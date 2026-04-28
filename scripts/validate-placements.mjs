@@ -96,6 +96,9 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
         reportFailure(`${file}: ${component.ref} single-row pinheader footprint is missing rows1`)
       }
     }
+    if (String(component.footprint).startsWith("pinrow") && String(component.footprint).includes("_p1mm")) {
+      reportFailure(`${file}: ${component.ref} ${component.kind} uses overlapping 1mm pinrow pitch`)
+    }
     if (component.kind === "usbc" || component.kind === "microusb" || component.kind === "hdmi" || component.kind === "potentiometer_rk09") {
       const expectedRotation = component.kind === "potentiometer_rk09"
         ? component.edge === "left"

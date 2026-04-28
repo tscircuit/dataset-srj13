@@ -9,8 +9,9 @@ const circuitsDir = "circuits"
 
 const connectorCatalog = {
   rj45: {
-    footprint: "pinrow8_p1mm",
+    footprint: "pinrow8_rows1_p2.56mm",
     pins: 8,
+    pitch: 2.56,
     jlcpcb: ["C386757", "C163507"],
   },
   usbc: {
