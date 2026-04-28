@@ -79,6 +79,7 @@ const subcircuitCatalog = [
   { kind: "qfn_thermalpad_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm_thermalpad", pins: 20, bounds: [4.42, 4.42] },
   { kind: "button_4pin_subcircuit", componentType: "chip", footprint: "pushbutton_4pin", pins: 4, bounds: [8.5, 10.5] },
   { kind: "button_6x6_subcircuit", componentType: "chip", footprint: "pushbutton_6x6", pins: 4, bounds: [8.5, 10.5] },
+  { kind: "large_capacitor_subcircuit", componentType: "capacitor", footprint: "radial_capacitor", pins: 2, bounds: [12, 12], passiveValue: "47uF", standalone: true },
   { kind: "mosfet_subcircuit", componentType: "mosfet", footprint: "sot23", pins: 3, bounds: [4.2, 4.2] },
   { kind: "dual_mosfet_subcircuit", componentType: "chip", footprint: "soic8_w3.9mm_p1.27mm", pins: 8, bounds: [6.4, 6.5] },
   { kind: "power_mosfet_subcircuit", componentType: "mosfet", footprint: "sot223", pins: 4, bounds: [11.5, 9.6] },
@@ -91,6 +92,7 @@ const powerMosfetSubcircuit = subcircuitCatalog.find((component) => component.ki
 const largePowerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "large_power_mosfet_subcircuit")
 const irf540MosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "irf540_mosfet_subcircuit")
 const flatPowerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "flat_power_mosfet_subcircuit")
+const largeCapacitorSubcircuit = subcircuitCatalog.find((component) => component.kind === "large_capacitor_subcircuit")
 const buttonSubcircuitCatalog = subcircuitCatalog.filter((component) => component.kind.startsWith("button_"))
 const standardSubcircuitCatalog = subcircuitCatalog.filter((component) =>
   component.kind !== "power_mosfet_subcircuit" &&
@@ -104,6 +106,8 @@ const passiveFootprints = [
   { footprint: "0402", bounds: [1.56, 0.64] },
   { footprint: "0603", bounds: [2.45, 0.95] },
 ]
+
+const edgePassiveConnectorKinds = new Set(["hdmi", "usbc", "microusb", "usbb"])
 
 const densityProfiles = [
   { targetUtilization: 0.36, earlyClearance: 1.1, lateClearance: 0.55, selfClearance: 0.35, lateStep: 4.5 },
@@ -298,7 +302,112 @@ const connectorFor = (kind) => {
   return withBounds({ kind, componentType: "connector", ...entry })
 }
 
-const placeEdge = (components, definition) => {
+const inwardTargetForEdge = (edge, bounds, passiveIndex) => {
+  const alongOffset = passiveIndex % 2 === 0 ? -1.8 : 1.8
+  const inset = 1
+  if (edge === "left") return { x: bounds.width / 2 + inset, y: alongOffset }
+  if (edge === "right") return { x: -bounds.width / 2 - inset, y: alongOffset }
+  if (edge === "bottom") return { x: alongOffset, y: bounds.height / 2 + inset }
+  return { x: alongOffset, y: -bounds.height / 2 - inset }
+}
+
+const buildEdgeConnectorPassiveCluster = ({ connector, rng }) => {
+  if (!edgePassiveConnectorKinds.has(connector.kind)) return null
+  const passiveCount = Math.floor(rng() * 3)
+  if (passiveCount === 0) return null
+  const packedInput = {
+    components: [
+      {
+        componentId: connector.ref,
+        isStatic: true,
+        center: { x: 0, y: 0 },
+        availableRotationDegrees: [0],
+        pads: [
+          makePackingPad(`${connector.ref}_body`, [connector.bounds.width, connector.bounds.height], `${connector.ref}_body`),
+          ...Array.from({ length: passiveCount }, (_, passiveIndex) =>
+            makePackingPad(
+              `${connector.ref}_target_${passiveIndex + 1}`,
+              [0.22, 0.22],
+              `${connector.ref}_p${passiveIndex + 1}`,
+              inwardTargetForEdge(connector.edge, connector.bounds, passiveIndex),
+            )
+          ),
+        ],
+      },
+    ],
+    bounds: {
+      minX: -connector.bounds.width / 2 - 6,
+      minY: -connector.bounds.height / 2 - 6,
+      maxX: connector.bounds.width / 2 + 6,
+      maxY: connector.bounds.height / 2 + 6,
+    },
+      minGap: 0.6,
+    packOrderStrategy: "largest_to_smallest",
+    packPlacementStrategy: "shortest_connection_along_outline",
+    disconnectedPackDirection: "nearest_to_center",
+    packFirst: [connector.ref],
+  }
+
+  const passiveSpecs = []
+  for (let passiveIndex = 0; passiveIndex < passiveCount; passiveIndex++) {
+    const passive = pick(rng, passiveFootprints)
+    const isCapacitor = passiveIndex % 2 === 0
+    const passiveRef = `${isCapacitor ? "C" : "R"}${connector.ref}_${passiveIndex + 1}`
+    passiveSpecs.push({ passive, isCapacitor, passiveRef, passiveIndex })
+    packedInput.components.push({
+      componentId: passiveRef,
+      availableRotationDegrees: [0, 90, 180, 270],
+      pads: [
+        makePackingPad(`${passiveRef}_body`, passive.bounds, `${passiveRef}_body`),
+        makePackingPad(
+          `${passiveRef}_pin1`,
+          [0.2, 0.2],
+          `${connector.ref}_p${passiveIndex + 1}`,
+          passivePadOffset(passive.bounds, 0),
+        ),
+        makePackingPad(
+          `${passiveRef}_pin2`,
+          [0.2, 0.2],
+          isCapacitor ? "GND" : "VCC",
+          passivePadOffset(passive.bounds, 1),
+        ),
+      ],
+    })
+  }
+
+  let packed
+  try {
+    packed = packQuietly(packedInput)
+  } catch {
+    return null
+  }
+  const packedById = new Map(packed.components.map((component) => [component.componentId, component]))
+  const components = []
+  const traces = []
+  for (const spec of passiveSpecs) {
+    const packedPassive = packedById.get(spec.passiveRef)
+    if (!packedPassive) return null
+    const rotation = packedPassive.ccwRotationDegrees ?? packedPassive.ccwRotationOffset ?? 0
+    const bounds = boundsForRotation(spec.passive.bounds, rotation)
+    components.push({
+      ref: spec.passiveRef,
+      kind: "edge_connector_passive",
+      componentType: spec.isCapacitor ? "capacitor" : "resistor",
+      footprint: spec.passive.footprint,
+      x: round(connector.x + packedPassive.center.x),
+      y: round(connector.y + packedPassive.center.y),
+      rotation,
+      bounds,
+      passiveKind: spec.isCapacitor ? "capacitor" : "resistor",
+      passiveValue: spec.isCapacitor ? "100nF" : "22R",
+    })
+    traces.push({ from: `.${connector.ref} > .pin${Math.min(spec.passiveIndex + 1, connector.pinCount ?? 1)}`, to: `.${spec.passiveRef} > .pin1` })
+    if (spec.isCapacitor) traces.push({ from: `.${spec.passiveRef} > .pin2`, to: "net.GND" })
+  }
+  return { components, traces }
+}
+
+const placeEdge = (components, traces, definition, rng) => {
   const edges = [
     ["left", definition.leftEdge],
     ["right", definition.rightEdge],
@@ -325,37 +434,49 @@ const placeEdge = (components, definition) => {
       const majorCenter = cursor + majorSizes[index] / 2
       cursor += majorSizes[index] + gap
       const edgeClearance = 1.1
+      const outwardOffset = kind === "potentiometer_rk09" ? 8.6 : 0
       const x = edge === "left"
-        ? -definition.board.width / 2 + width / 2 + edgeClearance
+        ? -definition.board.width / 2 + width / 2 + edgeClearance - outwardOffset
         : edge === "right"
-          ? definition.board.width / 2 - width / 2 - edgeClearance
+          ? definition.board.width / 2 - width / 2 - edgeClearance + outwardOffset
           : majorCenter
       const y = edge === "bottom"
-        ? -definition.board.height / 2 + height / 2 + edgeClearance
+        ? -definition.board.height / 2 + height / 2 + edgeClearance - outwardOffset
         : edge === "top"
-          ? definition.board.height / 2 - height / 2 - edgeClearance
+          ? definition.board.height / 2 - height / 2 - edgeClearance + outwardOffset
           : majorCenter
+
+      const connector = {
+        ref: `J${connectorIndex++}`,
+        kind,
+        componentType: catalog.componentType,
+        footprint: catalog.footprint,
+        x: round(x),
+        y: round(y),
+        rotation,
+        bounds: { width, height },
+        pinCount: catalog.pins,
+        doubleRow: catalog.doubleRow,
+        pitch: catalog.pitch,
+        edge,
+        allowOffBoard: catalog.allowOffBoard ?? true,
+        supplierPartNumbers: catalog.jlcpcb?.length ? { jlcpcb: catalog.jlcpcb } : undefined,
+      }
 
       addComponent(
         components,
-        {
-          ref: `J${connectorIndex++}`,
-          kind,
-          componentType: catalog.componentType,
-          footprint: catalog.footprint,
-          x: round(x),
-          y: round(y),
-          rotation,
-          bounds: { width, height },
-          pinCount: catalog.pins,
-          doubleRow: catalog.doubleRow,
-          pitch: catalog.pitch,
-          edge,
-          allowOffBoard: catalog.allowOffBoard ?? true,
-          supplierPartNumbers: catalog.jlcpcb?.length ? { jlcpcb: catalog.jlcpcb } : undefined,
-        },
+        connector,
         -0.5,
       )
+      const passiveCluster = buildEdgeConnectorPassiveCluster({ connector, rng })
+      if (passiveCluster?.components.every((component) =>
+        isInsideBoard(component, definition.board, 0.35) &&
+        !overlapsAny(component, components, 0.16) &&
+        !passiveCluster.components.some((other) => other !== component && intersects(rectFor(component, 0.12), rectFor(other, 0.12)))
+      )) {
+        components.push(...passiveCluster.components)
+        traces.push(...passiveCluster.traces)
+      }
     })
   }
 }
@@ -435,6 +556,7 @@ const placeMcus = (components, traces, definition, rng) => {
                   sideOrder[(index + passiveIndex) % sideOrder.length],
                   mcu.bounds,
                   slotOffsets[Math.floor(passiveIndex / sideOrder.length) % slotOffsets.length],
+                  0.75,
                 ),
               )
             ),
@@ -447,7 +569,7 @@ const placeMcus = (components, traces, definition, rng) => {
         maxX: Math.max(18, mcu.bounds[0] / 2 + 12),
         maxY: Math.max(18, mcu.bounds[1] / 2 + 12),
       },
-      minGap: 1.4,
+      minGap: 0.55,
       packOrderStrategy: "largest_to_smallest",
       packPlacementStrategy: "shortest_connection_along_outline",
       disconnectedPackDirection: "nearest_to_center",
@@ -507,8 +629,8 @@ const placeMcus = (components, traces, definition, rng) => {
         passiveValue: spec.isCapacitor ? "100nF" : "10k",
       }
       if (!isInsideBoard(passiveComponent, definition.board, 0.55)) continue
-      if (overlapsAnyForFillCluster(passiveComponent, components, 0.2)) continue
-      if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, 0.15), rectFor(other, 0.15)))) continue
+      if (overlapsAnyForFillCluster(passiveComponent, components, 0.16)) continue
+      if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, 0.16), rectFor(other, 0.16)))) continue
       passiveComponents.push(passiveComponent)
       passiveTraces.push({ from: `.${ref} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
       passiveTraces.push({ from: `.${spec.passiveRef} > .pin2`, to: spec.isCapacitor ? "net.GND" : "net.VCC" })
@@ -529,9 +651,8 @@ const makePackingPad = (id, bounds, networkId = "cluster", offset = { x: 0, y: 0
   size: { x: bounds[0], y: bounds[1] },
 })
 
-const pinTargetForSide = (side, catalogBounds, slotOffset = 0) => {
+const pinTargetForSide = (side, catalogBounds, slotOffset = 0, inset = 2) => {
   const [width, height] = catalogBounds
-  const inset = 2
   const spreadX = Math.min(width * 0.45, 4.5)
   const spreadY = Math.min(height * 0.45, 4.5)
   if (side === "left") return { x: -width / 2 - inset, y: slotOffset * spreadY }
@@ -555,6 +676,28 @@ const mirroredPackedComponents = (packed, axis) =>
   }))
 
 const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
+  if (catalog.standalone) {
+    const ref = catalog.componentType === "capacitor" ? `C_BULK${subIndex}` : `U_AUX${subIndex}`
+    return {
+      components: [
+        {
+          ref,
+          kind: catalog.kind,
+          componentType: catalog.componentType,
+          footprint: catalog.footprint,
+          x: round(x),
+          y: round(y),
+          rotation: [0, 90, 180, 270][subIndex % 4],
+          bounds: boundsForRotation(catalog.bounds, [0, 90, 180, 270][subIndex % 4]),
+          pinCount: catalog.pins,
+          passiveValue: catalog.passiveValue,
+          passiveCount: 0,
+        },
+      ],
+      traces: [],
+    }
+  }
+
   const subRef = catalog.componentType === "mosfet" ? `Q${subIndex}` : `U_AUX${subIndex}`
   const passiveCount = 1 + Math.floor(rng() * 4)
   const sideOrder = ["left", "right", "top", "bottom"]
@@ -736,6 +879,7 @@ const placeSubcircuits = (components, traces, definition, rng) => {
       const needsPowerMosfet = !components.some((component) => component.kind === "power_mosfet_subcircuit")
       const needsIrf540Mosfet = !components.some((component) => component.kind === "irf540_mosfet_subcircuit")
       const needsFlatPowerMosfet = !components.some((component) => component.kind === "flat_power_mosfet_subcircuit")
+      const needsLargeCapacitor = !components.some((component) => component.kind === "large_capacitor_subcircuit")
       const needsButton = !components.some((component) => component.kind.startsWith("button_"))
       const catalog = needsLargePowerMosfet
         ? largePowerMosfetSubcircuit
@@ -745,10 +889,14 @@ const placeSubcircuits = (components, traces, definition, rng) => {
         ? irf540MosfetSubcircuit
         : needsFlatPowerMosfet
         ? flatPowerMosfetSubcircuit
+        : needsLargeCapacitor
+        ? largeCapacitorSubcircuit
         : needsButton
         ? pick(rng, buttonSubcircuitCatalog)
         : rng() < 0.06
           ? largePowerMosfetSubcircuit
+          : rng() < 0.1
+          ? largeCapacitorSubcircuit
           : rng() < 0.1
           ? flatPowerMosfetSubcircuit
           : rng() < 0.12
@@ -778,7 +926,7 @@ const generatePlacement = (definition) => {
   const components = []
   const traces = []
 
-  placeEdge(components, definition)
+  placeEdge(components, traces, definition, rng)
   placeMcus(components, traces, definition, rng)
   placeSubcircuits(components, traces, definition, rng)
 

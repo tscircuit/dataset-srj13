@@ -60,6 +60,10 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     reportFailure(`${file}: missing flat D2PAK/TO-263 power mosfet variant`)
   }
 
+  if (!components.some((component) => component.kind === "large_capacitor_subcircuit")) {
+    reportFailure(`${file}: missing large capacitor subcircuit variant`)
+  }
+
   if (!components.some((component) => component.kind.startsWith("button_"))) {
     reportFailure(`${file}: missing button footprint subcircuit variant`)
   }
@@ -112,6 +116,19 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
         reportFailure(`${file}: ${component.ref} ${component.kind} rotation ${component.rotation} does not point off-board`)
       }
     }
+    if (component.kind === "potentiometer_rk09") {
+      const rect = rectFor(component)
+      const overhang = component.edge === "left"
+        ? -placement.board.width / 2 - rect.left
+        : component.edge === "right"
+          ? rect.right - placement.board.width / 2
+          : component.edge === "top"
+            ? rect.top - placement.board.height / 2
+            : -placement.board.height / 2 - rect.bottom
+      if (overhang < 6.5) {
+        reportFailure(`${file}: ${component.ref} potentiometer overhang ${overhang.toFixed(2)}mm is not close enough to board edge`)
+      }
+    }
     const rect = rectFor(component)
     const insideBoard =
       rect.left >= -placement.board.width / 2 &&
@@ -155,7 +172,7 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
   }
 
   for (const subcircuit of components.filter((component) =>
-    component.kind.endsWith("_subcircuit") ||
+    (component.kind.endsWith("_subcircuit") && component.kind !== "large_capacitor_subcircuit") ||
     component.kind === "mosfet_subcircuit" ||
     component.kind === "power_mosfet_subcircuit"
   )) {
@@ -178,6 +195,20 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
       if (sideBuckets.size < 2) {
         reportFailure(`${file}: ${subcircuit.ref} passives are packed on only one side`)
       }
+    }
+  }
+
+  for (const connector of components.filter((component) =>
+    component.kind === "hdmi" ||
+    component.kind === "usbc" ||
+    component.kind === "microusb" ||
+    component.kind === "usbb"
+  )) {
+    const passives = components.filter((component) =>
+      component.kind === "edge_connector_passive" && new RegExp(`^[CR]${connector.ref}_`).test(component.ref)
+    )
+    if (passives.length > 2) {
+      reportFailure(`${file}: ${connector.ref} has ${passives.length} edge passives, expected 0-2`)
     }
   }
 }
