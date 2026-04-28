@@ -73,10 +73,15 @@ const subcircuitCatalog = [
   { kind: "mosfet_subcircuit", componentType: "mosfet", footprint: "sot23", pins: 3, bounds: [3.77, 3.4] },
   { kind: "dual_mosfet_subcircuit", componentType: "chip", footprint: "soic8_p1.27mm", pins: 8, bounds: [5.8, 5.31] },
   { kind: "power_mosfet_subcircuit", componentType: "mosfet", footprint: "sot223", pins: 4, bounds: [10.3, 8.7] },
+  { kind: "large_power_mosfet_subcircuit", componentType: "mosfet", footprint: "to220", pins: 3, bounds: [12.26, 6.71] },
 ]
 
 const powerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "power_mosfet_subcircuit")
-const standardSubcircuitCatalog = subcircuitCatalog.filter((component) => component.kind !== "power_mosfet_subcircuit")
+const largePowerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "large_power_mosfet_subcircuit")
+const standardSubcircuitCatalog = subcircuitCatalog.filter((component) =>
+  component.kind !== "power_mosfet_subcircuit" &&
+  component.kind !== "large_power_mosfet_subcircuit"
+)
 
 const passiveFootprints = [
   { footprint: "0201", bounds: [1.12, 0.4] },
@@ -84,7 +89,12 @@ const passiveFootprints = [
   { footprint: "0603", bounds: [2.45, 0.95] },
 ]
 
-const targetUtilization = 0.35
+const densityProfiles = [
+  { targetUtilization: 0.34, earlyClearance: 1.05, lateClearance: 0.55, selfClearance: 0.35, lateStep: 4.5 },
+  { targetUtilization: 0.36, earlyClearance: 0.95, lateClearance: 0.4, selfClearance: 0.28, lateStep: 4 },
+  { targetUtilization: 0.37, earlyClearance: 0.85, lateClearance: 0.32, selfClearance: 0.24, lateStep: 3.75 },
+  { targetUtilization: 0.38, earlyClearance: 0.75, lateClearance: 0.28, selfClearance: 0.22, lateStep: 3.5 },
+]
 
 const round = (value) => Math.round(value * 1000) / 1000
 
@@ -210,9 +220,19 @@ const boundsForRotation = (bounds, rotation) => {
     : { width: bounds[0], height: bounds[1] }
 }
 
-const getEdgeRotation = (edge, kind) => {
-  if (kind === "usbc") {
-    return edge === "left" ? 90 : edge === "right" ? 270 : edge === "top" ? 180 : 0
+const getDensityProfile = (definition) =>
+  densityProfiles[Math.abs(definition.seed) % densityProfiles.length]
+
+const usbEdgeRotations = {
+  left: 270,
+  right: 90,
+  top: 180,
+  bottom: 0,
+}
+
+const getEdgeRotation = (edge, kind, definitionId) => {
+  if (kind === "usbc" || kind === "microusb") {
+    return usbEdgeRotations[edge]
   }
   return edge === "left" ? 90 : edge === "right" ? -90 : edge === "top" ? 180 : 0
 }
@@ -254,7 +274,7 @@ const placeEdge = (components, definition) => {
     const horizontal = edge === "top" || edge === "bottom"
     const boardSpan = horizontal ? definition.board.width : definition.board.height
     const catalogs = kinds.map(connectorFor)
-    const rotations = catalogs.map((catalog, index) => getEdgeRotation(edge, kinds[index] ?? catalog.kind))
+    const rotations = catalogs.map((catalog, index) => getEdgeRotation(edge, kinds[index] ?? catalog.kind, definition.id))
     const renderedBounds = catalogs.map((catalog, index) => boundsForRotation(catalog.bounds, rotations[index]))
     const majorSizes = renderedBounds.map((bounds) => (horizontal ? bounds.width : bounds.height))
     const gap = 4
@@ -641,8 +661,8 @@ const addCluster = (components, traces, cluster) => {
   traces.push(...cluster.traces)
 }
 
-const makeFillCandidates = (definition, rng, passIndex) => {
-  const step = passIndex < 2 ? 8 : 4
+const makeFillCandidates = (definition, rng, passIndex, densityProfile) => {
+  const step = passIndex < 2 ? 8 : densityProfile.lateStep
   const candidates = []
   for (let y = -definition.board.height / 2 + step / 2; y <= definition.board.height / 2 - step / 2; y += step) {
     for (let x = -definition.board.width / 2 + step / 2; x <= definition.board.width / 2 - step / 2; x += step) {
@@ -657,11 +677,12 @@ const makeFillCandidates = (definition, rng, passIndex) => {
 }
 
 const placeSubcircuits = (components, traces, definition, rng) => {
+  const densityProfile = getDensityProfile(definition)
   let subIndex = 1
-  for (let passIndex = 0; passIndex < 10 && getUtilization(components, definition.board) < targetUtilization; passIndex++) {
+  for (let passIndex = 0; passIndex < 12 && getUtilization(components, definition.board) < densityProfile.targetUtilization; passIndex++) {
     let placedThisPass = 0
-    for (const { x, y } of makeFillCandidates(definition, rng, passIndex)) {
-      if (getUtilization(components, definition.board) >= targetUtilization) break
+    for (const { x, y } of makeFillCandidates(definition, rng, passIndex, densityProfile)) {
+      if (getUtilization(components, definition.board) >= densityProfile.targetUtilization) break
       const needsPowerMosfet = !components.some((component) => component.kind === "power_mosfet_subcircuit")
       const catalog = needsPowerMosfet
         ? powerMosfetSubcircuit
@@ -670,7 +691,13 @@ const placeSubcircuits = (components, traces, definition, rng) => {
           : pick(rng, standardSubcircuitCatalog)
       const cluster = buildSubcircuitCluster({ x, y, catalog, subIndex, rng })
       if (!cluster) continue
-      if (!canPlaceCluster(cluster, components, definition.board, passIndex < 2 ? 1.1 : 0.45, 0.3)) continue
+      if (!canPlaceCluster(
+        cluster,
+        components,
+        definition.board,
+        passIndex < 2 ? densityProfile.earlyClearance : densityProfile.lateClearance,
+        densityProfile.selfClearance,
+      )) continue
       addCluster(components, traces, cluster)
       placedThisPass++
       subIndex++
@@ -691,6 +718,7 @@ const generatePlacement = (definition) => {
   return {
     id: definition.id,
     sourceDefinition: `dataset/definitions/${definition.id}.json`,
+    densityProfile: getDensityProfile(definition),
     board: definition.board,
     components,
     traces,

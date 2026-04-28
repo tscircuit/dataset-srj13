@@ -1,6 +1,13 @@
 {
   "id": "example-01",
   "sourceDefinition": "dataset/definitions/example-01.json",
+  "densityProfile": {
+    "targetUtilization": 0.36,
+    "earlyClearance": 0.95,
+    "lateClearance": 0.4,
+    "selfClearance": 0.28,
+    "lateStep": 4
+  },
   "board": {
     "width": 96,
     "height": 88
@@ -77,7 +84,7 @@
       "footprint": "imported:TYPE_C_16PIN_2MD_073_",
       "x": 42.65,
       "y": -20.41,
-      "rotation": 270,
+      "rotation": 90,
       "bounds": {
         "width": 8.5,
         "height": 10.4
@@ -947,57 +954,42 @@
     },
     {
       "ref": "U_AUX4",
-      "kind": "soic_subcircuit",
+      "kind": "dual_mosfet_subcircuit",
       "componentType": "chip",
       "footprint": "soic8_p1.27mm",
-      "x": -4.231,
-      "y": -23.913,
+      "x": -20.072,
+      "y": -15.77,
       "rotation": 0,
       "bounds": {
         "width": 5.8,
         "height": 5.31
       },
       "pinCount": 8,
-      "passiveCount": 1
+      "passiveCount": 2
     },
     {
       "ref": "CA4_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0402",
-      "x": 2.139,
-      "y": -26.303,
-      "rotation": 180,
+      "footprint": "0201",
+      "x": -15.53,
+      "y": -17.269,
+      "rotation": 0,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 1.12,
+        "height": 0.4
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
     },
     {
-      "ref": "U_AUX5",
-      "kind": "dual_mosfet_subcircuit",
-      "componentType": "chip",
-      "footprint": "soic8_p1.27mm",
-      "x": 3.813,
-      "y": 31.685,
-      "rotation": 90,
-      "bounds": {
-        "width": 5.31,
-        "height": 5.8
-      },
-      "pinCount": 8,
-      "passiveCount": 2
-    },
-    {
-      "ref": "RA5_1",
+      "ref": "RA4_2",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
       "footprint": "0603",
-      "x": 8.118,
-      "y": 26.785,
-      "rotation": 0,
+      "x": -20.767,
+      "y": -11.115,
+      "rotation": 180,
       "bounds": {
         "width": 2.45,
         "height": 0.95
@@ -1006,33 +998,48 @@
       "passiveValue": "4.7k"
     },
     {
-      "ref": "CA5_2",
+      "ref": "U_AUX5",
+      "kind": "soic_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic8_p1.27mm",
+      "x": -4.231,
+      "y": -23.913,
+      "rotation": 90,
+      "bounds": {
+        "width": 5.31,
+        "height": 5.8
+      },
+      "pinCount": 8,
+      "passiveCount": 1
+    },
+    {
+      "ref": "RA5_1",
       "kind": "subcircuit_passive",
-      "componentType": "capacitor",
+      "componentType": "resistor",
       "footprint": "0402",
-      "x": 9.938,
-      "y": 29.075,
+      "x": -0.371,
+      "y": -28.813,
       "rotation": 0,
       "bounds": {
         "width": 1.56,
         "height": 0.64
       },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
     },
     {
       "ref": "U_AUX6",
-      "kind": "dual_mosfet_subcircuit",
+      "kind": "qfn_subcircuit",
       "componentType": "chip",
-      "footprint": "soic8_p1.27mm",
-      "x": -12.312,
-      "y": 32.053,
+      "footprint": "qfn20_w4_h4_p0.5mm",
+      "x": 20.359,
+      "y": 16.295,
       "rotation": 180,
       "bounds": {
-        "width": 5.8,
-        "height": 5.31
+        "width": 4.42,
+        "height": 4.42
       },
-      "pinCount": 8,
+      "pinCount": 20,
       "passiveCount": 1
     },
     {
@@ -1040,8 +1047,8 @@
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0402",
-      "x": -8.232,
-      "y": 27.398,
+      "x": 23.818,
+      "y": 12.085,
       "rotation": 0,
       "bounds": {
         "width": 1.56,
@@ -1052,15 +1059,15 @@
     },
     {
       "ref": "U_AUX7",
-      "kind": "qfn_subcircuit",
+      "kind": "tssop20_subcircuit",
       "componentType": "chip",
-      "footprint": "qfn20_w4_h4_p0.5mm",
-      "x": 12.292,
-      "y": -32.067,
+      "footprint": "tssop20_p0.65mm",
+      "x": -27.977,
+      "y": 8.031,
       "rotation": 270,
       "bounds": {
-        "width": 4.42,
-        "height": 4.42
+        "width": 7.35,
+        "height": 5.95
       },
       "pinCount": 20,
       "passiveCount": 2
@@ -1070,12 +1077,12 @@
       "kind": "subcircuit_passive",
       "componentType": "resistor",
       "footprint": "0402",
-      "x": 16.003,
-      "y": -28.748,
-      "rotation": 0,
+      "x": -23.352,
+      "y": 11.208,
+      "rotation": 90,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 0.64,
+        "height": 1.56
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -1085,8 +1092,8 @@
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0402",
-      "x": 9.804,
-      "y": -35.267,
+      "x": -32.754,
+      "y": 3.056,
       "rotation": 0,
       "bounds": {
         "width": 1.56,
@@ -1097,30 +1104,30 @@
     },
     {
       "ref": "U_AUX8",
-      "kind": "soic16_subcircuit",
+      "kind": "dual_mosfet_subcircuit",
       "componentType": "chip",
-      "footprint": "soic16_p1.27mm",
-      "x": -28.164,
-      "y": -24.245,
+      "footprint": "soic8_p1.27mm",
+      "x": 3.813,
+      "y": 31.685,
       "rotation": 0,
       "bounds": {
         "width": 5.8,
-        "height": 10.39
+        "height": 5.31
       },
-      "pinCount": 16,
+      "pinCount": 8,
       "passiveCount": 2
     },
     {
       "ref": "CA8_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0201",
-      "x": -32.706,
-      "y": -20.635,
-      "rotation": 0,
+      "footprint": "0603",
+      "x": -1.871,
+      "y": 35.24,
+      "rotation": 180,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
@@ -1129,40 +1136,40 @@
       "ref": "RA8_2",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0201",
-      "x": -25.196,
-      "y": -30.55,
-      "rotation": 0,
+      "footprint": "0402",
+      "x": 4.953,
+      "y": 27.03,
+      "rotation": 180,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 1.56,
+        "height": 0.64
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
     },
     {
       "ref": "U_AUX9",
-      "kind": "soic_subcircuit",
+      "kind": "qfn_subcircuit",
       "componentType": "chip",
-      "footprint": "soic8_p1.27mm",
-      "x": 35.76,
-      "y": 31.974,
+      "footprint": "qfn20_w4_h4_p0.5mm",
+      "x": 12.292,
+      "y": -32.067,
       "rotation": 90,
       "bounds": {
-        "width": 5.31,
-        "height": 5.8
+        "width": 4.42,
+        "height": 4.42
       },
-      "pinCount": 8,
-      "passiveCount": 1
+      "pinCount": 20,
+      "passiveCount": 2
     },
     {
       "ref": "RA9_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
       "footprint": "0402",
-      "x": 39.62,
-      "y": 36.874,
-      "rotation": 0,
+      "x": 12.811,
+      "y": -27.857,
+      "rotation": 180,
       "bounds": {
         "width": 1.56,
         "height": 0.64
@@ -1171,96 +1178,76 @@
       "passiveValue": "4.7k"
     },
     {
+      "ref": "CA9_2",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 17.972,
+      "y": -30.078,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
       "ref": "U_AUX10",
-      "kind": "qfn_subcircuit",
+      "kind": "tssop20_subcircuit",
       "componentType": "chip",
-      "footprint": "qfn20_w4_h4_p0.5mm",
-      "x": 19.852,
-      "y": 24.314,
+      "footprint": "tssop20_p0.65mm",
+      "x": 28.194,
+      "y": -15.764,
       "rotation": 180,
       "bounds": {
-        "width": 4.42,
-        "height": 4.42
+        "width": 5.95,
+        "height": 7.35
       },
       "pinCount": 20,
-      "passiveCount": 3
+      "passiveCount": 1
     },
     {
       "ref": "CA10_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0201",
-      "x": 17.505,
-      "y": 19.214,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "RA10_2",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
       "footprint": "0402",
-      "x": 14.172,
-      "y": 22.325,
+      "x": 25.017,
+      "y": -22.449,
       "rotation": 0,
       "bounds": {
         "width": 1.56,
         "height": 0.64
       },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "CA10_3",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0402",
-      "x": 16.282,
-      "y": 23.795,
-      "rotation": 270,
-      "bounds": {
-        "width": 0.64,
-        "height": 1.56
-      },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
     },
     {
-      "ref": "Q11",
-      "kind": "mosfet_subcircuit",
-      "componentType": "mosfet",
-      "footprint": "sot23",
-      "x": -27.971,
-      "y": 15.847,
+      "ref": "U_AUX11",
+      "kind": "tssop20_subcircuit",
+      "componentType": "chip",
+      "footprint": "tssop20_p0.65mm",
+      "x": -20.327,
+      "y": -31.843,
       "rotation": 270,
       "bounds": {
-        "width": 3.4,
-        "height": 3.77
+        "width": 7.35,
+        "height": 5.95
       },
-      "pinCount": 3,
-      "passiveCount": 3,
-      "supplierPartNumbers": {
-        "jlcpcb": [
-          "C8545"
-        ]
-      }
+      "pinCount": 20,
+      "passiveCount": 2
     },
     {
       "ref": "RA11_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0201",
-      "x": -32.921,
-      "y": 14.151,
+      "footprint": "0603",
+      "x": -26.786,
+      "y": -32.88,
       "rotation": 180,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -1270,9 +1257,9 @@
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0402",
-      "x": -26.94,
-      "y": 18.737,
-      "rotation": 180,
+      "x": -15.55,
+      "y": -26.868,
+      "rotation": 0,
       "bounds": {
         "width": 1.56,
         "height": 0.64
@@ -1281,121 +1268,46 @@
       "passiveValue": "1uF"
     },
     {
-      "ref": "RA11_3",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0603",
-      "x": -31.019,
-      "y": 11.478,
-      "rotation": 270,
-      "bounds": {
-        "width": 0.95,
-        "height": 2.45
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
       "ref": "U_AUX12",
-      "kind": "tssop20_subcircuit",
+      "kind": "soic_subcircuit",
       "componentType": "chip",
-      "footprint": "tssop20_p0.65mm",
-      "x": 27.936,
-      "y": -15.87,
+      "footprint": "soic8_p1.27mm",
+      "x": 35.76,
+      "y": 31.974,
       "rotation": 0,
       "bounds": {
-        "width": 5.95,
-        "height": 7.35
+        "width": 5.8,
+        "height": 5.31
       },
-      "pinCount": 20,
-      "passiveCount": 3
+      "pinCount": 8,
+      "passiveCount": 1
     },
     {
       "ref": "CA12_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0201",
-      "x": 23.851,
-      "y": -18.819,
-      "rotation": 90,
+      "footprint": "0402",
+      "x": 29.39,
+      "y": 29.585,
+      "rotation": 180,
       "bounds": {
-        "width": 0.4,
-        "height": 1.12
+        "width": 1.56,
+        "height": 0.64
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
     },
     {
-      "ref": "RA12_2",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0402",
-      "x": 32.084,
-      "y": -10.195,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "CA12_3",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0402",
-      "x": 34.381,
-      "y": -18.713,
-      "rotation": 90,
-      "bounds": {
-        "width": 0.64,
-        "height": 1.56
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "U_AUX13",
-      "kind": "tssop20_subcircuit",
-      "componentType": "chip",
-      "footprint": "tssop20_p0.65mm",
-      "x": -2.354,
-      "y": 1.643,
-      "rotation": 90,
-      "bounds": {
-        "width": 7.35,
-        "height": 5.95
-      },
-      "pinCount": 20,
-      "passiveCount": 1
-    },
-    {
-      "ref": "RA13_1",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0402",
-      "x": -7.132,
-      "y": 6.618,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "Q14",
+      "ref": "Q13",
       "kind": "mosfet_subcircuit",
       "componentType": "mosfet",
       "footprint": "sot23",
-      "x": 13.923,
-      "y": 13.951,
-      "rotation": 180,
+      "x": 36.162,
+      "y": 39.949,
+      "rotation": 90,
       "bounds": {
-        "width": 3.77,
-        "height": 3.4
+        "width": 3.4,
+        "height": 3.77
       },
       "pinCount": 3,
       "passiveCount": 1,
@@ -1406,13 +1318,43 @@
       }
     },
     {
+      "ref": "RA13_1",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 34.274,
+      "y": 42.944,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "U_AUX14",
+      "kind": "tssop20_subcircuit",
+      "componentType": "chip",
+      "footprint": "tssop20_p0.65mm",
+      "x": -2.354,
+      "y": 1.643,
+      "rotation": 180,
+      "bounds": {
+        "width": 5.95,
+        "height": 7.35
+      },
+      "pinCount": 20,
+      "passiveCount": 1
+    },
+    {
       "ref": "CA14_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0402",
-      "x": 14.15,
-      "y": 17.651,
-      "rotation": 180,
+      "x": 0.823,
+      "y": 8.328,
+      "rotation": 0,
       "bounds": {
         "width": 1.56,
         "height": 0.64
@@ -1425,8 +1367,8 @@
       "kind": "qfn_subcircuit",
       "componentType": "chip",
       "footprint": "qfn20_w4_h4_p0.5mm",
-      "x": -18.271,
-      "y": -18.091,
+      "x": -6.032,
+      "y": 18.263,
       "rotation": 270,
       "bounds": {
         "width": 4.42,
@@ -1439,13 +1381,13 @@
       "ref": "RA15_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0201",
-      "x": -22.123,
-      "y": -17.192,
+      "footprint": "0402",
+      "x": -9.743,
+      "y": 21.582,
       "rotation": 0,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 1.56,
+        "height": 0.64
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -1454,39 +1396,44 @@
       "ref": "CA15_2",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0201",
-      "x": -15.924,
-      "y": -21.411,
+      "footprint": "0402",
+      "x": -3.544,
+      "y": 15.063,
       "rotation": 0,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 1.56,
+        "height": 0.64
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
     },
     {
-      "ref": "U_AUX16",
-      "kind": "dual_mosfet_subcircuit",
-      "componentType": "chip",
-      "footprint": "soic8_p1.27mm",
-      "x": 26.149,
-      "y": 1.925,
+      "ref": "Q16",
+      "kind": "mosfet_subcircuit",
+      "componentType": "mosfet",
+      "footprint": "sot23",
+      "x": 13.923,
+      "y": 13.951,
       "rotation": 0,
       "bounds": {
-        "width": 5.8,
-        "height": 5.31
+        "width": 3.77,
+        "height": 3.4
       },
-      "pinCount": 8,
-      "passiveCount": 2
+      "pinCount": 3,
+      "passiveCount": 1,
+      "supplierPartNumbers": {
+        "jlcpcb": [
+          "C8545"
+        ]
+      }
     },
     {
       "ref": "CA16_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0402",
-      "x": 32.519,
-      "y": -0.464,
+      "x": 19.278,
+      "y": 12.421,
       "rotation": 180,
       "bounds": {
         "width": 1.56,
@@ -1496,27 +1443,12 @@
       "passiveValue": "1uF"
     },
     {
-      "ref": "RA16_2",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0603",
-      "x": 25.454,
-      "y": 6.58,
-      "rotation": 180,
-      "bounds": {
-        "width": 2.45,
-        "height": 0.95
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
       "ref": "U_AUX17",
       "kind": "qfn_subcircuit",
       "componentType": "chip",
       "footprint": "qfn20_w4_h4_p0.5mm",
-      "x": 1.858,
-      "y": -30.11,
+      "x": 13.788,
+      "y": 22.344,
       "rotation": 90,
       "bounds": {
         "width": 4.42,
@@ -1529,13 +1461,13 @@
       "ref": "RA17_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0201",
-      "x": 4.205,
-      "y": -33.43,
-      "rotation": 0,
+      "footprint": "0603",
+      "x": 13.862,
+      "y": 18.134,
+      "rotation": 180,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -1545,9 +1477,9 @@
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0201",
-      "x": 5.178,
-      "y": -31.741,
-      "rotation": 270,
+      "x": 17.108,
+      "y": 19.997,
+      "rotation": 90,
       "bounds": {
         "width": 0.4,
         "height": 1.12
@@ -1556,36 +1488,31 @@
       "passiveValue": "1uF"
     },
     {
-      "ref": "Q18",
-      "kind": "mosfet_subcircuit",
-      "componentType": "mosfet",
-      "footprint": "sot23",
-      "x": 30.381,
-      "y": 9.964,
+      "ref": "U_AUX18",
+      "kind": "dual_mosfet_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic8_p1.27mm",
+      "x": 26.149,
+      "y": 1.925,
       "rotation": 180,
       "bounds": {
-        "width": 3.77,
-        "height": 3.4
+        "width": 5.8,
+        "height": 5.31
       },
-      "pinCount": 3,
-      "passiveCount": 2,
-      "supplierPartNumbers": {
-        "jlcpcb": [
-          "C8545"
-        ]
-      }
+      "pinCount": 8,
+      "passiveCount": 2
     },
     {
       "ref": "CA18_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0603",
-      "x": 33.993,
-      "y": 6.264,
+      "footprint": "0402",
+      "x": 30.229,
+      "y": -2.73,
       "rotation": 0,
       "bounds": {
-        "width": 2.45,
-        "height": 0.95
+        "width": 1.56,
+        "height": 0.64
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
@@ -1594,130 +1521,75 @@
       "ref": "RA18_2",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0201",
-      "x": 34.624,
-      "y": 7.544,
+      "footprint": "0603",
+      "x": 31.833,
+      "y": 1.175,
       "rotation": 0,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
     },
     {
-      "ref": "U_AUX19",
-      "kind": "soic_subcircuit",
-      "componentType": "chip",
-      "footprint": "soic8_p1.27mm",
-      "x": 14.324,
-      "y": 30.374,
+      "ref": "Q19",
+      "kind": "mosfet_subcircuit",
+      "componentType": "mosfet",
+      "footprint": "sot23",
+      "x": 5.6,
+      "y": -26.096,
       "rotation": 270,
       "bounds": {
-        "width": 5.31,
-        "height": 5.8
+        "width": 3.4,
+        "height": 3.77
       },
-      "pinCount": 8,
-      "passiveCount": 1
+      "pinCount": 3,
+      "passiveCount": 1,
+      "supplierPartNumbers": {
+        "jlcpcb": [
+          "C8545"
+        ]
+      }
     },
     {
       "ref": "RA19_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0201",
-      "x": 18.621,
-      "y": 33.874,
-      "rotation": 0,
+      "footprint": "0603",
+      "x": 10.084,
+      "y": -23.234,
+      "rotation": 180,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
     },
     {
       "ref": "U_AUX20",
-      "kind": "soic_subcircuit",
+      "kind": "tssop_subcircuit",
       "componentType": "chip",
-      "footprint": "soic8_p1.27mm",
-      "x": 34.15,
-      "y": -6.275,
+      "footprint": "tssop16_p0.65mm",
+      "x": -22.007,
+      "y": 22.379,
       "rotation": 0,
       "bounds": {
-        "width": 5.8,
-        "height": 5.31
+        "width": 5.95,
+        "height": 6.05
       },
-      "pinCount": 8,
-      "passiveCount": 1
+      "pinCount": 16,
+      "passiveCount": 2
     },
     {
       "ref": "CA20_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0402",
-      "x": 27.78,
-      "y": -3.886,
-      "rotation": 180,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "U_AUX21",
-      "kind": "soic14_subcircuit",
-      "componentType": "chip",
-      "footprint": "soic14_p1.27mm",
-      "x": -29.915,
-      "y": -9.781,
-      "rotation": 90,
-      "bounds": {
-        "width": 9.12,
-        "height": 5.8
-      },
-      "pinCount": 14,
-      "passiveCount": 1
-    },
-    {
-      "ref": "RA21_1",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0402",
-      "x": -24.341,
-      "y": -4.881,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "U_AUX22",
-      "kind": "qfn_subcircuit",
-      "componentType": "chip",
-      "footprint": "qfn20_w4_h4_p0.5mm",
-      "x": -2.218,
-      "y": 33.848,
-      "rotation": 180,
-      "bounds": {
-        "width": 4.42,
-        "height": 4.42
-      },
-      "pinCount": 20,
-      "passiveCount": 2
-    },
-    {
-      "ref": "CA22_1",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
       "footprint": "0603",
-      "x": -6.122,
-      "y": 29.638,
-      "rotation": 0,
+      "x": -27.766,
+      "y": 26.267,
+      "rotation": 180,
       "bounds": {
         "width": 2.45,
         "height": 0.95
@@ -1726,12 +1598,42 @@
       "passiveValue": "1uF"
     },
     {
-      "ref": "RA22_2",
+      "ref": "RA20_2",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -21.245,
+      "y": 17.354,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "U_AUX21",
+      "kind": "soic_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic8_p1.27mm",
+      "x": 14.324,
+      "y": 30.374,
+      "rotation": 90,
+      "bounds": {
+        "width": 5.31,
+        "height": 5.8
+      },
+      "pinCount": 8,
+      "passiveCount": 1
+    },
+    {
+      "ref": "RA21_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
       "footprint": "0201",
-      "x": -6.786,
-      "y": 30.969,
+      "x": 17.072,
+      "y": 34.384,
       "rotation": 0,
       "bounds": {
         "width": 1.12,
@@ -1741,31 +1643,61 @@
       "passiveValue": "4.7k"
     },
     {
+      "ref": "U_AUX22",
+      "kind": "soic14_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic14_p1.27mm",
+      "x": -29.915,
+      "y": -9.781,
+      "rotation": 180,
+      "bounds": {
+        "width": 5.8,
+        "height": 9.12
+      },
+      "pinCount": 14,
+      "passiveCount": 1
+    },
+    {
+      "ref": "CA22_1",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -33.995,
+      "y": -16.341,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
       "ref": "U_AUX23",
       "kind": "dual_mosfet_subcircuit",
       "componentType": "chip",
       "footprint": "soic8_p1.27mm",
-      "x": 26.244,
-      "y": 22.383,
+      "x": -9.974,
+      "y": 29.709,
       "rotation": 270,
       "bounds": {
         "width": 5.31,
         "height": 5.8
       },
       "pinCount": 8,
-      "passiveCount": 3
+      "passiveCount": 2
     },
     {
       "ref": "RA23_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0201",
-      "x": 21.947,
-      "y": 18.883,
+      "footprint": "0402",
+      "x": -14.13,
+      "y": 26.089,
       "rotation": 0,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 1.56,
+        "height": 0.64
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -1774,39 +1706,24 @@
       "ref": "CA23_2",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0201",
-      "x": 29.883,
-      "y": 27.283,
+      "footprint": "0603",
+      "x": -5.67,
+      "y": 34.609,
       "rotation": 0,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
     },
     {
-      "ref": "RA23_3",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0603",
-      "x": 23.077,
-      "y": 15.843,
-      "rotation": 180,
-      "bounds": {
-        "width": 2.45,
-        "height": 0.95
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
       "ref": "U_AUX24",
-      "kind": "soic_subcircuit",
+      "kind": "dual_mosfet_subcircuit",
       "componentType": "chip",
       "footprint": "soic8_p1.27mm",
-      "x": -22.311,
-      "y": 25.763,
+      "x": -29.852,
+      "y": 18.159,
       "rotation": 0,
       "bounds": {
         "width": 5.8,
@@ -1819,13 +1736,13 @@
       "ref": "CA24_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0603",
-      "x": -27.995,
-      "y": 22.209,
-      "rotation": 180,
+      "footprint": "0201",
+      "x": -34.394,
+      "y": 16.659,
+      "rotation": 0,
       "bounds": {
-        "width": 2.45,
-        "height": 0.95
+        "width": 1.12,
+        "height": 0.4
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
@@ -1834,55 +1751,25 @@
       "ref": "RA24_2",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0402",
-      "x": -21.171,
-      "y": 30.418,
+      "footprint": "0603",
+      "x": -29.157,
+      "y": 22.814,
       "rotation": 180,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
     },
     {
       "ref": "U_AUX25",
-      "kind": "tssop_subcircuit",
-      "componentType": "chip",
-      "footprint": "tssop16_p0.65mm",
-      "x": 21.918,
-      "y": -29.718,
-      "rotation": 90,
-      "bounds": {
-        "width": 6.05,
-        "height": 5.95
-      },
-      "pinCount": 16,
-      "passiveCount": 1
-    },
-    {
-      "ref": "RA25_1",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0201",
-      "x": 18.837,
-      "y": -25.633,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "U_AUX26",
       "kind": "qfn_subcircuit",
       "componentType": "chip",
       "footprint": "qfn20_w4_h4_p0.5mm",
-      "x": -33.833,
-      "y": 17.919,
-      "rotation": 180,
+      "x": 34.062,
+      "y": 9.656,
+      "rotation": 90,
       "bounds": {
         "width": 4.42,
         "height": 4.42
@@ -1891,12 +1778,42 @@
       "passiveCount": 1
     },
     {
+      "ref": "RA25_1",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": 33.988,
+      "y": 13.866,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "U_AUX26",
+      "kind": "dual_mosfet_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic8_p1.27mm",
+      "x": 2.052,
+      "y": -34.277,
+      "rotation": 180,
+      "bounds": {
+        "width": 5.8,
+        "height": 5.31
+      },
+      "pinCount": 8,
+      "passiveCount": 1
+    },
+    {
       "ref": "CA26_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0201",
-      "x": -31.486,
-      "y": 23.019,
+      "x": 5.02,
+      "y": -30.512,
       "rotation": 0,
       "bounds": {
         "width": 1.12,
@@ -1907,72 +1824,12 @@
     },
     {
       "ref": "U_AUX27",
-      "kind": "tssop20_subcircuit",
-      "componentType": "chip",
-      "footprint": "tssop20_p0.65mm",
-      "x": 30.003,
-      "y": -26.365,
-      "rotation": 270,
-      "bounds": {
-        "width": 7.35,
-        "height": 5.95
-      },
-      "pinCount": 20,
-      "passiveCount": 1
-    },
-    {
-      "ref": "RA27_1",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0603",
-      "x": 23.544,
-      "y": -25.327,
-      "rotation": 180,
-      "bounds": {
-        "width": 2.45,
-        "height": 0.95
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "U_AUX28",
-      "kind": "soic14_subcircuit",
-      "componentType": "chip",
-      "footprint": "soic14_p1.27mm",
-      "x": 34.227,
-      "y": -38.347,
-      "rotation": 0,
-      "bounds": {
-        "width": 5.8,
-        "height": 9.12
-      },
-      "pinCount": 14,
-      "passiveCount": 1
-    },
-    {
-      "ref": "CA28_1",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0603",
-      "x": 39.911,
-      "y": -41.286,
-      "rotation": 180,
-      "bounds": {
-        "width": 2.45,
-        "height": 0.95
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "U_AUX29",
       "kind": "tssop_subcircuit",
       "componentType": "chip",
       "footprint": "tssop16_p0.65mm",
-      "x": -30.02,
-      "y": 5.669,
-      "rotation": 90,
+      "x": 29.626,
+      "y": 22.183,
+      "rotation": 270,
       "bounds": {
         "width": 6.05,
         "height": 5.95
@@ -1981,16 +1838,106 @@
       "passiveCount": 2
     },
     {
-      "ref": "RA29_1",
+      "ref": "RA27_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
+      "footprint": "0603",
+      "x": 23.817,
+      "y": 26.026,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "CA27_2",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 33.599,
+      "y": 17.208,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "U_AUX28",
+      "kind": "soic14_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic14_p1.27mm",
+      "x": 26.292,
+      "y": -29.736,
+      "rotation": 0,
+      "bounds": {
+        "width": 5.8,
+        "height": 9.12
+      },
+      "pinCount": 14,
+      "passiveCount": 2
+    },
+    {
+      "ref": "CA28_1",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
       "footprint": "0402",
-      "x": -28.767,
-      "y": 0.694,
+      "x": 32.662,
+      "y": -33.84,
       "rotation": 180,
       "bounds": {
         "width": 1.56,
         "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "RA28_2",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 23.324,
+      "y": -24.066,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "U_AUX29",
+      "kind": "dual_mosfet_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic8_p1.27mm",
+      "x": -33.997,
+      "y": 33.851,
+      "rotation": 90,
+      "bounds": {
+        "width": 5.31,
+        "height": 5.8
+      },
+      "pinCount": 8,
+      "passiveCount": 2
+    },
+    {
+      "ref": "RA29_1",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -29.692,
+      "y": 28.951,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -1999,9 +1946,39 @@
       "ref": "CA29_2",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -28.984,
+      "y": 32.131,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "U_AUX30",
+      "kind": "qfn_subcircuit",
+      "componentType": "chip",
+      "footprint": "qfn20_w4_h4_p0.5mm",
+      "x": 42.127,
+      "y": 33.714,
+      "rotation": 180,
+      "bounds": {
+        "width": 4.42,
+        "height": 4.42
+      },
+      "pinCount": 20,
+      "passiveCount": 3
+    },
+    {
+      "ref": "CA30_1",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
       "footprint": "0402",
-      "x": -23.525,
-      "y": 2.992,
+      "x": 45.586,
+      "y": 29.504,
       "rotation": 0,
       "bounds": {
         "width": 1.56,
@@ -2011,46 +1988,16 @@
       "passiveValue": "1uF"
     },
     {
-      "ref": "U_AUX30",
-      "kind": "tssop20_subcircuit",
-      "componentType": "chip",
-      "footprint": "tssop20_p0.65mm",
-      "x": -14.249,
-      "y": -26.363,
-      "rotation": 180,
-      "bounds": {
-        "width": 5.95,
-        "height": 7.35
-      },
-      "pinCount": 20,
-      "passiveCount": 3
-    },
-    {
-      "ref": "CA30_1",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0603",
-      "x": -10.788,
-      "y": -33.203,
-      "rotation": 0,
-      "bounds": {
-        "width": 2.45,
-        "height": 0.95
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
       "ref": "RA30_2",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0402",
-      "x": -9.274,
-      "y": -31.197,
-      "rotation": 270,
+      "footprint": "0201",
+      "x": 46.695,
+      "y": 30.835,
+      "rotation": 0,
       "bounds": {
-        "width": 0.64,
-        "height": 1.56
+        "width": 1.12,
+        "height": 0.4
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -2060,8 +2007,8 @@
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0201",
-      "x": -10.4,
-      "y": -29.859,
+      "x": 45.17,
+      "y": 33.443,
       "rotation": 270,
       "bounds": {
         "width": 0.4,
@@ -2071,32 +2018,72 @@
       "passiveValue": "1uF"
     },
     {
-      "ref": "Q31",
-      "kind": "mosfet_subcircuit",
-      "componentType": "mosfet",
-      "footprint": "sot23",
-      "x": 33.633,
-      "y": 22.371,
+      "ref": "U_AUX31",
+      "kind": "soic14_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic14_p1.27mm",
+      "x": 34.227,
+      "y": -38.347,
       "rotation": 270,
       "bounds": {
-        "width": 3.4,
-        "height": 3.77
+        "width": 9.12,
+        "height": 5.8
       },
-      "pinCount": 3,
-      "passiveCount": 2,
-      "supplierPartNumbers": {
-        "jlcpcb": [
-          "C8545"
-        ]
-      }
+      "pinCount": 14,
+      "passiveCount": 1
     },
     {
       "ref": "RA31_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
+      "footprint": "0603",
+      "x": 40.003,
+      "y": -34.097,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "U_AUX32",
+      "kind": "soic_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic8_p1.27mm",
+      "x": 17.866,
+      "y": -22.279,
+      "rotation": 0,
+      "bounds": {
+        "width": 5.8,
+        "height": 5.31
+      },
+      "pinCount": 8,
+      "passiveCount": 2
+    },
+    {
+      "ref": "CA32_1",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 11.496,
+      "y": -19.889,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "RA32_2",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
       "footprint": "0201",
-      "x": 36.975,
-      "y": 24.958,
+      "x": 20.834,
+      "y": -26.044,
       "rotation": 0,
       "bounds": {
         "width": 1.12,
@@ -2106,81 +2093,31 @@
       "passiveValue": "4.7k"
     },
     {
-      "ref": "CA31_2",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0201",
-      "x": 31.745,
-      "y": 17.596,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "U_AUX32",
-      "kind": "dual_mosfet_subcircuit",
+      "ref": "U_AUX33",
+      "kind": "qfn_subcircuit",
       "componentType": "chip",
-      "footprint": "soic8_p1.27mm",
-      "x": -17.852,
-      "y": -34.187,
-      "rotation": 0,
-      "bounds": {
-        "width": 5.8,
-        "height": 5.31
-      },
-      "pinCount": 8,
-      "passiveCount": 1
-    },
-    {
-      "ref": "CA32_1",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0201",
-      "x": -22.394,
-      "y": -32.687,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "Q33",
-      "kind": "mosfet_subcircuit",
-      "componentType": "mosfet",
-      "footprint": "sot23",
-      "x": -34.116,
-      "y": 26.208,
+      "footprint": "qfn20_w4_h4_p0.5mm",
+      "x": -21.944,
+      "y": -25.718,
       "rotation": 90,
       "bounds": {
-        "width": 3.4,
-        "height": 3.77
+        "width": 4.42,
+        "height": 4.42
       },
-      "pinCount": 3,
-      "passiveCount": 2,
-      "supplierPartNumbers": {
-        "jlcpcb": [
-          "C8545"
-        ]
-      }
+      "pinCount": 20,
+      "passiveCount": 2
     },
     {
       "ref": "RA33_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0402",
-      "x": -32.087,
-      "y": 29.083,
+      "footprint": "0201",
+      "x": -19.597,
+      "y": -22.398,
       "rotation": 0,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 1.12,
+        "height": 0.4
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -2190,8 +2127,8 @@
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0603",
-      "x": -28.501,
-      "y": 27.905,
+      "x": -15.819,
+      "y": -23.729,
       "rotation": 0,
       "bounds": {
         "width": 2.45,
@@ -2201,31 +2138,36 @@
       "passiveValue": "1uF"
     },
     {
-      "ref": "U_AUX34",
-      "kind": "qfn_subcircuit",
-      "componentType": "chip",
-      "footprint": "qfn20_w4_h4_p0.5mm",
-      "x": -5.887,
-      "y": 14.058,
+      "ref": "Q34",
+      "kind": "mosfet_subcircuit",
+      "componentType": "mosfet",
+      "footprint": "sot23",
+      "x": -34.116,
+      "y": 26.208,
       "rotation": 180,
       "bounds": {
-        "width": 4.42,
-        "height": 4.42
+        "width": 3.77,
+        "height": 3.4
       },
-      "pinCount": 20,
-      "passiveCount": 2
+      "pinCount": 3,
+      "passiveCount": 2,
+      "supplierPartNumbers": {
+        "jlcpcb": [
+          "C8545"
+        ]
+      }
     },
     {
       "ref": "CA34_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0201",
-      "x": -8.234,
-      "y": 8.958,
-      "rotation": 0,
+      "footprint": "0402",
+      "x": -34.342,
+      "y": 22.508,
+      "rotation": 180,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 1.56,
+        "height": 0.64
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
@@ -2234,13 +2176,13 @@
       "ref": "RA34_2",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0402",
-      "x": -11.567,
-      "y": 12.069,
+      "footprint": "0603",
+      "x": -39.916,
+      "y": 24.678,
       "rotation": 0,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -2250,68 +2192,53 @@
       "kind": "dual_mosfet_subcircuit",
       "componentType": "chip",
       "footprint": "soic8_p1.27mm",
-      "x": 42.288,
-      "y": 30,
+      "x": -29.981,
+      "y": -22.183,
       "rotation": 270,
       "bounds": {
         "width": 5.31,
         "height": 5.8
       },
       "pinCount": 8,
-      "passiveCount": 2
+      "passiveCount": 1
     },
     {
       "ref": "RA35_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0402",
-      "x": 38.132,
-      "y": 26.38,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "CA35_2",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
       "footprint": "0201",
-      "x": 45.927,
-      "y": 34.9,
+      "x": -34.278,
+      "y": -25.683,
       "rotation": 0,
       "bounds": {
         "width": 1.12,
         "height": 0.4
       },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
     },
     {
       "ref": "U_AUX36",
-      "kind": "soic_subcircuit",
+      "kind": "dual_mosfet_subcircuit",
       "componentType": "chip",
       "footprint": "soic8_p1.27mm",
-      "x": 17.829,
-      "y": -18.139,
+      "x": 41.878,
+      "y": -30.104,
       "rotation": 0,
       "bounds": {
         "width": 5.8,
         "height": 5.31
       },
       "pinCount": 8,
-      "passiveCount": 2
+      "passiveCount": 1
     },
     {
       "ref": "CA36_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0603",
-      "x": 12.145,
-      "y": -21.693,
+      "x": 36.194,
+      "y": -33.658,
       "rotation": 180,
       "bounds": {
         "width": 2.45,
@@ -2321,28 +2248,43 @@
       "passiveValue": "1uF"
     },
     {
-      "ref": "RA36_2",
+      "ref": "U_AUX37",
+      "kind": "tssop_subcircuit",
+      "componentType": "chip",
+      "footprint": "tssop16_p0.65mm",
+      "x": -22.271,
+      "y": 29.742,
+      "rotation": 90,
+      "bounds": {
+        "width": 6.05,
+        "height": 5.95
+      },
+      "pinCount": 16,
+      "passiveCount": 1
+    },
+    {
+      "ref": "RA37_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0402",
-      "x": 18.969,
-      "y": -13.484,
-      "rotation": 180,
+      "footprint": "0201",
+      "x": -25.352,
+      "y": 33.827,
+      "rotation": 0,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 1.12,
+        "height": 0.4
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
     },
     {
-      "ref": "U_AUX37",
+      "ref": "U_AUX38",
       "kind": "qfn_subcircuit",
       "componentType": "chip",
       "footprint": "qfn20_w4_h4_p0.5mm",
-      "x": -21.991,
-      "y": -25.828,
-      "rotation": 90,
+      "x": 18.309,
+      "y": -34.377,
+      "rotation": 180,
       "bounds": {
         "width": 4.42,
         "height": 4.42
@@ -2351,27 +2293,152 @@
       "passiveCount": 1
     },
     {
-      "ref": "RA37_1",
+      "ref": "CA38_1",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 20.656,
+      "y": -29.277,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "Q39",
+      "kind": "mosfet_subcircuit",
+      "componentType": "mosfet",
+      "footprint": "sot23",
+      "x": 34.021,
+      "y": -26.307,
+      "rotation": 270,
+      "bounds": {
+        "width": 3.4,
+        "height": 3.77
+      },
+      "pinCount": 3,
+      "passiveCount": 2,
+      "supplierPartNumbers": {
+        "jlcpcb": [
+          "C8545"
+        ]
+      }
+    },
+    {
+      "ref": "RA39_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0402",
-      "x": -22.51,
-      "y": -21.618,
-      "rotation": 180,
+      "footprint": "0201",
+      "x": 30.679,
+      "y": -23.72,
+      "rotation": 0,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 1.12,
+        "height": 0.4
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
     },
     {
-      "ref": "Q38",
+      "ref": "CA39_2",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 35.052,
+      "y": -29.197,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "U_AUX40",
+      "kind": "qfn_subcircuit",
+      "componentType": "chip",
+      "footprint": "qfn20_w4_h4_p0.5mm",
+      "x": -13.686,
+      "y": -13.9,
+      "rotation": 0,
+      "bounds": {
+        "width": 4.42,
+        "height": 4.42
+      },
+      "pinCount": 20,
+      "passiveCount": 1
+    },
+    {
+      "ref": "CA40_1",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -8.006,
+      "y": -15.889,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "U_AUX41",
+      "kind": "qfn_subcircuit",
+      "componentType": "chip",
+      "footprint": "qfn20_w4_h4_p0.5mm",
+      "x": -9.865,
+      "y": -30.247,
+      "rotation": 90,
+      "bounds": {
+        "width": 4.42,
+        "height": 4.42
+      },
+      "pinCount": 20,
+      "passiveCount": 2
+    },
+    {
+      "ref": "RA41_1",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -7.518,
+      "y": -33.567,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "CA41_2",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": -3.74,
+      "y": -32.236,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "Q42",
       "kind": "mosfet_subcircuit",
       "componentType": "mosfet",
       "footprint": "sot23",
-      "x": -2.338,
-      "y": -14.027,
+      "x": -38.279,
+      "y": -38.315,
       "rotation": 180,
       "bounds": {
         "width": 3.77,
@@ -2386,34 +2453,34 @@
       }
     },
     {
-      "ref": "CA38_1",
+      "ref": "CA42_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0603",
-      "x": 1.273,
-      "y": -10.327,
+      "footprint": "0201",
+      "x": -36.224,
+      "y": -42.905,
       "rotation": 0,
       "bounds": {
-        "width": 2.45,
-        "height": 0.95
+        "width": 1.12,
+        "height": 0.4
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
     },
     {
-      "ref": "Q39",
+      "ref": "Q43",
       "kind": "mosfet_subcircuit",
       "componentType": "mosfet",
       "footprint": "sot23",
-      "x": -6.215,
-      "y": 22.368,
+      "x": -6.121,
+      "y": 9.726,
       "rotation": 270,
       "bounds": {
         "width": 3.4,
         "height": 3.77
       },
       "pinCount": 3,
-      "passiveCount": 1,
+      "passiveCount": 2,
       "supplierPartNumbers": {
         "jlcpcb": [
           "C8545"
@@ -2421,27 +2488,42 @@
       }
     },
     {
-      "ref": "RA39_1",
+      "ref": "RA43_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0603",
-      "x": -10.699,
-      "y": 25.229,
-      "rotation": 180,
+      "footprint": "0201",
+      "x": -2.779,
+      "y": 12.313,
+      "rotation": 0,
       "bounds": {
-        "width": 2.45,
-        "height": 0.95
+        "width": 1.12,
+        "height": 0.4
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
     },
     {
-      "ref": "U_AUX40",
+      "ref": "CA43_2",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -7.152,
+      "y": 6.836,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "U_AUX44",
       "kind": "qfn_subcircuit",
       "componentType": "chip",
       "footprint": "qfn20_w4_h4_p0.5mm",
-      "x": 21.683,
-      "y": 29.913,
+      "x": 37.898,
+      "y": 25.921,
       "rotation": 0,
       "bounds": {
         "width": 4.42,
@@ -2451,31 +2533,31 @@
       "passiveCount": 2
     },
     {
-      "ref": "CA40_1",
+      "ref": "CA44_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0402",
-      "x": 27.363,
-      "y": 27.924,
-      "rotation": 180,
+      "footprint": "0201",
+      "x": 34.578,
+      "y": 27.552,
+      "rotation": 90,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 0.4,
+        "height": 1.12
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
     },
     {
-      "ref": "RA40_2",
+      "ref": "RA44_2",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0402",
-      "x": 21.164,
-      "y": 34.123,
-      "rotation": 180,
+      "footprint": "0201",
+      "x": 40.245,
+      "y": 22.601,
+      "rotation": 0,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 1.12,
+        "height": 0.4
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -2787,12 +2869,12 @@
       "to": ".CA4_1 > .pin1"
     },
     {
-      "from": ".U_AUX5 > .pin1",
-      "to": ".RA5_1 > .pin1"
+      "from": ".U_AUX4 > .pin2",
+      "to": ".RA4_2 > .pin1"
     },
     {
-      "from": ".U_AUX5 > .pin2",
-      "to": ".CA5_2 > .pin1"
+      "from": ".U_AUX5 > .pin1",
+      "to": ".RA5_1 > .pin1"
     },
     {
       "from": ".U_AUX6 > .pin1",
@@ -2819,47 +2901,31 @@
       "to": ".RA9_1 > .pin1"
     },
     {
+      "from": ".U_AUX9 > .pin2",
+      "to": ".CA9_2 > .pin1"
+    },
+    {
       "from": ".U_AUX10 > .pin1",
       "to": ".CA10_1 > .pin1"
     },
     {
-      "from": ".U_AUX10 > .pin2",
-      "to": ".RA10_2 > .pin1"
-    },
-    {
-      "from": ".U_AUX10 > .pin3",
-      "to": ".CA10_3 > .pin1"
-    },
-    {
-      "from": ".Q11 > .pin1",
+      "from": ".U_AUX11 > .pin1",
       "to": ".RA11_1 > .pin1"
     },
     {
-      "from": ".Q11 > .pin2",
+      "from": ".U_AUX11 > .pin2",
       "to": ".CA11_2 > .pin1"
-    },
-    {
-      "from": ".Q11 > .pin3",
-      "to": ".RA11_3 > .pin1"
     },
     {
       "from": ".U_AUX12 > .pin1",
       "to": ".CA12_1 > .pin1"
     },
     {
-      "from": ".U_AUX12 > .pin2",
-      "to": ".RA12_2 > .pin1"
-    },
-    {
-      "from": ".U_AUX12 > .pin3",
-      "to": ".CA12_3 > .pin1"
-    },
-    {
-      "from": ".U_AUX13 > .pin1",
+      "from": ".Q13 > .pin1",
       "to": ".RA13_1 > .pin1"
     },
     {
-      "from": ".Q14 > .pin1",
+      "from": ".U_AUX14 > .pin1",
       "to": ".CA14_1 > .pin1"
     },
     {
@@ -2871,12 +2937,8 @@
       "to": ".CA15_2 > .pin1"
     },
     {
-      "from": ".U_AUX16 > .pin1",
+      "from": ".Q16 > .pin1",
       "to": ".CA16_1 > .pin1"
-    },
-    {
-      "from": ".U_AUX16 > .pin2",
-      "to": ".RA16_2 > .pin1"
     },
     {
       "from": ".U_AUX17 > .pin1",
@@ -2887,20 +2949,24 @@
       "to": ".CA17_2 > .pin1"
     },
     {
-      "from": ".Q18 > .pin1",
+      "from": ".U_AUX18 > .pin1",
       "to": ".CA18_1 > .pin1"
     },
     {
-      "from": ".Q18 > .pin2",
+      "from": ".U_AUX18 > .pin2",
       "to": ".RA18_2 > .pin1"
     },
     {
-      "from": ".U_AUX19 > .pin1",
+      "from": ".Q19 > .pin1",
       "to": ".RA19_1 > .pin1"
     },
     {
       "from": ".U_AUX20 > .pin1",
       "to": ".CA20_1 > .pin1"
+    },
+    {
+      "from": ".U_AUX20 > .pin2",
+      "to": ".RA20_2 > .pin1"
     },
     {
       "from": ".U_AUX21 > .pin1",
@@ -2911,20 +2977,12 @@
       "to": ".CA22_1 > .pin1"
     },
     {
-      "from": ".U_AUX22 > .pin2",
-      "to": ".RA22_2 > .pin1"
-    },
-    {
       "from": ".U_AUX23 > .pin1",
       "to": ".RA23_1 > .pin1"
     },
     {
       "from": ".U_AUX23 > .pin2",
       "to": ".CA23_2 > .pin1"
-    },
-    {
-      "from": ".U_AUX23 > .pin3",
-      "to": ".RA23_3 > .pin1"
     },
     {
       "from": ".U_AUX24 > .pin1",
@@ -2947,8 +3005,16 @@
       "to": ".RA27_1 > .pin1"
     },
     {
+      "from": ".U_AUX27 > .pin2",
+      "to": ".CA27_2 > .pin1"
+    },
+    {
       "from": ".U_AUX28 > .pin1",
       "to": ".CA28_1 > .pin1"
+    },
+    {
+      "from": ".U_AUX28 > .pin2",
+      "to": ".RA28_2 > .pin1"
     },
     {
       "from": ".U_AUX29 > .pin1",
@@ -2971,31 +3037,31 @@
       "to": ".CA30_3 > .pin1"
     },
     {
-      "from": ".Q31 > .pin1",
+      "from": ".U_AUX31 > .pin1",
       "to": ".RA31_1 > .pin1"
-    },
-    {
-      "from": ".Q31 > .pin2",
-      "to": ".CA31_2 > .pin1"
     },
     {
       "from": ".U_AUX32 > .pin1",
       "to": ".CA32_1 > .pin1"
     },
     {
-      "from": ".Q33 > .pin1",
+      "from": ".U_AUX32 > .pin2",
+      "to": ".RA32_2 > .pin1"
+    },
+    {
+      "from": ".U_AUX33 > .pin1",
       "to": ".RA33_1 > .pin1"
     },
     {
-      "from": ".Q33 > .pin2",
+      "from": ".U_AUX33 > .pin2",
       "to": ".CA33_2 > .pin1"
     },
     {
-      "from": ".U_AUX34 > .pin1",
+      "from": ".Q34 > .pin1",
       "to": ".CA34_1 > .pin1"
     },
     {
-      "from": ".U_AUX34 > .pin2",
+      "from": ".Q34 > .pin2",
       "to": ".RA34_2 > .pin1"
     },
     {
@@ -3003,23 +3069,15 @@
       "to": ".RA35_1 > .pin1"
     },
     {
-      "from": ".U_AUX35 > .pin2",
-      "to": ".CA35_2 > .pin1"
-    },
-    {
       "from": ".U_AUX36 > .pin1",
       "to": ".CA36_1 > .pin1"
-    },
-    {
-      "from": ".U_AUX36 > .pin2",
-      "to": ".RA36_2 > .pin1"
     },
     {
       "from": ".U_AUX37 > .pin1",
       "to": ".RA37_1 > .pin1"
     },
     {
-      "from": ".Q38 > .pin1",
+      "from": ".U_AUX38 > .pin1",
       "to": ".CA38_1 > .pin1"
     },
     {
@@ -3027,12 +3085,40 @@
       "to": ".RA39_1 > .pin1"
     },
     {
+      "from": ".Q39 > .pin2",
+      "to": ".CA39_2 > .pin1"
+    },
+    {
       "from": ".U_AUX40 > .pin1",
       "to": ".CA40_1 > .pin1"
     },
     {
-      "from": ".U_AUX40 > .pin2",
-      "to": ".RA40_2 > .pin1"
+      "from": ".U_AUX41 > .pin1",
+      "to": ".RA41_1 > .pin1"
+    },
+    {
+      "from": ".U_AUX41 > .pin2",
+      "to": ".CA41_2 > .pin1"
+    },
+    {
+      "from": ".Q42 > .pin1",
+      "to": ".CA42_1 > .pin1"
+    },
+    {
+      "from": ".Q43 > .pin1",
+      "to": ".RA43_1 > .pin1"
+    },
+    {
+      "from": ".Q43 > .pin2",
+      "to": ".CA43_2 > .pin1"
+    },
+    {
+      "from": ".U_AUX44 > .pin1",
+      "to": ".CA44_1 > .pin1"
+    },
+    {
+      "from": ".U_AUX44 > .pin2",
+      "to": ".RA44_2 > .pin1"
     }
   ]
 }

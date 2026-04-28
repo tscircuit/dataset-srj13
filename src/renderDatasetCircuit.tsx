@@ -58,18 +58,11 @@ const renderComponent = (component: PlacementComponent) => {
 
   if (component.componentType === "pinheader") {
     return (
-      <pinheader
+      <chip
         key={component.ref}
-        name={component.ref}
-        pinCount={component.pinCount ?? 8}
-        doubleRow={component.doubleRow}
-        pitch={component.pitch ?? 2.54}
+        {...common}
+        pinLabels={makePinLabels(component.pinCount)}
         footprint={component.footprint}
-        pcbX={component.x}
-        pcbY={component.y}
-        pcbRotation={component.rotation}
-        allowOffBoard={component.allowOffBoard}
-        supplierPartNumbers={supplierPartNumbers(component)}
       />
     )
   }

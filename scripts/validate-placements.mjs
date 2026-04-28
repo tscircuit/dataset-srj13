@@ -57,16 +57,16 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
         reportFailure(`${file}: ${component.ref} single-row pinheader footprint is missing rows1`)
       }
     }
-    if (component.kind === "usbc") {
+    if (component.kind === "usbc" || component.kind === "microusb") {
       const expectedRotation = component.edge === "left"
-        ? 90
+        ? 270
         : component.edge === "right"
-          ? 270
+          ? 90
           : component.edge === "top"
             ? 180
             : 0
       if (component.rotation !== expectedRotation) {
-        reportFailure(`${file}: ${component.ref} USB-C rotation ${component.rotation} does not point off-board`)
+        reportFailure(`${file}: ${component.ref} ${component.kind} rotation ${component.rotation} does not point off-board`)
       }
     }
     const rect = rectFor(component)
