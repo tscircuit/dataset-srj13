@@ -46,7 +46,7 @@ export interface PlacementComponent {
   passiveCount?: number
   designatedPassiveCount?: number
   doubleRow?: boolean
-  pitch?: string
+  pitch?: number | string
   passiveValue?: string
   passiveKind?: "resistor" | "capacitor"
   edge?: EdgeName

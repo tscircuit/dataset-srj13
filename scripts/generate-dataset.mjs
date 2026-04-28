@@ -1,5 +1,6 @@
 import { mkdirSync, readdirSync, readFileSync, writeFileSync } from "node:fs"
 import { join } from "node:path"
+import { pack } from "calculate-packing"
 import { fp } from "@tscircuit/footprinter"
 
 const definitionsDir = "dataset/definitions"
@@ -29,10 +30,10 @@ const connectorCatalog = {
     jlcpcb: ["C10418"],
   },
   rs232: {
-    footprint: "imported:DS1034_25FUNSI44",
-    pins: 25,
-    bounds: [53.6, 13.1],
-    jlcpcb: ["C77833"],
+    footprint: "imported:SP3232EEN_L_TR",
+    pins: 16,
+    bounds: [10.9, 7.6],
+    jlcpcb: ["C9378"],
   },
   hdmi: {
     footprint: "imported:A_3110_30MG0BK00P1",
@@ -68,10 +69,12 @@ const subcircuitCatalog = [
 ]
 
 const passiveFootprints = [
-  { footprint: "0201", bounds: [0.95, 0.6] },
-  { footprint: "0402", bounds: [1.35, 0.9] },
-  { footprint: "0603", bounds: [1.95, 1.2] },
+  { footprint: "0201", bounds: [1.12, 0.4] },
+  { footprint: "0402", bounds: [1.56, 0.64] },
+  { footprint: "0603", bounds: [2.45, 0.95] },
 ]
+
+const targetUtilization = 0.35
 
 const round = (value) => Math.round(value * 1000) / 1000
 
@@ -171,6 +174,13 @@ const boundsForRotation = (bounds, rotation) => {
     : { width: bounds[0], height: bounds[1] }
 }
 
+const getEdgeRotation = (edge, kind) => {
+  if (kind === "usbc") {
+    return edge === "left" ? 0 : edge === "right" ? 180 : edge === "top" ? -90 : 90
+  }
+  return edge === "left" ? 90 : edge === "right" ? -90 : edge === "top" ? 180 : 0
+}
+
 const parsePinHeader = (kind) => {
   const match = kind.match(/^pinheader(\d+)(?:_rows(\d+))?$/)
   if (!match) return null
@@ -179,10 +189,10 @@ const parsePinHeader = (kind) => {
   return {
     kind,
     componentType: "pinheader",
-    footprint: `pinrow${pinCount}${rows === 2 ? "_rows2" : ""}_p2.54mm`,
+    footprint: `pinrow${pinCount}_rows${rows}_p2.54mm`,
     pins: pinCount,
     doubleRow: rows === 2,
-    pitch: "2.54mm",
+    pitch: 2.54,
     jlcpcb: [],
   }
 }
@@ -208,9 +218,7 @@ const placeEdge = (components, definition) => {
     const horizontal = edge === "top" || edge === "bottom"
     const boardSpan = horizontal ? definition.board.width : definition.board.height
     const catalogs = kinds.map(connectorFor)
-    const rotations = catalogs.map(() =>
-      edge === "left" ? 90 : edge === "right" ? -90 : edge === "top" ? 180 : 0,
-    )
+    const rotations = catalogs.map((catalog, index) => getEdgeRotation(edge, kinds[index] ?? catalog.kind))
     const renderedBounds = catalogs.map((catalog, index) => boundsForRotation(catalog.bounds, rotations[index]))
     const majorSizes = renderedBounds.map((bounds) => (horizontal ? bounds.width : bounds.height))
     const gap = 4
@@ -356,51 +364,137 @@ const placeMcus = (components, traces, definition, rng) => {
   })
 }
 
-const placeSubcircuits = (components, traces, definition, rng) => {
-  const cell = 10
-  let subIndex = 1
-  for (let y = -definition.board.height / 2 + cell / 2; y <= definition.board.height / 2 - cell / 2; y += cell) {
-    for (let x = -definition.board.width / 2 + cell / 2; x <= definition.board.width / 2 - cell / 2; x += cell) {
-      const catalog = pick(rng, subcircuitCatalog)
-      const candidate = {
-        ref: catalog.componentType === "mosfet" ? `Q${subIndex}` : `U_AUX${subIndex}`,
-        kind: catalog.kind,
-        componentType: catalog.componentType,
-        footprint: catalog.footprint,
-        x: round(x),
-        y: round(y),
-        rotation: [0, 90, 180, 270][subIndex % 4],
-        bounds: { width: catalog.bounds[0], height: catalog.bounds[1] },
-        pinCount: catalog.pins,
-        supplierPartNumbers: catalog.componentType === "mosfet" ? { jlcpcb: ["C8545"] } : undefined,
-      }
-      if (overlapsAny(candidate, components, 2)) continue
-      components.push(candidate)
+const makePackingPad = (id, bounds, networkId = "cluster") => ({
+  padId: id,
+  networkId,
+  type: "rect",
+  offset: { x: 0, y: 0 },
+  size: { x: bounds[0], y: bounds[1] },
+})
 
-      const passiveCount = 1 + Math.floor(rng() * 4)
-      for (let passiveIndex = 0; passiveIndex < passiveCount; passiveIndex++) {
-        const passive = pick(rng, passiveFootprints)
-        const isCapacitor = rng() > 0.45
-        const passiveRef = `${isCapacitor ? "C" : "R"}A${subIndex}_${passiveIndex + 1}`
-        const dx = passiveIndex % 2 === 0 ? -4.4 : 4.4
-        const dy = passiveIndex < 2 ? -4.2 : 4.2
-        const passiveComponent = {
-          ref: passiveRef,
-          kind: "subcircuit_passive",
-          componentType: isCapacitor ? "capacitor" : "resistor",
-          footprint: passive.footprint,
-          x: round(x + dx),
-          y: round(y + dy),
-          rotation: passiveIndex % 2 === 0 ? 0 : 90,
-          bounds: { width: passive.bounds[0], height: passive.bounds[1] },
-          passiveKind: isCapacitor ? "capacitor" : "resistor",
-          passiveValue: isCapacitor ? "1uF" : "4.7k",
-        }
-        if (isInsideBoard(passiveComponent, definition.board, 0.7) && !overlapsAny(passiveComponent, components, 0.8)) {
-          components.push(passiveComponent)
-          traces.push({ from: `.${candidate.ref} > .pin${passiveIndex + 1}`, to: `.${passiveRef} > .pin1` })
-        }
-      }
+const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
+  const subRef = catalog.componentType === "mosfet" ? `Q${subIndex}` : `U_AUX${subIndex}`
+  const passiveCount = 1 + Math.floor(rng() * 4)
+  const packedInput = {
+    components: [
+      {
+        componentId: subRef,
+        isStatic: true,
+        center: { x: 0, y: 0 },
+        ccwRotationOffset: [0, 90, 180, 270][subIndex % 4],
+        availableRotationDegrees: [[0, 90, 180, 270][subIndex % 4]],
+        pads: [makePackingPad(`${subRef}_body`, catalog.bounds, `${subRef}_cluster`)],
+      },
+    ],
+    bounds: {
+      minX: -8,
+      minY: -8,
+      maxX: 8,
+      maxY: 8,
+    },
+    minGap: 0.6,
+    packOrderStrategy: "largest_to_smallest",
+    packPlacementStrategy: "minimum_sum_distance_to_network",
+    disconnectedPackDirection: "nearest_to_center",
+  }
+
+  const passiveSpecs = []
+  for (let passiveIndex = 0; passiveIndex < passiveCount; passiveIndex++) {
+    const passive = pick(rng, passiveFootprints)
+    const isCapacitor = (subIndex + passiveIndex) % 2 === 0
+    const passiveRef = `${isCapacitor ? "C" : "R"}A${subIndex}_${passiveIndex + 1}`
+    passiveSpecs.push({ passive, isCapacitor, passiveRef, passiveIndex })
+    packedInput.components.push({
+      componentId: passiveRef,
+      availableRotationDegrees: [0, 90, 180, 270],
+      pads: [makePackingPad(`${passiveRef}_body`, passive.bounds, `${subRef}_cluster`)],
+    })
+  }
+
+  const packed = pack(packedInput)
+  const packedById = new Map(packed.components.map((component) => [component.componentId, component]))
+  const packedSub = packedById.get(subRef)
+  const subRotation = packedSub.ccwRotationDegrees ?? packedSub.ccwRotationOffset ?? 0
+  const subBounds = boundsForRotation(catalog.bounds, subRotation)
+  const clusterComponents = [
+    {
+      ref: subRef,
+      kind: catalog.kind,
+      componentType: catalog.componentType,
+      footprint: catalog.footprint,
+      x: round(x),
+      y: round(y),
+      rotation: subRotation,
+      bounds: subBounds,
+      pinCount: catalog.pins,
+      passiveCount,
+      supplierPartNumbers: catalog.componentType === "mosfet" ? { jlcpcb: ["C8545"] } : undefined,
+    },
+  ]
+  const clusterTraces = []
+
+  for (const spec of passiveSpecs) {
+    const packedPassive = packedById.get(spec.passiveRef)
+    const rotation = packedPassive.ccwRotationDegrees ?? packedPassive.ccwRotationOffset ?? 0
+    const passiveBounds = boundsForRotation(spec.passive.bounds, rotation)
+    clusterComponents.push({
+      ref: spec.passiveRef,
+      kind: "subcircuit_passive",
+      componentType: spec.isCapacitor ? "capacitor" : "resistor",
+      footprint: spec.passive.footprint,
+      x: round(x + packedPassive.center.x),
+      y: round(y + packedPassive.center.y),
+      rotation,
+      bounds: passiveBounds,
+      passiveKind: spec.isCapacitor ? "capacitor" : "resistor",
+      passiveValue: spec.isCapacitor ? "1uF" : "4.7k",
+    })
+    clusterTraces.push({ from: `.${subRef} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
+  }
+
+  return { components: clusterComponents, traces: clusterTraces }
+}
+
+const canPlaceCluster = (cluster, components, board, existingClearance = 0.6, selfClearance = 0.15) =>
+  cluster.components.every((component, index) => {
+    if (!isInsideBoard(component, board, 0.55)) return false
+    if (overlapsAny(component, components, existingClearance)) return false
+    return !cluster.components.slice(0, index).some((other) =>
+      intersects(rectFor(component, selfClearance), rectFor(other, selfClearance)),
+    )
+  })
+
+const addCluster = (components, traces, cluster) => {
+  components.push(...cluster.components)
+  traces.push(...cluster.traces)
+}
+
+const makeFillCandidates = (definition, rng, passIndex) => {
+  const step = passIndex < 2 ? 8 : 5
+  const candidates = []
+  for (let y = -definition.board.height / 2 + step / 2; y <= definition.board.height / 2 - step / 2; y += step) {
+    for (let x = -definition.board.width / 2 + step / 2; x <= definition.board.width / 2 - step / 2; x += step) {
+      candidates.push({
+        x: round(x + (rng() - 0.5) * 0.8),
+        y: round(y + (rng() - 0.5) * 0.8),
+        score: Math.hypot(x, y) + rng() * 4,
+      })
+    }
+  }
+  return candidates.sort((a, b) => a.score - b.score)
+}
+
+const placeSubcircuits = (components, traces, definition, rng) => {
+  let subIndex = 1
+  for (let passIndex = 0; passIndex < 8 && getUtilization(components, definition.board) < targetUtilization; passIndex++) {
+    let placedThisPass = 0
+    for (const { x, y } of makeFillCandidates(definition, rng, passIndex)) {
+      if (getUtilization(components, definition.board) >= targetUtilization) break
+      const catalog = pick(rng, subcircuitCatalog)
+      const cluster = buildSubcircuitCluster({ x, y, catalog, subIndex, rng })
+      if (!canPlaceCluster(cluster, components, definition.board, passIndex < 2 ? 0.8 : 0.3)) continue
+      addCluster(components, traces, cluster)
+      placedThisPass++
       subIndex++
     }
   }

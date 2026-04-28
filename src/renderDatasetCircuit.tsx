@@ -1,6 +1,6 @@
 import { Fragment } from "react"
 import { A_3110_30MG0BK00P1 as HdmiConnector } from "../imports/A_3110_30MG0BK00P1"
-import { DS1034_25FUNSI44 as Rs232Connector } from "../imports/DS1034_25FUNSI44"
+import { SP3232EEN_L_TR as Rs232Connector } from "../imports/SP3232EEN_L_TR"
 import { TYPE_C_16PIN_2MD_073_ as UsbCConnector } from "../imports/TYPE_C_16PIN_2MD_073_"
 import type {
   DatasetPlacement,
@@ -62,7 +62,8 @@ const renderComponent = (component: PlacementComponent) => {
         name={component.ref}
         pinCount={component.pinCount ?? 8}
         doubleRow={component.doubleRow}
-        pitch={component.pitch ?? "2.54mm"}
+        pitch={component.pitch ?? 2.54}
+        footprint={component.footprint}
         pcbX={component.x}
         pcbY={component.y}
         pcbRotation={component.rotation}

@@ -13,6 +13,14 @@ const rectFor = (component, clearance = 0) => ({
 const intersects = (a, b) =>
   a.left < b.right && a.right > b.left && a.bottom < b.top && a.top > b.bottom
 
+const getUtilization = (components, board) => {
+  const occupiedArea = components.reduce(
+    (sum, component) => sum + component.bounds.width * component.bounds.height,
+    0,
+  )
+  return occupiedArea / (board.width * board.height)
+}
+
 let failures = 0
 let reportedFailures = 0
 const reportFailure = (message) => {
@@ -26,12 +34,37 @@ const reportFailure = (message) => {
 for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".json")).sort()) {
   const placement = JSON.parse(readFileSync(join(placementsDir, file), "utf8"))
   const components = placement.components
+  const utilization = getUtilization(components, placement.board)
+
+  if (utilization < 0.35) {
+    reportFailure(`${file}: only ${(utilization * 100).toFixed(2)}% covered, expected at least 35% JSON coverage`)
+  }
 
   if (components.some((component) => component.kind === "dense_passive")) {
     reportFailure(`${file}: contains dense_passive filler despite MCU passive-count cap`)
   }
 
   for (const component of components) {
+    if (component.componentType === "pinheader") {
+      if (component.pitch !== 2.54 || !String(component.footprint).includes("_p2.54mm")) {
+        reportFailure(`${file}: ${component.ref} pinheader pitch/footprint is not explicit 2.54mm`)
+      }
+      if (!component.doubleRow && !String(component.footprint).includes("_rows1_")) {
+        reportFailure(`${file}: ${component.ref} single-row pinheader footprint is missing rows1`)
+      }
+    }
+    if (component.kind === "usbc") {
+      const expectedRotation = component.edge === "left"
+        ? 0
+        : component.edge === "right"
+          ? 180
+          : component.edge === "top"
+            ? -90
+            : 90
+      if (component.rotation !== expectedRotation) {
+        reportFailure(`${file}: ${component.ref} USB-C rotation ${component.rotation} does not point off-board`)
+      }
+    }
     const rect = rectFor(component)
     const insideBoard =
       rect.left >= -placement.board.width / 2 &&
@@ -68,6 +101,20 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     }
     if (mcuPassives.length > 1 && new Set(mcuPassives.map((component) => component.rotation)).size < 2) {
       reportFailure(`${file}: ${mcu.ref} passives do not vary rotation`)
+    }
+  }
+
+  for (const subcircuit of components.filter((component) =>
+    component.kind === "soic_subcircuit" || component.kind === "tssop_subcircuit" || component.kind === "mosfet_subcircuit"
+  )) {
+    const passivePrefix = subcircuit.ref.startsWith("U_AUX")
+      ? subcircuit.ref.replace("U_AUX", "")
+      : subcircuit.ref.replace("Q", "")
+    const passives = components.filter((component) =>
+      component.kind === "subcircuit_passive" && new RegExp(`^[CR]A${passivePrefix}_`).test(component.ref)
+    )
+    if (passives.length < 1 || passives.length > 4) {
+      reportFailure(`${file}: ${subcircuit.ref} has ${passives.length} surrounding passives, expected 1-4`)
     }
   }
 }
