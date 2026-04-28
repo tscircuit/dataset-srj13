@@ -48,16 +48,43 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     reportFailure(`${file}: missing power_mosfet_subcircuit variant`)
   }
 
+  if (!components.some((component) => component.kind === "large_power_mosfet_subcircuit")) {
+    reportFailure(`${file}: missing large_power_mosfet_subcircuit variant`)
+  }
+
+  if (!components.some((component) => component.kind === "irf540_mosfet_subcircuit")) {
+    reportFailure(`${file}: missing C2566 IRF540NPBF mosfet variant`)
+  }
+
+  if (!components.some((component) => component.kind.startsWith("button_"))) {
+    reportFailure(`${file}: missing button footprint subcircuit variant`)
+  }
+
+  if (components.filter((component) => component.kind === "hdmi").length < 1) {
+    reportFailure(`${file}: expected at least one HDMI edge connector`)
+  }
+
+  if (components.filter((component) => component.kind === "usbc" || component.kind === "microusb" || component.kind === "usbb").length < 1) {
+    reportFailure(`${file}: expected at least one USB edge connector`)
+  }
+
+  if (components.filter((component) => component.componentType === "pinheader").length < 2) {
+    reportFailure(`${file}: expected at least two pin headers`)
+  }
+
   for (const component of components) {
     if (component.componentType === "pinheader") {
-      if (component.pitch !== 2.54 || !String(component.footprint).includes("_p2.54mm")) {
-        reportFailure(`${file}: ${component.ref} pinheader pitch/footprint is not explicit 2.54mm`)
+      if (component.pitch !== 2.56 || !String(component.footprint).includes("_p2.56mm")) {
+        reportFailure(`${file}: ${component.ref} pinheader pitch/footprint is not explicit 2.56mm`)
+      }
+      if (String(component.footprint).includes("_p1mm")) {
+        reportFailure(`${file}: ${component.ref} pinheader footprint uses overlapping 1mm pitch`)
       }
       if (!component.doubleRow && !String(component.footprint).includes("_rows1_")) {
         reportFailure(`${file}: ${component.ref} single-row pinheader footprint is missing rows1`)
       }
     }
-    if (component.kind === "usbc" || component.kind === "microusb") {
+    if (component.kind === "usbc" || component.kind === "microusb" || component.kind === "hdmi") {
       const expectedRotation = component.edge === "left"
         ? 270
         : component.edge === "right"

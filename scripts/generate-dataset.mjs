@@ -37,10 +37,10 @@ const connectorCatalog = {
     jlcpcb: ["C9378"],
   },
   hdmi: {
-    footprint: "imported:A_3110_30MG0BK00P1",
-    pins: 30,
-    bounds: [46.6, 11.1],
-    jlcpcb: ["C720743"],
+    footprint: "imported:HDMI_001_19PCBTP",
+    pins: 23,
+    bounds: [16.6, 12.7],
+    jlcpcb: ["C138388"],
   },
   barrel_jack: {
     footprint: "pinrow3_p2.5mm",
@@ -70,17 +70,24 @@ const subcircuitCatalog = [
   { kind: "tssop_subcircuit", componentType: "chip", footprint: "tssop16_p0.65mm", pins: 16, bounds: [5.95, 6.05] },
   { kind: "tssop20_subcircuit", componentType: "chip", footprint: "tssop20_p0.65mm", pins: 20, bounds: [5.95, 7.35] },
   { kind: "qfn_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm", pins: 20, bounds: [4.42, 4.42] },
-  { kind: "mosfet_subcircuit", componentType: "mosfet", footprint: "sot23", pins: 3, bounds: [3.77, 3.4] },
+  { kind: "qfn_thermalpad_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm_thermalpad", pins: 20, bounds: [4.42, 4.42] },
+  { kind: "button_4pin_subcircuit", componentType: "chip", footprint: "pushbutton_4pin", pins: 4, bounds: [8.5, 10.5] },
+  { kind: "button_6x6_subcircuit", componentType: "chip", footprint: "pushbutton_6x6", pins: 4, bounds: [8.5, 10.5] },
+  { kind: "mosfet_subcircuit", componentType: "mosfet", footprint: "sot23", pins: 3, bounds: [4.2, 4.2] },
   { kind: "dual_mosfet_subcircuit", componentType: "chip", footprint: "soic8_p1.27mm", pins: 8, bounds: [5.8, 5.31] },
-  { kind: "power_mosfet_subcircuit", componentType: "mosfet", footprint: "sot223", pins: 4, bounds: [10.3, 8.7] },
-  { kind: "large_power_mosfet_subcircuit", componentType: "mosfet", footprint: "to220", pins: 3, bounds: [12.26, 6.71] },
+  { kind: "power_mosfet_subcircuit", componentType: "mosfet", footprint: "sot223", pins: 4, bounds: [11.5, 9.6] },
+  { kind: "large_power_mosfet_subcircuit", componentType: "mosfet", footprint: "to220", pins: 3, bounds: [13.5, 8] },
+  { kind: "irf540_mosfet_subcircuit", componentType: "mosfet", footprint: "imported:IRF540NPBF", pins: 3, bounds: [12.4, 7.3] },
 ]
 
 const powerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "power_mosfet_subcircuit")
 const largePowerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "large_power_mosfet_subcircuit")
+const irf540MosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "irf540_mosfet_subcircuit")
+const buttonSubcircuitCatalog = subcircuitCatalog.filter((component) => component.kind.startsWith("button_"))
 const standardSubcircuitCatalog = subcircuitCatalog.filter((component) =>
   component.kind !== "power_mosfet_subcircuit" &&
-  component.kind !== "large_power_mosfet_subcircuit"
+  component.kind !== "large_power_mosfet_subcircuit" &&
+  component.kind !== "irf540_mosfet_subcircuit"
 )
 
 const passiveFootprints = [
@@ -90,10 +97,10 @@ const passiveFootprints = [
 ]
 
 const densityProfiles = [
-  { targetUtilization: 0.34, earlyClearance: 1.05, lateClearance: 0.55, selfClearance: 0.35, lateStep: 4.5 },
-  { targetUtilization: 0.36, earlyClearance: 0.95, lateClearance: 0.4, selfClearance: 0.28, lateStep: 4 },
-  { targetUtilization: 0.37, earlyClearance: 0.85, lateClearance: 0.32, selfClearance: 0.24, lateStep: 3.75 },
-  { targetUtilization: 0.38, earlyClearance: 0.75, lateClearance: 0.28, selfClearance: 0.22, lateStep: 3.5 },
+  { targetUtilization: 0.36, earlyClearance: 1.1, lateClearance: 0.55, selfClearance: 0.35, lateStep: 4.5 },
+  { targetUtilization: 0.37, earlyClearance: 1.0, lateClearance: 0.5, selfClearance: 0.32, lateStep: 4 },
+  { targetUtilization: 0.38, earlyClearance: 0.9, lateClearance: 0.48, selfClearance: 0.3, lateStep: 3.75 },
+  { targetUtilization: 0.39, earlyClearance: 0.85, lateClearance: 0.45, selfClearance: 0.28, lateStep: 3.5 },
 ]
 
 const round = (value) => Math.round(value * 1000) / 1000
@@ -188,6 +195,17 @@ const overlapsAny = (candidate, components, clearance = 0) => {
   return components.some((component) => intersects(candidateRect, rectFor(component, clearance)))
 }
 
+const edgeKeepoutFor = (component) =>
+  component.componentType === "connector" || component.componentType === "pinheader"
+    ? 2.2
+    : 0
+
+const overlapsAnyForFillCluster = (candidate, components, clearance = 0) =>
+  components.some((component) => {
+    const pairClearance = Math.max(clearance, edgeKeepoutFor(component), edgeKeepoutFor(candidate))
+    return intersects(rectFor(candidate, pairClearance), rectFor(component, pairClearance))
+  })
+
 const isInsideBoard = (component, board, clearance = 0) => {
   const rect = rectFor(component, clearance)
   return (
@@ -223,7 +241,7 @@ const boundsForRotation = (bounds, rotation) => {
 const getDensityProfile = (definition) =>
   densityProfiles[Math.abs(definition.seed) % densityProfiles.length]
 
-const usbEdgeRotations = {
+const portEdgeRotations = {
   left: 270,
   right: 90,
   top: 180,
@@ -231,8 +249,8 @@ const usbEdgeRotations = {
 }
 
 const getEdgeRotation = (edge, kind, definitionId) => {
-  if (kind === "usbc" || kind === "microusb") {
-    return usbEdgeRotations[edge]
+  if (kind === "usbc" || kind === "microusb" || kind === "hdmi") {
+    return portEdgeRotations[edge]
   }
   return edge === "left" ? 90 : edge === "right" ? -90 : edge === "top" ? 180 : 0
 }
@@ -245,10 +263,10 @@ const parsePinHeader = (kind) => {
   return {
     kind,
     componentType: "pinheader",
-    footprint: `pinrow${pinCount}_rows${rows}_p2.54mm`,
+    footprint: `pinrow${pinCount}_rows${rows}_p2.56mm`,
     pins: pinCount,
     doubleRow: rows === 2,
-    pitch: 2.54,
+    pitch: 2.56,
     jlcpcb: [],
   }
 }
@@ -650,7 +668,7 @@ const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
 const canPlaceCluster = (cluster, components, board, existingClearance = 0.6, selfClearance = 0.15) =>
   cluster.components.every((component, index) => {
     if (!isInsideBoard(component, board, 0.55)) return false
-    if (overlapsAny(component, components, existingClearance)) return false
+    if (overlapsAnyForFillCluster(component, components, existingClearance)) return false
     return !cluster.components.slice(0, index).some((other) =>
       intersects(rectFor(component, selfClearance), rectFor(other, selfClearance)),
     )
@@ -679,14 +697,27 @@ const makeFillCandidates = (definition, rng, passIndex, densityProfile) => {
 const placeSubcircuits = (components, traces, definition, rng) => {
   const densityProfile = getDensityProfile(definition)
   let subIndex = 1
-  for (let passIndex = 0; passIndex < 12 && getUtilization(components, definition.board) < densityProfile.targetUtilization; passIndex++) {
+  for (let passIndex = 0; passIndex < 16 && getUtilization(components, definition.board) < densityProfile.targetUtilization; passIndex++) {
     let placedThisPass = 0
     for (const { x, y } of makeFillCandidates(definition, rng, passIndex, densityProfile)) {
       if (getUtilization(components, definition.board) >= densityProfile.targetUtilization) break
+      const needsLargePowerMosfet = !components.some((component) => component.kind === "large_power_mosfet_subcircuit")
       const needsPowerMosfet = !components.some((component) => component.kind === "power_mosfet_subcircuit")
-      const catalog = needsPowerMosfet
+      const needsIrf540Mosfet = !components.some((component) => component.kind === "irf540_mosfet_subcircuit")
+      const needsButton = !components.some((component) => component.kind.startsWith("button_"))
+      const catalog = needsLargePowerMosfet
+        ? largePowerMosfetSubcircuit
+        : needsPowerMosfet
         ? powerMosfetSubcircuit
-        : rng() < 0.12
+        : needsIrf540Mosfet
+        ? irf540MosfetSubcircuit
+        : needsButton
+        ? pick(rng, buttonSubcircuitCatalog)
+        : rng() < 0.06
+          ? largePowerMosfetSubcircuit
+          : rng() < 0.12
+          ? irf540MosfetSubcircuit
+          : rng() < 0.2
           ? powerMosfetSubcircuit
           : pick(rng, standardSubcircuitCatalog)
       const cluster = buildSubcircuitCluster({ x, y, catalog, subIndex, rng })

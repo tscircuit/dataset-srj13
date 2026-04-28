@@ -1,5 +1,6 @@
 import { Fragment } from "react"
-import { A_3110_30MG0BK00P1 as HdmiConnector } from "../imports/A_3110_30MG0BK00P1"
+import { HDMI_001_19PCBTP as HdmiConnector } from "../imports/HDMI_001_19PCBTP"
+import { IRF540NPBF } from "../imports/IRF540NPBF"
 import { A_920_E52A2021S10100 as MicroUsbConnector } from "../imports/A_920_E52A2021S10100"
 import { SP3232EEN_L_TR as Rs232Connector } from "../imports/SP3232EEN_L_TR"
 import { TYPE_C_16PIN_2MD_073_ as UsbCConnector } from "../imports/TYPE_C_16PIN_2MD_073_"
@@ -81,6 +82,10 @@ const renderComponent = (component: PlacementComponent) => {
 
   if (component.kind === "microusb") {
     return <MicroUsbConnector key={component.ref} {...importedCommon} />
+  }
+
+  if (component.kind === "irf540_mosfet_subcircuit") {
+    return <IRF540NPBF key={component.ref} {...importedCommon} />
   }
 
   if (component.componentType === "resistor") {
