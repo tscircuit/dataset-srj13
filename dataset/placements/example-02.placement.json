@@ -2046,7 +2046,7 @@
         "width": 5.43,
         "height": 5.43
       },
-      "pinCount": 20,
+      "pinCount": 21,
       "passiveCount": 1
     },
     {
@@ -2076,7 +2076,7 @@
         "width": 5.43,
         "height": 5.43
       },
-      "pinCount": 20,
+      "pinCount": 21,
       "passiveCount": 1
     },
     {
@@ -2106,7 +2106,7 @@
         "width": 5.43,
         "height": 5.43
       },
-      "pinCount": 20,
+      "pinCount": 21,
       "passiveCount": 1
     },
     {
@@ -2356,7 +2356,7 @@
         "width": 5.43,
         "height": 5.43
       },
-      "pinCount": 20,
+      "pinCount": 21,
       "passiveCount": 1
     },
     {
@@ -2571,7 +2571,7 @@
         "width": 5.43,
         "height": 5.43
       },
-      "pinCount": 20,
+      "pinCount": 21,
       "passiveCount": 1
     },
     {
@@ -2636,7 +2636,7 @@
         "width": 5.43,
         "height": 5.43
       },
-      "pinCount": 20,
+      "pinCount": 21,
       "passiveCount": 1
     },
     {
@@ -4476,6 +4476,10 @@
       "to": "net.SCL"
     },
     {
+      "from": ".Q1 > .pin2",
+      "to": "net.V5"
+    },
+    {
       "from": ".Q1 > .pin3",
       "to": "net.GND"
     },
@@ -4488,10 +4492,6 @@
       "to": "net.GND"
     },
     {
-      "from": ".Q2 > .pin4",
-      "to": "net.GND"
-    },
-    {
       "from": ".Q3 > .pin2",
       "to": "net.V5"
     },
@@ -4500,44 +4500,32 @@
       "to": "net.GND"
     },
     {
+      "from": ".Q4 > .pin2",
+      "to": "net.V5"
+    },
+    {
       "from": ".Q4 > .pin3",
       "to": "net.GND"
     },
     {
-      "from": ".Q4 > .pin4",
-      "to": "net.GND"
-    },
-    {
-      "from": ".C_BULK5 > .pin1",
-      "to": "net.C_BULK5_PASSIVE"
-    },
-    {
-      "from": ".C_BULK5 > .pin2",
-      "to": "net.GND"
-    },
-    {
-      "from": ".U_AUX6 > .pin2",
-      "to": "net.U_AUX6_SIG2"
-    },
-    {
-      "from": ".U_AUX6 > .pin3",
-      "to": "net.U_AUX6_SIG3"
+      "from": ".U_AUX6 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX6 > .pin4",
       "to": "net.GND"
     },
     {
+      "from": ".Q7 > .pin2",
+      "to": "net.V5"
+    },
+    {
       "from": ".Q7 > .pin3",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX8 > .pin2",
-      "to": "net.U_AUX8_SIG2"
-    },
-    {
-      "from": ".U_AUX8 > .pin3",
-      "to": "net.U_AUX8_SIG3"
+      "from": ".U_AUX8 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX8 > .pin4",
@@ -4552,404 +4540,88 @@
       "to": "net.GND"
     },
     {
-      "from": ".Q9 > .pin4",
-      "to": "net.GND"
-    },
-    {
-      "from": ".U_AUX10 > .pin2",
-      "to": "net.U_AUX10_SIG2"
-    },
-    {
-      "from": ".U_AUX10 > .pin3",
-      "to": "net.U_AUX10_SIG3"
-    },
-    {
-      "from": ".U_AUX10 > .pin4",
-      "to": "net.U_AUX10_SIG4"
-    },
-    {
-      "from": ".U_AUX10 > .pin5",
-      "to": "net.U_AUX10_SIG5"
-    },
-    {
-      "from": ".U_AUX10 > .pin6",
-      "to": "net.U_AUX10_SIG6"
-    },
-    {
-      "from": ".U_AUX10 > .pin7",
-      "to": "net.U_AUX10_SIG7"
-    },
-    {
-      "from": ".U_AUX10 > .pin8",
-      "to": "net.U_AUX10_SIG8"
-    },
-    {
-      "from": ".U_AUX10 > .pin9",
-      "to": "net.U_AUX10_SIG9"
-    },
-    {
-      "from": ".U_AUX10 > .pin10",
-      "to": "net.U_AUX10_SIG10"
-    },
-    {
-      "from": ".U_AUX10 > .pin11",
-      "to": "net.U_AUX10_SIG11"
-    },
-    {
-      "from": ".U_AUX10 > .pin12",
-      "to": "net.U_AUX10_SIG12"
-    },
-    {
-      "from": ".U_AUX10 > .pin13",
-      "to": "net.U_AUX10_SIG13"
-    },
-    {
-      "from": ".U_AUX10 > .pin14",
-      "to": "net.U_AUX10_SIG14"
-    },
-    {
-      "from": ".U_AUX10 > .pin15",
-      "to": "net.U_AUX10_SIG15"
-    },
-    {
-      "from": ".U_AUX10 > .pin16",
-      "to": "net.U_AUX10_SIG16"
-    },
-    {
-      "from": ".U_AUX10 > .pin17",
-      "to": "net.U_AUX10_SIG17"
-    },
-    {
-      "from": ".U_AUX10 > .pin18",
-      "to": "net.U_AUX10_SIG18"
-    },
-    {
-      "from": ".U_AUX10 > .pin19",
-      "to": "net.U_AUX10_SIG19"
+      "from": ".U_AUX10 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX10 > .pin20",
       "to": "net.GND"
     },
     {
+      "from": ".Q11 > .pin2",
+      "to": "net.V5"
+    },
+    {
       "from": ".Q11 > .pin3",
       "to": "net.GND"
     },
     {
-      "from": ".C_BULK12 > .pin1",
-      "to": "net.C_BULK12_PASSIVE"
-    },
-    {
-      "from": ".C_BULK12 > .pin2",
-      "to": "net.GND"
-    },
-    {
-      "from": ".U_AUX13 > .pin4",
-      "to": "net.U_AUX13_SIG4"
-    },
-    {
-      "from": ".U_AUX13 > .pin5",
-      "to": "net.U_AUX13_SIG5"
-    },
-    {
-      "from": ".U_AUX13 > .pin6",
-      "to": "net.U_AUX13_SIG6"
-    },
-    {
-      "from": ".U_AUX13 > .pin7",
-      "to": "net.U_AUX13_SIG7"
-    },
-    {
-      "from": ".U_AUX13 > .pin8",
-      "to": "net.U_AUX13_SIG8"
-    },
-    {
-      "from": ".U_AUX13 > .pin9",
-      "to": "net.U_AUX13_SIG9"
-    },
-    {
-      "from": ".U_AUX13 > .pin10",
-      "to": "net.U_AUX13_SIG10"
-    },
-    {
-      "from": ".U_AUX13 > .pin11",
-      "to": "net.U_AUX13_SIG11"
-    },
-    {
-      "from": ".U_AUX13 > .pin12",
-      "to": "net.U_AUX13_SIG12"
-    },
-    {
-      "from": ".U_AUX13 > .pin13",
-      "to": "net.U_AUX13_SIG13"
+      "from": ".U_AUX13 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX13 > .pin14",
       "to": "net.GND"
     },
     {
-      "from": ".C_BULK14 > .pin1",
-      "to": "net.C_BULK14_PASSIVE"
-    },
-    {
-      "from": ".C_BULK14 > .pin2",
-      "to": "net.GND"
-    },
-    {
-      "from": ".U_AUX15 > .pin4",
-      "to": "net.U_AUX15_SIG4"
-    },
-    {
-      "from": ".U_AUX15 > .pin5",
-      "to": "net.U_AUX15_SIG5"
-    },
-    {
-      "from": ".U_AUX15 > .pin6",
-      "to": "net.U_AUX15_SIG6"
-    },
-    {
-      "from": ".U_AUX15 > .pin7",
-      "to": "net.U_AUX15_SIG7"
-    },
-    {
-      "from": ".U_AUX15 > .pin8",
-      "to": "net.U_AUX15_SIG8"
-    },
-    {
-      "from": ".U_AUX15 > .pin9",
-      "to": "net.U_AUX15_SIG9"
-    },
-    {
-      "from": ".U_AUX15 > .pin10",
-      "to": "net.U_AUX15_SIG10"
-    },
-    {
-      "from": ".U_AUX15 > .pin11",
-      "to": "net.U_AUX15_SIG11"
-    },
-    {
-      "from": ".U_AUX15 > .pin12",
-      "to": "net.U_AUX15_SIG12"
-    },
-    {
-      "from": ".U_AUX15 > .pin13",
-      "to": "net.U_AUX15_SIG13"
-    },
-    {
-      "from": ".U_AUX15 > .pin14",
-      "to": "net.U_AUX15_SIG14"
-    },
-    {
-      "from": ".U_AUX15 > .pin15",
-      "to": "net.U_AUX15_SIG15"
-    },
-    {
-      "from": ".U_AUX15 > .pin16",
-      "to": "net.U_AUX15_SIG16"
-    },
-    {
-      "from": ".U_AUX15 > .pin17",
-      "to": "net.U_AUX15_SIG17"
-    },
-    {
-      "from": ".U_AUX15 > .pin18",
-      "to": "net.U_AUX15_SIG18"
-    },
-    {
-      "from": ".U_AUX15 > .pin19",
-      "to": "net.U_AUX15_SIG19"
+      "from": ".U_AUX15 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX15 > .pin20",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX16 > .pin2",
-      "to": "net.U_AUX16_SIG2"
-    },
-    {
-      "from": ".U_AUX16 > .pin3",
-      "to": "net.U_AUX16_SIG3"
-    },
-    {
-      "from": ".U_AUX16 > .pin4",
-      "to": "net.U_AUX16_SIG4"
-    },
-    {
-      "from": ".U_AUX16 > .pin5",
-      "to": "net.U_AUX16_SIG5"
-    },
-    {
-      "from": ".U_AUX16 > .pin6",
-      "to": "net.U_AUX16_SIG6"
-    },
-    {
-      "from": ".U_AUX16 > .pin7",
-      "to": "net.U_AUX16_SIG7"
+      "from": ".U_AUX16 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX16 > .pin8",
       "to": "net.GND"
     },
     {
+      "from": ".Q17 > .pin2",
+      "to": "net.V5"
+    },
+    {
       "from": ".Q17 > .pin3",
       "to": "net.GND"
     },
     {
-      "from": ".Q17 > .pin4",
-      "to": "net.GND"
+      "from": ".Q18 > .pin2",
+      "to": "net.V5"
     },
     {
       "from": ".Q18 > .pin3",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX19 > .pin2",
-      "to": "net.U_AUX19_SIG2"
-    },
-    {
-      "from": ".U_AUX19 > .pin3",
-      "to": "net.U_AUX19_SIG3"
-    },
-    {
-      "from": ".U_AUX19 > .pin4",
-      "to": "net.U_AUX19_SIG4"
-    },
-    {
-      "from": ".U_AUX19 > .pin5",
-      "to": "net.U_AUX19_SIG5"
-    },
-    {
-      "from": ".U_AUX19 > .pin6",
-      "to": "net.U_AUX19_SIG6"
-    },
-    {
-      "from": ".U_AUX19 > .pin7",
-      "to": "net.U_AUX19_SIG7"
-    },
-    {
-      "from": ".U_AUX19 > .pin8",
-      "to": "net.U_AUX19_SIG8"
-    },
-    {
-      "from": ".U_AUX19 > .pin9",
-      "to": "net.U_AUX19_SIG9"
-    },
-    {
-      "from": ".U_AUX19 > .pin10",
-      "to": "net.U_AUX19_SIG10"
-    },
-    {
-      "from": ".U_AUX19 > .pin11",
-      "to": "net.U_AUX19_SIG11"
-    },
-    {
-      "from": ".U_AUX19 > .pin12",
-      "to": "net.U_AUX19_SIG12"
-    },
-    {
-      "from": ".U_AUX19 > .pin13",
-      "to": "net.U_AUX19_SIG13"
-    },
-    {
-      "from": ".U_AUX19 > .pin14",
-      "to": "net.U_AUX19_SIG14"
-    },
-    {
-      "from": ".U_AUX19 > .pin15",
-      "to": "net.U_AUX19_SIG15"
+      "from": ".U_AUX19 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX19 > .pin16",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX20 > .pin2",
-      "to": "net.U_AUX20_SIG2"
-    },
-    {
-      "from": ".U_AUX20 > .pin3",
-      "to": "net.U_AUX20_SIG3"
+      "from": ".U_AUX20 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX20 > .pin4",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX21 > .pin2",
-      "to": "net.U_AUX21_SIG2"
-    },
-    {
-      "from": ".U_AUX21 > .pin3",
-      "to": "net.U_AUX21_SIG3"
+      "from": ".U_AUX21 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX21 > .pin4",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX22 > .pin4",
-      "to": "net.U_AUX22_SIG4"
-    },
-    {
-      "from": ".U_AUX22 > .pin5",
-      "to": "net.U_AUX22_SIG5"
-    },
-    {
-      "from": ".U_AUX22 > .pin6",
-      "to": "net.U_AUX22_SIG6"
-    },
-    {
-      "from": ".U_AUX22 > .pin7",
-      "to": "net.U_AUX22_SIG7"
-    },
-    {
-      "from": ".U_AUX22 > .pin8",
-      "to": "net.U_AUX22_SIG8"
-    },
-    {
-      "from": ".U_AUX22 > .pin9",
-      "to": "net.U_AUX22_SIG9"
-    },
-    {
-      "from": ".U_AUX22 > .pin10",
-      "to": "net.U_AUX22_SIG10"
-    },
-    {
-      "from": ".U_AUX22 > .pin11",
-      "to": "net.U_AUX22_SIG11"
-    },
-    {
-      "from": ".U_AUX22 > .pin12",
-      "to": "net.U_AUX22_SIG12"
-    },
-    {
-      "from": ".U_AUX22 > .pin13",
-      "to": "net.U_AUX22_SIG13"
-    },
-    {
-      "from": ".U_AUX22 > .pin14",
-      "to": "net.U_AUX22_SIG14"
-    },
-    {
-      "from": ".U_AUX22 > .pin15",
-      "to": "net.U_AUX22_SIG15"
-    },
-    {
-      "from": ".U_AUX22 > .pin16",
-      "to": "net.U_AUX22_SIG16"
-    },
-    {
-      "from": ".U_AUX22 > .pin17",
-      "to": "net.U_AUX22_SIG17"
-    },
-    {
-      "from": ".U_AUX22 > .pin18",
-      "to": "net.U_AUX22_SIG18"
-    },
-    {
-      "from": ".U_AUX22 > .pin19",
-      "to": "net.U_AUX22_SIG19"
+      "from": ".U_AUX22 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX22 > .pin20",
@@ -4964,536 +4636,64 @@
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX24 > .pin2",
-      "to": "net.U_AUX24_SIG2"
-    },
-    {
-      "from": ".U_AUX24 > .pin3",
-      "to": "net.U_AUX24_SIG3"
-    },
-    {
-      "from": ".U_AUX24 > .pin4",
-      "to": "net.U_AUX24_SIG4"
-    },
-    {
-      "from": ".U_AUX24 > .pin5",
-      "to": "net.U_AUX24_SIG5"
-    },
-    {
-      "from": ".U_AUX24 > .pin6",
-      "to": "net.U_AUX24_SIG6"
-    },
-    {
-      "from": ".U_AUX24 > .pin7",
-      "to": "net.U_AUX24_SIG7"
-    },
-    {
-      "from": ".U_AUX24 > .pin8",
-      "to": "net.U_AUX24_SIG8"
-    },
-    {
-      "from": ".U_AUX24 > .pin9",
-      "to": "net.U_AUX24_SIG9"
-    },
-    {
-      "from": ".U_AUX24 > .pin10",
-      "to": "net.U_AUX24_SIG10"
-    },
-    {
-      "from": ".U_AUX24 > .pin11",
-      "to": "net.U_AUX24_SIG11"
-    },
-    {
-      "from": ".U_AUX24 > .pin12",
-      "to": "net.U_AUX24_SIG12"
-    },
-    {
-      "from": ".U_AUX24 > .pin13",
-      "to": "net.U_AUX24_SIG13"
-    },
-    {
-      "from": ".U_AUX24 > .pin14",
-      "to": "net.U_AUX24_SIG14"
-    },
-    {
-      "from": ".U_AUX24 > .pin15",
-      "to": "net.U_AUX24_SIG15"
-    },
-    {
-      "from": ".U_AUX24 > .pin16",
-      "to": "net.U_AUX24_SIG16"
-    },
-    {
-      "from": ".U_AUX24 > .pin17",
-      "to": "net.U_AUX24_SIG17"
-    },
-    {
-      "from": ".U_AUX24 > .pin18",
-      "to": "net.U_AUX24_SIG18"
-    },
-    {
-      "from": ".U_AUX24 > .pin19",
-      "to": "net.U_AUX24_SIG19"
+      "from": ".U_AUX24 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX24 > .pin20",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX25 > .pin2",
-      "to": "net.U_AUX25_SIG2"
-    },
-    {
-      "from": ".U_AUX25 > .pin3",
-      "to": "net.U_AUX25_SIG3"
-    },
-    {
-      "from": ".U_AUX25 > .pin4",
-      "to": "net.U_AUX25_SIG4"
-    },
-    {
-      "from": ".U_AUX25 > .pin5",
-      "to": "net.U_AUX25_SIG5"
-    },
-    {
-      "from": ".U_AUX25 > .pin6",
-      "to": "net.U_AUX25_SIG6"
-    },
-    {
-      "from": ".U_AUX25 > .pin7",
-      "to": "net.U_AUX25_SIG7"
-    },
-    {
-      "from": ".U_AUX25 > .pin8",
-      "to": "net.U_AUX25_SIG8"
-    },
-    {
-      "from": ".U_AUX25 > .pin9",
-      "to": "net.U_AUX25_SIG9"
-    },
-    {
-      "from": ".U_AUX25 > .pin10",
-      "to": "net.U_AUX25_SIG10"
-    },
-    {
-      "from": ".U_AUX25 > .pin11",
-      "to": "net.U_AUX25_SIG11"
-    },
-    {
-      "from": ".U_AUX25 > .pin12",
-      "to": "net.U_AUX25_SIG12"
-    },
-    {
-      "from": ".U_AUX25 > .pin13",
-      "to": "net.U_AUX25_SIG13"
-    },
-    {
-      "from": ".U_AUX25 > .pin14",
-      "to": "net.U_AUX25_SIG14"
-    },
-    {
-      "from": ".U_AUX25 > .pin15",
-      "to": "net.U_AUX25_SIG15"
+      "from": ".U_AUX25 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX25 > .pin16",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX26 > .pin2",
-      "to": "net.U_AUX26_SIG2"
-    },
-    {
-      "from": ".U_AUX26 > .pin3",
-      "to": "net.U_AUX26_SIG3"
-    },
-    {
-      "from": ".U_AUX26 > .pin4",
-      "to": "net.U_AUX26_SIG4"
-    },
-    {
-      "from": ".U_AUX26 > .pin5",
-      "to": "net.U_AUX26_SIG5"
-    },
-    {
-      "from": ".U_AUX26 > .pin6",
-      "to": "net.U_AUX26_SIG6"
-    },
-    {
-      "from": ".U_AUX26 > .pin7",
-      "to": "net.U_AUX26_SIG7"
-    },
-    {
-      "from": ".U_AUX26 > .pin8",
-      "to": "net.U_AUX26_SIG8"
-    },
-    {
-      "from": ".U_AUX26 > .pin9",
-      "to": "net.U_AUX26_SIG9"
-    },
-    {
-      "from": ".U_AUX26 > .pin10",
-      "to": "net.U_AUX26_SIG10"
-    },
-    {
-      "from": ".U_AUX26 > .pin11",
-      "to": "net.U_AUX26_SIG11"
-    },
-    {
-      "from": ".U_AUX26 > .pin12",
-      "to": "net.U_AUX26_SIG12"
-    },
-    {
-      "from": ".U_AUX26 > .pin13",
-      "to": "net.U_AUX26_SIG13"
-    },
-    {
-      "from": ".U_AUX26 > .pin14",
-      "to": "net.U_AUX26_SIG14"
-    },
-    {
-      "from": ".U_AUX26 > .pin15",
-      "to": "net.U_AUX26_SIG15"
-    },
-    {
-      "from": ".U_AUX26 > .pin16",
-      "to": "net.U_AUX26_SIG16"
-    },
-    {
-      "from": ".U_AUX26 > .pin17",
-      "to": "net.U_AUX26_SIG17"
-    },
-    {
-      "from": ".U_AUX26 > .pin18",
-      "to": "net.U_AUX26_SIG18"
-    },
-    {
-      "from": ".U_AUX26 > .pin19",
-      "to": "net.U_AUX26_SIG19"
+      "from": ".U_AUX26 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX26 > .pin20",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX27 > .pin2",
-      "to": "net.U_AUX27_SIG2"
-    },
-    {
-      "from": ".U_AUX27 > .pin3",
-      "to": "net.U_AUX27_SIG3"
-    },
-    {
-      "from": ".U_AUX27 > .pin4",
-      "to": "net.U_AUX27_SIG4"
-    },
-    {
-      "from": ".U_AUX27 > .pin5",
-      "to": "net.U_AUX27_SIG5"
-    },
-    {
-      "from": ".U_AUX27 > .pin6",
-      "to": "net.U_AUX27_SIG6"
-    },
-    {
-      "from": ".U_AUX27 > .pin7",
-      "to": "net.U_AUX27_SIG7"
-    },
-    {
-      "from": ".U_AUX27 > .pin8",
-      "to": "net.U_AUX27_SIG8"
-    },
-    {
-      "from": ".U_AUX27 > .pin9",
-      "to": "net.U_AUX27_SIG9"
-    },
-    {
-      "from": ".U_AUX27 > .pin10",
-      "to": "net.U_AUX27_SIG10"
-    },
-    {
-      "from": ".U_AUX27 > .pin11",
-      "to": "net.U_AUX27_SIG11"
-    },
-    {
-      "from": ".U_AUX27 > .pin12",
-      "to": "net.U_AUX27_SIG12"
-    },
-    {
-      "from": ".U_AUX27 > .pin13",
-      "to": "net.U_AUX27_SIG13"
-    },
-    {
-      "from": ".U_AUX27 > .pin14",
-      "to": "net.U_AUX27_SIG14"
-    },
-    {
-      "from": ".U_AUX27 > .pin15",
-      "to": "net.U_AUX27_SIG15"
+      "from": ".U_AUX27 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX27 > .pin16",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX28 > .pin2",
-      "to": "net.U_AUX28_SIG2"
-    },
-    {
-      "from": ".U_AUX28 > .pin3",
-      "to": "net.U_AUX28_SIG3"
-    },
-    {
-      "from": ".U_AUX28 > .pin4",
-      "to": "net.U_AUX28_SIG4"
-    },
-    {
-      "from": ".U_AUX28 > .pin5",
-      "to": "net.U_AUX28_SIG5"
-    },
-    {
-      "from": ".U_AUX28 > .pin6",
-      "to": "net.U_AUX28_SIG6"
-    },
-    {
-      "from": ".U_AUX28 > .pin7",
-      "to": "net.U_AUX28_SIG7"
-    },
-    {
-      "from": ".U_AUX28 > .pin8",
-      "to": "net.U_AUX28_SIG8"
-    },
-    {
-      "from": ".U_AUX28 > .pin9",
-      "to": "net.U_AUX28_SIG9"
-    },
-    {
-      "from": ".U_AUX28 > .pin10",
-      "to": "net.U_AUX28_SIG10"
-    },
-    {
-      "from": ".U_AUX28 > .pin11",
-      "to": "net.U_AUX28_SIG11"
-    },
-    {
-      "from": ".U_AUX28 > .pin12",
-      "to": "net.U_AUX28_SIG12"
-    },
-    {
-      "from": ".U_AUX28 > .pin13",
-      "to": "net.U_AUX28_SIG13"
-    },
-    {
-      "from": ".U_AUX28 > .pin14",
-      "to": "net.U_AUX28_SIG14"
-    },
-    {
-      "from": ".U_AUX28 > .pin15",
-      "to": "net.U_AUX28_SIG15"
-    },
-    {
-      "from": ".U_AUX28 > .pin16",
-      "to": "net.U_AUX28_SIG16"
-    },
-    {
-      "from": ".U_AUX28 > .pin17",
-      "to": "net.U_AUX28_SIG17"
-    },
-    {
-      "from": ".U_AUX28 > .pin18",
-      "to": "net.U_AUX28_SIG18"
-    },
-    {
-      "from": ".U_AUX28 > .pin19",
-      "to": "net.U_AUX28_SIG19"
+      "from": ".U_AUX28 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX28 > .pin20",
       "to": "net.GND"
     },
     {
-      "from": ".C_BULK29 > .pin1",
-      "to": "net.C_BULK29_PASSIVE"
-    },
-    {
-      "from": ".C_BULK29 > .pin2",
-      "to": "net.GND"
-    },
-    {
-      "from": ".U_AUX30 > .pin4",
-      "to": "net.U_AUX30_SIG4"
-    },
-    {
-      "from": ".U_AUX30 > .pin5",
-      "to": "net.U_AUX30_SIG5"
-    },
-    {
-      "from": ".U_AUX30 > .pin6",
-      "to": "net.U_AUX30_SIG6"
-    },
-    {
-      "from": ".U_AUX30 > .pin7",
-      "to": "net.U_AUX30_SIG7"
-    },
-    {
-      "from": ".U_AUX30 > .pin8",
-      "to": "net.U_AUX30_SIG8"
-    },
-    {
-      "from": ".U_AUX30 > .pin9",
-      "to": "net.U_AUX30_SIG9"
-    },
-    {
-      "from": ".U_AUX30 > .pin10",
-      "to": "net.U_AUX30_SIG10"
-    },
-    {
-      "from": ".U_AUX30 > .pin11",
-      "to": "net.U_AUX30_SIG11"
-    },
-    {
-      "from": ".U_AUX30 > .pin12",
-      "to": "net.U_AUX30_SIG12"
-    },
-    {
-      "from": ".U_AUX30 > .pin13",
-      "to": "net.U_AUX30_SIG13"
+      "from": ".U_AUX30 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX30 > .pin14",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX31 > .pin2",
-      "to": "net.U_AUX31_SIG2"
-    },
-    {
-      "from": ".U_AUX31 > .pin3",
-      "to": "net.U_AUX31_SIG3"
-    },
-    {
-      "from": ".U_AUX31 > .pin4",
-      "to": "net.U_AUX31_SIG4"
-    },
-    {
-      "from": ".U_AUX31 > .pin5",
-      "to": "net.U_AUX31_SIG5"
-    },
-    {
-      "from": ".U_AUX31 > .pin6",
-      "to": "net.U_AUX31_SIG6"
-    },
-    {
-      "from": ".U_AUX31 > .pin7",
-      "to": "net.U_AUX31_SIG7"
-    },
-    {
-      "from": ".U_AUX31 > .pin8",
-      "to": "net.U_AUX31_SIG8"
-    },
-    {
-      "from": ".U_AUX31 > .pin9",
-      "to": "net.U_AUX31_SIG9"
-    },
-    {
-      "from": ".U_AUX31 > .pin10",
-      "to": "net.U_AUX31_SIG10"
-    },
-    {
-      "from": ".U_AUX31 > .pin11",
-      "to": "net.U_AUX31_SIG11"
-    },
-    {
-      "from": ".U_AUX31 > .pin12",
-      "to": "net.U_AUX31_SIG12"
-    },
-    {
-      "from": ".U_AUX31 > .pin13",
-      "to": "net.U_AUX31_SIG13"
-    },
-    {
-      "from": ".U_AUX31 > .pin14",
-      "to": "net.U_AUX31_SIG14"
-    },
-    {
-      "from": ".U_AUX31 > .pin15",
-      "to": "net.U_AUX31_SIG15"
+      "from": ".U_AUX31 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX31 > .pin16",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX32 > .pin2",
-      "to": "net.U_AUX32_SIG2"
-    },
-    {
-      "from": ".U_AUX32 > .pin3",
-      "to": "net.U_AUX32_SIG3"
-    },
-    {
-      "from": ".U_AUX32 > .pin4",
-      "to": "net.U_AUX32_SIG4"
-    },
-    {
-      "from": ".U_AUX32 > .pin5",
-      "to": "net.U_AUX32_SIG5"
-    },
-    {
-      "from": ".U_AUX32 > .pin6",
-      "to": "net.U_AUX32_SIG6"
-    },
-    {
-      "from": ".U_AUX32 > .pin7",
-      "to": "net.U_AUX32_SIG7"
-    },
-    {
-      "from": ".U_AUX32 > .pin8",
-      "to": "net.U_AUX32_SIG8"
-    },
-    {
-      "from": ".U_AUX32 > .pin9",
-      "to": "net.U_AUX32_SIG9"
-    },
-    {
-      "from": ".U_AUX32 > .pin10",
-      "to": "net.U_AUX32_SIG10"
-    },
-    {
-      "from": ".U_AUX32 > .pin11",
-      "to": "net.U_AUX32_SIG11"
-    },
-    {
-      "from": ".U_AUX32 > .pin12",
-      "to": "net.U_AUX32_SIG12"
-    },
-    {
-      "from": ".U_AUX32 > .pin13",
-      "to": "net.U_AUX32_SIG13"
-    },
-    {
-      "from": ".U_AUX32 > .pin14",
-      "to": "net.U_AUX32_SIG14"
-    },
-    {
-      "from": ".U_AUX32 > .pin15",
-      "to": "net.U_AUX32_SIG15"
-    },
-    {
-      "from": ".U_AUX32 > .pin16",
-      "to": "net.U_AUX32_SIG16"
-    },
-    {
-      "from": ".U_AUX32 > .pin17",
-      "to": "net.U_AUX32_SIG17"
-    },
-    {
-      "from": ".U_AUX32 > .pin18",
-      "to": "net.U_AUX32_SIG18"
-    },
-    {
-      "from": ".U_AUX32 > .pin19",
-      "to": "net.U_AUX32_SIG19"
+      "from": ".U_AUX32 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX32 > .pin20",
@@ -5508,368 +4708,56 @@
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX34 > .pin2",
-      "to": "net.U_AUX34_SIG2"
-    },
-    {
-      "from": ".U_AUX34 > .pin3",
-      "to": "net.U_AUX34_SIG3"
+      "from": ".U_AUX34 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX34 > .pin4",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX35 > .pin2",
-      "to": "net.U_AUX35_SIG2"
+      "from": ".U_AUX35 > .pin1",
+      "to": "net.V5"
     },
     {
-      "from": ".U_AUX35 > .pin3",
-      "to": "net.U_AUX35_SIG3"
-    },
-    {
-      "from": ".U_AUX35 > .pin4",
-      "to": "net.U_AUX35_SIG4"
-    },
-    {
-      "from": ".U_AUX35 > .pin5",
-      "to": "net.U_AUX35_SIG5"
-    },
-    {
-      "from": ".U_AUX35 > .pin6",
-      "to": "net.U_AUX35_SIG6"
-    },
-    {
-      "from": ".U_AUX35 > .pin7",
-      "to": "net.U_AUX35_SIG7"
-    },
-    {
-      "from": ".U_AUX35 > .pin8",
-      "to": "net.U_AUX35_SIG8"
-    },
-    {
-      "from": ".U_AUX35 > .pin9",
-      "to": "net.U_AUX35_SIG9"
-    },
-    {
-      "from": ".U_AUX35 > .pin10",
-      "to": "net.U_AUX35_SIG10"
-    },
-    {
-      "from": ".U_AUX35 > .pin11",
-      "to": "net.U_AUX35_SIG11"
-    },
-    {
-      "from": ".U_AUX35 > .pin12",
-      "to": "net.U_AUX35_SIG12"
-    },
-    {
-      "from": ".U_AUX35 > .pin13",
-      "to": "net.U_AUX35_SIG13"
-    },
-    {
-      "from": ".U_AUX35 > .pin14",
-      "to": "net.U_AUX35_SIG14"
-    },
-    {
-      "from": ".U_AUX35 > .pin15",
-      "to": "net.U_AUX35_SIG15"
-    },
-    {
-      "from": ".U_AUX35 > .pin16",
-      "to": "net.U_AUX35_SIG16"
-    },
-    {
-      "from": ".U_AUX35 > .pin17",
-      "to": "net.U_AUX35_SIG17"
-    },
-    {
-      "from": ".U_AUX35 > .pin18",
-      "to": "net.U_AUX35_SIG18"
-    },
-    {
-      "from": ".U_AUX35 > .pin19",
-      "to": "net.U_AUX35_SIG19"
-    },
-    {
-      "from": ".U_AUX35 > .pin20",
+      "from": ".U_AUX35 > .pin21",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX36 > .pin2",
-      "to": "net.U_AUX36_SIG2"
+      "from": ".U_AUX36 > .pin1",
+      "to": "net.V5"
     },
     {
-      "from": ".U_AUX36 > .pin3",
-      "to": "net.U_AUX36_SIG3"
-    },
-    {
-      "from": ".U_AUX36 > .pin4",
-      "to": "net.U_AUX36_SIG4"
-    },
-    {
-      "from": ".U_AUX36 > .pin5",
-      "to": "net.U_AUX36_SIG5"
-    },
-    {
-      "from": ".U_AUX36 > .pin6",
-      "to": "net.U_AUX36_SIG6"
-    },
-    {
-      "from": ".U_AUX36 > .pin7",
-      "to": "net.U_AUX36_SIG7"
-    },
-    {
-      "from": ".U_AUX36 > .pin8",
-      "to": "net.U_AUX36_SIG8"
-    },
-    {
-      "from": ".U_AUX36 > .pin9",
-      "to": "net.U_AUX36_SIG9"
-    },
-    {
-      "from": ".U_AUX36 > .pin10",
-      "to": "net.U_AUX36_SIG10"
-    },
-    {
-      "from": ".U_AUX36 > .pin11",
-      "to": "net.U_AUX36_SIG11"
-    },
-    {
-      "from": ".U_AUX36 > .pin12",
-      "to": "net.U_AUX36_SIG12"
-    },
-    {
-      "from": ".U_AUX36 > .pin13",
-      "to": "net.U_AUX36_SIG13"
-    },
-    {
-      "from": ".U_AUX36 > .pin14",
-      "to": "net.U_AUX36_SIG14"
-    },
-    {
-      "from": ".U_AUX36 > .pin15",
-      "to": "net.U_AUX36_SIG15"
-    },
-    {
-      "from": ".U_AUX36 > .pin16",
-      "to": "net.U_AUX36_SIG16"
-    },
-    {
-      "from": ".U_AUX36 > .pin17",
-      "to": "net.U_AUX36_SIG17"
-    },
-    {
-      "from": ".U_AUX36 > .pin18",
-      "to": "net.U_AUX36_SIG18"
-    },
-    {
-      "from": ".U_AUX36 > .pin19",
-      "to": "net.U_AUX36_SIG19"
-    },
-    {
-      "from": ".U_AUX36 > .pin20",
+      "from": ".U_AUX36 > .pin21",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX37 > .pin2",
-      "to": "net.U_AUX37_SIG2"
+      "from": ".U_AUX37 > .pin1",
+      "to": "net.V5"
     },
     {
-      "from": ".U_AUX37 > .pin3",
-      "to": "net.U_AUX37_SIG3"
-    },
-    {
-      "from": ".U_AUX37 > .pin4",
-      "to": "net.U_AUX37_SIG4"
-    },
-    {
-      "from": ".U_AUX37 > .pin5",
-      "to": "net.U_AUX37_SIG5"
-    },
-    {
-      "from": ".U_AUX37 > .pin6",
-      "to": "net.U_AUX37_SIG6"
-    },
-    {
-      "from": ".U_AUX37 > .pin7",
-      "to": "net.U_AUX37_SIG7"
-    },
-    {
-      "from": ".U_AUX37 > .pin8",
-      "to": "net.U_AUX37_SIG8"
-    },
-    {
-      "from": ".U_AUX37 > .pin9",
-      "to": "net.U_AUX37_SIG9"
-    },
-    {
-      "from": ".U_AUX37 > .pin10",
-      "to": "net.U_AUX37_SIG10"
-    },
-    {
-      "from": ".U_AUX37 > .pin11",
-      "to": "net.U_AUX37_SIG11"
-    },
-    {
-      "from": ".U_AUX37 > .pin12",
-      "to": "net.U_AUX37_SIG12"
-    },
-    {
-      "from": ".U_AUX37 > .pin13",
-      "to": "net.U_AUX37_SIG13"
-    },
-    {
-      "from": ".U_AUX37 > .pin14",
-      "to": "net.U_AUX37_SIG14"
-    },
-    {
-      "from": ".U_AUX37 > .pin15",
-      "to": "net.U_AUX37_SIG15"
-    },
-    {
-      "from": ".U_AUX37 > .pin16",
-      "to": "net.U_AUX37_SIG16"
-    },
-    {
-      "from": ".U_AUX37 > .pin17",
-      "to": "net.U_AUX37_SIG17"
-    },
-    {
-      "from": ".U_AUX37 > .pin18",
-      "to": "net.U_AUX37_SIG18"
-    },
-    {
-      "from": ".U_AUX37 > .pin19",
-      "to": "net.U_AUX37_SIG19"
-    },
-    {
-      "from": ".U_AUX37 > .pin20",
+      "from": ".U_AUX37 > .pin21",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX39 > .pin2",
-      "to": "net.U_AUX39_SIG2"
+      "from": ".Q38 > .pin2",
+      "to": "net.V5"
     },
     {
-      "from": ".U_AUX39 > .pin3",
-      "to": "net.U_AUX39_SIG3"
+      "from": ".Q38 > .pin3",
+      "to": "net.GND"
     },
     {
-      "from": ".U_AUX39 > .pin4",
-      "to": "net.U_AUX39_SIG4"
-    },
-    {
-      "from": ".U_AUX39 > .pin5",
-      "to": "net.U_AUX39_SIG5"
-    },
-    {
-      "from": ".U_AUX39 > .pin6",
-      "to": "net.U_AUX39_SIG6"
-    },
-    {
-      "from": ".U_AUX39 > .pin7",
-      "to": "net.U_AUX39_SIG7"
-    },
-    {
-      "from": ".U_AUX39 > .pin8",
-      "to": "net.U_AUX39_SIG8"
-    },
-    {
-      "from": ".U_AUX39 > .pin9",
-      "to": "net.U_AUX39_SIG9"
-    },
-    {
-      "from": ".U_AUX39 > .pin10",
-      "to": "net.U_AUX39_SIG10"
-    },
-    {
-      "from": ".U_AUX39 > .pin11",
-      "to": "net.U_AUX39_SIG11"
-    },
-    {
-      "from": ".U_AUX39 > .pin12",
-      "to": "net.U_AUX39_SIG12"
-    },
-    {
-      "from": ".U_AUX39 > .pin13",
-      "to": "net.U_AUX39_SIG13"
-    },
-    {
-      "from": ".U_AUX39 > .pin14",
-      "to": "net.U_AUX39_SIG14"
-    },
-    {
-      "from": ".U_AUX39 > .pin15",
-      "to": "net.U_AUX39_SIG15"
-    },
-    {
-      "from": ".U_AUX39 > .pin16",
-      "to": "net.U_AUX39_SIG16"
-    },
-    {
-      "from": ".U_AUX39 > .pin17",
-      "to": "net.U_AUX39_SIG17"
-    },
-    {
-      "from": ".U_AUX39 > .pin18",
-      "to": "net.U_AUX39_SIG18"
-    },
-    {
-      "from": ".U_AUX39 > .pin19",
-      "to": "net.U_AUX39_SIG19"
+      "from": ".U_AUX39 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX39 > .pin20",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX40 > .pin4",
-      "to": "net.U_AUX40_SIG4"
-    },
-    {
-      "from": ".U_AUX40 > .pin5",
-      "to": "net.U_AUX40_SIG5"
-    },
-    {
-      "from": ".U_AUX40 > .pin6",
-      "to": "net.U_AUX40_SIG6"
-    },
-    {
-      "from": ".U_AUX40 > .pin7",
-      "to": "net.U_AUX40_SIG7"
-    },
-    {
-      "from": ".U_AUX40 > .pin8",
-      "to": "net.U_AUX40_SIG8"
-    },
-    {
-      "from": ".U_AUX40 > .pin9",
-      "to": "net.U_AUX40_SIG9"
-    },
-    {
-      "from": ".U_AUX40 > .pin10",
-      "to": "net.U_AUX40_SIG10"
-    },
-    {
-      "from": ".U_AUX40 > .pin11",
-      "to": "net.U_AUX40_SIG11"
-    },
-    {
-      "from": ".U_AUX40 > .pin12",
-      "to": "net.U_AUX40_SIG12"
-    },
-    {
-      "from": ".U_AUX40 > .pin13",
-      "to": "net.U_AUX40_SIG13"
-    },
-    {
-      "from": ".U_AUX40 > .pin14",
-      "to": "net.U_AUX40_SIG14"
-    },
-    {
-      "from": ".U_AUX40 > .pin15",
-      "to": "net.U_AUX40_SIG15"
+      "from": ".U_AUX40 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX40 > .pin16",
@@ -5884,132 +4772,24 @@
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX42 > .pin2",
-      "to": "net.U_AUX42_SIG2"
-    },
-    {
-      "from": ".U_AUX42 > .pin3",
-      "to": "net.U_AUX42_SIG3"
-    },
-    {
-      "from": ".U_AUX42 > .pin4",
-      "to": "net.U_AUX42_SIG4"
-    },
-    {
-      "from": ".U_AUX42 > .pin5",
-      "to": "net.U_AUX42_SIG5"
-    },
-    {
-      "from": ".U_AUX42 > .pin6",
-      "to": "net.U_AUX42_SIG6"
-    },
-    {
-      "from": ".U_AUX42 > .pin7",
-      "to": "net.U_AUX42_SIG7"
+      "from": ".U_AUX42 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX42 > .pin8",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX43 > .pin2",
-      "to": "net.U_AUX43_SIG2"
+      "from": ".U_AUX43 > .pin1",
+      "to": "net.V5"
     },
     {
-      "from": ".U_AUX43 > .pin3",
-      "to": "net.U_AUX43_SIG3"
-    },
-    {
-      "from": ".U_AUX43 > .pin4",
-      "to": "net.U_AUX43_SIG4"
-    },
-    {
-      "from": ".U_AUX43 > .pin5",
-      "to": "net.U_AUX43_SIG5"
-    },
-    {
-      "from": ".U_AUX43 > .pin6",
-      "to": "net.U_AUX43_SIG6"
-    },
-    {
-      "from": ".U_AUX43 > .pin7",
-      "to": "net.U_AUX43_SIG7"
-    },
-    {
-      "from": ".U_AUX43 > .pin8",
-      "to": "net.U_AUX43_SIG8"
-    },
-    {
-      "from": ".U_AUX43 > .pin9",
-      "to": "net.U_AUX43_SIG9"
-    },
-    {
-      "from": ".U_AUX43 > .pin10",
-      "to": "net.U_AUX43_SIG10"
-    },
-    {
-      "from": ".U_AUX43 > .pin11",
-      "to": "net.U_AUX43_SIG11"
-    },
-    {
-      "from": ".U_AUX43 > .pin12",
-      "to": "net.U_AUX43_SIG12"
-    },
-    {
-      "from": ".U_AUX43 > .pin13",
-      "to": "net.U_AUX43_SIG13"
-    },
-    {
-      "from": ".U_AUX43 > .pin14",
-      "to": "net.U_AUX43_SIG14"
-    },
-    {
-      "from": ".U_AUX43 > .pin15",
-      "to": "net.U_AUX43_SIG15"
-    },
-    {
-      "from": ".U_AUX43 > .pin16",
-      "to": "net.U_AUX43_SIG16"
-    },
-    {
-      "from": ".U_AUX43 > .pin17",
-      "to": "net.U_AUX43_SIG17"
-    },
-    {
-      "from": ".U_AUX43 > .pin18",
-      "to": "net.U_AUX43_SIG18"
-    },
-    {
-      "from": ".U_AUX43 > .pin19",
-      "to": "net.U_AUX43_SIG19"
-    },
-    {
-      "from": ".U_AUX43 > .pin20",
+      "from": ".U_AUX43 > .pin21",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX44 > .pin2",
-      "to": "net.U_AUX44_SIG2"
-    },
-    {
-      "from": ".U_AUX44 > .pin3",
-      "to": "net.U_AUX44_SIG3"
-    },
-    {
-      "from": ".U_AUX44 > .pin4",
-      "to": "net.U_AUX44_SIG4"
-    },
-    {
-      "from": ".U_AUX44 > .pin5",
-      "to": "net.U_AUX44_SIG5"
-    },
-    {
-      "from": ".U_AUX44 > .pin6",
-      "to": "net.U_AUX44_SIG6"
-    },
-    {
-      "from": ".U_AUX44 > .pin7",
-      "to": "net.U_AUX44_SIG7"
+      "from": ".U_AUX44 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX44 > .pin8",
@@ -6024,251 +4804,35 @@
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX46 > .pin3",
-      "to": "net.U_AUX46_SIG3"
-    },
-    {
-      "from": ".U_AUX46 > .pin4",
-      "to": "net.U_AUX46_SIG4"
-    },
-    {
-      "from": ".U_AUX46 > .pin5",
-      "to": "net.U_AUX46_SIG5"
-    },
-    {
-      "from": ".U_AUX46 > .pin6",
-      "to": "net.U_AUX46_SIG6"
-    },
-    {
-      "from": ".U_AUX46 > .pin7",
-      "to": "net.U_AUX46_SIG7"
+      "from": ".U_AUX46 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX46 > .pin8",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX47 > .pin3",
-      "to": "net.U_AUX47_SIG3"
-    },
-    {
-      "from": ".U_AUX47 > .pin4",
-      "to": "net.U_AUX47_SIG4"
-    },
-    {
-      "from": ".U_AUX47 > .pin5",
-      "to": "net.U_AUX47_SIG5"
-    },
-    {
-      "from": ".U_AUX47 > .pin6",
-      "to": "net.U_AUX47_SIG6"
-    },
-    {
-      "from": ".U_AUX47 > .pin7",
-      "to": "net.U_AUX47_SIG7"
-    },
-    {
-      "from": ".U_AUX47 > .pin8",
-      "to": "net.U_AUX47_SIG8"
-    },
-    {
-      "from": ".U_AUX47 > .pin9",
-      "to": "net.U_AUX47_SIG9"
-    },
-    {
-      "from": ".U_AUX47 > .pin10",
-      "to": "net.U_AUX47_SIG10"
-    },
-    {
-      "from": ".U_AUX47 > .pin11",
-      "to": "net.U_AUX47_SIG11"
-    },
-    {
-      "from": ".U_AUX47 > .pin12",
-      "to": "net.U_AUX47_SIG12"
-    },
-    {
-      "from": ".U_AUX47 > .pin13",
-      "to": "net.U_AUX47_SIG13"
-    },
-    {
-      "from": ".U_AUX47 > .pin14",
-      "to": "net.U_AUX47_SIG14"
-    },
-    {
-      "from": ".U_AUX47 > .pin15",
-      "to": "net.U_AUX47_SIG15"
-    },
-    {
-      "from": ".U_AUX47 > .pin16",
-      "to": "net.U_AUX47_SIG16"
-    },
-    {
-      "from": ".U_AUX47 > .pin17",
-      "to": "net.U_AUX47_SIG17"
-    },
-    {
-      "from": ".U_AUX47 > .pin18",
-      "to": "net.U_AUX47_SIG18"
-    },
-    {
-      "from": ".U_AUX47 > .pin19",
-      "to": "net.U_AUX47_SIG19"
+      "from": ".U_AUX47 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX47 > .pin20",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX48 > .pin2",
-      "to": "net.U_AUX48_SIG2"
-    },
-    {
-      "from": ".U_AUX48 > .pin3",
-      "to": "net.U_AUX48_SIG3"
-    },
-    {
-      "from": ".U_AUX48 > .pin4",
-      "to": "net.U_AUX48_SIG4"
-    },
-    {
-      "from": ".U_AUX48 > .pin5",
-      "to": "net.U_AUX48_SIG5"
-    },
-    {
-      "from": ".U_AUX48 > .pin6",
-      "to": "net.U_AUX48_SIG6"
-    },
-    {
-      "from": ".U_AUX48 > .pin7",
-      "to": "net.U_AUX48_SIG7"
-    },
-    {
-      "from": ".U_AUX48 > .pin8",
-      "to": "net.U_AUX48_SIG8"
-    },
-    {
-      "from": ".U_AUX48 > .pin9",
-      "to": "net.U_AUX48_SIG9"
-    },
-    {
-      "from": ".U_AUX48 > .pin10",
-      "to": "net.U_AUX48_SIG10"
-    },
-    {
-      "from": ".U_AUX48 > .pin11",
-      "to": "net.U_AUX48_SIG11"
-    },
-    {
-      "from": ".U_AUX48 > .pin12",
-      "to": "net.U_AUX48_SIG12"
-    },
-    {
-      "from": ".U_AUX48 > .pin13",
-      "to": "net.U_AUX48_SIG13"
-    },
-    {
-      "from": ".U_AUX48 > .pin14",
-      "to": "net.U_AUX48_SIG14"
-    },
-    {
-      "from": ".U_AUX48 > .pin15",
-      "to": "net.U_AUX48_SIG15"
-    },
-    {
-      "from": ".U_AUX48 > .pin16",
-      "to": "net.U_AUX48_SIG16"
-    },
-    {
-      "from": ".U_AUX48 > .pin17",
-      "to": "net.U_AUX48_SIG17"
-    },
-    {
-      "from": ".U_AUX48 > .pin18",
-      "to": "net.U_AUX48_SIG18"
-    },
-    {
-      "from": ".U_AUX48 > .pin19",
-      "to": "net.U_AUX48_SIG19"
+      "from": ".U_AUX48 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX48 > .pin20",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX49 > .pin2",
-      "to": "net.U_AUX49_SIG2"
+      "from": ".U_AUX49 > .pin1",
+      "to": "net.V5"
     },
     {
-      "from": ".U_AUX49 > .pin3",
-      "to": "net.U_AUX49_SIG3"
-    },
-    {
-      "from": ".U_AUX49 > .pin4",
-      "to": "net.U_AUX49_SIG4"
-    },
-    {
-      "from": ".U_AUX49 > .pin5",
-      "to": "net.U_AUX49_SIG5"
-    },
-    {
-      "from": ".U_AUX49 > .pin6",
-      "to": "net.U_AUX49_SIG6"
-    },
-    {
-      "from": ".U_AUX49 > .pin7",
-      "to": "net.U_AUX49_SIG7"
-    },
-    {
-      "from": ".U_AUX49 > .pin8",
-      "to": "net.U_AUX49_SIG8"
-    },
-    {
-      "from": ".U_AUX49 > .pin9",
-      "to": "net.U_AUX49_SIG9"
-    },
-    {
-      "from": ".U_AUX49 > .pin10",
-      "to": "net.U_AUX49_SIG10"
-    },
-    {
-      "from": ".U_AUX49 > .pin11",
-      "to": "net.U_AUX49_SIG11"
-    },
-    {
-      "from": ".U_AUX49 > .pin12",
-      "to": "net.U_AUX49_SIG12"
-    },
-    {
-      "from": ".U_AUX49 > .pin13",
-      "to": "net.U_AUX49_SIG13"
-    },
-    {
-      "from": ".U_AUX49 > .pin14",
-      "to": "net.U_AUX49_SIG14"
-    },
-    {
-      "from": ".U_AUX49 > .pin15",
-      "to": "net.U_AUX49_SIG15"
-    },
-    {
-      "from": ".U_AUX49 > .pin16",
-      "to": "net.U_AUX49_SIG16"
-    },
-    {
-      "from": ".U_AUX49 > .pin17",
-      "to": "net.U_AUX49_SIG17"
-    },
-    {
-      "from": ".U_AUX49 > .pin18",
-      "to": "net.U_AUX49_SIG18"
-    },
-    {
-      "from": ".U_AUX49 > .pin19",
-      "to": "net.U_AUX49_SIG19"
-    },
-    {
-      "from": ".U_AUX49 > .pin20",
+      "from": ".U_AUX49 > .pin21",
       "to": "net.GND"
     },
     {
@@ -6280,164 +4844,24 @@
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX51 > .pin2",
-      "to": "net.U_AUX51_SIG2"
+      "from": ".U_AUX51 > .pin1",
+      "to": "net.V5"
     },
     {
-      "from": ".U_AUX51 > .pin3",
-      "to": "net.U_AUX51_SIG3"
-    },
-    {
-      "from": ".U_AUX51 > .pin4",
-      "to": "net.U_AUX51_SIG4"
-    },
-    {
-      "from": ".U_AUX51 > .pin5",
-      "to": "net.U_AUX51_SIG5"
-    },
-    {
-      "from": ".U_AUX51 > .pin6",
-      "to": "net.U_AUX51_SIG6"
-    },
-    {
-      "from": ".U_AUX51 > .pin7",
-      "to": "net.U_AUX51_SIG7"
-    },
-    {
-      "from": ".U_AUX51 > .pin8",
-      "to": "net.U_AUX51_SIG8"
-    },
-    {
-      "from": ".U_AUX51 > .pin9",
-      "to": "net.U_AUX51_SIG9"
-    },
-    {
-      "from": ".U_AUX51 > .pin10",
-      "to": "net.U_AUX51_SIG10"
-    },
-    {
-      "from": ".U_AUX51 > .pin11",
-      "to": "net.U_AUX51_SIG11"
-    },
-    {
-      "from": ".U_AUX51 > .pin12",
-      "to": "net.U_AUX51_SIG12"
-    },
-    {
-      "from": ".U_AUX51 > .pin13",
-      "to": "net.U_AUX51_SIG13"
-    },
-    {
-      "from": ".U_AUX51 > .pin14",
-      "to": "net.U_AUX51_SIG14"
-    },
-    {
-      "from": ".U_AUX51 > .pin15",
-      "to": "net.U_AUX51_SIG15"
-    },
-    {
-      "from": ".U_AUX51 > .pin16",
-      "to": "net.U_AUX51_SIG16"
-    },
-    {
-      "from": ".U_AUX51 > .pin17",
-      "to": "net.U_AUX51_SIG17"
-    },
-    {
-      "from": ".U_AUX51 > .pin18",
-      "to": "net.U_AUX51_SIG18"
-    },
-    {
-      "from": ".U_AUX51 > .pin19",
-      "to": "net.U_AUX51_SIG19"
-    },
-    {
-      "from": ".U_AUX51 > .pin20",
+      "from": ".U_AUX51 > .pin21",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX52 > .pin2",
-      "to": "net.U_AUX52_SIG2"
-    },
-    {
-      "from": ".U_AUX52 > .pin3",
-      "to": "net.U_AUX52_SIG3"
-    },
-    {
-      "from": ".U_AUX52 > .pin4",
-      "to": "net.U_AUX52_SIG4"
-    },
-    {
-      "from": ".U_AUX52 > .pin5",
-      "to": "net.U_AUX52_SIG5"
-    },
-    {
-      "from": ".U_AUX52 > .pin6",
-      "to": "net.U_AUX52_SIG6"
-    },
-    {
-      "from": ".U_AUX52 > .pin7",
-      "to": "net.U_AUX52_SIG7"
-    },
-    {
-      "from": ".U_AUX52 > .pin8",
-      "to": "net.U_AUX52_SIG8"
-    },
-    {
-      "from": ".U_AUX52 > .pin9",
-      "to": "net.U_AUX52_SIG9"
-    },
-    {
-      "from": ".U_AUX52 > .pin10",
-      "to": "net.U_AUX52_SIG10"
-    },
-    {
-      "from": ".U_AUX52 > .pin11",
-      "to": "net.U_AUX52_SIG11"
-    },
-    {
-      "from": ".U_AUX52 > .pin12",
-      "to": "net.U_AUX52_SIG12"
-    },
-    {
-      "from": ".U_AUX52 > .pin13",
-      "to": "net.U_AUX52_SIG13"
-    },
-    {
-      "from": ".U_AUX52 > .pin14",
-      "to": "net.U_AUX52_SIG14"
-    },
-    {
-      "from": ".U_AUX52 > .pin15",
-      "to": "net.U_AUX52_SIG15"
+      "from": ".U_AUX52 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX52 > .pin16",
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX53 > .pin2",
-      "to": "net.U_AUX53_SIG2"
-    },
-    {
-      "from": ".U_AUX53 > .pin3",
-      "to": "net.U_AUX53_SIG3"
-    },
-    {
-      "from": ".U_AUX53 > .pin4",
-      "to": "net.U_AUX53_SIG4"
-    },
-    {
-      "from": ".U_AUX53 > .pin5",
-      "to": "net.U_AUX53_SIG5"
-    },
-    {
-      "from": ".U_AUX53 > .pin6",
-      "to": "net.U_AUX53_SIG6"
-    },
-    {
-      "from": ".U_AUX53 > .pin7",
-      "to": "net.U_AUX53_SIG7"
+      "from": ".U_AUX53 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX53 > .pin8",
@@ -6452,20 +4876,8 @@
       "to": "net.GND"
     },
     {
-      "from": ".U_AUX55 > .pin4",
-      "to": "net.U_AUX55_SIG4"
-    },
-    {
-      "from": ".U_AUX55 > .pin5",
-      "to": "net.U_AUX55_SIG5"
-    },
-    {
-      "from": ".U_AUX55 > .pin6",
-      "to": "net.U_AUX55_SIG6"
-    },
-    {
-      "from": ".U_AUX55 > .pin7",
-      "to": "net.U_AUX55_SIG7"
+      "from": ".U_AUX55 > .pin1",
+      "to": "net.V5"
     },
     {
       "from": ".U_AUX55 > .pin8",
@@ -6485,6 +4897,1934 @@
     },
     {
       "from": ".Q57 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q1 > .pin2",
+      "to": ".U1 > .pin56"
+    },
+    {
+      "from": ".Q2 > .pin2",
+      "to": ".U3 > .pin8"
+    },
+    {
+      "from": ".Q2 > .pin3",
+      "to": ".U1 > .pin57"
+    },
+    {
+      "from": ".Q3 > .pin2",
+      "to": ".U1 > .pin58"
+    },
+    {
+      "from": ".Q4 > .pin2",
+      "to": ".U1 > .pin59"
+    },
+    {
+      "from": ".Q4 > .pin3",
+      "to": ".U1 > .pin60"
+    },
+    {
+      "from": ".U_AUX6 > .pin2",
+      "to": ".U1 > .pin61"
+    },
+    {
+      "from": ".U_AUX6 > .pin3",
+      "to": ".U1 > .pin62"
+    },
+    {
+      "from": ".Q7 > .pin2",
+      "to": ".U1 > .pin63"
+    },
+    {
+      "from": ".U_AUX8 > .pin2",
+      "to": ".U1 > .pin64"
+    },
+    {
+      "from": ".U_AUX8 > .pin3",
+      "to": ".U2 > .pin35"
+    },
+    {
+      "from": ".Q9 > .pin2",
+      "to": ".U1 > .pin28"
+    },
+    {
+      "from": ".Q9 > .pin3",
+      "to": ".U2 > .pin45"
+    },
+    {
+      "from": ".U_AUX10 > .pin2",
+      "to": ".U1 > .pin45"
+    },
+    {
+      "from": ".U_AUX10 > .pin3",
+      "to": ".U2 > .pin46"
+    },
+    {
+      "from": ".U_AUX10 > .pin4",
+      "to": ".U3 > .pin47"
+    },
+    {
+      "from": ".U_AUX10 > .pin5",
+      "to": ".U1 > .pin48"
+    },
+    {
+      "from": ".U_AUX10 > .pin6",
+      "to": ".U2 > .pin1"
+    },
+    {
+      "from": ".U_AUX10 > .pin7",
+      "to": ".U3 > .pin2"
+    },
+    {
+      "from": ".U_AUX10 > .pin8",
+      "to": ".U1 > .pin51"
+    },
+    {
+      "from": ".U_AUX10 > .pin9",
+      "to": ".U2 > .pin4"
+    },
+    {
+      "from": ".U_AUX10 > .pin10",
+      "to": ".U3 > .pin28"
+    },
+    {
+      "from": ".U_AUX10 > .pin11",
+      "to": ".U1 > .pin61"
+    },
+    {
+      "from": ".U_AUX10 > .pin12",
+      "to": ".U2 > .pin30"
+    },
+    {
+      "from": ".U_AUX10 > .pin13",
+      "to": ".U3 > .pin31"
+    },
+    {
+      "from": ".U_AUX10 > .pin14",
+      "to": ".U1 > .pin64"
+    },
+    {
+      "from": ".U_AUX10 > .pin15",
+      "to": ".U2 > .pin33"
+    },
+    {
+      "from": ".U_AUX10 > .pin16",
+      "to": ".U3 > .pin34"
+    },
+    {
+      "from": ".U_AUX10 > .pin17",
+      "to": ".U1 > .pin3"
+    },
+    {
+      "from": ".U_AUX10 > .pin18",
+      "to": ".U2 > .pin36"
+    },
+    {
+      "from": ".U_AUX10 > .pin19",
+      "to": ".U3 > .pin37"
+    },
+    {
+      "from": ".Q11 > .pin2",
+      "to": ".U3 > .pin5"
+    },
+    {
+      "from": ".U_AUX13 > .pin2",
+      "to": ".U1 > .pin48"
+    },
+    {
+      "from": ".U_AUX13 > .pin3",
+      "to": ".U2 > .pin1"
+    },
+    {
+      "from": ".U_AUX13 > .pin4",
+      "to": ".U3 > .pin2"
+    },
+    {
+      "from": ".U_AUX13 > .pin5",
+      "to": ".U1 > .pin51"
+    },
+    {
+      "from": ".U_AUX13 > .pin6",
+      "to": ".U2 > .pin4"
+    },
+    {
+      "from": ".U_AUX13 > .pin7",
+      "to": ".U3 > .pin5"
+    },
+    {
+      "from": ".U_AUX13 > .pin8",
+      "to": ".U1 > .pin54"
+    },
+    {
+      "from": ".U_AUX13 > .pin9",
+      "to": ".U2 > .pin7"
+    },
+    {
+      "from": ".U_AUX13 > .pin10",
+      "to": ".U3 > .pin9"
+    },
+    {
+      "from": ".U_AUX13 > .pin11",
+      "to": ".U1 > .pin26"
+    },
+    {
+      "from": ".U_AUX13 > .pin12",
+      "to": ".U2 > .pin11"
+    },
+    {
+      "from": ".U_AUX13 > .pin13",
+      "to": ".U3 > .pin12"
+    },
+    {
+      "from": ".U_AUX15 > .pin2",
+      "to": ".U2 > .pin34"
+    },
+    {
+      "from": ".U_AUX15 > .pin3",
+      "to": ".U3 > .pin35"
+    },
+    {
+      "from": ".U_AUX15 > .pin4",
+      "to": ".U1 > .pin52"
+    },
+    {
+      "from": ".U_AUX15 > .pin5",
+      "to": ".U2 > .pin37"
+    },
+    {
+      "from": ".U_AUX15 > .pin6",
+      "to": ".U3 > .pin38"
+    },
+    {
+      "from": ".U_AUX15 > .pin7",
+      "to": ".U1 > .pin55"
+    },
+    {
+      "from": ".U_AUX15 > .pin8",
+      "to": ".U2 > .pin40"
+    },
+    {
+      "from": ".U_AUX15 > .pin9",
+      "to": ".U3 > .pin41"
+    },
+    {
+      "from": ".U_AUX15 > .pin10",
+      "to": ".U1 > .pin23"
+    },
+    {
+      "from": ".U_AUX15 > .pin11",
+      "to": ".U2 > .pin8"
+    },
+    {
+      "from": ".U_AUX15 > .pin12",
+      "to": ".U3 > .pin9"
+    },
+    {
+      "from": ".U_AUX15 > .pin13",
+      "to": ".U1 > .pin26"
+    },
+    {
+      "from": ".U_AUX15 > .pin14",
+      "to": ".U2 > .pin11"
+    },
+    {
+      "from": ".U_AUX15 > .pin15",
+      "to": ".U3 > .pin12"
+    },
+    {
+      "from": ".U_AUX15 > .pin16",
+      "to": ".U1 > .pin29"
+    },
+    {
+      "from": ".U_AUX15 > .pin17",
+      "to": ".U2 > .pin14"
+    },
+    {
+      "from": ".U_AUX15 > .pin18",
+      "to": ".U3 > .pin15"
+    },
+    {
+      "from": ".U_AUX15 > .pin19",
+      "to": ".U1 > .pin32"
+    },
+    {
+      "from": ".U_AUX16 > .pin2",
+      "to": ".U3 > .pin35"
+    },
+    {
+      "from": ".U_AUX16 > .pin3",
+      "to": ".U1 > .pin52"
+    },
+    {
+      "from": ".U_AUX16 > .pin4",
+      "to": ".U2 > .pin37"
+    },
+    {
+      "from": ".U_AUX16 > .pin5",
+      "to": ".U3 > .pin38"
+    },
+    {
+      "from": ".U_AUX16 > .pin6",
+      "to": ".U1 > .pin55"
+    },
+    {
+      "from": ".U_AUX16 > .pin7",
+      "to": ".U2 > .pin40"
+    },
+    {
+      "from": ".Q17 > .pin2",
+      "to": ".U3 > .pin43"
+    },
+    {
+      "from": ".Q17 > .pin3",
+      "to": ".U2 > .pin44"
+    },
+    {
+      "from": ".Q18 > .pin2",
+      "to": ".U1 > .pin12"
+    },
+    {
+      "from": ".U_AUX19 > .pin2",
+      "to": ".U1 > .pin54"
+    },
+    {
+      "from": ".U_AUX19 > .pin3",
+      "to": ".U2 > .pin39"
+    },
+    {
+      "from": ".U_AUX19 > .pin4",
+      "to": ".U3 > .pin40"
+    },
+    {
+      "from": ".U_AUX19 > .pin5",
+      "to": ".U1 > .pin57"
+    },
+    {
+      "from": ".U_AUX19 > .pin6",
+      "to": ".U2 > .pin42"
+    },
+    {
+      "from": ".U_AUX19 > .pin7",
+      "to": ".U3 > .pin43"
+    },
+    {
+      "from": ".U_AUX19 > .pin8",
+      "to": ".U1 > .pin60"
+    },
+    {
+      "from": ".U_AUX19 > .pin9",
+      "to": ".U2 > .pin45"
+    },
+    {
+      "from": ".U_AUX19 > .pin10",
+      "to": ".U3 > .pin19"
+    },
+    {
+      "from": ".U_AUX19 > .pin11",
+      "to": ".U1 > .pin20"
+    },
+    {
+      "from": ".U_AUX19 > .pin12",
+      "to": ".U2 > .pin21"
+    },
+    {
+      "from": ".U_AUX19 > .pin13",
+      "to": ".U3 > .pin22"
+    },
+    {
+      "from": ".U_AUX19 > .pin14",
+      "to": ".U1 > .pin23"
+    },
+    {
+      "from": ".U_AUX19 > .pin15",
+      "to": ".U2 > .pin24"
+    },
+    {
+      "from": ".U_AUX20 > .pin2",
+      "to": ".U1 > .pin12"
+    },
+    {
+      "from": ".U_AUX20 > .pin3",
+      "to": ".U3 > .pin29"
+    },
+    {
+      "from": ".U_AUX21 > .pin2",
+      "to": ".U3 > .pin29"
+    },
+    {
+      "from": ".U_AUX21 > .pin3",
+      "to": ".U1 > .pin14"
+    },
+    {
+      "from": ".U_AUX22 > .pin2",
+      "to": ".U2 > .pin30"
+    },
+    {
+      "from": ".U_AUX22 > .pin3",
+      "to": ".U1 > .pin15"
+    },
+    {
+      "from": ".U_AUX22 > .pin4",
+      "to": ".U3 > .pin32"
+    },
+    {
+      "from": ".U_AUX22 > .pin5",
+      "to": ".U2 > .pin33"
+    },
+    {
+      "from": ".U_AUX22 > .pin6",
+      "to": ".U1 > .pin18"
+    },
+    {
+      "from": ".U_AUX22 > .pin7",
+      "to": ".U3 > .pin35"
+    },
+    {
+      "from": ".U_AUX22 > .pin8",
+      "to": ".U2 > .pin36"
+    },
+    {
+      "from": ".U_AUX22 > .pin9",
+      "to": ".U1 > .pin21"
+    },
+    {
+      "from": ".U_AUX22 > .pin10",
+      "to": ".U3 > .pin27"
+    },
+    {
+      "from": ".U_AUX22 > .pin11",
+      "to": ".U2 > .pin28"
+    },
+    {
+      "from": ".U_AUX22 > .pin12",
+      "to": ".U1 > .pin61"
+    },
+    {
+      "from": ".U_AUX22 > .pin13",
+      "to": ".U3 > .pin30"
+    },
+    {
+      "from": ".U_AUX22 > .pin14",
+      "to": ".U2 > .pin31"
+    },
+    {
+      "from": ".U_AUX22 > .pin15",
+      "to": ".U1 > .pin64"
+    },
+    {
+      "from": ".U_AUX22 > .pin16",
+      "to": ".U3 > .pin33"
+    },
+    {
+      "from": ".U_AUX22 > .pin17",
+      "to": ".U2 > .pin34"
+    },
+    {
+      "from": ".U_AUX22 > .pin18",
+      "to": ".U1 > .pin3"
+    },
+    {
+      "from": ".U_AUX22 > .pin19",
+      "to": ".U3 > .pin36"
+    },
+    {
+      "from": ".Q23 > .pin2",
+      "to": ".U3 > .pin22"
+    },
+    {
+      "from": ".U_AUX24 > .pin2",
+      "to": ".U2 > .pin16"
+    },
+    {
+      "from": ".U_AUX24 > .pin3",
+      "to": ".U3 > .pin17"
+    },
+    {
+      "from": ".U_AUX24 > .pin4",
+      "to": ".U1 > .pin18"
+    },
+    {
+      "from": ".U_AUX24 > .pin5",
+      "to": ".U2 > .pin19"
+    },
+    {
+      "from": ".U_AUX24 > .pin6",
+      "to": ".U3 > .pin20"
+    },
+    {
+      "from": ".U_AUX24 > .pin7",
+      "to": ".U1 > .pin21"
+    },
+    {
+      "from": ".U_AUX24 > .pin8",
+      "to": ".U2 > .pin22"
+    },
+    {
+      "from": ".U_AUX24 > .pin9",
+      "to": ".U3 > .pin23"
+    },
+    {
+      "from": ".U_AUX24 > .pin10",
+      "to": ".U1 > .pin57"
+    },
+    {
+      "from": ".U_AUX24 > .pin11",
+      "to": ".U2 > .pin26"
+    },
+    {
+      "from": ".U_AUX24 > .pin12",
+      "to": ".U3 > .pin27"
+    },
+    {
+      "from": ".U_AUX24 > .pin13",
+      "to": ".U1 > .pin60"
+    },
+    {
+      "from": ".U_AUX24 > .pin14",
+      "to": ".U2 > .pin29"
+    },
+    {
+      "from": ".U_AUX24 > .pin15",
+      "to": ".U3 > .pin30"
+    },
+    {
+      "from": ".U_AUX24 > .pin16",
+      "to": ".U1 > .pin63"
+    },
+    {
+      "from": ".U_AUX24 > .pin17",
+      "to": ".U2 > .pin32"
+    },
+    {
+      "from": ".U_AUX24 > .pin18",
+      "to": ".U3 > .pin33"
+    },
+    {
+      "from": ".U_AUX24 > .pin19",
+      "to": ".U1 > .pin2"
+    },
+    {
+      "from": ".U_AUX25 > .pin2",
+      "to": ".U1 > .pin17"
+    },
+    {
+      "from": ".U_AUX25 > .pin3",
+      "to": ".U2 > .pin18"
+    },
+    {
+      "from": ".U_AUX25 > .pin4",
+      "to": ".U3 > .pin19"
+    },
+    {
+      "from": ".U_AUX25 > .pin5",
+      "to": ".U1 > .pin20"
+    },
+    {
+      "from": ".U_AUX25 > .pin6",
+      "to": ".U2 > .pin21"
+    },
+    {
+      "from": ".U_AUX25 > .pin7",
+      "to": ".U3 > .pin22"
+    },
+    {
+      "from": ".U_AUX25 > .pin8",
+      "to": ".U1 > .pin23"
+    },
+    {
+      "from": ".U_AUX25 > .pin9",
+      "to": ".U2 > .pin24"
+    },
+    {
+      "from": ".U_AUX25 > .pin10",
+      "to": ".U3 > .pin8"
+    },
+    {
+      "from": ".U_AUX25 > .pin11",
+      "to": ".U1 > .pin25"
+    },
+    {
+      "from": ".U_AUX25 > .pin12",
+      "to": ".U2 > .pin10"
+    },
+    {
+      "from": ".U_AUX25 > .pin13",
+      "to": ".U3 > .pin11"
+    },
+    {
+      "from": ".U_AUX25 > .pin14",
+      "to": ".U1 > .pin28"
+    },
+    {
+      "from": ".U_AUX25 > .pin15",
+      "to": ".U2 > .pin13"
+    },
+    {
+      "from": ".U_AUX26 > .pin2",
+      "to": ".U1 > .pin18"
+    },
+    {
+      "from": ".U_AUX26 > .pin3",
+      "to": ".U2 > .pin19"
+    },
+    {
+      "from": ".U_AUX26 > .pin4",
+      "to": ".U3 > .pin20"
+    },
+    {
+      "from": ".U_AUX26 > .pin5",
+      "to": ".U1 > .pin21"
+    },
+    {
+      "from": ".U_AUX26 > .pin6",
+      "to": ".U2 > .pin22"
+    },
+    {
+      "from": ".U_AUX26 > .pin7",
+      "to": ".U3 > .pin23"
+    },
+    {
+      "from": ".U_AUX26 > .pin8",
+      "to": ".U1 > .pin24"
+    },
+    {
+      "from": ".U_AUX26 > .pin9",
+      "to": ".U2 > .pin25"
+    },
+    {
+      "from": ".U_AUX26 > .pin10",
+      "to": ".U3 > .pin23"
+    },
+    {
+      "from": ".U_AUX26 > .pin11",
+      "to": ".U1 > .pin56"
+    },
+    {
+      "from": ".U_AUX26 > .pin12",
+      "to": ".U2 > .pin25"
+    },
+    {
+      "from": ".U_AUX26 > .pin13",
+      "to": ".U3 > .pin26"
+    },
+    {
+      "from": ".U_AUX26 > .pin14",
+      "to": ".U1 > .pin59"
+    },
+    {
+      "from": ".U_AUX26 > .pin15",
+      "to": ".U2 > .pin28"
+    },
+    {
+      "from": ".U_AUX26 > .pin16",
+      "to": ".U3 > .pin29"
+    },
+    {
+      "from": ".U_AUX26 > .pin17",
+      "to": ".U1 > .pin62"
+    },
+    {
+      "from": ".U_AUX26 > .pin18",
+      "to": ".U2 > .pin31"
+    },
+    {
+      "from": ".U_AUX26 > .pin19",
+      "to": ".U3 > .pin32"
+    },
+    {
+      "from": ".U_AUX27 > .pin2",
+      "to": ".U2 > .pin19"
+    },
+    {
+      "from": ".U_AUX27 > .pin3",
+      "to": ".U3 > .pin20"
+    },
+    {
+      "from": ".U_AUX27 > .pin4",
+      "to": ".U1 > .pin21"
+    },
+    {
+      "from": ".U_AUX27 > .pin5",
+      "to": ".U2 > .pin22"
+    },
+    {
+      "from": ".U_AUX27 > .pin6",
+      "to": ".U3 > .pin23"
+    },
+    {
+      "from": ".U_AUX27 > .pin7",
+      "to": ".U1 > .pin24"
+    },
+    {
+      "from": ".U_AUX27 > .pin8",
+      "to": ".U2 > .pin25"
+    },
+    {
+      "from": ".U_AUX27 > .pin9",
+      "to": ".U3 > .pin26"
+    },
+    {
+      "from": ".U_AUX27 > .pin10",
+      "to": ".U1 > .pin22"
+    },
+    {
+      "from": ".U_AUX27 > .pin11",
+      "to": ".U2 > .pin7"
+    },
+    {
+      "from": ".U_AUX27 > .pin12",
+      "to": ".U3 > .pin8"
+    },
+    {
+      "from": ".U_AUX27 > .pin13",
+      "to": ".U1 > .pin25"
+    },
+    {
+      "from": ".U_AUX27 > .pin14",
+      "to": ".U2 > .pin10"
+    },
+    {
+      "from": ".U_AUX27 > .pin15",
+      "to": ".U3 > .pin11"
+    },
+    {
+      "from": ".U_AUX28 > .pin2",
+      "to": ".U1 > .pin20"
+    },
+    {
+      "from": ".U_AUX28 > .pin3",
+      "to": ".U2 > .pin5"
+    },
+    {
+      "from": ".U_AUX28 > .pin4",
+      "to": ".U3 > .pin6"
+    },
+    {
+      "from": ".U_AUX28 > .pin5",
+      "to": ".U1 > .pin23"
+    },
+    {
+      "from": ".U_AUX28 > .pin6",
+      "to": ".U2 > .pin8"
+    },
+    {
+      "from": ".U_AUX28 > .pin7",
+      "to": ".U3 > .pin9"
+    },
+    {
+      "from": ".U_AUX28 > .pin8",
+      "to": ".U1 > .pin26"
+    },
+    {
+      "from": ".U_AUX28 > .pin9",
+      "to": ".U2 > .pin11"
+    },
+    {
+      "from": ".U_AUX28 > .pin10",
+      "to": ".U3 > .pin37"
+    },
+    {
+      "from": ".U_AUX28 > .pin11",
+      "to": ".U1 > .pin54"
+    },
+    {
+      "from": ".U_AUX28 > .pin12",
+      "to": ".U2 > .pin39"
+    },
+    {
+      "from": ".U_AUX28 > .pin13",
+      "to": ".U3 > .pin40"
+    },
+    {
+      "from": ".U_AUX28 > .pin14",
+      "to": ".U1 > .pin57"
+    },
+    {
+      "from": ".U_AUX28 > .pin15",
+      "to": ".U2 > .pin42"
+    },
+    {
+      "from": ".U_AUX28 > .pin16",
+      "to": ".U3 > .pin43"
+    },
+    {
+      "from": ".U_AUX28 > .pin17",
+      "to": ".U1 > .pin60"
+    },
+    {
+      "from": ".U_AUX28 > .pin18",
+      "to": ".U2 > .pin45"
+    },
+    {
+      "from": ".U_AUX28 > .pin19",
+      "to": ".U3 > .pin46"
+    },
+    {
+      "from": ".U_AUX30 > .pin2",
+      "to": ".U3 > .pin11"
+    },
+    {
+      "from": ".U_AUX30 > .pin3",
+      "to": ".U1 > .pin44"
+    },
+    {
+      "from": ".U_AUX30 > .pin4",
+      "to": ".U2 > .pin13"
+    },
+    {
+      "from": ".U_AUX30 > .pin5",
+      "to": ".U3 > .pin14"
+    },
+    {
+      "from": ".U_AUX30 > .pin6",
+      "to": ".U1 > .pin47"
+    },
+    {
+      "from": ".U_AUX30 > .pin7",
+      "to": ".U2 > .pin16"
+    },
+    {
+      "from": ".U_AUX30 > .pin8",
+      "to": ".U3 > .pin17"
+    },
+    {
+      "from": ".U_AUX30 > .pin9",
+      "to": ".U1 > .pin50"
+    },
+    {
+      "from": ".U_AUX30 > .pin10",
+      "to": ".U2 > .pin14"
+    },
+    {
+      "from": ".U_AUX30 > .pin11",
+      "to": ".U3 > .pin15"
+    },
+    {
+      "from": ".U_AUX30 > .pin12",
+      "to": ".U1 > .pin64"
+    },
+    {
+      "from": ".U_AUX30 > .pin13",
+      "to": ".U2 > .pin17"
+    },
+    {
+      "from": ".U_AUX31 > .pin2",
+      "to": ".U2 > .pin44"
+    },
+    {
+      "from": ".U_AUX31 > .pin3",
+      "to": ".U1 > .pin45"
+    },
+    {
+      "from": ".U_AUX31 > .pin4",
+      "to": ".U3 > .pin46"
+    },
+    {
+      "from": ".U_AUX31 > .pin5",
+      "to": ".U2 > .pin47"
+    },
+    {
+      "from": ".U_AUX31 > .pin6",
+      "to": ".U1 > .pin48"
+    },
+    {
+      "from": ".U_AUX31 > .pin7",
+      "to": ".U3 > .pin1"
+    },
+    {
+      "from": ".U_AUX31 > .pin8",
+      "to": ".U2 > .pin2"
+    },
+    {
+      "from": ".U_AUX31 > .pin9",
+      "to": ".U1 > .pin51"
+    },
+    {
+      "from": ".U_AUX31 > .pin10",
+      "to": ".U3 > .pin45"
+    },
+    {
+      "from": ".U_AUX31 > .pin11",
+      "to": ".U2 > .pin46"
+    },
+    {
+      "from": ".U_AUX31 > .pin12",
+      "to": ".U1 > .pin31"
+    },
+    {
+      "from": ".U_AUX31 > .pin13",
+      "to": ".U3 > .pin48"
+    },
+    {
+      "from": ".U_AUX31 > .pin14",
+      "to": ".U2 > .pin1"
+    },
+    {
+      "from": ".U_AUX31 > .pin15",
+      "to": ".U1 > .pin34"
+    },
+    {
+      "from": ".U_AUX32 > .pin2",
+      "to": ".U1 > .pin45"
+    },
+    {
+      "from": ".U_AUX32 > .pin3",
+      "to": ".U3 > .pin46"
+    },
+    {
+      "from": ".U_AUX32 > .pin4",
+      "to": ".U2 > .pin47"
+    },
+    {
+      "from": ".U_AUX32 > .pin5",
+      "to": ".U1 > .pin48"
+    },
+    {
+      "from": ".U_AUX32 > .pin6",
+      "to": ".U3 > .pin1"
+    },
+    {
+      "from": ".U_AUX32 > .pin7",
+      "to": ".U2 > .pin2"
+    },
+    {
+      "from": ".U_AUX32 > .pin8",
+      "to": ".U1 > .pin51"
+    },
+    {
+      "from": ".U_AUX32 > .pin9",
+      "to": ".U3 > .pin4"
+    },
+    {
+      "from": ".U_AUX32 > .pin10",
+      "to": ".U2 > .pin12"
+    },
+    {
+      "from": ".U_AUX32 > .pin11",
+      "to": ".U1 > .pin61"
+    },
+    {
+      "from": ".U_AUX32 > .pin12",
+      "to": ".U3 > .pin14"
+    },
+    {
+      "from": ".U_AUX32 > .pin13",
+      "to": ".U2 > .pin15"
+    },
+    {
+      "from": ".U_AUX32 > .pin14",
+      "to": ".U1 > .pin64"
+    },
+    {
+      "from": ".U_AUX32 > .pin15",
+      "to": ".U3 > .pin17"
+    },
+    {
+      "from": ".U_AUX32 > .pin16",
+      "to": ".U2 > .pin18"
+    },
+    {
+      "from": ".U_AUX32 > .pin17",
+      "to": ".U1 > .pin3"
+    },
+    {
+      "from": ".U_AUX32 > .pin18",
+      "to": ".U3 > .pin20"
+    },
+    {
+      "from": ".U_AUX32 > .pin19",
+      "to": ".U2 > .pin21"
+    },
+    {
+      "from": ".Q33 > .pin2",
+      "to": ".U3 > .pin5"
+    },
+    {
+      "from": ".U_AUX34 > .pin2",
+      "to": ".U1 > .pin47"
+    },
+    {
+      "from": ".U_AUX34 > .pin3",
+      "to": ".U2 > .pin48"
+    },
+    {
+      "from": ".U_AUX35 > .pin2",
+      "to": ".U1 > .pin48"
+    },
+    {
+      "from": ".U_AUX35 > .pin3",
+      "to": ".U3 > .pin1"
+    },
+    {
+      "from": ".U_AUX35 > .pin4",
+      "to": ".U2 > .pin2"
+    },
+    {
+      "from": ".U_AUX35 > .pin5",
+      "to": ".U1 > .pin51"
+    },
+    {
+      "from": ".U_AUX35 > .pin6",
+      "to": ".U3 > .pin4"
+    },
+    {
+      "from": ".U_AUX35 > .pin7",
+      "to": ".U2 > .pin5"
+    },
+    {
+      "from": ".U_AUX35 > .pin8",
+      "to": ".U1 > .pin54"
+    },
+    {
+      "from": ".U_AUX35 > .pin9",
+      "to": ".U3 > .pin7"
+    },
+    {
+      "from": ".U_AUX35 > .pin10",
+      "to": ".U2 > .pin41"
+    },
+    {
+      "from": ".U_AUX35 > .pin11",
+      "to": ".U1 > .pin26"
+    },
+    {
+      "from": ".U_AUX35 > .pin12",
+      "to": ".U3 > .pin43"
+    },
+    {
+      "from": ".U_AUX35 > .pin13",
+      "to": ".U2 > .pin44"
+    },
+    {
+      "from": ".U_AUX35 > .pin14",
+      "to": ".U1 > .pin29"
+    },
+    {
+      "from": ".U_AUX35 > .pin15",
+      "to": ".U3 > .pin46"
+    },
+    {
+      "from": ".U_AUX35 > .pin16",
+      "to": ".U2 > .pin47"
+    },
+    {
+      "from": ".U_AUX35 > .pin17",
+      "to": ".U1 > .pin32"
+    },
+    {
+      "from": ".U_AUX35 > .pin18",
+      "to": ".U3 > .pin1"
+    },
+    {
+      "from": ".U_AUX35 > .pin19",
+      "to": ".U2 > .pin2"
+    },
+    {
+      "from": ".U_AUX35 > .pin20",
+      "to": ".U1 > .pin56"
+    },
+    {
+      "from": ".U_AUX36 > .pin2",
+      "to": ".U3 > .pin33"
+    },
+    {
+      "from": ".U_AUX36 > .pin3",
+      "to": ".U2 > .pin34"
+    },
+    {
+      "from": ".U_AUX36 > .pin4",
+      "to": ".U1 > .pin51"
+    },
+    {
+      "from": ".U_AUX36 > .pin5",
+      "to": ".U3 > .pin36"
+    },
+    {
+      "from": ".U_AUX36 > .pin6",
+      "to": ".U2 > .pin37"
+    },
+    {
+      "from": ".U_AUX36 > .pin7",
+      "to": ".U1 > .pin54"
+    },
+    {
+      "from": ".U_AUX36 > .pin8",
+      "to": ".U3 > .pin39"
+    },
+    {
+      "from": ".U_AUX36 > .pin9",
+      "to": ".U2 > .pin40"
+    },
+    {
+      "from": ".U_AUX36 > .pin10",
+      "to": ".U1 > .pin56"
+    },
+    {
+      "from": ".U_AUX36 > .pin11",
+      "to": ".U3 > .pin25"
+    },
+    {
+      "from": ".U_AUX36 > .pin12",
+      "to": ".U2 > .pin26"
+    },
+    {
+      "from": ".U_AUX36 > .pin13",
+      "to": ".U1 > .pin59"
+    },
+    {
+      "from": ".U_AUX36 > .pin14",
+      "to": ".U3 > .pin28"
+    },
+    {
+      "from": ".U_AUX36 > .pin15",
+      "to": ".U2 > .pin29"
+    },
+    {
+      "from": ".U_AUX36 > .pin16",
+      "to": ".U1 > .pin62"
+    },
+    {
+      "from": ".U_AUX36 > .pin17",
+      "to": ".U3 > .pin31"
+    },
+    {
+      "from": ".U_AUX36 > .pin18",
+      "to": ".U2 > .pin32"
+    },
+    {
+      "from": ".U_AUX36 > .pin19",
+      "to": ".U1 > .pin1"
+    },
+    {
+      "from": ".U_AUX36 > .pin20",
+      "to": ".U3 > .pin7"
+    },
+    {
+      "from": ".U_AUX37 > .pin2",
+      "to": ".U3 > .pin34"
+    },
+    {
+      "from": ".U_AUX37 > .pin3",
+      "to": ".U1 > .pin51"
+    },
+    {
+      "from": ".U_AUX37 > .pin4",
+      "to": ".U2 > .pin36"
+    },
+    {
+      "from": ".U_AUX37 > .pin5",
+      "to": ".U3 > .pin37"
+    },
+    {
+      "from": ".U_AUX37 > .pin6",
+      "to": ".U1 > .pin54"
+    },
+    {
+      "from": ".U_AUX37 > .pin7",
+      "to": ".U2 > .pin39"
+    },
+    {
+      "from": ".U_AUX37 > .pin8",
+      "to": ".U3 > .pin40"
+    },
+    {
+      "from": ".U_AUX37 > .pin9",
+      "to": ".U1 > .pin57"
+    },
+    {
+      "from": ".U_AUX37 > .pin10",
+      "to": ".U2 > .pin39"
+    },
+    {
+      "from": ".U_AUX37 > .pin11",
+      "to": ".U3 > .pin40"
+    },
+    {
+      "from": ".U_AUX37 > .pin12",
+      "to": ".U1 > .pin25"
+    },
+    {
+      "from": ".U_AUX37 > .pin13",
+      "to": ".U2 > .pin42"
+    },
+    {
+      "from": ".U_AUX37 > .pin14",
+      "to": ".U3 > .pin43"
+    },
+    {
+      "from": ".U_AUX37 > .pin15",
+      "to": ".U1 > .pin28"
+    },
+    {
+      "from": ".U_AUX37 > .pin16",
+      "to": ".U2 > .pin45"
+    },
+    {
+      "from": ".U_AUX37 > .pin17",
+      "to": ".U3 > .pin46"
+    },
+    {
+      "from": ".U_AUX37 > .pin18",
+      "to": ".U1 > .pin31"
+    },
+    {
+      "from": ".U_AUX37 > .pin19",
+      "to": ".U2 > .pin48"
+    },
+    {
+      "from": ".U_AUX37 > .pin20",
+      "to": ".U3 > .pin22"
+    },
+    {
+      "from": ".Q38 > .pin2",
+      "to": ".U3 > .pin42"
+    },
+    {
+      "from": ".U_AUX39 > .pin2",
+      "to": ".U2 > .pin36"
+    },
+    {
+      "from": ".U_AUX39 > .pin3",
+      "to": ".U3 > .pin37"
+    },
+    {
+      "from": ".U_AUX39 > .pin4",
+      "to": ".U1 > .pin54"
+    },
+    {
+      "from": ".U_AUX39 > .pin5",
+      "to": ".U2 > .pin39"
+    },
+    {
+      "from": ".U_AUX39 > .pin6",
+      "to": ".U3 > .pin40"
+    },
+    {
+      "from": ".U_AUX39 > .pin7",
+      "to": ".U1 > .pin57"
+    },
+    {
+      "from": ".U_AUX39 > .pin8",
+      "to": ".U2 > .pin42"
+    },
+    {
+      "from": ".U_AUX39 > .pin9",
+      "to": ".U3 > .pin43"
+    },
+    {
+      "from": ".U_AUX39 > .pin10",
+      "to": ".U1 > .pin21"
+    },
+    {
+      "from": ".U_AUX39 > .pin11",
+      "to": ".U2 > .pin6"
+    },
+    {
+      "from": ".U_AUX39 > .pin12",
+      "to": ".U3 > .pin7"
+    },
+    {
+      "from": ".U_AUX39 > .pin13",
+      "to": ".U1 > .pin24"
+    },
+    {
+      "from": ".U_AUX39 > .pin14",
+      "to": ".U2 > .pin9"
+    },
+    {
+      "from": ".U_AUX39 > .pin15",
+      "to": ".U3 > .pin10"
+    },
+    {
+      "from": ".U_AUX39 > .pin16",
+      "to": ".U1 > .pin27"
+    },
+    {
+      "from": ".U_AUX39 > .pin17",
+      "to": ".U2 > .pin12"
+    },
+    {
+      "from": ".U_AUX39 > .pin18",
+      "to": ".U3 > .pin13"
+    },
+    {
+      "from": ".U_AUX39 > .pin19",
+      "to": ".U1 > .pin30"
+    },
+    {
+      "from": ".U_AUX40 > .pin2",
+      "to": ".U1 > .pin10"
+    },
+    {
+      "from": ".U_AUX40 > .pin3",
+      "to": ".U2 > .pin27"
+    },
+    {
+      "from": ".U_AUX40 > .pin4",
+      "to": ".U3 > .pin28"
+    },
+    {
+      "from": ".U_AUX40 > .pin5",
+      "to": ".U1 > .pin13"
+    },
+    {
+      "from": ".U_AUX40 > .pin6",
+      "to": ".U2 > .pin30"
+    },
+    {
+      "from": ".U_AUX40 > .pin7",
+      "to": ".U3 > .pin31"
+    },
+    {
+      "from": ".U_AUX40 > .pin8",
+      "to": ".U1 > .pin16"
+    },
+    {
+      "from": ".U_AUX40 > .pin9",
+      "to": ".U2 > .pin33"
+    },
+    {
+      "from": ".U_AUX40 > .pin10",
+      "to": ".U3 > .pin15"
+    },
+    {
+      "from": ".U_AUX40 > .pin11",
+      "to": ".U1 > .pin64"
+    },
+    {
+      "from": ".U_AUX40 > .pin12",
+      "to": ".U2 > .pin17"
+    },
+    {
+      "from": ".U_AUX40 > .pin13",
+      "to": ".U3 > .pin18"
+    },
+    {
+      "from": ".U_AUX40 > .pin14",
+      "to": ".U1 > .pin3"
+    },
+    {
+      "from": ".U_AUX40 > .pin15",
+      "to": ".U2 > .pin20"
+    },
+    {
+      "from": ".Q41 > .pin2",
+      "to": ".U3 > .pin34"
+    },
+    {
+      "from": ".U_AUX42 > .pin2",
+      "to": ".U2 > .pin28"
+    },
+    {
+      "from": ".U_AUX42 > .pin3",
+      "to": ".U3 > .pin29"
+    },
+    {
+      "from": ".U_AUX42 > .pin4",
+      "to": ".U1 > .pin14"
+    },
+    {
+      "from": ".U_AUX42 > .pin5",
+      "to": ".U2 > .pin31"
+    },
+    {
+      "from": ".U_AUX42 > .pin6",
+      "to": ".U3 > .pin32"
+    },
+    {
+      "from": ".U_AUX42 > .pin7",
+      "to": ".U1 > .pin17"
+    },
+    {
+      "from": ".U_AUX43 > .pin2",
+      "to": ".U3 > .pin29"
+    },
+    {
+      "from": ".U_AUX43 > .pin3",
+      "to": ".U1 > .pin14"
+    },
+    {
+      "from": ".U_AUX43 > .pin4",
+      "to": ".U2 > .pin31"
+    },
+    {
+      "from": ".U_AUX43 > .pin5",
+      "to": ".U3 > .pin32"
+    },
+    {
+      "from": ".U_AUX43 > .pin6",
+      "to": ".U1 > .pin17"
+    },
+    {
+      "from": ".U_AUX43 > .pin7",
+      "to": ".U2 > .pin34"
+    },
+    {
+      "from": ".U_AUX43 > .pin8",
+      "to": ".U3 > .pin35"
+    },
+    {
+      "from": ".U_AUX43 > .pin9",
+      "to": ".U1 > .pin20"
+    },
+    {
+      "from": ".U_AUX43 > .pin10",
+      "to": ".U2 > .pin28"
+    },
+    {
+      "from": ".U_AUX43 > .pin11",
+      "to": ".U3 > .pin29"
+    },
+    {
+      "from": ".U_AUX43 > .pin12",
+      "to": ".U1 > .pin30"
+    },
+    {
+      "from": ".U_AUX43 > .pin13",
+      "to": ".U2 > .pin31"
+    },
+    {
+      "from": ".U_AUX43 > .pin14",
+      "to": ".U3 > .pin32"
+    },
+    {
+      "from": ".U_AUX43 > .pin15",
+      "to": ".U1 > .pin33"
+    },
+    {
+      "from": ".U_AUX43 > .pin16",
+      "to": ".U2 > .pin34"
+    },
+    {
+      "from": ".U_AUX43 > .pin17",
+      "to": ".U3 > .pin35"
+    },
+    {
+      "from": ".U_AUX43 > .pin18",
+      "to": ".U1 > .pin36"
+    },
+    {
+      "from": ".U_AUX43 > .pin19",
+      "to": ".U2 > .pin37"
+    },
+    {
+      "from": ".U_AUX43 > .pin20",
+      "to": ".U3 > .pin11"
+    },
+    {
+      "from": ".U_AUX44 > .pin2",
+      "to": ".U1 > .pin14"
+    },
+    {
+      "from": ".U_AUX44 > .pin3",
+      "to": ".U2 > .pin15"
+    },
+    {
+      "from": ".U_AUX44 > .pin4",
+      "to": ".U3 > .pin16"
+    },
+    {
+      "from": ".U_AUX44 > .pin5",
+      "to": ".U1 > .pin17"
+    },
+    {
+      "from": ".U_AUX44 > .pin6",
+      "to": ".U2 > .pin18"
+    },
+    {
+      "from": ".U_AUX44 > .pin7",
+      "to": ".U3 > .pin19"
+    },
+    {
+      "from": ".Q45 > .pin2",
+      "to": ".U1 > .pin38"
+    },
+    {
+      "from": ".U_AUX46 > .pin2",
+      "to": ".U2 > .pin16"
+    },
+    {
+      "from": ".U_AUX46 > .pin3",
+      "to": ".U1 > .pin17"
+    },
+    {
+      "from": ".U_AUX46 > .pin4",
+      "to": ".U3 > .pin18"
+    },
+    {
+      "from": ".U_AUX46 > .pin5",
+      "to": ".U2 > .pin19"
+    },
+    {
+      "from": ".U_AUX46 > .pin6",
+      "to": ".U1 > .pin20"
+    },
+    {
+      "from": ".U_AUX46 > .pin7",
+      "to": ".U3 > .pin21"
+    },
+    {
+      "from": ".U_AUX47 > .pin2",
+      "to": ".U1 > .pin17"
+    },
+    {
+      "from": ".U_AUX47 > .pin3",
+      "to": ".U2 > .pin18"
+    },
+    {
+      "from": ".U_AUX47 > .pin4",
+      "to": ".U3 > .pin19"
+    },
+    {
+      "from": ".U_AUX47 > .pin5",
+      "to": ".U1 > .pin20"
+    },
+    {
+      "from": ".U_AUX47 > .pin6",
+      "to": ".U2 > .pin21"
+    },
+    {
+      "from": ".U_AUX47 > .pin7",
+      "to": ".U3 > .pin22"
+    },
+    {
+      "from": ".U_AUX47 > .pin8",
+      "to": ".U1 > .pin23"
+    },
+    {
+      "from": ".U_AUX47 > .pin9",
+      "to": ".U2 > .pin24"
+    },
+    {
+      "from": ".U_AUX47 > .pin10",
+      "to": ".U3 > .pin40"
+    },
+    {
+      "from": ".U_AUX47 > .pin11",
+      "to": ".U1 > .pin25"
+    },
+    {
+      "from": ".U_AUX47 > .pin12",
+      "to": ".U2 > .pin42"
+    },
+    {
+      "from": ".U_AUX47 > .pin13",
+      "to": ".U3 > .pin43"
+    },
+    {
+      "from": ".U_AUX47 > .pin14",
+      "to": ".U1 > .pin28"
+    },
+    {
+      "from": ".U_AUX47 > .pin15",
+      "to": ".U2 > .pin45"
+    },
+    {
+      "from": ".U_AUX47 > .pin16",
+      "to": ".U3 > .pin46"
+    },
+    {
+      "from": ".U_AUX47 > .pin17",
+      "to": ".U1 > .pin31"
+    },
+    {
+      "from": ".U_AUX47 > .pin18",
+      "to": ".U2 > .pin48"
+    },
+    {
+      "from": ".U_AUX47 > .pin19",
+      "to": ".U3 > .pin1"
+    },
+    {
+      "from": ".U_AUX48 > .pin2",
+      "to": ".U2 > .pin2"
+    },
+    {
+      "from": ".U_AUX48 > .pin3",
+      "to": ".U3 > .pin3"
+    },
+    {
+      "from": ".U_AUX48 > .pin4",
+      "to": ".U1 > .pin20"
+    },
+    {
+      "from": ".U_AUX48 > .pin5",
+      "to": ".U2 > .pin5"
+    },
+    {
+      "from": ".U_AUX48 > .pin6",
+      "to": ".U3 > .pin6"
+    },
+    {
+      "from": ".U_AUX48 > .pin7",
+      "to": ".U1 > .pin23"
+    },
+    {
+      "from": ".U_AUX48 > .pin8",
+      "to": ".U2 > .pin8"
+    },
+    {
+      "from": ".U_AUX48 > .pin9",
+      "to": ".U3 > .pin9"
+    },
+    {
+      "from": ".U_AUX48 > .pin10",
+      "to": ".U1 > .pin55"
+    },
+    {
+      "from": ".U_AUX48 > .pin11",
+      "to": ".U2 > .pin8"
+    },
+    {
+      "from": ".U_AUX48 > .pin12",
+      "to": ".U3 > .pin9"
+    },
+    {
+      "from": ".U_AUX48 > .pin13",
+      "to": ".U1 > .pin58"
+    },
+    {
+      "from": ".U_AUX48 > .pin14",
+      "to": ".U2 > .pin11"
+    },
+    {
+      "from": ".U_AUX48 > .pin15",
+      "to": ".U3 > .pin12"
+    },
+    {
+      "from": ".U_AUX48 > .pin16",
+      "to": ".U1 > .pin61"
+    },
+    {
+      "from": ".U_AUX48 > .pin17",
+      "to": ".U2 > .pin14"
+    },
+    {
+      "from": ".U_AUX48 > .pin18",
+      "to": ".U3 > .pin15"
+    },
+    {
+      "from": ".U_AUX48 > .pin19",
+      "to": ".U1 > .pin64"
+    },
+    {
+      "from": ".U_AUX49 > .pin2",
+      "to": ".U3 > .pin3"
+    },
+    {
+      "from": ".U_AUX49 > .pin3",
+      "to": ".U1 > .pin20"
+    },
+    {
+      "from": ".U_AUX49 > .pin4",
+      "to": ".U2 > .pin5"
+    },
+    {
+      "from": ".U_AUX49 > .pin5",
+      "to": ".U3 > .pin6"
+    },
+    {
+      "from": ".U_AUX49 > .pin6",
+      "to": ".U1 > .pin23"
+    },
+    {
+      "from": ".U_AUX49 > .pin7",
+      "to": ".U2 > .pin8"
+    },
+    {
+      "from": ".U_AUX49 > .pin8",
+      "to": ".U3 > .pin9"
+    },
+    {
+      "from": ".U_AUX49 > .pin9",
+      "to": ".U1 > .pin26"
+    },
+    {
+      "from": ".U_AUX49 > .pin10",
+      "to": ".U2 > .pin38"
+    },
+    {
+      "from": ".U_AUX49 > .pin11",
+      "to": ".U3 > .pin39"
+    },
+    {
+      "from": ".U_AUX49 > .pin12",
+      "to": ".U1 > .pin24"
+    },
+    {
+      "from": ".U_AUX49 > .pin13",
+      "to": ".U2 > .pin41"
+    },
+    {
+      "from": ".U_AUX49 > .pin14",
+      "to": ".U3 > .pin42"
+    },
+    {
+      "from": ".U_AUX49 > .pin15",
+      "to": ".U1 > .pin27"
+    },
+    {
+      "from": ".U_AUX49 > .pin16",
+      "to": ".U2 > .pin44"
+    },
+    {
+      "from": ".U_AUX49 > .pin17",
+      "to": ".U3 > .pin45"
+    },
+    {
+      "from": ".U_AUX49 > .pin18",
+      "to": ".U1 > .pin30"
+    },
+    {
+      "from": ".U_AUX49 > .pin19",
+      "to": ".U2 > .pin47"
+    },
+    {
+      "from": ".U_AUX49 > .pin20",
+      "to": ".U3 > .pin21"
+    },
+    {
+      "from": ".Q50 > .pin2",
+      "to": ".U3 > .pin16"
+    },
+    {
+      "from": ".U_AUX51 > .pin2",
+      "to": ".U3 > .pin10"
+    },
+    {
+      "from": ".U_AUX51 > .pin3",
+      "to": ".U2 > .pin11"
+    },
+    {
+      "from": ".U_AUX51 > .pin4",
+      "to": ".U1 > .pin44"
+    },
+    {
+      "from": ".U_AUX51 > .pin5",
+      "to": ".U3 > .pin13"
+    },
+    {
+      "from": ".U_AUX51 > .pin6",
+      "to": ".U2 > .pin14"
+    },
+    {
+      "from": ".U_AUX51 > .pin7",
+      "to": ".U1 > .pin47"
+    },
+    {
+      "from": ".U_AUX51 > .pin8",
+      "to": ".U3 > .pin16"
+    },
+    {
+      "from": ".U_AUX51 > .pin9",
+      "to": ".U2 > .pin17"
+    },
+    {
+      "from": ".U_AUX51 > .pin10",
+      "to": ".U1 > .pin31"
+    },
+    {
+      "from": ".U_AUX51 > .pin11",
+      "to": ".U3 > .pin32"
+    },
+    {
+      "from": ".U_AUX51 > .pin12",
+      "to": ".U2 > .pin33"
+    },
+    {
+      "from": ".U_AUX51 > .pin13",
+      "to": ".U1 > .pin34"
+    },
+    {
+      "from": ".U_AUX51 > .pin14",
+      "to": ".U3 > .pin35"
+    },
+    {
+      "from": ".U_AUX51 > .pin15",
+      "to": ".U2 > .pin36"
+    },
+    {
+      "from": ".U_AUX51 > .pin16",
+      "to": ".U1 > .pin37"
+    },
+    {
+      "from": ".U_AUX51 > .pin17",
+      "to": ".U3 > .pin38"
+    },
+    {
+      "from": ".U_AUX51 > .pin18",
+      "to": ".U2 > .pin39"
+    },
+    {
+      "from": ".U_AUX51 > .pin19",
+      "to": ".U1 > .pin40"
+    },
+    {
+      "from": ".U_AUX51 > .pin20",
+      "to": ".U3 > .pin14"
+    },
+    {
+      "from": ".U_AUX52 > .pin2",
+      "to": ".U3 > .pin43"
+    },
+    {
+      "from": ".U_AUX52 > .pin3",
+      "to": ".U1 > .pin44"
+    },
+    {
+      "from": ".U_AUX52 > .pin4",
+      "to": ".U2 > .pin45"
+    },
+    {
+      "from": ".U_AUX52 > .pin5",
+      "to": ".U3 > .pin46"
+    },
+    {
+      "from": ".U_AUX52 > .pin6",
+      "to": ".U1 > .pin47"
+    },
+    {
+      "from": ".U_AUX52 > .pin7",
+      "to": ".U2 > .pin48"
+    },
+    {
+      "from": ".U_AUX52 > .pin8",
+      "to": ".U3 > .pin1"
+    },
+    {
+      "from": ".U_AUX52 > .pin9",
+      "to": ".U1 > .pin50"
+    },
+    {
+      "from": ".U_AUX52 > .pin10",
+      "to": ".U2 > .pin46"
+    },
+    {
+      "from": ".U_AUX52 > .pin11",
+      "to": ".U3 > .pin47"
+    },
+    {
+      "from": ".U_AUX52 > .pin12",
+      "to": ".U1 > .pin64"
+    },
+    {
+      "from": ".U_AUX52 > .pin13",
+      "to": ".U2 > .pin1"
+    },
+    {
+      "from": ".U_AUX52 > .pin14",
+      "to": ".U3 > .pin2"
+    },
+    {
+      "from": ".U_AUX52 > .pin15",
+      "to": ".U1 > .pin3"
+    },
+    {
+      "from": ".U_AUX53 > .pin2",
+      "to": ".U2 > .pin44"
+    },
+    {
+      "from": ".U_AUX53 > .pin3",
+      "to": ".U3 > .pin45"
+    },
+    {
+      "from": ".U_AUX53 > .pin4",
+      "to": ".U1 > .pin46"
+    },
+    {
+      "from": ".U_AUX53 > .pin5",
+      "to": ".U2 > .pin47"
+    },
+    {
+      "from": ".U_AUX53 > .pin6",
+      "to": ".U3 > .pin48"
+    },
+    {
+      "from": ".U_AUX53 > .pin7",
+      "to": ".U1 > .pin49"
+    },
+    {
+      "from": ".Q54 > .pin2",
+      "to": ".U2 > .pin4"
+    },
+    {
+      "from": ".U_AUX55 > .pin2",
+      "to": ".U1 > .pin46"
+    },
+    {
+      "from": ".U_AUX55 > .pin3",
+      "to": ".U2 > .pin47"
+    },
+    {
+      "from": ".U_AUX55 > .pin4",
+      "to": ".U3 > .pin48"
+    },
+    {
+      "from": ".U_AUX55 > .pin5",
+      "to": ".U1 > .pin49"
+    },
+    {
+      "from": ".U_AUX55 > .pin6",
+      "to": ".U2 > .pin2"
+    },
+    {
+      "from": ".U_AUX55 > .pin7",
+      "to": ".U3 > .pin3"
+    },
+    {
+      "from": ".Q56 > .pin2",
+      "to": ".U3 > .pin6"
+    },
+    {
+      "from": ".Q57 > .pin2",
+      "to": ".U1 > .pin7"
+    },
+    {
+      "from": ".Q2 > .pin4",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q4 > .pin4",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_BULK5 > .pin1",
+      "to": "net.C_BULK5_PASSIVE"
+    },
+    {
+      "from": ".C_BULK5 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q9 > .pin4",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_BULK12 > .pin1",
+      "to": "net.C_BULK12_PASSIVE"
+    },
+    {
+      "from": ".C_BULK12 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_BULK14 > .pin1",
+      "to": "net.C_BULK14_PASSIVE"
+    },
+    {
+      "from": ".C_BULK14 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q17 > .pin4",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_BULK29 > .pin1",
+      "to": "net.C_BULK29_PASSIVE"
+    },
+    {
+      "from": ".C_BULK29 > .pin2",
       "to": "net.GND"
     }
   ]

@@ -1029,7 +1029,23 @@ const buildConnectivityState = (components, traces) => {
   }
 
   const isUsed = (component, pin) => usedPins.get(component.ref)?.has(Number(pin)) ?? false
-  return { addTrace, isUsed, usedPins }
+  const pinHasConnectionToAny = (component, pin, targets) => {
+    const endpoint = pinEndpoint(component.ref, pin)
+    const targetRefs = new Set(targets.map((target) => target.ref))
+    return traces.some((trace) => {
+      if (trace.from === endpoint) {
+        const match = trace.to.match(pinEndpointPattern)
+        return Boolean(match && targetRefs.has(match[1]))
+      }
+      if (trace.to === endpoint) {
+        const match = trace.from.match(pinEndpointPattern)
+        return Boolean(match && targetRefs.has(match[1]))
+      }
+      return false
+    })
+  }
+
+  return { addTrace, isUsed, usedPins, pinHasConnectionToAny }
 }
 
 const firstUnusedPin = (state, component, fallback = 1) =>
@@ -1047,6 +1063,23 @@ const allocateMcuPins = (state, mcu, count) => {
   windows.sort((a, b) => a.usedCount - b.usedCount || a.firstPin - b.firstPin)
   const selected = windows[0]?.range ?? pins.slice(0, count)
   return selected.slice(0, count)
+}
+
+const stableHash = (value) =>
+  Array.from(String(value)).reduce((hash, char) => (hash * 31 + char.charCodeAt(0)) >>> 0, 0)
+
+const nextMcuPin = (state, mcus, preferredMcu, seed = "") => {
+  if (mcus.length === 0) return null
+  const orderedMcus = preferredMcu
+    ? [preferredMcu, ...mcus.filter((mcu) => mcu !== preferredMcu)]
+    : mcus
+  for (const mcu of orderedMcus) {
+    const pin = componentPins(mcu).find((candidatePin) => !state.isUsed(mcu, candidatePin))
+    if (pin) return { mcu, pin }
+  }
+  const fallbackMcu = orderedMcus[stableHash(seed) % orderedMcus.length]
+  const fallbackPins = componentPins(fallbackMcu)
+  return { mcu: fallbackMcu, pin: fallbackPins[stableHash(`${seed}:pin`) % fallbackPins.length] }
 }
 
 const nearestMcu = (component, mcus) =>
@@ -1138,6 +1171,30 @@ const addNonPassivePowerConnectivity = (components, state) => {
   }
 }
 
+const addSubcircuitMcuConnectivity = (components, state) => {
+  const mcus = components.filter((component) => component.kind === "mcu")
+  const subcircuits = components.filter((component) =>
+    component.kind !== "mcu" &&
+    component.componentType !== "connector" &&
+    component.componentType !== "pinheader" &&
+    component.componentType !== "resistor" &&
+    component.componentType !== "capacitor"
+  )
+
+  for (const subcircuit of subcircuits) {
+    const preferredMcu = nearestMcu(subcircuit, mcus)
+    const pins = componentPins(subcircuit)
+    for (const pin of pins) {
+      const isPowerPin = pins.length > 1 && (pin === pins[0] || pin === pins[pins.length - 1])
+      if (isPowerPin) continue
+      if (state.pinHasConnectionToAny(subcircuit, pin, mcus)) continue
+      const target = nextMcuPin(state, mcus, preferredMcu, `${subcircuit.ref}:${pin}`)
+      if (!target) return
+      state.addTrace(pinEndpoint(subcircuit.ref, pin), pinEndpoint(target.mcu.ref, target.pin))
+    }
+  }
+}
+
 const defaultPinNet = (component, pin, pins) => {
   if (component.componentType === "resistor" || component.componentType === "capacitor") {
     return pin === pins[pins.length - 1] ? "net.GND" : `net.${component.ref}_PASSIVE`
@@ -1167,6 +1224,7 @@ const addConnectivityTraces = (components, traces) => {
   addConnectorConnectivity(components, state)
   addI2cConnectivity(components, state)
   addNonPassivePowerConnectivity(components, state)
+  addSubcircuitMcuConnectivity(components, state)
   addRemainingPinConnectivity(components, state)
 }
 

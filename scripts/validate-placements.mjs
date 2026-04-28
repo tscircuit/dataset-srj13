@@ -37,6 +37,22 @@ const traceTouchesComponent = (trace, ref) =>
 const traceTouchesNet = (trace, netName) =>
   trace.from === netName || trace.to === netName
 
+const pinHasConnectionToAny = (placement, component, pin, targets) => {
+  const endpoint = `.${component.ref} > .pin${pin}`
+  const targetRefs = new Set(targets.map((target) => target.ref))
+  return placement.traces.some((trace) => {
+    if (trace.from === endpoint) {
+      const match = trace.to.match(pinEndpointPattern)
+      return Boolean(match && targetRefs.has(match[1]))
+    }
+    if (trace.to === endpoint) {
+      const match = trace.from.match(pinEndpointPattern)
+      return Boolean(match && targetRefs.has(match[1]))
+    }
+    return false
+  })
+}
+
 let failures = 0
 let reportedFailures = 0
 const reportFailure = (message) => {
@@ -50,6 +66,7 @@ const reportFailure = (message) => {
 for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".json")).sort()) {
   const placement = JSON.parse(readFileSync(join(placementsDir, file), "utf8"))
   const components = placement.components
+  const mcus = components.filter((component) => component.kind === "mcu")
   const utilization = getUtilization(components, placement.board)
   const componentByRef = new Map(components.map((component) => [component.ref, component]))
   const touchedPins = new Map(components.map((component) => [component.ref, new Set()]))
@@ -212,6 +229,23 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
       rect.top <= placement.board.height / 2
     if (!insideBoard && !component.allowOffBoard) {
       reportFailure(`${file}: ${component.ref} is off-board without allowOffBoard`)
+    }
+  }
+
+  for (const subcircuit of components.filter((component) =>
+    component.kind !== "mcu" &&
+    component.componentType !== "connector" &&
+    component.componentType !== "pinheader" &&
+    component.componentType !== "resistor" &&
+    component.componentType !== "capacitor"
+  )) {
+    const pins = componentPins(subcircuit)
+    for (const pin of pins) {
+      const isPowerPin = pins.length > 1 && (pin === pins[0] || pin === pins[pins.length - 1])
+      if (isPowerPin) continue
+      if (!pinHasConnectionToAny(placement, subcircuit, pin, mcus)) {
+        reportFailure(`${file}: ${subcircuit.ref}.pin${pin} is not connected to an MCU`)
+      }
     }
   }
 
