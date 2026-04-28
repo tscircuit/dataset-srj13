@@ -77,8 +77,8 @@ const subcircuitCatalog = [
   { kind: "soic16_subcircuit", componentType: "chip", footprint: "soic16_w3.9mm_p1.27mm", pins: 16, bounds: [6.4, 11.6] },
   { kind: "tssop_subcircuit", componentType: "chip", footprint: "tssop16_w4_p0.65mm", pins: 16, bounds: [6.95, 6.05] },
   { kind: "tssop20_subcircuit", componentType: "chip", footprint: "tssop20_w4_p0.65mm", pins: 20, bounds: [6.95, 7.35] },
-  { kind: "qfn_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm", pins: 20, bounds: [4.42, 4.42] },
-  { kind: "qfn_thermalpad_subcircuit", componentType: "chip", footprint: "qfn20_w5_h5_p0.65mm_thermalpad2x2", pins: 20, bounds: [5.43, 5.43] },
+  { kind: "qfn_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm_pl0.6mm", pins: 20, bounds: [4.42, 4.42] },
+  { kind: "qfn_thermalpad_subcircuit", componentType: "chip", footprint: "qfn20_w5_h5_p0.65mm_pl0.6mm_thermalpad2x2", pins: 20, bounds: [5.43, 5.43] },
   { kind: "button_4pin_subcircuit", componentType: "chip", footprint: "pushbutton_4pin", pins: 4, bounds: [8.5, 10.5] },
   { kind: "button_6x6_subcircuit", componentType: "chip", footprint: "pushbutton_6x6", pins: 4, bounds: [8.5, 10.5] },
   { kind: "large_capacitor_subcircuit", componentType: "capacitor", footprint: "radial_capacitor", pins: 2, bounds: [12, 12], passiveValue: "47uF", standalone: true },
@@ -110,12 +110,13 @@ const passiveFootprints = [
 ]
 
 const edgePassiveConnectorKinds = new Set(["hdmi", "usbc", "microusb", "usbb"])
+const minimumPackingMargin = 0.3
 
 const densityProfiles = [
   { targetUtilization: 0.36, earlyClearance: 1.1, lateClearance: 0.55, selfClearance: 0.35, lateStep: 4.5 },
   { targetUtilization: 0.37, earlyClearance: 1.0, lateClearance: 0.5, selfClearance: 0.32, lateStep: 4 },
   { targetUtilization: 0.38, earlyClearance: 0.9, lateClearance: 0.48, selfClearance: 0.3, lateStep: 3.75 },
-  { targetUtilization: 0.39, earlyClearance: 0.85, lateClearance: 0.45, selfClearance: 0.28, lateStep: 3.5 },
+  { targetUtilization: 0.39, earlyClearance: 0.85, lateClearance: 0.45, selfClearance: minimumPackingMargin, lateStep: 3.5 },
 ]
 
 const round = (value) => Math.round(value * 1000) / 1000
@@ -367,7 +368,7 @@ const buildEdgeConnectorPassiveCluster = ({ connector, rng }) => {
       maxX: connector.bounds.width / 2 + 6,
       maxY: connector.bounds.height / 2 + 6,
     },
-      minGap: 0.6,
+      minGap: Math.max(0.6, minimumPackingMargin),
     packOrderStrategy: "largest_to_smallest",
     packPlacementStrategy: "shortest_connection_along_outline",
     disconnectedPackDirection: "nearest_to_center",
@@ -601,7 +602,7 @@ const placeMcus = (components, traces, definition, rng) => {
         maxX: Math.max(18, mcu.bounds[0] / 2 + 12),
         maxY: Math.max(18, mcu.bounds[1] / 2 + 12),
       },
-      minGap: 0.55,
+      minGap: Math.max(0.55, minimumPackingMargin),
       packOrderStrategy: "largest_to_smallest",
       packPlacementStrategy: "shortest_connection_along_outline",
       disconnectedPackDirection: "nearest_to_center",
@@ -831,7 +832,7 @@ const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
       maxX: 8,
       maxY: 8,
     },
-    minGap: 0.55,
+    minGap: Math.max(0.55, minimumPackingMargin),
     packOrderStrategy: "largest_to_smallest",
     packPlacementStrategy: "shortest_connection_along_outline",
     disconnectedPackDirection: "nearest_to_center",
