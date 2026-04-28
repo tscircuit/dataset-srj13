@@ -66,15 +66,15 @@ const mcuCatalog = [
   { family: "qfn", footprint: "qfn48_w7_h7_p0.5mm", pins: 48, bounds: [7.5, 7.5] },
   { family: "qfp", footprint: "qfp48_w7_h7_p0.5mm", pins: 48, bounds: [9.3, 9.3] },
   { family: "lqfp", footprint: "lqfp64_w10_h10_p0.5mm", pins: 64, bounds: [12.8, 12.8] },
-  { family: "tssop", footprint: "tssop38_p0.5mm", pins: 38, bounds: [5.8, 10.5] },
+  { family: "tssop", footprint: "tssop38_w4_p0.5mm", pins: 38, bounds: [6.8, 10.5] },
 ]
 
 const subcircuitCatalog = [
   { kind: "soic_subcircuit", componentType: "chip", footprint: "soic8_w3.9mm_p1.27mm", pins: 8, bounds: [6.4, 6.5] },
   { kind: "soic14_subcircuit", componentType: "chip", footprint: "soic14_w3.9mm_p1.27mm", pins: 14, bounds: [6.4, 10.3] },
   { kind: "soic16_subcircuit", componentType: "chip", footprint: "soic16_w3.9mm_p1.27mm", pins: 16, bounds: [6.4, 11.6] },
-  { kind: "tssop_subcircuit", componentType: "chip", footprint: "tssop16_p0.65mm", pins: 16, bounds: [5.95, 6.05] },
-  { kind: "tssop20_subcircuit", componentType: "chip", footprint: "tssop20_p0.65mm", pins: 20, bounds: [5.95, 7.35] },
+  { kind: "tssop_subcircuit", componentType: "chip", footprint: "tssop16_w4_p0.65mm", pins: 16, bounds: [6.95, 6.05] },
+  { kind: "tssop20_subcircuit", componentType: "chip", footprint: "tssop20_w4_p0.65mm", pins: 20, bounds: [6.95, 7.35] },
   { kind: "qfn_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm", pins: 20, bounds: [4.42, 4.42] },
   { kind: "qfn_thermalpad_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm_thermalpad", pins: 20, bounds: [4.42, 4.42] },
   { kind: "button_4pin_subcircuit", componentType: "chip", footprint: "pushbutton_4pin", pins: 4, bounds: [8.5, 10.5] },
@@ -681,6 +681,16 @@ const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
       passiveValue: spec.isCapacitor ? "1uF" : "4.7k",
     })
     clusterTraces.push({ from: `.${subRef} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
+  }
+
+  if (passiveSpecs.length >= 3) {
+    const sideBuckets = new Set(clusterComponents.slice(1).map((component) => {
+      const dx = component.x - x
+      const dy = component.y - y
+      if (Math.abs(dx) > Math.abs(dy)) return dx < 0 ? "left" : "right"
+      return dy < 0 ? "bottom" : "top"
+    }))
+    if (sideBuckets.size < 2) return null
   }
 
   return { components: clusterComponents, traces: clusterTraces }

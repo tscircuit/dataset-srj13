@@ -1097,12 +1097,12 @@
       "ref": "U_AUX6",
       "kind": "tssop20_subcircuit",
       "componentType": "chip",
-      "footprint": "tssop20_p0.65mm",
+      "footprint": "tssop20_w4_p0.65mm",
       "x": 33.901,
       "y": -5.129,
       "rotation": 180,
       "bounds": {
-        "width": 5.95,
+        "width": 6.95,
         "height": 7.35
       },
       "pinCount": 20,
@@ -1113,8 +1113,8 @@
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0201",
-      "x": 36.937,
-      "y": -11.694,
+      "x": 37.387,
+      "y": -9.754,
       "rotation": 0,
       "bounds": {
         "width": 1.12,
