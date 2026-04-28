@@ -64,7 +64,7 @@ const connectorCatalog = {
 
 const mcuCatalog = [
   { family: "bga", footprint: "bga64_p0.8mm", pins: 64, bounds: [7.1, 7.1] },
-  { family: "qfn", footprint: "qfn48_w7_h7_p0.5mm", pins: 48, bounds: [7.5, 7.5] },
+  { family: "qfn", footprint: "qfn48_w8_h8_p0.5mm", pins: 48, bounds: [8.43, 8.43] },
   { family: "qfp", footprint: "qfp48_w7_h7_p0.5mm", pins: 48, bounds: [9.3, 9.3] },
   { family: "qfp", footprint: "qfp128_w14_h14_p0.4mm", pins: 128, bounds: [16.1, 16.1] },
   { family: "lqfp", footprint: "lqfp64_w10_h10_p0.5mm", pins: 64, bounds: [12.8, 12.8] },
@@ -111,6 +111,7 @@ const passiveFootprints = [
 
 const edgePassiveConnectorKinds = new Set(["hdmi", "usbc", "microusb", "usbb"])
 const minimumPackingMargin = 0.3
+const mcuPassiveCourtyardClearance = 1.05
 
 const densityProfiles = [
   { targetUtilization: 0.36, earlyClearance: 1.1, lateClearance: 0.55, selfClearance: 0.35, lateStep: 4.5 },
@@ -214,6 +215,8 @@ const overlapsAny = (candidate, components, clearance = 0) => {
 const edgeKeepoutFor = (component) =>
   component.componentType === "connector" || component.componentType === "pinheader"
     ? 2.2
+    : component.kind === "mcu"
+      ? 1.35
     : 0
 
 const overlapsAnyForFillCluster = (candidate, components, clearance = 0) =>
@@ -589,7 +592,7 @@ const placeMcus = (components, traces, definition, rng) => {
                   sideOrder[(index + passiveIndex) % sideOrder.length],
                   mcu.bounds,
                   slotOffsets[Math.floor(passiveIndex / sideOrder.length) % slotOffsets.length],
-                  1.35,
+                  2.15,
                 ),
               )
             ),
@@ -662,7 +665,7 @@ const placeMcus = (components, traces, definition, rng) => {
         passiveValue: spec.isCapacitor ? "100nF" : "10k",
       }
       if (!isInsideBoard(passiveComponent, definition.board, 0.55)) continue
-      if (overlapsAnyForFillCluster(passiveComponent, components, 0.15)) continue
+      if (overlapsAnyForFillCluster(passiveComponent, components, mcuPassiveCourtyardClearance)) continue
       if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, 0.15), rectFor(other, 0.15)))) continue
       passiveComponents.push(passiveComponent)
       passiveTraces.push({ from: `.${ref} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
@@ -681,7 +684,7 @@ const correctionCandidateOffsets = (mcu, passiveBounds, passiveIndex) => {
   const offsets = [-3, -2, -1, 0, 1, 2, 3]
   const candidates = []
   for (let ring = 0; ring < 5; ring++) {
-    const sideInset = 1.35 + ring * 0.55
+    const sideInset = 2.15 + ring * 0.55
     for (const side of sides) {
       for (const offset of offsets) {
         const spread = offset * 1.15
@@ -727,7 +730,7 @@ const correctMcuPassivePlacement = (components, traces, definition) => {
             passiveValue: isCapacitor ? "100nF" : "10k",
           }
           if (!isInsideBoard(passiveComponent, definition.board, 0.55)) continue
-          if (overlapsAnyForFillCluster(passiveComponent, components, 0.15)) continue
+          if (overlapsAnyForFillCluster(passiveComponent, components, mcuPassiveCourtyardClearance)) continue
           components.push(passiveComponent)
           traces.push({ from: `.${mcu.ref} > .pin${passiveIndex + 1}`, to: `.${passiveRef} > .pin1` })
           traces.push({ from: `.${passiveRef} > .pin2`, to: isCapacitor ? "net.GND" : "net.VCC" })
@@ -737,6 +740,35 @@ const correctMcuPassivePlacement = (components, traces, definition) => {
       }
     }
     mcu.passiveCount = existing().length
+  }
+}
+
+const correctMcuPassiveRotations = (components, definition) => {
+  for (const mcu of components.filter((component) => component.kind === "mcu")) {
+    const mcuIndex = Number(mcu.ref.replace(/^U/, ""))
+    const passives = components.filter((component) =>
+      component.kind === "mcu_passive" && new RegExp(`^[CR]${mcuIndex}\\d+$`).test(component.ref)
+    )
+    if (passives.length < 2 || new Set(passives.map((component) => component.rotation)).size >= 2) continue
+    for (const passive of passives) {
+      const baseBounds = passiveFootprints.find((entry) => entry.footprint === passive.footprint)?.bounds
+      if (!baseBounds) continue
+      for (const rotation of [90, 180, 270, 0]) {
+        if (rotation === passive.rotation) continue
+        const candidate = {
+          ...passive,
+          rotation,
+          bounds: boundsForRotation(baseBounds, rotation),
+        }
+        const others = components.filter((component) => component !== passive)
+        if (!isInsideBoard(candidate, definition.board, 0.55)) continue
+        if (overlapsAnyForFillCluster(candidate, others, 0.15)) continue
+        passive.rotation = candidate.rotation
+        passive.bounds = candidate.bounds
+        break
+      }
+      if (new Set(passives.map((component) => component.rotation)).size >= 2) break
+    }
   }
 }
 
@@ -1026,6 +1058,7 @@ const generatePlacement = (definition) => {
   placeEdge(components, traces, definition, rng)
   placeMcus(components, traces, definition, rng)
   correctMcuPassivePlacement(components, traces, definition)
+  correctMcuPassiveRotations(components, definition)
   placeSubcircuits(components, traces, definition, rng)
 
   return {
