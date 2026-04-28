@@ -629,8 +629,8 @@ const placeMcus = (components, traces, definition, rng) => {
         passiveValue: spec.isCapacitor ? "100nF" : "10k",
       }
       if (!isInsideBoard(passiveComponent, definition.board, 0.55)) continue
-      if (overlapsAnyForFillCluster(passiveComponent, components, 0.16)) continue
-      if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, 0.16), rectFor(other, 0.16)))) continue
+      if (overlapsAnyForFillCluster(passiveComponent, components, 0.15)) continue
+      if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, 0.15), rectFor(other, 0.15)))) continue
       passiveComponents.push(passiveComponent)
       passiveTraces.push({ from: `.${ref} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
       passiveTraces.push({ from: `.${spec.passiveRef} > .pin2`, to: spec.isCapacitor ? "net.GND" : "net.VCC" })
