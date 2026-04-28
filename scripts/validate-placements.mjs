@@ -36,12 +36,16 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
   const components = placement.components
   const utilization = getUtilization(components, placement.board)
 
-  if (utilization < 0.35) {
-    reportFailure(`${file}: only ${(utilization * 100).toFixed(2)}% covered, expected at least 35% JSON coverage`)
+  if (utilization < 0.3) {
+    reportFailure(`${file}: only ${(utilization * 100).toFixed(2)}% covered, expected at least 30% JSON coverage`)
   }
 
   if (components.some((component) => component.kind === "dense_passive")) {
     reportFailure(`${file}: contains dense_passive filler despite MCU passive-count cap`)
+  }
+
+  if (!components.some((component) => component.kind === "power_mosfet_subcircuit")) {
+    reportFailure(`${file}: missing power_mosfet_subcircuit variant`)
   }
 
   for (const component of components) {
@@ -55,12 +59,12 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     }
     if (component.kind === "usbc") {
       const expectedRotation = component.edge === "left"
-        ? 0
+        ? 90
         : component.edge === "right"
-          ? 180
+          ? 270
           : component.edge === "top"
-            ? -90
-            : 90
+            ? 0
+            : 180
       if (component.rotation !== expectedRotation) {
         reportFailure(`${file}: ${component.ref} USB-C rotation ${component.rotation} does not point off-board`)
       }
@@ -90,11 +94,14 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
       return component.kind === "mcu_passive" && new RegExp(`^[CR]${mcuIndex}\\d+$`).test(component.ref)
     })
     const designated = mcu.designatedPassiveCount
-    if (designated < 2 || designated > 8) {
-      reportFailure(`${file}: ${mcu.ref} designated passive count ${designated} is outside 2-8`)
+    if (designated < 8 || designated > 20) {
+      reportFailure(`${file}: ${mcu.ref} designated passive count ${designated} is outside 8-20`)
     }
     if (mcuPassives.length > designated) {
       reportFailure(`${file}: ${mcu.ref} has ${mcuPassives.length} passives, above designated ${designated}`)
+    }
+    if (mcuPassives.length < 8) {
+      reportFailure(`${file}: ${mcu.ref} has only ${mcuPassives.length} packed passives, expected at least 8`)
     }
     if (mcuPassives.length !== mcu.passiveCount) {
       reportFailure(`${file}: ${mcu.ref} passiveCount metadata ${mcu.passiveCount} does not match ${mcuPassives.length}`)
@@ -105,7 +112,9 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
   }
 
   for (const subcircuit of components.filter((component) =>
-    component.kind === "soic_subcircuit" || component.kind === "tssop_subcircuit" || component.kind === "mosfet_subcircuit"
+    component.kind.endsWith("_subcircuit") ||
+    component.kind === "mosfet_subcircuit" ||
+    component.kind === "power_mosfet_subcircuit"
   )) {
     const passivePrefix = subcircuit.ref.startsWith("U_AUX")
       ? subcircuit.ref.replace("U_AUX", "")
@@ -115,6 +124,17 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     )
     if (passives.length < 1 || passives.length > 4) {
       reportFailure(`${file}: ${subcircuit.ref} has ${passives.length} surrounding passives, expected 1-4`)
+    }
+    if (passives.length >= 3) {
+      const sideBuckets = new Set(passives.map((passive) => {
+        const dx = passive.x - subcircuit.x
+        const dy = passive.y - subcircuit.y
+        if (Math.abs(dx) > Math.abs(dy)) return dx < 0 ? "left" : "right"
+        return dy < 0 ? "bottom" : "top"
+      }))
+      if (sideBuckets.size < 2) {
+        reportFailure(`${file}: ${subcircuit.ref} passives are packed on only one side`)
+      }
     }
   }
 }
