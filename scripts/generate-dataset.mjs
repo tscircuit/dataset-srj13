@@ -1338,7 +1338,13 @@ const generatePlacement = (definition) => {
 mkdirSync(placementsDir, { recursive: true })
 mkdirSync(circuitsDir, { recursive: true })
 
-for (const file of readdirSync(definitionsDir).filter((name) => name.endsWith(".json")).sort()) {
+const onlyDefinitionId = process.env.DATASET_EXAMPLE
+const definitionFiles = readdirSync(definitionsDir)
+  .filter((name) => name.endsWith(".json"))
+  .filter((name) => !onlyDefinitionId || name === `${onlyDefinitionId}.json`)
+  .sort()
+
+for (const file of definitionFiles) {
   const definition = JSON.parse(readFileSync(join(definitionsDir, file), "utf8"))
   const placement = generatePlacement(definition)
   const placementPath = join(placementsDir, `${definition.id}.placement.json`)
