@@ -113,6 +113,7 @@ const passiveFootprints = [
 const edgePassiveConnectorKinds = new Set(["hdmi", "usbc", "microusb", "usbb"])
 const minimumPackingMargin = 0.3
 const mcuPassiveCourtyardClearance = 1.05
+const mcuPassiveSelfClearance = 0.35
 
 const densityProfiles = [
   { targetUtilization: 0.36, earlyClearance: 1.1, lateClearance: 0.55, selfClearance: 0.35, lateStep: 4.5 },
@@ -669,7 +670,7 @@ const placeMcus = (components, traces, definition, rng) => {
       }
       if (!isInsideBoard(passiveComponent, definition.board, 0.55)) continue
       if (overlapsAnyForFillCluster(passiveComponent, components, mcuPassiveCourtyardClearance)) continue
-      if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, 0.15), rectFor(other, 0.15)))) continue
+      if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, mcuPassiveSelfClearance), rectFor(other, mcuPassiveSelfClearance)))) continue
       passiveComponents.push(passiveComponent)
       passiveTraces.push({ from: `.${ref} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
       passiveTraces.push({ from: `.${spec.passiveRef} > .pin2`, to: "net.GND" })

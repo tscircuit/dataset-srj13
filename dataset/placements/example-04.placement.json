@@ -545,21 +545,6 @@
       "passiveValue": "10k"
     },
     {
-      "ref": "C15",
-      "kind": "mcu_passive",
-      "componentType": "capacitor",
-      "footprint": "0201",
-      "x": -24.501,
-      "y": 0.075,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "100nF"
-    },
-    {
       "ref": "C111",
       "kind": "mcu_passive",
       "componentType": "capacitor",
@@ -631,7 +616,7 @@
           "C15081"
         ]
       },
-      "passiveCount": 11
+      "passiveCount": 10
     },
     {
       "ref": "C31",
@@ -784,21 +769,6 @@
       "passiveValue": "100nF"
     },
     {
-      "ref": "R318",
-      "kind": "mcu_passive",
-      "componentType": "resistor",
-      "footprint": "0402",
-      "x": 10.005,
-      "y": -15.659,
-      "rotation": 90,
-      "bounds": {
-        "width": 0.64,
-        "height": 1.56
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "10k"
-    },
-    {
       "ref": "R12",
       "kind": "mcu_passive",
       "componentType": "resistor",
@@ -812,6 +782,21 @@
       },
       "passiveKind": "resistor",
       "passiveValue": "10k"
+    },
+    {
+      "ref": "C15",
+      "kind": "mcu_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": -16,
+      "y": -2.375,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
     },
     {
       "ref": "R16",
@@ -1666,14 +1651,6 @@
       "to": "net.GND"
     },
     {
-      "from": ".U1 > .pin5",
-      "to": ".C15 > .pin1"
-    },
-    {
-      "from": ".C15 > .pin2",
-      "to": "net.GND"
-    },
-    {
       "from": ".U1 > .pin11",
       "to": ".C111 > .pin1"
     },
@@ -1770,19 +1747,19 @@
       "to": "net.GND"
     },
     {
-      "from": ".U3 > .pin18",
-      "to": ".R318 > .pin1"
-    },
-    {
-      "from": ".R318 > .pin2",
-      "to": "net.GND"
-    },
-    {
       "from": ".U1 > .pin2",
       "to": ".R12 > .pin1"
     },
     {
       "from": ".R12 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U1 > .pin5",
+      "to": ".C15 > .pin1"
+    },
+    {
+      "from": ".C15 > .pin2",
       "to": "net.GND"
     },
     {
@@ -2731,27 +2708,27 @@
     },
     {
       "from": ".J12 > .pin2",
-      "to": ".U3 > .pin19"
+      "to": ".U3 > .pin18"
     },
     {
       "from": ".J12 > .pin3",
-      "to": ".U3 > .pin20"
+      "to": ".U3 > .pin19"
     },
     {
       "from": ".J12 > .pin4",
-      "to": ".U3 > .pin21"
+      "to": ".U3 > .pin20"
     },
     {
       "from": ".J12 > .pin5",
-      "to": ".U3 > .pin22"
+      "to": ".U3 > .pin21"
     },
     {
       "from": ".J12 > .pin6",
-      "to": ".U3 > .pin23"
+      "to": ".U3 > .pin22"
     },
     {
       "from": ".J12 > .pin7",
-      "to": ".U3 > .pin24"
+      "to": ".U3 > .pin23"
     },
     {
       "from": ".J13 > .pin1",
@@ -2763,59 +2740,59 @@
     },
     {
       "from": ".J13 > .pin2",
-      "to": ".U3 > .pin25"
+      "to": ".U3 > .pin24"
     },
     {
       "from": ".J13 > .pin3",
-      "to": ".U3 > .pin26"
+      "to": ".U3 > .pin25"
     },
     {
       "from": ".J13 > .pin4",
-      "to": ".U3 > .pin27"
+      "to": ".U3 > .pin26"
     },
     {
       "from": ".J13 > .pin5",
-      "to": ".U3 > .pin28"
+      "to": ".U3 > .pin27"
     },
     {
       "from": ".J13 > .pin6",
-      "to": ".U3 > .pin29"
+      "to": ".U3 > .pin28"
     },
     {
       "from": ".J13 > .pin7",
-      "to": ".U3 > .pin30"
+      "to": ".U3 > .pin29"
     },
     {
       "from": ".J13 > .pin8",
-      "to": ".U3 > .pin31"
+      "to": ".U3 > .pin30"
     },
     {
       "from": ".J13 > .pin9",
-      "to": ".U3 > .pin32"
+      "to": ".U3 > .pin31"
     },
     {
       "from": ".J13 > .pin10",
-      "to": ".U3 > .pin33"
+      "to": ".U3 > .pin32"
     },
     {
       "from": ".J13 > .pin11",
-      "to": ".U3 > .pin34"
+      "to": ".U3 > .pin33"
     },
     {
       "from": ".J13 > .pin12",
-      "to": ".U3 > .pin35"
+      "to": ".U3 > .pin34"
     },
     {
       "from": ".J13 > .pin13",
-      "to": ".U3 > .pin36"
+      "to": ".U3 > .pin35"
     },
     {
       "from": ".J13 > .pin14",
-      "to": ".U3 > .pin37"
+      "to": ".U3 > .pin36"
     },
     {
       "from": ".J13 > .pin15",
-      "to": ".U3 > .pin38"
+      "to": ".U3 > .pin37"
     },
     {
       "from": ".J14 > .pin1",
@@ -3203,111 +3180,111 @@
     },
     {
       "from": ".U_AUX13 > .pin12",
-      "to": ".U3 > .pin39"
+      "to": ".U3 > .pin38"
     },
     {
       "from": ".U_AUX13 > .pin13",
-      "to": ".U3 > .pin40"
+      "to": ".U3 > .pin39"
     },
     {
       "from": ".U_AUX13 > .pin14",
-      "to": ".U3 > .pin41"
+      "to": ".U3 > .pin40"
     },
     {
       "from": ".U_AUX13 > .pin15",
-      "to": ".U3 > .pin42"
+      "to": ".U3 > .pin41"
     },
     {
       "from": ".U_AUX13 > .pin16",
-      "to": ".U3 > .pin43"
+      "to": ".U3 > .pin42"
     },
     {
       "from": ".U_AUX13 > .pin17",
-      "to": ".U3 > .pin44"
+      "to": ".U3 > .pin43"
     },
     {
       "from": ".U_AUX13 > .pin18",
-      "to": ".U3 > .pin45"
+      "to": ".U3 > .pin44"
     },
     {
       "from": ".U_AUX13 > .pin19",
-      "to": ".U3 > .pin46"
+      "to": ".U3 > .pin45"
     },
     {
       "from": ".U_AUX13 > .pin20",
-      "to": ".U3 > .pin47"
+      "to": ".U3 > .pin46"
     },
     {
       "from": ".U_AUX14 > .pin2",
-      "to": ".U3 > .pin48"
+      "to": ".U3 > .pin47"
     },
     {
       "from": ".U_AUX14 > .pin3",
-      "to": ".U3 > .pin49"
+      "to": ".U3 > .pin48"
     },
     {
       "from": ".U_AUX14 > .pin4",
-      "to": ".U3 > .pin50"
+      "to": ".U3 > .pin49"
     },
     {
       "from": ".U_AUX14 > .pin5",
-      "to": ".U3 > .pin51"
+      "to": ".U3 > .pin50"
     },
     {
       "from": ".U_AUX14 > .pin6",
-      "to": ".U3 > .pin52"
+      "to": ".U3 > .pin51"
     },
     {
       "from": ".U_AUX14 > .pin7",
-      "to": ".U3 > .pin53"
+      "to": ".U3 > .pin52"
     },
     {
       "from": ".U_AUX14 > .pin8",
-      "to": ".U3 > .pin54"
+      "to": ".U3 > .pin53"
     },
     {
       "from": ".U_AUX14 > .pin9",
-      "to": ".U3 > .pin55"
+      "to": ".U3 > .pin54"
     },
     {
       "from": ".U_AUX14 > .pin10",
-      "to": ".U3 > .pin56"
+      "to": ".U3 > .pin55"
     },
     {
       "from": ".U_AUX14 > .pin11",
-      "to": ".U3 > .pin57"
+      "to": ".U3 > .pin56"
     },
     {
       "from": ".U_AUX14 > .pin12",
-      "to": ".U3 > .pin58"
+      "to": ".U3 > .pin57"
     },
     {
       "from": ".U_AUX14 > .pin13",
-      "to": ".U3 > .pin59"
+      "to": ".U3 > .pin58"
     },
     {
       "from": ".U_AUX14 > .pin14",
-      "to": ".U3 > .pin60"
+      "to": ".U3 > .pin59"
     },
     {
       "from": ".U_AUX14 > .pin15",
-      "to": ".U3 > .pin61"
+      "to": ".U3 > .pin60"
     },
     {
       "from": ".U_AUX15 > .pin2",
-      "to": ".U3 > .pin62"
+      "to": ".U3 > .pin61"
     },
     {
       "from": ".U_AUX15 > .pin3",
-      "to": ".U3 > .pin63"
+      "to": ".U3 > .pin62"
     },
     {
       "from": ".U_AUX15 > .pin4",
-      "to": ".U3 > .pin64"
+      "to": ".U3 > .pin63"
     },
     {
       "from": ".U_AUX15 > .pin5",
-      "to": ".U3 > .pin53"
+      "to": ".U3 > .pin64"
     },
     {
       "from": ".U_AUX15 > .pin6",
