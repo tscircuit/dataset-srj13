@@ -212,7 +212,7 @@ const boundsForRotation = (bounds, rotation) => {
 
 const getEdgeRotation = (edge, kind) => {
   if (kind === "usbc") {
-    return edge === "left" ? 90 : edge === "right" ? 270 : edge === "top" ? 0 : 180
+    return edge === "left" ? 90 : edge === "right" ? 270 : edge === "top" ? 180 : 0
   }
   return edge === "left" ? 90 : edge === "right" ? -90 : edge === "top" ? 180 : 0
 }

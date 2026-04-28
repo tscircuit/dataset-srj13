@@ -63,8 +63,8 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
         : component.edge === "right"
           ? 270
           : component.edge === "top"
-            ? 0
-            : 180
+            ? 180
+            : 0
       if (component.rotation !== expectedRotation) {
         reportFailure(`${file}: ${component.ref} USB-C rotation ${component.rotation} does not point off-board`)
       }

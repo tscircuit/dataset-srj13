@@ -198,7 +198,7 @@
       "footprint": "imported:TYPE_C_16PIN_2MD_073_",
       "x": -23.74,
       "y": -40.65,
-      "rotation": 180,
+      "rotation": 0,
       "bounds": {
         "width": 10.4,
         "height": 8.5
