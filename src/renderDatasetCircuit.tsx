@@ -1,7 +1,9 @@
 import { Fragment } from "react"
 import { HDMI_001_19PCBTP as HdmiConnector } from "../imports/HDMI_001_19PCBTP"
+import { IRF640NSTRLPBF } from "../imports/IRF640NSTRLPBF"
 import { IRF540NPBF } from "../imports/IRF540NPBF"
 import { A_920_E52A2021S10100 as MicroUsbConnector } from "../imports/A_920_E52A2021S10100"
+import { RK09K1110077 as PotentiometerConnector } from "../imports/RK09K1110077"
 import { SP3232EEN_L_TR as Rs232Connector } from "../imports/SP3232EEN_L_TR"
 import { TYPE_C_16PIN_2MD_073_ as UsbCConnector } from "../imports/TYPE_C_16PIN_2MD_073_"
 import type {
@@ -84,8 +86,16 @@ const renderComponent = (component: PlacementComponent) => {
     return <MicroUsbConnector key={component.ref} {...importedCommon} />
   }
 
+  if (component.kind === "potentiometer_rk09") {
+    return <PotentiometerConnector key={component.ref} {...importedCommon} />
+  }
+
   if (component.kind === "irf540_mosfet_subcircuit") {
     return <IRF540NPBF key={component.ref} {...importedCommon} />
+  }
+
+  if (component.kind === "flat_power_mosfet_subcircuit") {
+    return <IRF640NSTRLPBF key={component.ref} {...importedCommon} />
   }
 
   if (component.componentType === "resistor") {

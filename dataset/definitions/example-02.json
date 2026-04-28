@@ -3,7 +3,7 @@
   "seed": 1302,
   "board": { "width": 110, "height": 74 },
   "leftEdge": ["pinheader20_rows2", "usbb", "barrel_jack"],
-  "rightEdge": ["esp32_wroom", "rj45", "microusb"],
+  "rightEdge": ["esp32_wroom", "potentiometer_rk09", "rj45", "microusb"],
   "topEdge": ["hdmi", "usbc", "pinheader8"],
   "bottomEdge": ["rs232", "hdmi", "pinheader18", "barrel_jack"],
   "mcuCount": 3

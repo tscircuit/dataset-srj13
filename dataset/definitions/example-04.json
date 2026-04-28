@@ -5,6 +5,6 @@
   "leftEdge": ["rs232", "pinheader24_rows2", "usbb"],
   "rightEdge": ["hdmi", "microusb", "barrel_jack", "rj45"],
   "topEdge": ["esp32_wroom", "hdmi", "usbc", "pinheader10"],
-  "bottomEdge": ["rj45", "pinheader16", "barrel_jack"],
+  "bottomEdge": ["rj45", "pinheader16", "potentiometer_rk09", "barrel_jack"],
   "mcuCount": 3
 }

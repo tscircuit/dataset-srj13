@@ -56,6 +56,10 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     reportFailure(`${file}: missing C2566 IRF540NPBF mosfet variant`)
   }
 
+  if (!components.some((component) => component.kind === "flat_power_mosfet_subcircuit")) {
+    reportFailure(`${file}: missing flat D2PAK/TO-263 power mosfet variant`)
+  }
+
   if (!components.some((component) => component.kind.startsWith("button_"))) {
     reportFailure(`${file}: missing button footprint subcircuit variant`)
   }
@@ -72,6 +76,10 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     reportFailure(`${file}: expected at least two pin headers`)
   }
 
+  if (!components.some((component) => component.kind === "potentiometer_rk09")) {
+    reportFailure(`${file}: missing outward-facing RK09 potentiometer edge connector`)
+  }
+
   for (const component of components) {
     if (component.componentType === "pinheader") {
       if (component.pitch !== 2.56 || !String(component.footprint).includes("_p2.56mm")) {
@@ -84,14 +92,22 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
         reportFailure(`${file}: ${component.ref} single-row pinheader footprint is missing rows1`)
       }
     }
-    if (component.kind === "usbc" || component.kind === "microusb" || component.kind === "hdmi") {
-      const expectedRotation = component.edge === "left"
-        ? 270
-        : component.edge === "right"
-          ? 90
-          : component.edge === "top"
-            ? 180
-            : 0
+    if (component.kind === "usbc" || component.kind === "microusb" || component.kind === "hdmi" || component.kind === "potentiometer_rk09") {
+      const expectedRotation = component.kind === "potentiometer_rk09"
+        ? component.edge === "left"
+          ? 180
+          : component.edge === "right"
+            ? 0
+            : component.edge === "top"
+              ? 90
+              : 270
+        : component.edge === "left"
+          ? 270
+          : component.edge === "right"
+            ? 90
+            : component.edge === "top"
+              ? 180
+              : 0
       if (component.rotation !== expectedRotation) {
         reportFailure(`${file}: ${component.ref} ${component.kind} rotation ${component.rotation} does not point off-board`)
       }

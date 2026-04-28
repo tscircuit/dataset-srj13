@@ -42,6 +42,12 @@ const connectorCatalog = {
     bounds: [16.6, 12.7],
     jlcpcb: ["C138388"],
   },
+  potentiometer_rk09: {
+    footprint: "imported:RK09K1110077",
+    pins: 5,
+    bounds: [20.6, 11.1],
+    jlcpcb: ["C3020620"],
+  },
   barrel_jack: {
     footprint: "pinrow3_p2.5mm",
     pins: 3,
@@ -64,9 +70,9 @@ const mcuCatalog = [
 ]
 
 const subcircuitCatalog = [
-  { kind: "soic_subcircuit", componentType: "chip", footprint: "soic8_p1.27mm", pins: 8, bounds: [5.8, 5.31] },
-  { kind: "soic14_subcircuit", componentType: "chip", footprint: "soic14_p1.27mm", pins: 14, bounds: [5.8, 9.12] },
-  { kind: "soic16_subcircuit", componentType: "chip", footprint: "soic16_p1.27mm", pins: 16, bounds: [5.8, 10.39] },
+  { kind: "soic_subcircuit", componentType: "chip", footprint: "soic8_w3.9mm_p1.27mm", pins: 8, bounds: [6.4, 6.5] },
+  { kind: "soic14_subcircuit", componentType: "chip", footprint: "soic14_w3.9mm_p1.27mm", pins: 14, bounds: [6.4, 10.3] },
+  { kind: "soic16_subcircuit", componentType: "chip", footprint: "soic16_w3.9mm_p1.27mm", pins: 16, bounds: [6.4, 11.6] },
   { kind: "tssop_subcircuit", componentType: "chip", footprint: "tssop16_p0.65mm", pins: 16, bounds: [5.95, 6.05] },
   { kind: "tssop20_subcircuit", componentType: "chip", footprint: "tssop20_p0.65mm", pins: 20, bounds: [5.95, 7.35] },
   { kind: "qfn_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm", pins: 20, bounds: [4.42, 4.42] },
@@ -74,20 +80,23 @@ const subcircuitCatalog = [
   { kind: "button_4pin_subcircuit", componentType: "chip", footprint: "pushbutton_4pin", pins: 4, bounds: [8.5, 10.5] },
   { kind: "button_6x6_subcircuit", componentType: "chip", footprint: "pushbutton_6x6", pins: 4, bounds: [8.5, 10.5] },
   { kind: "mosfet_subcircuit", componentType: "mosfet", footprint: "sot23", pins: 3, bounds: [4.2, 4.2] },
-  { kind: "dual_mosfet_subcircuit", componentType: "chip", footprint: "soic8_p1.27mm", pins: 8, bounds: [5.8, 5.31] },
+  { kind: "dual_mosfet_subcircuit", componentType: "chip", footprint: "soic8_w3.9mm_p1.27mm", pins: 8, bounds: [6.4, 6.5] },
   { kind: "power_mosfet_subcircuit", componentType: "mosfet", footprint: "sot223", pins: 4, bounds: [11.5, 9.6] },
   { kind: "large_power_mosfet_subcircuit", componentType: "mosfet", footprint: "to220", pins: 3, bounds: [13.5, 8] },
   { kind: "irf540_mosfet_subcircuit", componentType: "mosfet", footprint: "imported:IRF540NPBF", pins: 3, bounds: [12.4, 7.3] },
+  { kind: "flat_power_mosfet_subcircuit", componentType: "mosfet", footprint: "imported:IRF640NSTRLPBF", pins: 3, bounds: [17, 11.2], jlcpcb: ["C23708"] },
 ]
 
 const powerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "power_mosfet_subcircuit")
 const largePowerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "large_power_mosfet_subcircuit")
 const irf540MosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "irf540_mosfet_subcircuit")
+const flatPowerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "flat_power_mosfet_subcircuit")
 const buttonSubcircuitCatalog = subcircuitCatalog.filter((component) => component.kind.startsWith("button_"))
 const standardSubcircuitCatalog = subcircuitCatalog.filter((component) =>
   component.kind !== "power_mosfet_subcircuit" &&
   component.kind !== "large_power_mosfet_subcircuit" &&
-  component.kind !== "irf540_mosfet_subcircuit"
+  component.kind !== "irf540_mosfet_subcircuit" &&
+  component.kind !== "flat_power_mosfet_subcircuit"
 )
 
 const passiveFootprints = [
@@ -248,9 +257,19 @@ const portEdgeRotations = {
   bottom: 0,
 }
 
+const outwardXAxisEdgeRotations = {
+  left: 180,
+  right: 0,
+  top: 90,
+  bottom: 270,
+}
+
 const getEdgeRotation = (edge, kind, definitionId) => {
   if (kind === "usbc" || kind === "microusb" || kind === "hdmi") {
     return portEdgeRotations[edge]
+  }
+  if (kind === "potentiometer_rk09") {
+    return outwardXAxisEdgeRotations[edge]
   }
   return edge === "left" ? 90 : edge === "right" ? -90 : edge === "top" ? 180 : 0
 }
@@ -488,7 +507,7 @@ const placeMcus = (components, traces, definition, rng) => {
         passiveValue: spec.isCapacitor ? "100nF" : "10k",
       }
       if (!isInsideBoard(passiveComponent, definition.board, 0.55)) continue
-      if (overlapsAny(passiveComponent, components, 0.05)) continue
+      if (overlapsAnyForFillCluster(passiveComponent, components, 0.2)) continue
       if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, 0.15), rectFor(other, 0.15)))) continue
       passiveComponents.push(passiveComponent)
       passiveTraces.push({ from: `.${ref} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
@@ -635,9 +654,11 @@ const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
       bounds: subBounds,
       pinCount: catalog.pins,
       passiveCount,
-      supplierPartNumbers: catalog.componentType === "mosfet"
-        ? { jlcpcb: [catalog.kind === "power_mosfet_subcircuit" ? "C129018" : "C8545"] }
-        : undefined,
+      supplierPartNumbers: catalog.jlcpcb
+        ? { jlcpcb: catalog.jlcpcb }
+        : catalog.componentType === "mosfet"
+          ? { jlcpcb: [catalog.kind === "power_mosfet_subcircuit" ? "C129018" : "C8545"] }
+          : undefined,
     },
   ]
   const clusterTraces = []
@@ -704,6 +725,7 @@ const placeSubcircuits = (components, traces, definition, rng) => {
       const needsLargePowerMosfet = !components.some((component) => component.kind === "large_power_mosfet_subcircuit")
       const needsPowerMosfet = !components.some((component) => component.kind === "power_mosfet_subcircuit")
       const needsIrf540Mosfet = !components.some((component) => component.kind === "irf540_mosfet_subcircuit")
+      const needsFlatPowerMosfet = !components.some((component) => component.kind === "flat_power_mosfet_subcircuit")
       const needsButton = !components.some((component) => component.kind.startsWith("button_"))
       const catalog = needsLargePowerMosfet
         ? largePowerMosfetSubcircuit
@@ -711,10 +733,14 @@ const placeSubcircuits = (components, traces, definition, rng) => {
         ? powerMosfetSubcircuit
         : needsIrf540Mosfet
         ? irf540MosfetSubcircuit
+        : needsFlatPowerMosfet
+        ? flatPowerMosfetSubcircuit
         : needsButton
         ? pick(rng, buttonSubcircuitCatalog)
         : rng() < 0.06
           ? largePowerMosfetSubcircuit
+          : rng() < 0.1
+          ? flatPowerMosfetSubcircuit
           : rng() < 0.12
           ? irf540MosfetSubcircuit
           : rng() < 0.2

@@ -2,7 +2,7 @@
   "id": "example-03",
   "seed": 1303,
   "board": { "width": 88, "height": 82 },
-  "leftEdge": ["microusb", "pinheader10", "rs232"],
+  "leftEdge": ["microusb", "potentiometer_rk09", "pinheader10", "rs232"],
   "rightEdge": ["barrel_jack", "hdmi", "rj45"],
   "topEdge": ["rj45", "pinheader14_rows2", "usbb"],
   "bottomEdge": ["usbc", "usbb", "pinheader12"],
