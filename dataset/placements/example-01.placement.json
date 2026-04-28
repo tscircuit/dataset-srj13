@@ -55,11 +55,11 @@
       "componentType": "resistor",
       "footprint": "0402",
       "x": -35.71,
-      "y": -16.94,
-      "rotation": 0,
+      "y": -19.751,
+      "rotation": 270,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 0.64,
+        "height": 1.56
       },
       "passiveKind": "resistor",
       "passiveValue": "22R"
@@ -129,11 +129,11 @@
       "componentType": "resistor",
       "footprint": "0402",
       "x": -41.91,
-      "y": 25.59,
-      "rotation": 0,
+      "y": 23.69,
+      "rotation": 270,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 0.64,
+        "height": 1.56
       },
       "passiveKind": "resistor",
       "passiveValue": "22R"
@@ -151,6 +151,24 @@
         "height": 10.4
       },
       "pinCount": 16,
+      "portPins": [
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
       "edge": "right",
       "allowOffBoard": true,
       "supplierPartNumbers": {
@@ -397,8 +415,8 @@
       "kind": "mcu_passive",
       "componentType": "capacitor",
       "footprint": "0201",
-      "x": -13.315,
-      "y": -9,
+      "x": -7.685,
+      "y": -8.374,
       "rotation": 180,
       "bounds": {
         "width": 1.12,
@@ -408,13 +426,13 @@
       "passiveValue": "100nF"
     },
     {
-      "ref": "R16",
+      "ref": "R18",
       "kind": "mcu_passive",
       "componentType": "resistor",
       "footprint": "0603",
-      "x": -15.2,
-      "y": 10.779,
-      "rotation": 90,
+      "x": -18.957,
+      "y": -3.633,
+      "rotation": 270,
       "bounds": {
         "width": 0.95,
         "height": 2.45
@@ -464,8 +482,8 @@
       "kind": "mcu_passive",
       "componentType": "capacitor",
       "footprint": "0402",
-      "x": 10.26,
-      "y": -7.294,
+      "x": 14.025,
+      "y": -6.695,
       "rotation": 180,
       "bounds": {
         "width": 1.56,
@@ -475,27 +493,72 @@
       "passiveValue": "100nF"
     },
     {
-      "ref": "R26",
+      "ref": "R28",
       "kind": "mcu_passive",
       "componentType": "resistor",
-      "footprint": "0603",
-      "x": 14.665,
-      "y": 7.6,
-      "rotation": 90,
+      "footprint": "0201",
+      "x": 15.915,
+      "y": -6.935,
+      "rotation": 270,
       "bounds": {
-        "width": 0.95,
-        "height": 2.45
+        "width": 0.4,
+        "height": 1.12
       },
       "passiveKind": "resistor",
       "passiveValue": "10k"
+    },
+    {
+      "ref": "C29",
+      "kind": "mcu_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 5.065,
+      "y": -2.025,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "C213",
+      "kind": "mcu_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 5.065,
+      "y": 1.17,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "C215",
+      "kind": "mcu_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 18.935,
+      "y": 3.639,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
     },
     {
       "ref": "R216",
       "kind": "mcu_passive",
       "componentType": "resistor",
       "footprint": "0201",
-      "x": 11.85,
-      "y": -6.935,
+      "x": 9.523,
+      "y": -7.336,
       "rotation": 270,
       "bounds": {
         "width": 0.4,
@@ -525,7 +588,7 @@
       "componentType": "resistor",
       "footprint": "0402",
       "x": -19.43,
-      "y": 0,
+      "y": 1.15,
       "rotation": 0,
       "bounds": {
         "width": 1.56,
@@ -550,12 +613,27 @@
       "passiveValue": "100nF"
     },
     {
+      "ref": "R16",
+      "kind": "mcu_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -5.34,
+      "y": -3.45,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
       "ref": "C17",
       "kind": "mcu_passive",
       "componentType": "capacitor",
       "footprint": "0402",
-      "x": -5.12,
-      "y": -3.45,
+      "x": -12,
+      "y": 8.27,
       "rotation": 0,
       "bounds": {
         "width": 1.56,
@@ -565,26 +643,11 @@
       "passiveValue": "100nF"
     },
     {
-      "ref": "R18",
-      "kind": "mcu_passive",
-      "componentType": "resistor",
-      "footprint": "0603",
-      "x": -10.85,
-      "y": 8.425,
-      "rotation": 0,
-      "bounds": {
-        "width": 2.45,
-        "height": 0.95
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "10k"
-    },
-    {
       "ref": "R22",
       "kind": "mcu_passive",
       "componentType": "resistor",
       "footprint": "0201",
-      "x": 10.85,
+      "x": 12,
       "y": 6.45,
       "rotation": 0,
       "bounds": {
@@ -593,51 +656,6 @@
       },
       "passiveKind": "resistor",
       "passiveValue": "10k"
-    },
-    {
-      "ref": "R24",
-      "kind": "mcu_passive",
-      "componentType": "resistor",
-      "footprint": "0603",
-      "x": 4.525,
-      "y": 0,
-      "rotation": 0,
-      "bounds": {
-        "width": 2.45,
-        "height": 0.95
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "10k"
-    },
-    {
-      "ref": "C25",
-      "kind": "mcu_passive",
-      "componentType": "capacitor",
-      "footprint": "0201",
-      "x": 15.45,
-      "y": -6.45,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "100nF"
-    },
-    {
-      "ref": "C27",
-      "kind": "mcu_passive",
-      "componentType": "capacitor",
-      "footprint": "0603",
-      "x": 20.025,
-      "y": 0,
-      "rotation": 0,
-      "bounds": {
-        "width": 2.45,
-        "height": 0.95
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "100nF"
     },
     {
       "ref": "Q1",
@@ -694,9 +712,9 @@
       "kind": "subcircuit_passive",
       "componentType": "resistor",
       "footprint": "0402",
-      "x": 12.966,
-      "y": -24.818,
-      "rotation": 270,
+      "x": 14.861,
+      "y": -24.178,
+      "rotation": 90,
       "bounds": {
         "width": 0.64,
         "height": 1.56
@@ -709,15 +727,15 @@
       "kind": "power_mosfet_subcircuit",
       "componentType": "mosfet",
       "footprint": "sot223",
-      "x": -0.301,
-      "y": 21.176,
+      "x": 8.398,
+      "y": 21.031,
       "rotation": 180,
       "bounds": {
         "width": 11.5,
         "height": 9.6
       },
       "pinCount": 4,
-      "passiveCount": 3,
+      "passiveCount": 1,
       "supplierPartNumbers": {
         "jlcpcb": [
           "C129018"
@@ -728,43 +746,13 @@
       "ref": "CA2_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0402",
-      "x": 2.729,
-      "y": 27.976,
-      "rotation": 180,
+      "footprint": "0603",
+      "x": 14.813,
+      "y": 27.831,
+      "rotation": 0,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "RA2_2",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0201",
-      "x": 7.091,
-      "y": 24.606,
-      "rotation": 180,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "CA2_3",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0402",
-      "x": 3.628,
-      "y": 15.386,
-      "rotation": 180,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
@@ -809,14 +797,14 @@
       "kind": "flat_power_mosfet_subcircuit",
       "componentType": "mosfet",
       "footprint": "imported:IRF640NSTRLPBF",
-      "x": -31.82,
-      "y": 5.056,
+      "x": -25.736,
+      "y": 15.268,
       "rotation": 0,
       "bounds": {
         "width": 17,
         "height": 11.2
       },
-      "pinCount": 3,
+      "pinCount": 4,
       "passiveCount": 2,
       "supplierPartNumbers": {
         "jlcpcb": [
@@ -828,13 +816,13 @@
       "ref": "CA4_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0201",
-      "x": -34.25,
-      "y": 11.766,
+      "footprint": "0402",
+      "x": -28.166,
+      "y": 21.858,
       "rotation": 0,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 1.56,
+        "height": 0.64
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
@@ -843,13 +831,13 @@
       "ref": "RA4_2",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0201",
-      "x": -36.678,
-      "y": 11.766,
+      "footprint": "0603",
+      "x": -32.151,
+      "y": 22.656,
       "rotation": 0,
       "bounds": {
-        "width": 1.12,
-        "height": 0.4
+        "width": 2.45,
+        "height": 0.95
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -859,8 +847,8 @@
       "kind": "large_capacitor_subcircuit",
       "componentType": "capacitor",
       "footprint": "radial_capacitor",
-      "x": 31.986,
-      "y": -2.928,
+      "x": 26.09,
+      "y": 11.094,
       "rotation": 90,
       "bounds": {
         "width": 12,
@@ -872,11 +860,11 @@
     },
     {
       "ref": "U_AUX6",
-      "kind": "button_4pin_subcircuit",
+      "kind": "button_6x6_subcircuit",
       "componentType": "chip",
-      "footprint": "pushbutton_4pin",
-      "x": 31.923,
-      "y": 12.967,
+      "footprint": "pushbutton_6x6",
+      "x": -26.228,
+      "y": -12.814,
       "rotation": 180,
       "bounds": {
         "width": 8.5,
@@ -890,8 +878,8 @@
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0201",
-      "x": 34.498,
-      "y": 5.717,
+      "x": -23.653,
+      "y": -20.064,
       "rotation": 180,
       "bounds": {
         "width": 1.12,
@@ -902,57 +890,27 @@
     },
     {
       "ref": "U_AUX7",
-      "kind": "soic16_subcircuit",
+      "kind": "soic_subcircuit",
       "componentType": "chip",
-      "footprint": "soic16_w3.9mm_p1.27mm",
-      "x": 13.734,
-      "y": 15.395,
+      "footprint": "soic8_w3.9mm_p1.27mm",
+      "x": -33.733,
+      "y": -1.158,
       "rotation": 270,
       "bounds": {
-        "width": 11.6,
+        "width": 6.5,
         "height": 6.4
       },
-      "pinCount": 16,
-      "passiveCount": 3
+      "pinCount": 8,
+      "passiveCount": 1
     },
     {
       "ref": "RA7_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0402",
-      "x": 20.304,
-      "y": 19.585,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "CA7_2",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
       "footprint": "0201",
-      "x": 8.876,
-      "y": 11.085,
+      "x": -28.841,
+      "y": 0.832,
       "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "RA7_3",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0201",
-      "x": 18.865,
-      "y": 21.485,
-      "rotation": 180,
       "bounds": {
         "width": 1.12,
         "height": 0.4
@@ -962,30 +920,30 @@
     },
     {
       "ref": "U_AUX8",
-      "kind": "qfn_thermalpad_subcircuit",
+      "kind": "tssop_subcircuit",
       "componentType": "chip",
-      "footprint": "qfn20_w5_h5_p0.65mm_pl0.6mm_thermalpad2x2",
-      "x": -13.85,
-      "y": 22.725,
+      "footprint": "tssop16_w4_p0.65mm",
+      "x": 33.883,
+      "y": -12.749,
       "rotation": 0,
       "bounds": {
-        "width": 5.43,
-        "height": 5.43
+        "width": 6.95,
+        "height": 6.05
       },
-      "pinCount": 20,
+      "pinCount": 16,
       "passiveCount": 2
     },
     {
       "ref": "CA8_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
-      "footprint": "0603",
-      "x": -20.48,
-      "y": 25.169,
-      "rotation": 180,
+      "footprint": "0201",
+      "x": 29.298,
+      "y": -10.385,
+      "rotation": 90,
       "bounds": {
-        "width": 2.45,
-        "height": 0.95
+        "width": 0.4,
+        "height": 1.12
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
@@ -994,13 +952,13 @@
       "ref": "RA8_2",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0603",
-      "x": -9.491,
-      "y": 18.01,
-      "rotation": 0,
+      "footprint": "0402",
+      "x": 35.541,
+      "y": -16.757,
+      "rotation": 180,
       "bounds": {
-        "width": 2.45,
-        "height": 0.95
+        "width": 1.56,
+        "height": 0.64
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -1010,8 +968,8 @@
       "kind": "qfn_subcircuit",
       "componentType": "chip",
       "footprint": "qfn20_w4_h4_p0.5mm_pl0.6mm",
-      "x": -25.928,
-      "y": 18.847,
+      "x": -9.737,
+      "y": 18.723,
       "rotation": 90,
       "bounds": {
         "width": 4.42,
@@ -1024,9 +982,74 @@
       "ref": "RA9_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
+      "footprint": "0402",
+      "x": -9.218,
+      "y": 22.933,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "Q10",
+      "kind": "irf540_mosfet_subcircuit",
+      "componentType": "mosfet",
+      "footprint": "imported:IRF540NPBF",
+      "x": 30.03,
+      "y": -0.833,
+      "rotation": 180,
+      "bounds": {
+        "width": 12.4,
+        "height": 7.3
+      },
+      "pinCount": 3,
+      "passiveCount": 1,
+      "supplierPartNumbers": {
+        "jlcpcb": [
+          "C8545"
+        ]
+      }
+    },
+    {
+      "ref": "CA10_1",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 24.06,
+      "y": -6.483,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "U_AUX11",
+      "kind": "dual_mosfet_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic8_w3.9mm_p1.27mm",
+      "x": 33.936,
+      "y": -25.171,
+      "rotation": 270,
+      "bounds": {
+        "width": 6.5,
+        "height": 6.4
+      },
+      "pinCount": 8,
+      "passiveCount": 1
+    },
+    {
+      "ref": "RA11_1",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
       "footprint": "0603",
-      "x": -25.854,
-      "y": 23.057,
+      "x": 27.902,
+      "y": -26.886,
       "rotation": 180,
       "bounds": {
         "width": 2.45,
@@ -1036,73 +1059,32 @@
       "passiveValue": "4.7k"
     },
     {
-      "ref": "U_AUX10",
-      "kind": "qfn_subcircuit",
-      "componentType": "chip",
-      "footprint": "qfn20_w4_h4_p0.5mm_pl0.6mm",
-      "x": 33.977,
-      "y": -16.659,
-      "rotation": 180,
-      "bounds": {
-        "width": 4.42,
-        "height": 4.42
-      },
-      "pinCount": 20,
-      "passiveCount": 1
-    },
-    {
-      "ref": "CA10_1",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0402",
-      "x": 30.518,
-      "y": -20.869,
+      "ref": "Q12",
+      "kind": "irf540_mosfet_subcircuit",
+      "componentType": "mosfet",
+      "footprint": "imported:IRF540NPBF",
+      "x": 1.666,
+      "y": 11.044,
       "rotation": 0,
       "bounds": {
-        "width": 1.56,
-        "height": 0.64
+        "width": 12.4,
+        "height": 7.3
       },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "C_BULK11",
-      "kind": "large_capacitor_subcircuit",
-      "componentType": "capacitor",
-      "footprint": "radial_capacitor",
-      "x": -26.128,
-      "y": -9.377,
-      "rotation": 270,
-      "bounds": {
-        "width": 12,
-        "height": 12
-      },
-      "pinCount": 2,
-      "passiveValue": "47uF",
-      "passiveCount": 0
-    },
-    {
-      "ref": "U_AUX12",
-      "kind": "dual_mosfet_subcircuit",
-      "componentType": "chip",
-      "footprint": "soic8_w3.9mm_p1.27mm",
-      "x": -34.216,
-      "y": 18.999,
-      "rotation": 0,
-      "bounds": {
-        "width": 6.4,
-        "height": 6.5
-      },
-      "pinCount": 8,
-      "passiveCount": 2
+      "pinCount": 3,
+      "passiveCount": 1,
+      "supplierPartNumbers": {
+        "jlcpcb": [
+          "C8545"
+        ]
+      }
     },
     {
       "ref": "CA12_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0201",
-      "x": -38.526,
-      "y": 16.432,
+      "x": -5.644,
+      "y": 8.117,
       "rotation": 90,
       "bounds": {
         "width": 0.4,
@@ -1110,175 +1092,15 @@
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
-    },
-    {
-      "ref": "RA12_2",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0402",
-      "x": -32.806,
-      "y": 24.249,
-      "rotation": 180,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
     },
     {
       "ref": "Q13",
       "kind": "mosfet_subcircuit",
       "componentType": "mosfet",
       "footprint": "sot23",
-      "x": -6.275,
-      "y": 11.221,
+      "x": -1.61,
+      "y": 18.984,
       "rotation": 90,
-      "bounds": {
-        "width": 4.2,
-        "height": 4.2
-      },
-      "pinCount": 3,
-      "passiveCount": 2,
-      "supplierPartNumbers": {
-        "jlcpcb": [
-          "C8545"
-        ]
-      }
-    },
-    {
-      "ref": "RA13_1",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0201",
-      "x": -8.523,
-      "y": 14.431,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "CA13_2",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0201",
-      "x": -9.485,
-      "y": 12.753,
-      "rotation": 270,
-      "bounds": {
-        "width": 0.4,
-        "height": 1.12
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "Q14",
-      "kind": "mosfet_subcircuit",
-      "componentType": "mosfet",
-      "footprint": "sot23",
-      "x": -13.886,
-      "y": -12.625,
-      "rotation": 180,
-      "bounds": {
-        "width": 4.2,
-        "height": 4.2
-      },
-      "pinCount": 3,
-      "passiveCount": 3,
-      "supplierPartNumbers": {
-        "jlcpcb": [
-          "C8545"
-        ]
-      }
-    },
-    {
-      "ref": "CA14_1",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0402",
-      "x": -10.526,
-      "y": -8.525,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "RA14_2",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0402",
-      "x": -8.316,
-      "y": -10.735,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "CA14_3",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0201",
-      "x": -10.866,
-      "y": -12.073,
-      "rotation": 270,
-      "bounds": {
-        "width": 0.4,
-        "height": 1.12
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "U_AUX15",
-      "kind": "tssop20_subcircuit",
-      "componentType": "chip",
-      "footprint": "tssop20_w4_p0.65mm",
-      "x": 46.397,
-      "y": 34.835,
-      "rotation": 270,
-      "bounds": {
-        "width": 7.35,
-        "height": 6.95
-      },
-      "pinCount": 20,
-      "passiveCount": 1
-    },
-    {
-      "ref": "RA15_1",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0402",
-      "x": 39.252,
-      "y": 37.963,
-      "rotation": 180,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "Q16",
-      "kind": "mosfet_subcircuit",
-      "componentType": "mosfet",
-      "footprint": "sot23",
-      "x": -5.722,
-      "y": -17.014,
-      "rotation": 0,
       "bounds": {
         "width": 4.2,
         "height": 4.2
@@ -1292,12 +1114,102 @@
       }
     },
     {
+      "ref": "RA13_1",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -3.858,
+      "y": 22.194,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "U_AUX14",
+      "kind": "qfn_subcircuit",
+      "componentType": "chip",
+      "footprint": "qfn20_w4_h4_p0.5mm_pl0.6mm",
+      "x": -38.293,
+      "y": 10.693,
+      "rotation": 180,
+      "bounds": {
+        "width": 4.42,
+        "height": 4.42
+      },
+      "pinCount": 20,
+      "passiveCount": 1
+    },
+    {
+      "ref": "CA14_1",
+      "kind": "subcircuit_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -35.946,
+      "y": 15.793,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "1uF"
+    },
+    {
+      "ref": "U_AUX15",
+      "kind": "soic_subcircuit",
+      "componentType": "chip",
+      "footprint": "soic8_w3.9mm_p1.27mm",
+      "x": -9.734,
+      "y": -17.246,
+      "rotation": 270,
+      "bounds": {
+        "width": 6.5,
+        "height": 6.4
+      },
+      "pinCount": 8,
+      "passiveCount": 1
+    },
+    {
+      "ref": "RA15_1",
+      "kind": "subcircuit_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -15.768,
+      "y": -15.531,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "4.7k"
+    },
+    {
+      "ref": "U_AUX16",
+      "kind": "qfn_thermalpad_subcircuit",
+      "componentType": "chip",
+      "footprint": "qfn20_w5_h5_p0.65mm_pl0.6mm_thermalpad2x2",
+      "x": 25.771,
+      "y": 23.107,
+      "rotation": 0,
+      "bounds": {
+        "width": 5.43,
+        "height": 5.43
+      },
+      "pinCount": 21,
+      "passiveCount": 1
+    },
+    {
       "ref": "CA16_1",
       "kind": "subcircuit_passive",
       "componentType": "capacitor",
       "footprint": "0603",
-      "x": 0.293,
-      "y": -18.904,
+      "x": 32.401,
+      "y": 20.664,
       "rotation": 180,
       "bounds": {
         "width": 2.45,
@@ -1311,8 +1223,8 @@
       "kind": "mosfet_subcircuit",
       "componentType": "mosfet",
       "footprint": "sot23",
-      "x": 38.221,
-      "y": 27.161,
+      "x": 38.189,
+      "y": 27.377,
       "rotation": 90,
       "bounds": {
         "width": 4.2,
@@ -1330,153 +1242,13 @@
       "ref": "RA17_1",
       "kind": "subcircuit_passive",
       "componentType": "resistor",
-      "footprint": "0201",
-      "x": 40.469,
-      "y": 23.951,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "U_AUX18",
-      "kind": "qfn_thermalpad_subcircuit",
-      "componentType": "chip",
-      "footprint": "qfn20_w5_h5_p0.65mm_pl0.6mm_thermalpad2x2",
-      "x": -41.641,
-      "y": 35.003,
-      "rotation": 180,
-      "bounds": {
-        "width": 5.43,
-        "height": 5.43
-      },
-      "pinCount": 20,
-      "passiveCount": 2
-    },
-    {
-      "ref": "CA18_1",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
       "footprint": "0603",
-      "x": -37.282,
-      "y": 30.288,
-      "rotation": 0,
+      "x": 38.164,
+      "y": 23.277,
+      "rotation": 180,
       "bounds": {
         "width": 2.45,
         "height": 0.95
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "RA18_2",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0201",
-      "x": -36.568,
-      "y": 31.67,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "U_AUX19",
-      "kind": "tssop_subcircuit",
-      "componentType": "chip",
-      "footprint": "tssop16_w4_p0.65mm",
-      "x": 26.072,
-      "y": 22.827,
-      "rotation": 270,
-      "bounds": {
-        "width": 6.05,
-        "height": 6.95
-      },
-      "pinCount": 16,
-      "passiveCount": 1
-    },
-    {
-      "ref": "RA19_1",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0402",
-      "x": 30.598,
-      "y": 24.945,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.56,
-        "height": 0.64
-      },
-      "passiveKind": "resistor",
-      "passiveValue": "4.7k"
-    },
-    {
-      "ref": "U_AUX20",
-      "kind": "qfn_thermalpad_subcircuit",
-      "componentType": "chip",
-      "footprint": "qfn20_w5_h5_p0.65mm_pl0.6mm_thermalpad2x2",
-      "x": 21.675,
-      "y": 7.301,
-      "rotation": 0,
-      "bounds": {
-        "width": 5.43,
-        "height": 5.43
-      },
-      "pinCount": 20,
-      "passiveCount": 1
-    },
-    {
-      "ref": "CA20_1",
-      "kind": "subcircuit_passive",
-      "componentType": "capacitor",
-      "footprint": "0201",
-      "x": 17.318,
-      "y": 8.855,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
-      },
-      "passiveKind": "capacitor",
-      "passiveValue": "1uF"
-    },
-    {
-      "ref": "Q21",
-      "kind": "mosfet_subcircuit",
-      "componentType": "mosfet",
-      "footprint": "sot23",
-      "x": 13.925,
-      "y": 22.799,
-      "rotation": 90,
-      "bounds": {
-        "width": 4.2,
-        "height": 4.2
-      },
-      "pinCount": 3,
-      "passiveCount": 1,
-      "supplierPartNumbers": {
-        "jlcpcb": [
-          "C8545"
-        ]
-      }
-    },
-    {
-      "ref": "RA21_1",
-      "kind": "subcircuit_passive",
-      "componentType": "resistor",
-      "footprint": "0201",
-      "x": 16.173,
-      "y": 26.009,
-      "rotation": 0,
-      "bounds": {
-        "width": 1.12,
-        "height": 0.4
       },
       "passiveKind": "resistor",
       "passiveValue": "4.7k"
@@ -1496,6 +1268,10 @@
       "to": ".RJ1_2 > .pin1"
     },
     {
+      "from": ".RJ1_2 > .pin2",
+      "to": "net.GND"
+    },
+    {
       "from": ".J3 > .pin1",
       "to": ".CJ3_1 > .pin1"
     },
@@ -1506,6 +1282,10 @@
     {
       "from": ".J3 > .pin2",
       "to": ".RJ3_2 > .pin1"
+    },
+    {
+      "from": ".RJ3_2 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".J9 > .pin1",
@@ -1532,12 +1312,12 @@
       "to": "net.GND"
     },
     {
-      "from": ".U1 > .pin6",
-      "to": ".R16 > .pin1"
+      "from": ".U1 > .pin8",
+      "to": ".R18 > .pin1"
     },
     {
-      "from": ".R16 > .pin2",
-      "to": "net.VCC"
+      "from": ".R18 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".U2 > .pin1",
@@ -1556,12 +1336,36 @@
       "to": "net.GND"
     },
     {
-      "from": ".U2 > .pin6",
-      "to": ".R26 > .pin1"
+      "from": ".U2 > .pin8",
+      "to": ".R28 > .pin1"
     },
     {
-      "from": ".R26 > .pin2",
-      "to": "net.VCC"
+      "from": ".R28 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U2 > .pin9",
+      "to": ".C29 > .pin1"
+    },
+    {
+      "from": ".C29 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U2 > .pin13",
+      "to": ".C213 > .pin1"
+    },
+    {
+      "from": ".C213 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U2 > .pin15",
+      "to": ".C215 > .pin1"
+    },
+    {
+      "from": ".C215 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".U2 > .pin16",
@@ -1569,7 +1373,7 @@
     },
     {
       "from": ".R216 > .pin2",
-      "to": "net.VCC"
+      "to": "net.GND"
     },
     {
       "from": ".U1 > .pin2",
@@ -1577,7 +1381,7 @@
     },
     {
       "from": ".R12 > .pin2",
-      "to": "net.VCC"
+      "to": "net.GND"
     },
     {
       "from": ".U1 > .pin4",
@@ -1585,7 +1389,7 @@
     },
     {
       "from": ".R14 > .pin2",
-      "to": "net.VCC"
+      "to": "net.GND"
     },
     {
       "from": ".U1 > .pin5",
@@ -1593,6 +1397,14 @@
     },
     {
       "from": ".C15 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U1 > .pin6",
+      "to": ".R16 > .pin1"
+    },
+    {
+      "from": ".R16 > .pin2",
       "to": "net.GND"
     },
     {
@@ -1604,43 +1416,11 @@
       "to": "net.GND"
     },
     {
-      "from": ".U1 > .pin8",
-      "to": ".R18 > .pin1"
-    },
-    {
-      "from": ".R18 > .pin2",
-      "to": "net.VCC"
-    },
-    {
       "from": ".U2 > .pin2",
       "to": ".R22 > .pin1"
     },
     {
       "from": ".R22 > .pin2",
-      "to": "net.VCC"
-    },
-    {
-      "from": ".U2 > .pin4",
-      "to": ".R24 > .pin1"
-    },
-    {
-      "from": ".R24 > .pin2",
-      "to": "net.VCC"
-    },
-    {
-      "from": ".U2 > .pin5",
-      "to": ".C25 > .pin1"
-    },
-    {
-      "from": ".C25 > .pin2",
-      "to": "net.GND"
-    },
-    {
-      "from": ".U2 > .pin7",
-      "to": ".C27 > .pin1"
-    },
-    {
-      "from": ".C27 > .pin2",
       "to": "net.GND"
     },
     {
@@ -1648,128 +1428,1208 @@
       "to": ".RA1_1 > .pin1"
     },
     {
+      "from": ".RA1_1 > .pin2",
+      "to": "net.GND"
+    },
+    {
       "from": ".Q1 > .pin2",
       "to": ".CA1_2 > .pin1"
+    },
+    {
+      "from": ".CA1_2 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".Q1 > .pin3",
       "to": ".RA1_3 > .pin1"
     },
     {
+      "from": ".RA1_3 > .pin2",
+      "to": "net.GND"
+    },
+    {
       "from": ".Q2 > .pin1",
       "to": ".CA2_1 > .pin1"
     },
     {
-      "from": ".Q2 > .pin2",
-      "to": ".RA2_2 > .pin1"
-    },
-    {
-      "from": ".Q2 > .pin3",
-      "to": ".CA2_3 > .pin1"
+      "from": ".CA2_1 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".Q3 > .pin1",
       "to": ".RA3_1 > .pin1"
     },
     {
+      "from": ".RA3_1 > .pin2",
+      "to": "net.GND"
+    },
+    {
       "from": ".Q4 > .pin1",
       "to": ".CA4_1 > .pin1"
+    },
+    {
+      "from": ".CA4_1 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".Q4 > .pin2",
       "to": ".RA4_2 > .pin1"
     },
     {
+      "from": ".RA4_2 > .pin2",
+      "to": "net.GND"
+    },
+    {
       "from": ".U_AUX6 > .pin1",
       "to": ".CA6_1 > .pin1"
+    },
+    {
+      "from": ".CA6_1 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".U_AUX7 > .pin1",
       "to": ".RA7_1 > .pin1"
     },
     {
-      "from": ".U_AUX7 > .pin2",
-      "to": ".CA7_2 > .pin1"
-    },
-    {
-      "from": ".U_AUX7 > .pin3",
-      "to": ".RA7_3 > .pin1"
+      "from": ".RA7_1 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".U_AUX8 > .pin1",
       "to": ".CA8_1 > .pin1"
     },
     {
+      "from": ".CA8_1 > .pin2",
+      "to": "net.GND"
+    },
+    {
       "from": ".U_AUX8 > .pin2",
       "to": ".RA8_2 > .pin1"
+    },
+    {
+      "from": ".RA8_2 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".U_AUX9 > .pin1",
       "to": ".RA9_1 > .pin1"
     },
     {
-      "from": ".U_AUX10 > .pin1",
+      "from": ".RA9_1 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q10 > .pin1",
       "to": ".CA10_1 > .pin1"
     },
     {
-      "from": ".U_AUX12 > .pin1",
+      "from": ".CA10_1 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX11 > .pin1",
+      "to": ".RA11_1 > .pin1"
+    },
+    {
+      "from": ".RA11_1 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q12 > .pin1",
       "to": ".CA12_1 > .pin1"
     },
     {
-      "from": ".U_AUX12 > .pin2",
-      "to": ".RA12_2 > .pin1"
+      "from": ".CA12_1 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".Q13 > .pin1",
       "to": ".RA13_1 > .pin1"
     },
     {
-      "from": ".Q13 > .pin2",
-      "to": ".CA13_2 > .pin1"
+      "from": ".RA13_1 > .pin2",
+      "to": "net.GND"
     },
     {
-      "from": ".Q14 > .pin1",
+      "from": ".U_AUX14 > .pin1",
       "to": ".CA14_1 > .pin1"
     },
     {
-      "from": ".Q14 > .pin2",
-      "to": ".RA14_2 > .pin1"
-    },
-    {
-      "from": ".Q14 > .pin3",
-      "to": ".CA14_3 > .pin1"
+      "from": ".CA14_1 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".U_AUX15 > .pin1",
       "to": ".RA15_1 > .pin1"
     },
     {
-      "from": ".Q16 > .pin1",
+      "from": ".RA15_1 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX16 > .pin1",
       "to": ".CA16_1 > .pin1"
+    },
+    {
+      "from": ".CA16_1 > .pin2",
+      "to": "net.GND"
     },
     {
       "from": ".Q17 > .pin1",
       "to": ".RA17_1 > .pin1"
     },
     {
-      "from": ".U_AUX18 > .pin1",
-      "to": ".CA18_1 > .pin1"
+      "from": ".RA17_1 > .pin2",
+      "to": "net.GND"
     },
     {
-      "from": ".U_AUX18 > .pin2",
-      "to": ".RA18_2 > .pin1"
+      "from": ".J1 > .pin18",
+      "to": "net.V5"
     },
     {
-      "from": ".U_AUX19 > .pin1",
-      "to": ".RA19_1 > .pin1"
+      "from": ".J1 > .pin17",
+      "to": "net.GND"
     },
     {
-      "from": ".U_AUX20 > .pin1",
-      "to": ".CA20_1 > .pin1"
+      "from": ".J1 > .pin20",
+      "to": "net.GND"
     },
     {
-      "from": ".Q21 > .pin1",
-      "to": ".RA21_1 > .pin1"
+      "from": ".J1 > .pin21",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J1 > .pin22",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J1 > .pin23",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J1 > .pin1",
+      "to": ".U1 > .pin9"
+    },
+    {
+      "from": ".J1 > .pin2",
+      "to": ".U1 > .pin10"
+    },
+    {
+      "from": ".J1 > .pin3",
+      "to": ".U1 > .pin11"
+    },
+    {
+      "from": ".J1 > .pin4",
+      "to": ".U1 > .pin12"
+    },
+    {
+      "from": ".J1 > .pin5",
+      "to": ".U1 > .pin13"
+    },
+    {
+      "from": ".J1 > .pin6",
+      "to": ".U1 > .pin14"
+    },
+    {
+      "from": ".J1 > .pin7",
+      "to": ".U1 > .pin15"
+    },
+    {
+      "from": ".J1 > .pin8",
+      "to": ".U1 > .pin16"
+    },
+    {
+      "from": ".J1 > .pin9",
+      "to": ".U1 > .pin17"
+    },
+    {
+      "from": ".J1 > .pin10",
+      "to": ".U1 > .pin18"
+    },
+    {
+      "from": ".J1 > .pin11",
+      "to": ".U1 > .pin19"
+    },
+    {
+      "from": ".J1 > .pin12",
+      "to": ".U1 > .pin20"
+    },
+    {
+      "from": ".J1 > .pin13",
+      "to": ".U1 > .pin21"
+    },
+    {
+      "from": ".J1 > .pin14",
+      "to": ".U1 > .pin22"
+    },
+    {
+      "from": ".J1 > .pin15",
+      "to": ".U1 > .pin23"
+    },
+    {
+      "from": ".J1 > .pin16",
+      "to": ".U1 > .pin24"
+    },
+    {
+      "from": ".J1 > .pin19",
+      "to": ".U1 > .pin25"
+    },
+    {
+      "from": ".J2 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J2 > .pin8",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J2 > .pin2",
+      "to": ".U1 > .pin26"
+    },
+    {
+      "from": ".J2 > .pin3",
+      "to": ".U1 > .pin27"
+    },
+    {
+      "from": ".J2 > .pin4",
+      "to": ".U1 > .pin28"
+    },
+    {
+      "from": ".J2 > .pin5",
+      "to": ".U1 > .pin29"
+    },
+    {
+      "from": ".J2 > .pin6",
+      "to": ".U1 > .pin30"
+    },
+    {
+      "from": ".J2 > .pin7",
+      "to": ".U1 > .pin31"
+    },
+    {
+      "from": ".J3 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J3 > .pin4",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J3 > .pin2",
+      "to": ".U1 > .pin32"
+    },
+    {
+      "from": ".J3 > .pin3",
+      "to": ".U1 > .pin33"
+    },
+    {
+      "from": ".J4 > .pin18",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J4 > .pin27",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J4 > .pin13",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J4 > .pin14",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J4 > .pin15",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J4 > .pin16",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J4 > .pin17",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J4 > .pin28",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J4 > .pin19",
+      "to": ".U2 > .pin17"
+    },
+    {
+      "from": ".J4 > .pin20",
+      "to": ".U2 > .pin18"
+    },
+    {
+      "from": ".J4 > .pin21",
+      "to": ".U2 > .pin19"
+    },
+    {
+      "from": ".J4 > .pin22",
+      "to": ".U2 > .pin20"
+    },
+    {
+      "from": ".J4 > .pin23",
+      "to": ".U2 > .pin21"
+    },
+    {
+      "from": ".J4 > .pin24",
+      "to": ".U2 > .pin22"
+    },
+    {
+      "from": ".J4 > .pin25",
+      "to": ".U2 > .pin23"
+    },
+    {
+      "from": ".J4 > .pin26",
+      "to": ".U2 > .pin24"
+    },
+    {
+      "from": ".J5 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J5 > .pin16",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J5 > .pin2",
+      "to": ".U2 > .pin25"
+    },
+    {
+      "from": ".J5 > .pin3",
+      "to": ".U2 > .pin26"
+    },
+    {
+      "from": ".J5 > .pin4",
+      "to": ".U2 > .pin27"
+    },
+    {
+      "from": ".J5 > .pin5",
+      "to": ".U2 > .pin28"
+    },
+    {
+      "from": ".J5 > .pin6",
+      "to": ".U2 > .pin29"
+    },
+    {
+      "from": ".J5 > .pin7",
+      "to": ".U2 > .pin30"
+    },
+    {
+      "from": ".J5 > .pin8",
+      "to": ".U2 > .pin31"
+    },
+    {
+      "from": ".J5 > .pin9",
+      "to": ".U2 > .pin32"
+    },
+    {
+      "from": ".J5 > .pin10",
+      "to": ".U2 > .pin33"
+    },
+    {
+      "from": ".J5 > .pin11",
+      "to": ".U2 > .pin34"
+    },
+    {
+      "from": ".J5 > .pin12",
+      "to": ".U2 > .pin35"
+    },
+    {
+      "from": ".J5 > .pin13",
+      "to": ".U2 > .pin36"
+    },
+    {
+      "from": ".J5 > .pin14",
+      "to": ".U2 > .pin37"
+    },
+    {
+      "from": ".J5 > .pin15",
+      "to": ".U2 > .pin38"
+    },
+    {
+      "from": ".J6 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J6 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J6 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J7 > .pin16",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J7 > .pin15",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J7 > .pin1",
+      "to": ".U1 > .pin25"
+    },
+    {
+      "from": ".J7 > .pin2",
+      "to": ".U1 > .pin26"
+    },
+    {
+      "from": ".J7 > .pin3",
+      "to": ".U1 > .pin27"
+    },
+    {
+      "from": ".J7 > .pin4",
+      "to": ".U1 > .pin28"
+    },
+    {
+      "from": ".J7 > .pin5",
+      "to": ".U1 > .pin29"
+    },
+    {
+      "from": ".J7 > .pin6",
+      "to": ".U1 > .pin30"
+    },
+    {
+      "from": ".J7 > .pin7",
+      "to": ".U1 > .pin31"
+    },
+    {
+      "from": ".J7 > .pin8",
+      "to": ".U1 > .pin32"
+    },
+    {
+      "from": ".J7 > .pin9",
+      "to": ".U1 > .pin33"
+    },
+    {
+      "from": ".J7 > .pin10",
+      "to": ".U1 > .pin34"
+    },
+    {
+      "from": ".J7 > .pin11",
+      "to": ".U1 > .pin35"
+    },
+    {
+      "from": ".J7 > .pin12",
+      "to": ".U1 > .pin36"
+    },
+    {
+      "from": ".J7 > .pin13",
+      "to": ".U1 > .pin37"
+    },
+    {
+      "from": ".J7 > .pin14",
+      "to": ".U1 > .pin38"
+    },
+    {
+      "from": ".J8 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J8 > .pin12",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J8 > .pin2",
+      "to": ".U2 > .pin39"
+    },
+    {
+      "from": ".J8 > .pin3",
+      "to": ".U2 > .pin40"
+    },
+    {
+      "from": ".J8 > .pin4",
+      "to": ".U2 > .pin41"
+    },
+    {
+      "from": ".J8 > .pin5",
+      "to": ".U2 > .pin42"
+    },
+    {
+      "from": ".J8 > .pin6",
+      "to": ".U2 > .pin43"
+    },
+    {
+      "from": ".J8 > .pin7",
+      "to": ".U1 > .pin1"
+    },
+    {
+      "from": ".J8 > .pin8",
+      "to": ".U1 > .pin2"
+    },
+    {
+      "from": ".J8 > .pin9",
+      "to": ".U1 > .pin3"
+    },
+    {
+      "from": ".J8 > .pin10",
+      "to": ".U1 > .pin4"
+    },
+    {
+      "from": ".J8 > .pin11",
+      "to": ".U1 > .pin5"
+    },
+    {
+      "from": ".J9 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J9 > .pin5",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J9 > .pin6",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J9 > .pin7",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J9 > .pin8",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J9 > .pin9",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J9 > .pin2",
+      "to": ".U2 > .pin4"
+    },
+    {
+      "from": ".J9 > .pin3",
+      "to": ".U2 > .pin5"
+    },
+    {
+      "from": ".J9 > .pin4",
+      "to": ".U2 > .pin6"
+    },
+    {
+      "from": ".J10 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J10 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J10 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J11 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J11 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J11 > .pin4",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J11 > .pin5",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J11 > .pin2",
+      "to": ".U1 > .pin1"
+    },
+    {
+      "from": ".J12 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J12 > .pin5",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J12 > .pin6",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J12 > .pin7",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J12 > .pin8",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J12 > .pin9",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J12 > .pin2",
+      "to": ".U1 > .pin1"
+    },
+    {
+      "from": ".J12 > .pin3",
+      "to": ".U1 > .pin2"
+    },
+    {
+      "from": ".J12 > .pin4",
+      "to": ".U1 > .pin3"
+    },
+    {
+      "from": ".J13 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".J13 > .pin10",
+      "to": "net.GND"
+    },
+    {
+      "from": ".J13 > .pin2",
+      "to": ".U2 > .pin44"
+    },
+    {
+      "from": ".J13 > .pin3",
+      "to": ".U2 > .pin45"
+    },
+    {
+      "from": ".J13 > .pin4",
+      "to": ".U2 > .pin46"
+    },
+    {
+      "from": ".J13 > .pin5",
+      "to": ".U2 > .pin47"
+    },
+    {
+      "from": ".J13 > .pin6",
+      "to": ".U2 > .pin48"
+    },
+    {
+      "from": ".J13 > .pin7",
+      "to": ".U2 > .pin49"
+    },
+    {
+      "from": ".J13 > .pin8",
+      "to": ".U2 > .pin50"
+    },
+    {
+      "from": ".J13 > .pin9",
+      "to": ".U2 > .pin51"
+    },
+    {
+      "from": ".U_AUX7 > .pin2",
+      "to": "net.SDA"
+    },
+    {
+      "from": ".U_AUX7 > .pin3",
+      "to": "net.SCL"
+    },
+    {
+      "from": ".U_AUX15 > .pin2",
+      "to": "net.SDA"
+    },
+    {
+      "from": ".U_AUX15 > .pin3",
+      "to": "net.SCL"
+    },
+    {
+      "from": ".U1 > .pin1",
+      "to": "net.SDA"
+    },
+    {
+      "from": ".U1 > .pin2",
+      "to": "net.SCL"
+    },
+    {
+      "from": ".U2 > .pin10",
+      "to": "net.SDA"
+    },
+    {
+      "from": ".U2 > .pin11",
+      "to": "net.SCL"
+    },
+    {
+      "from": ".Q1 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q1 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q2 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q2 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q3 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q3 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q4 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q4 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX6 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".U_AUX6 > .pin4",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX7 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".U_AUX7 > .pin8",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX8 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".U_AUX8 > .pin16",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX9 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".U_AUX9 > .pin20",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q10 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q10 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX11 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".U_AUX11 > .pin8",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q12 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q12 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q13 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q13 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX14 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".U_AUX14 > .pin20",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX15 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".U_AUX15 > .pin8",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX16 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".U_AUX16 > .pin21",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q17 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q17 > .pin3",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q2 > .pin4",
+      "to": "net.GND"
+    },
+    {
+      "from": ".Q4 > .pin4",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_BULK5 > .pin1",
+      "to": "net.C_BULK5_PASSIVE"
+    },
+    {
+      "from": ".C_BULK5 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".U_AUX6 > .pin2",
+      "to": "net.U_AUX6_SIG2"
+    },
+    {
+      "from": ".U_AUX6 > .pin3",
+      "to": "net.U_AUX6_SIG3"
+    },
+    {
+      "from": ".U_AUX7 > .pin4",
+      "to": "net.U_AUX7_SIG4"
+    },
+    {
+      "from": ".U_AUX7 > .pin5",
+      "to": "net.U_AUX7_SIG5"
+    },
+    {
+      "from": ".U_AUX7 > .pin6",
+      "to": "net.U_AUX7_SIG6"
+    },
+    {
+      "from": ".U_AUX7 > .pin7",
+      "to": "net.U_AUX7_SIG7"
+    },
+    {
+      "from": ".U_AUX8 > .pin3",
+      "to": "net.U_AUX8_SIG3"
+    },
+    {
+      "from": ".U_AUX8 > .pin4",
+      "to": "net.U_AUX8_SIG4"
+    },
+    {
+      "from": ".U_AUX8 > .pin5",
+      "to": "net.U_AUX8_SIG5"
+    },
+    {
+      "from": ".U_AUX8 > .pin6",
+      "to": "net.U_AUX8_SIG6"
+    },
+    {
+      "from": ".U_AUX8 > .pin7",
+      "to": "net.U_AUX8_SIG7"
+    },
+    {
+      "from": ".U_AUX8 > .pin8",
+      "to": "net.U_AUX8_SIG8"
+    },
+    {
+      "from": ".U_AUX8 > .pin9",
+      "to": "net.U_AUX8_SIG9"
+    },
+    {
+      "from": ".U_AUX8 > .pin10",
+      "to": "net.U_AUX8_SIG10"
+    },
+    {
+      "from": ".U_AUX8 > .pin11",
+      "to": "net.U_AUX8_SIG11"
+    },
+    {
+      "from": ".U_AUX8 > .pin12",
+      "to": "net.U_AUX8_SIG12"
+    },
+    {
+      "from": ".U_AUX8 > .pin13",
+      "to": "net.U_AUX8_SIG13"
+    },
+    {
+      "from": ".U_AUX8 > .pin14",
+      "to": "net.U_AUX8_SIG14"
+    },
+    {
+      "from": ".U_AUX8 > .pin15",
+      "to": "net.U_AUX8_SIG15"
+    },
+    {
+      "from": ".U_AUX9 > .pin2",
+      "to": "net.U_AUX9_SIG2"
+    },
+    {
+      "from": ".U_AUX9 > .pin3",
+      "to": "net.U_AUX9_SIG3"
+    },
+    {
+      "from": ".U_AUX9 > .pin4",
+      "to": "net.U_AUX9_SIG4"
+    },
+    {
+      "from": ".U_AUX9 > .pin5",
+      "to": "net.U_AUX9_SIG5"
+    },
+    {
+      "from": ".U_AUX9 > .pin6",
+      "to": "net.U_AUX9_SIG6"
+    },
+    {
+      "from": ".U_AUX9 > .pin7",
+      "to": "net.U_AUX9_SIG7"
+    },
+    {
+      "from": ".U_AUX9 > .pin8",
+      "to": "net.U_AUX9_SIG8"
+    },
+    {
+      "from": ".U_AUX9 > .pin9",
+      "to": "net.U_AUX9_SIG9"
+    },
+    {
+      "from": ".U_AUX9 > .pin10",
+      "to": "net.U_AUX9_SIG10"
+    },
+    {
+      "from": ".U_AUX9 > .pin11",
+      "to": "net.U_AUX9_SIG11"
+    },
+    {
+      "from": ".U_AUX9 > .pin12",
+      "to": "net.U_AUX9_SIG12"
+    },
+    {
+      "from": ".U_AUX9 > .pin13",
+      "to": "net.U_AUX9_SIG13"
+    },
+    {
+      "from": ".U_AUX9 > .pin14",
+      "to": "net.U_AUX9_SIG14"
+    },
+    {
+      "from": ".U_AUX9 > .pin15",
+      "to": "net.U_AUX9_SIG15"
+    },
+    {
+      "from": ".U_AUX9 > .pin16",
+      "to": "net.U_AUX9_SIG16"
+    },
+    {
+      "from": ".U_AUX9 > .pin17",
+      "to": "net.U_AUX9_SIG17"
+    },
+    {
+      "from": ".U_AUX9 > .pin18",
+      "to": "net.U_AUX9_SIG18"
+    },
+    {
+      "from": ".U_AUX9 > .pin19",
+      "to": "net.U_AUX9_SIG19"
+    },
+    {
+      "from": ".U_AUX11 > .pin2",
+      "to": "net.U_AUX11_SIG2"
+    },
+    {
+      "from": ".U_AUX11 > .pin3",
+      "to": "net.U_AUX11_SIG3"
+    },
+    {
+      "from": ".U_AUX11 > .pin4",
+      "to": "net.U_AUX11_SIG4"
+    },
+    {
+      "from": ".U_AUX11 > .pin5",
+      "to": "net.U_AUX11_SIG5"
+    },
+    {
+      "from": ".U_AUX11 > .pin6",
+      "to": "net.U_AUX11_SIG6"
+    },
+    {
+      "from": ".U_AUX11 > .pin7",
+      "to": "net.U_AUX11_SIG7"
+    },
+    {
+      "from": ".U_AUX14 > .pin2",
+      "to": "net.U_AUX14_SIG2"
+    },
+    {
+      "from": ".U_AUX14 > .pin3",
+      "to": "net.U_AUX14_SIG3"
+    },
+    {
+      "from": ".U_AUX14 > .pin4",
+      "to": "net.U_AUX14_SIG4"
+    },
+    {
+      "from": ".U_AUX14 > .pin5",
+      "to": "net.U_AUX14_SIG5"
+    },
+    {
+      "from": ".U_AUX14 > .pin6",
+      "to": "net.U_AUX14_SIG6"
+    },
+    {
+      "from": ".U_AUX14 > .pin7",
+      "to": "net.U_AUX14_SIG7"
+    },
+    {
+      "from": ".U_AUX14 > .pin8",
+      "to": "net.U_AUX14_SIG8"
+    },
+    {
+      "from": ".U_AUX14 > .pin9",
+      "to": "net.U_AUX14_SIG9"
+    },
+    {
+      "from": ".U_AUX14 > .pin10",
+      "to": "net.U_AUX14_SIG10"
+    },
+    {
+      "from": ".U_AUX14 > .pin11",
+      "to": "net.U_AUX14_SIG11"
+    },
+    {
+      "from": ".U_AUX14 > .pin12",
+      "to": "net.U_AUX14_SIG12"
+    },
+    {
+      "from": ".U_AUX14 > .pin13",
+      "to": "net.U_AUX14_SIG13"
+    },
+    {
+      "from": ".U_AUX14 > .pin14",
+      "to": "net.U_AUX14_SIG14"
+    },
+    {
+      "from": ".U_AUX14 > .pin15",
+      "to": "net.U_AUX14_SIG15"
+    },
+    {
+      "from": ".U_AUX14 > .pin16",
+      "to": "net.U_AUX14_SIG16"
+    },
+    {
+      "from": ".U_AUX14 > .pin17",
+      "to": "net.U_AUX14_SIG17"
+    },
+    {
+      "from": ".U_AUX14 > .pin18",
+      "to": "net.U_AUX14_SIG18"
+    },
+    {
+      "from": ".U_AUX14 > .pin19",
+      "to": "net.U_AUX14_SIG19"
+    },
+    {
+      "from": ".U_AUX15 > .pin4",
+      "to": "net.U_AUX15_SIG4"
+    },
+    {
+      "from": ".U_AUX15 > .pin5",
+      "to": "net.U_AUX15_SIG5"
+    },
+    {
+      "from": ".U_AUX15 > .pin6",
+      "to": "net.U_AUX15_SIG6"
+    },
+    {
+      "from": ".U_AUX15 > .pin7",
+      "to": "net.U_AUX15_SIG7"
+    },
+    {
+      "from": ".U_AUX16 > .pin2",
+      "to": "net.U_AUX16_SIG2"
+    },
+    {
+      "from": ".U_AUX16 > .pin3",
+      "to": "net.U_AUX16_SIG3"
+    },
+    {
+      "from": ".U_AUX16 > .pin4",
+      "to": "net.U_AUX16_SIG4"
+    },
+    {
+      "from": ".U_AUX16 > .pin5",
+      "to": "net.U_AUX16_SIG5"
+    },
+    {
+      "from": ".U_AUX16 > .pin6",
+      "to": "net.U_AUX16_SIG6"
+    },
+    {
+      "from": ".U_AUX16 > .pin7",
+      "to": "net.U_AUX16_SIG7"
+    },
+    {
+      "from": ".U_AUX16 > .pin8",
+      "to": "net.U_AUX16_SIG8"
+    },
+    {
+      "from": ".U_AUX16 > .pin9",
+      "to": "net.U_AUX16_SIG9"
+    },
+    {
+      "from": ".U_AUX16 > .pin10",
+      "to": "net.U_AUX16_SIG10"
+    },
+    {
+      "from": ".U_AUX16 > .pin11",
+      "to": "net.U_AUX16_SIG11"
+    },
+    {
+      "from": ".U_AUX16 > .pin12",
+      "to": "net.U_AUX16_SIG12"
+    },
+    {
+      "from": ".U_AUX16 > .pin13",
+      "to": "net.U_AUX16_SIG13"
+    },
+    {
+      "from": ".U_AUX16 > .pin14",
+      "to": "net.U_AUX16_SIG14"
+    },
+    {
+      "from": ".U_AUX16 > .pin15",
+      "to": "net.U_AUX16_SIG15"
+    },
+    {
+      "from": ".U_AUX16 > .pin16",
+      "to": "net.U_AUX16_SIG16"
+    },
+    {
+      "from": ".U_AUX16 > .pin17",
+      "to": "net.U_AUX16_SIG17"
+    },
+    {
+      "from": ".U_AUX16 > .pin18",
+      "to": "net.U_AUX16_SIG18"
+    },
+    {
+      "from": ".U_AUX16 > .pin19",
+      "to": "net.U_AUX16_SIG19"
+    },
+    {
+      "from": ".U_AUX16 > .pin20",
+      "to": "net.U_AUX16_SIG20"
     }
   ]
 }

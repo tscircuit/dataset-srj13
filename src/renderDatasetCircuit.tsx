@@ -122,11 +122,10 @@ const renderComponent = (component: PlacementComponent) => {
 
   if (component.componentType === "mosfet") {
     return (
-      <mosfet
+      <chip
         key={component.ref}
         {...common}
-        channelType="n"
-        mosfetMode="enhancement"
+        pinLabels={makePinLabels(component.pinCount)}
         footprint={component.footprint}
       />
     )

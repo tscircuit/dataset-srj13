@@ -43,6 +43,7 @@ export interface PlacementComponent {
   rotation: number
   bounds: ComponentBounds
   pinCount?: number
+  portPins?: number[]
   passiveCount?: number
   designatedPassiveCount?: number
   doubleRow?: boolean

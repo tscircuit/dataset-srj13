@@ -21,6 +21,22 @@ const getUtilization = (components, board) => {
   return occupiedArea / (board.width * board.height)
 }
 
+const pinEndpointPattern = /^\.([A-Za-z0-9_]+)\s*>\s*\.pin(\d+)$/
+
+const componentPins = (component) => {
+  if (Array.isArray(component.portPins) && component.portPins.length > 0) {
+    return component.portPins
+  }
+  const pinCount = component.pinCount ?? (component.componentType === "resistor" || component.componentType === "capacitor" ? 2 : 0)
+  return Array.from({ length: pinCount }, (_, index) => index + 1)
+}
+
+const traceTouchesComponent = (trace, ref) =>
+  trace.from.startsWith(`.${ref} > `) || trace.to.startsWith(`.${ref} > `)
+
+const traceTouchesNet = (trace, netName) =>
+  trace.from === netName || trace.to === netName
+
 let failures = 0
 let reportedFailures = 0
 const reportFailure = (message) => {
@@ -35,6 +51,29 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
   const placement = JSON.parse(readFileSync(join(placementsDir, file), "utf8"))
   const components = placement.components
   const utilization = getUtilization(components, placement.board)
+  const componentByRef = new Map(components.map((component) => [component.ref, component]))
+  const touchedPins = new Map(components.map((component) => [component.ref, new Set()]))
+
+  for (const trace of placement.traces) {
+    if (trace.from === "net.VCC" || trace.to === "net.VCC") {
+      reportFailure(`${file}: trace still uses net.VCC instead of net.V5`)
+    }
+    for (const endpoint of [trace.from, trace.to]) {
+      const match = endpoint.match(pinEndpointPattern)
+      if (!match) continue
+      const [, ref, pinText] = match
+      const component = componentByRef.get(ref)
+      if (!component) {
+        reportFailure(`${file}: trace references unknown component ${endpoint}`)
+        continue
+      }
+      const pin = Number(pinText)
+      if (!componentPins(component).includes(pin)) {
+        reportFailure(`${file}: trace references unsupported pin ${endpoint}`)
+      }
+      touchedPins.get(ref)?.add(pin)
+    }
+  }
 
   if (utilization < 0.3) {
     reportFailure(`${file}: only ${(utilization * 100).toFixed(2)}% covered, expected at least 30% JSON coverage`)
@@ -95,6 +134,39 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
       if (!component.doubleRow && !String(component.footprint).includes("_rows1_")) {
         reportFailure(`${file}: ${component.ref} single-row pinheader footprint is missing rows1`)
       }
+    }
+    if (component.kind !== "mcu") {
+      for (const pin of componentPins(component)) {
+        if (!touchedPins.get(component.ref)?.has(pin)) {
+          reportFailure(`${file}: ${component.ref}.pin${pin} is not connected by any trace`)
+        }
+      }
+    }
+    if (component.componentType === "connector" || component.componentType === "pinheader") {
+      if (!placement.traces.some((trace) => traceTouchesComponent(trace, component.ref) && traceTouchesNet(trace, "net.V5"))) {
+        reportFailure(`${file}: ${component.ref} has no connector pin tied to net.V5`)
+      }
+      if (!placement.traces.some((trace) => traceTouchesComponent(trace, component.ref) && traceTouchesNet(trace, "net.GND"))) {
+        reportFailure(`${file}: ${component.ref} has no connector pin tied to net.GND`)
+      }
+    }
+    if (component.kind !== "mcu" &&
+      component.componentType !== "resistor" &&
+      component.componentType !== "capacitor" &&
+      component.componentType !== "connector" &&
+      component.componentType !== "pinheader"
+    ) {
+      if (!placement.traces.some((trace) => traceTouchesComponent(trace, component.ref) && traceTouchesNet(trace, "net.V5"))) {
+        reportFailure(`${file}: ${component.ref} non-passive component has no pin tied to net.V5`)
+      }
+      if (!placement.traces.some((trace) => traceTouchesComponent(trace, component.ref) && traceTouchesNet(trace, "net.GND"))) {
+        reportFailure(`${file}: ${component.ref} non-passive component has no pin tied to net.GND`)
+      }
+    }
+    if ((component.componentType === "resistor" || component.componentType === "capacitor") &&
+      !placement.traces.some((trace) => traceTouchesComponent(trace, component.ref) && traceTouchesNet(trace, "net.GND"))
+    ) {
+      reportFailure(`${file}: ${component.ref} passive has no pin tied to net.GND`)
     }
     if (String(component.footprint).startsWith("pinrow") && String(component.footprint).includes("_p1mm")) {
       reportFailure(`${file}: ${component.ref} ${component.kind} uses overlapping 1mm pinrow pitch`)

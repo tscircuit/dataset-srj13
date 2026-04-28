@@ -17,6 +17,7 @@ const connectorCatalog = {
   usbc: {
     footprint: "imported:TYPE_C_16PIN_2MD_073_",
     pins: 16,
+    portPins: Array.from({ length: 16 }, (_, index) => index + 13),
     bounds: [10.4, 8.5],
     jlcpcb: ["C2765186", "C393939"],
   },
@@ -78,7 +79,7 @@ const subcircuitCatalog = [
   { kind: "tssop_subcircuit", componentType: "chip", footprint: "tssop16_w4_p0.65mm", pins: 16, bounds: [6.95, 6.05] },
   { kind: "tssop20_subcircuit", componentType: "chip", footprint: "tssop20_w4_p0.65mm", pins: 20, bounds: [6.95, 7.35] },
   { kind: "qfn_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm_pl0.6mm", pins: 20, bounds: [4.42, 4.42] },
-  { kind: "qfn_thermalpad_subcircuit", componentType: "chip", footprint: "qfn20_w5_h5_p0.65mm_pl0.6mm_thermalpad2x2", pins: 20, bounds: [5.43, 5.43] },
+  { kind: "qfn_thermalpad_subcircuit", componentType: "chip", footprint: "qfn20_w5_h5_p0.65mm_pl0.6mm_thermalpad2x2", pins: 21, bounds: [5.43, 5.43] },
   { kind: "button_4pin_subcircuit", componentType: "chip", footprint: "pushbutton_4pin", pins: 4, bounds: [8.5, 10.5] },
   { kind: "button_6x6_subcircuit", componentType: "chip", footprint: "pushbutton_6x6", pins: 4, bounds: [8.5, 10.5] },
   { kind: "large_capacitor_subcircuit", componentType: "capacitor", footprint: "radial_capacitor", pins: 2, bounds: [12, 12], passiveValue: "47uF", standalone: true },
@@ -87,7 +88,7 @@ const subcircuitCatalog = [
   { kind: "power_mosfet_subcircuit", componentType: "mosfet", footprint: "sot223", pins: 4, bounds: [11.5, 9.6] },
   { kind: "large_power_mosfet_subcircuit", componentType: "mosfet", footprint: "to220", pins: 3, bounds: [13.5, 8] },
   { kind: "irf540_mosfet_subcircuit", componentType: "mosfet", footprint: "imported:IRF540NPBF", pins: 3, bounds: [12.4, 7.3] },
-  { kind: "flat_power_mosfet_subcircuit", componentType: "mosfet", footprint: "imported:IRF640NSTRLPBF", pins: 3, bounds: [17, 11.2], jlcpcb: ["C23708"] },
+  { kind: "flat_power_mosfet_subcircuit", componentType: "mosfet", footprint: "imported:IRF640NSTRLPBF", pins: 4, bounds: [17, 11.2], jlcpcb: ["C23708"] },
 ]
 
 const powerMosfetSubcircuit = subcircuitCatalog.find((component) => component.kind === "power_mosfet_subcircuit")
@@ -398,7 +399,7 @@ const buildEdgeConnectorPassiveCluster = ({ connector, rng }) => {
         makePackingPad(
           `${passiveRef}_pin2`,
           [0.2, 0.2],
-          isCapacitor ? "GND" : "VCC",
+          "GND",
           passivePadOffset(passive.bounds, 1),
         ),
       ],
@@ -431,8 +432,9 @@ const buildEdgeConnectorPassiveCluster = ({ connector, rng }) => {
       passiveKind: spec.isCapacitor ? "capacitor" : "resistor",
       passiveValue: spec.isCapacitor ? "100nF" : "22R",
     })
-    traces.push({ from: `.${connector.ref} > .pin${Math.min(spec.passiveIndex + 1, connector.pinCount ?? 1)}`, to: `.${spec.passiveRef} > .pin1` })
-    if (spec.isCapacitor) traces.push({ from: `.${spec.passiveRef} > .pin2`, to: "net.GND" })
+    const connectorPin = connector.portPins?.[spec.passiveIndex] ?? Math.min(spec.passiveIndex + 1, connector.pinCount ?? 1)
+    traces.push({ from: `.${connector.ref} > .pin${connectorPin}`, to: `.${spec.passiveRef} > .pin1` })
+    traces.push({ from: `.${spec.passiveRef} > .pin2`, to: "net.GND" })
   }
   return { components, traces }
 }
@@ -486,6 +488,7 @@ const placeEdge = (components, traces, definition, rng) => {
         rotation,
         bounds: { width, height },
         pinCount: catalog.pins,
+        portPins: catalog.portPins,
         doubleRow: catalog.doubleRow,
         pitch: catalog.pitch,
         edge,
@@ -631,7 +634,7 @@ const placeMcus = (components, traces, definition, rng) => {
           makePackingPad(
             `${passiveRef}_pin2`,
             [0.22, 0.22],
-            isCapacitor ? "GND" : "VCC",
+            "GND",
             passivePadOffset(passive.bounds, 1),
           ),
         ],
@@ -669,7 +672,7 @@ const placeMcus = (components, traces, definition, rng) => {
       if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, 0.15), rectFor(other, 0.15)))) continue
       passiveComponents.push(passiveComponent)
       passiveTraces.push({ from: `.${ref} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
-      passiveTraces.push({ from: `.${spec.passiveRef} > .pin2`, to: spec.isCapacitor ? "net.GND" : "net.VCC" })
+      passiveTraces.push({ from: `.${spec.passiveRef} > .pin2`, to: "net.GND" })
     }
 
     components.push(...passiveComponents)
@@ -733,7 +736,7 @@ const correctMcuPassivePlacement = (components, traces, definition) => {
           if (overlapsAnyForFillCluster(passiveComponent, components, mcuPassiveCourtyardClearance)) continue
           components.push(passiveComponent)
           traces.push({ from: `.${mcu.ref} > .pin${passiveIndex + 1}`, to: `.${passiveRef} > .pin1` })
-          traces.push({ from: `.${passiveRef} > .pin2`, to: isCapacitor ? "net.GND" : "net.VCC" })
+          traces.push({ from: `.${passiveRef} > .pin2`, to: "net.GND" })
           break
         }
         if (components.some((component) => component.ref === passiveRef)) break
@@ -851,7 +854,7 @@ const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
             makePackingPad(
               `${subRef}_target_${passiveIndex + 1}`,
               [subPadSize, subPadSize],
-              `${subRef}_p${passiveIndex + 1}`,
+              `${subRef}_p${(passiveIndex % catalog.pins) + 1}`,
               pinTargetForSide(side, catalog.bounds, passiveIndex % 2 === 0 ? -1 : 1),
             )
           ),
@@ -885,13 +888,13 @@ const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
         makePackingPad(
           `${passiveRef}_pin1`,
           [0.22, 0.22],
-          `${subRef}_p${passiveIndex + 1}`,
+          `${subRef}_p${(passiveIndex % catalog.pins) + 1}`,
           passivePadOffset(passive.bounds, 0),
         ),
         makePackingPad(
           `${passiveRef}_pin2`,
           [0.22, 0.22],
-          isCapacitor ? "GND" : "VCC",
+          "GND",
           passivePadOffset(passive.bounds, 1),
         ),
       ],
@@ -952,7 +955,8 @@ const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
       passiveKind: spec.isCapacitor ? "capacitor" : "resistor",
       passiveValue: spec.isCapacitor ? "1uF" : "4.7k",
     })
-    clusterTraces.push({ from: `.${subRef} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
+    clusterTraces.push({ from: `.${subRef} > .pin${(spec.passiveIndex % catalog.pins) + 1}`, to: `.${spec.passiveRef} > .pin1` })
+    clusterTraces.push({ from: `.${spec.passiveRef} > .pin2`, to: "net.GND" })
   }
 
   if (passiveSpecs.length >= 3) {
@@ -980,6 +984,190 @@ const canPlaceCluster = (cluster, components, board, existingClearance = 0.6, se
 const addCluster = (components, traces, cluster) => {
   components.push(...cluster.components)
   traces.push(...cluster.traces)
+}
+
+const componentPins = (component) => {
+  if (Array.isArray(component.portPins) && component.portPins.length > 0) {
+    return component.portPins
+  }
+  const pinCount = component.pinCount ?? (component.componentType === "resistor" || component.componentType === "capacitor" ? 2 : 0)
+  return Array.from({ length: pinCount }, (_, index) => index + 1)
+}
+
+const pinEndpoint = (ref, pin) => `.${ref} > .pin${pin}`
+
+const pinEndpointPattern = /^\.([A-Za-z0-9_]+)\s*>\s*\.pin(\d+)$/
+
+const buildConnectivityState = (components, traces) => {
+  const byRef = new Map(components.map((component) => [component.ref, component]))
+  const usedPins = new Map()
+  const traceKeys = new Set()
+  const touchPin = (ref, pin) => {
+    if (!usedPins.has(ref)) usedPins.set(ref, new Set())
+    usedPins.get(ref).add(Number(pin))
+  }
+
+  for (const trace of traces) {
+    traceKeys.add(`${trace.from}|${trace.to}`)
+    for (const endpoint of [trace.from, trace.to]) {
+      const match = endpoint.match(pinEndpointPattern)
+      if (!match || !byRef.has(match[1])) continue
+      touchPin(match[1], match[2])
+    }
+  }
+
+  const addTrace = (from, to) => {
+    const forwardKey = `${from}|${to}`
+    const reverseKey = `${to}|${from}`
+    if (traceKeys.has(forwardKey) || traceKeys.has(reverseKey)) return
+    traceKeys.add(forwardKey)
+    traces.push({ from, to })
+    for (const endpoint of [from, to]) {
+      const match = endpoint.match(pinEndpointPattern)
+      if (match && byRef.has(match[1])) touchPin(match[1], match[2])
+    }
+  }
+
+  const isUsed = (component, pin) => usedPins.get(component.ref)?.has(Number(pin)) ?? false
+  return { addTrace, isUsed, usedPins }
+}
+
+const firstUnusedPin = (state, component, fallback = 1) =>
+  componentPins(component).find((pin) => !state.isUsed(component, pin)) ?? fallback
+
+const allocateMcuPins = (state, mcu, count) => {
+  if (!mcu || count <= 0) return []
+  const pins = componentPins(mcu)
+  const windows = []
+  for (let start = 0; start <= pins.length - count; start++) {
+    const range = pins.slice(start, start + count)
+    const usedCount = range.filter((pin) => state.isUsed(mcu, pin)).length
+    windows.push({ range, usedCount, firstPin: range[0] })
+  }
+  windows.sort((a, b) => a.usedCount - b.usedCount || a.firstPin - b.firstPin)
+  const selected = windows[0]?.range ?? pins.slice(0, count)
+  return selected.slice(0, count)
+}
+
+const nearestMcu = (component, mcus) =>
+  mcus
+    .map((mcu) => ({ mcu, distance: Math.hypot(component.x - mcu.x, component.y - mcu.y) }))
+    .sort((a, b) => a.distance - b.distance)[0]?.mcu
+
+const splitIntoBuses = (pins, busCount) => {
+  if (busCount <= 1 || pins.length < 4) return [pins]
+  const split = Math.ceil(pins.length / 2)
+  return [pins.slice(0, split), pins.slice(split)].filter((bus) => bus.length > 0)
+}
+
+const connectorPowerPins = (connector, pins) => {
+  if (connector.kind === "rs232") return { v5: [16], gnd: [15] }
+  if (connector.kind === "hdmi") return { v5: [18], gnd: [17, 20, 21, 22, 23] }
+  if (connector.kind === "microusb") return { v5: [1], gnd: [5, 6, 7, 8, 9] }
+  if (connector.kind === "usbc") return { v5: [18, 27], gnd: [13, 14, 15, 16, 17, 28] }
+  if (connector.kind === "barrel_jack") return { v5: [1], gnd: [2, 3] }
+  if (connector.kind === "potentiometer_rk09") return { v5: [1], gnd: [3, 4, 5] }
+  return { v5: [pins[0]], gnd: [pins[pins.length - 1]] }
+}
+
+const addConnectorConnectivity = (components, state) => {
+  const mcus = components.filter((component) => component.kind === "mcu")
+  const connectors = components.filter((component) =>
+    component.componentType === "connector" || component.componentType === "pinheader"
+  )
+
+  for (const connector of connectors) {
+    const pins = componentPins(connector)
+    const power = connectorPowerPins(connector, pins)
+    for (const pin of power.v5.filter((pin) => pins.includes(pin))) {
+      state.addTrace(pinEndpoint(connector.ref, pin), "net.V5")
+    }
+    for (const pin of power.gnd.filter((pin) => pins.includes(pin))) {
+      state.addTrace(pinEndpoint(connector.ref, pin), "net.GND")
+    }
+
+    const signalPins = pins.filter((pin) => !power.v5.includes(pin) && !power.gnd.includes(pin))
+    const busCount = connector.componentType === "pinheader" && mcus.length > 1 && signalPins.length >= 6 && connector.ref.charCodeAt(connector.ref.length - 1) % 2 === 0
+      ? 2
+      : 1
+    const buses = splitIntoBuses(signalPins, busCount)
+    const primaryMcu = nearestMcu(connector, mcus)
+    for (const [busIndex, busPins] of buses.entries()) {
+      const targetMcu = connector.componentType === "pinheader" && busIndex > 0
+        ? mcus[(mcus.indexOf(primaryMcu) + busIndex) % mcus.length]
+        : primaryMcu
+      const mcuPins = allocateMcuPins(state, targetMcu, busPins.length)
+      for (let index = 0; index < busPins.length; index++) {
+        if (!targetMcu || !mcuPins[index]) {
+          state.addTrace(pinEndpoint(connector.ref, busPins[index]), `net.${connector.ref}_BUS${busIndex + 1}_${index + 1}`)
+        } else {
+          state.addTrace(pinEndpoint(connector.ref, busPins[index]), pinEndpoint(targetMcu.ref, mcuPins[index]))
+        }
+      }
+    }
+  }
+}
+
+const addI2cConnectivity = (components, state) => {
+  const i2cChips = components.filter((component) => component.kind.startsWith("soic")).slice(0, 4)
+  const i2cMcus = components.filter((component) => component.kind === "mcu").slice(0, 2)
+  for (const chip of i2cChips) {
+    const sdaPin = firstUnusedPin(state, chip, 3)
+    state.addTrace(pinEndpoint(chip.ref, sdaPin), "net.SDA")
+    const sclPin = firstUnusedPin(state, chip, 4)
+    state.addTrace(pinEndpoint(chip.ref, sclPin), "net.SCL")
+  }
+  for (const mcu of i2cMcus) {
+    const [sdaPin, sclPin] = allocateMcuPins(state, mcu, 2)
+    if (sdaPin) state.addTrace(pinEndpoint(mcu.ref, sdaPin), "net.SDA")
+    if (sclPin) state.addTrace(pinEndpoint(mcu.ref, sclPin), "net.SCL")
+  }
+}
+
+const addNonPassivePowerConnectivity = (components, state) => {
+  for (const component of components) {
+    if (component.kind === "mcu") continue
+    if (component.componentType === "connector" || component.componentType === "pinheader") continue
+    if (component.componentType === "resistor" || component.componentType === "capacitor") continue
+    const pins = componentPins(component)
+    if (pins.length === 0) continue
+    const v5Pin = component.componentType === "mosfet" && pins.includes(2) ? 2 : pins[0]
+    const gndPin = component.componentType === "mosfet" && pins.includes(3) ? 3 : pins[pins.length - 1]
+    state.addTrace(pinEndpoint(component.ref, v5Pin), "net.V5")
+    if (gndPin !== v5Pin) state.addTrace(pinEndpoint(component.ref, gndPin), "net.GND")
+  }
+}
+
+const defaultPinNet = (component, pin, pins) => {
+  if (component.componentType === "resistor" || component.componentType === "capacitor") {
+    return pin === pins[pins.length - 1] ? "net.GND" : `net.${component.ref}_PASSIVE`
+  }
+  if (pin === pins[0]) return "net.V5"
+  if (pin === pins[pins.length - 1]) return "net.GND"
+  if (component.componentType === "mosfet") {
+    if (pin === pins[1]) return "net.V5"
+    if (pin === pins[2]) return "net.GND"
+  }
+  return `net.${component.ref}_SIG${pin}`
+}
+
+const addRemainingPinConnectivity = (components, state) => {
+  for (const component of components) {
+    if (component.kind === "mcu") continue
+    const pins = componentPins(component)
+    for (const pin of pins) {
+      if (state.isUsed(component, pin)) continue
+      state.addTrace(pinEndpoint(component.ref, pin), defaultPinNet(component, pin, pins))
+    }
+  }
+}
+
+const addConnectivityTraces = (components, traces) => {
+  const state = buildConnectivityState(components, traces)
+  addConnectorConnectivity(components, state)
+  addI2cConnectivity(components, state)
+  addNonPassivePowerConnectivity(components, state)
+  addRemainingPinConnectivity(components, state)
 }
 
 const makeFillCandidates = (definition, rng, passIndex, densityProfile) => {
@@ -1060,6 +1248,7 @@ const generatePlacement = (definition) => {
   correctMcuPassivePlacement(components, traces, definition)
   correctMcuPassiveRotations(components, definition)
   placeSubcircuits(components, traces, definition, rng)
+  addConnectivityTraces(components, traces)
 
   return {
     id: definition.id,
