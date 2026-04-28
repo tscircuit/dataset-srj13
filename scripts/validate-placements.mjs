@@ -37,6 +37,19 @@ const traceTouchesComponent = (trace, ref) =>
 const traceTouchesNet = (trace, netName) =>
   trace.from === netName || trace.to === netName
 
+const powerPinsForComponent = (component, pins) => {
+  if (component.componentType === "mosfet") {
+    return {
+      v5: pins.filter((pin) => pin === 2 || pin === 4),
+      gnd: pins.filter((pin) => pin === 3),
+    }
+  }
+  return {
+    v5: pins.length > 0 ? [pins[0]] : [],
+    gnd: pins.length > 1 ? [pins[pins.length - 1]] : [],
+  }
+}
+
 const pinHasConnectionToAny = (placement, component, pin, targets) => {
   const endpoint = `.${component.ref} > .pin${pin}`
   const targetRefs = new Set(targets.map((target) => target.ref))
@@ -185,6 +198,19 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     ) {
       reportFailure(`${file}: ${component.ref} passive has no pin tied to net.GND`)
     }
+    if (component.kind === "large_capacitor_subcircuit") {
+      if (!placement.traces.some((trace) => traceTouchesComponent(trace, component.ref) && traceTouchesNet(trace, "net.V5"))) {
+        reportFailure(`${file}: ${component.ref} bulk capacitor positive pin is not tied to net.V5`)
+      }
+      if (!placement.traces.some((trace) => traceTouchesComponent(trace, component.ref) && traceTouchesNet(trace, "net.GND"))) {
+        reportFailure(`${file}: ${component.ref} bulk capacitor negative pin is not tied to net.GND`)
+      }
+    }
+    if (component.kind === "flat_power_mosfet_subcircuit" &&
+      placement.traces.some((trace) => traceTouchesComponent(trace, component.ref) && traceTouchesNet(trace, "net.GND") && (trace.from.includes(".pin4") || trace.to.includes(".pin4")))
+    ) {
+      reportFailure(`${file}: ${component.ref}.pin4 shares the drain pad and must not be tied to net.GND`)
+    }
     if (String(component.footprint).startsWith("pinrow") && String(component.footprint).includes("_p1mm")) {
       reportFailure(`${file}: ${component.ref} ${component.kind} uses overlapping 1mm pinrow pitch`)
     }
@@ -240,9 +266,10 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     component.componentType !== "capacitor"
   )) {
     const pins = componentPins(subcircuit)
+    const powerPins = powerPinsForComponent(subcircuit, pins)
+    const powerPinSet = new Set([...powerPins.v5, ...powerPins.gnd])
     for (const pin of pins) {
-      const isPowerPin = pins.length > 1 && (pin === pins[0] || pin === pins[pins.length - 1])
-      if (isPowerPin) continue
+      if (powerPinSet.has(pin)) continue
       if (!pinHasConnectionToAny(placement, subcircuit, pin, mcus)) {
         reportFailure(`${file}: ${subcircuit.ref}.pin${pin} is not connected to an MCU`)
       }

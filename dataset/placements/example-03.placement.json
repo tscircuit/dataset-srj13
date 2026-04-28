@@ -2466,6 +2466,10 @@
       "to": "net.V5"
     },
     {
+      "from": ".Q2 > .pin4",
+      "to": "net.V5"
+    },
+    {
       "from": ".Q2 > .pin3",
       "to": "net.GND"
     },
@@ -2479,6 +2483,10 @@
     },
     {
       "from": ".Q4 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q4 > .pin4",
       "to": "net.V5"
     },
     {
@@ -2551,6 +2559,10 @@
     },
     {
       "from": ".Q15 > .pin2",
+      "to": "net.V5"
+    },
+    {
+      "from": ".Q15 > .pin4",
       "to": "net.V5"
     },
     {
@@ -2638,28 +2650,20 @@
       "to": "net.GND"
     },
     {
-      "from": ".Q1 > .pin2",
+      "from": ".Q1 > .pin1",
+      "to": ".U1 > .pin19"
+    },
+    {
+      "from": ".Q2 > .pin1",
       "to": ".U1 > .pin20"
     },
     {
-      "from": ".Q2 > .pin2",
+      "from": ".Q3 > .pin1",
       "to": ".U1 > .pin21"
     },
     {
-      "from": ".Q2 > .pin3",
-      "to": ".U1 > .pin22"
-    },
-    {
-      "from": ".Q3 > .pin2",
-      "to": ".U1 > .pin22"
-    },
-    {
-      "from": ".Q4 > .pin2",
-      "to": ".U1 > .pin7"
-    },
-    {
-      "from": ".Q4 > .pin3",
-      "to": ".U1 > .pin8"
+      "from": ".Q4 > .pin1",
+      "to": ".U1 > .pin6"
     },
     {
       "from": ".U_AUX6 > .pin2",
@@ -2670,8 +2674,8 @@
       "to": ".U1 > .pin33"
     },
     {
-      "from": ".Q7 > .pin2",
-      "to": ".U1 > .pin10"
+      "from": ".Q7 > .pin1",
+      "to": ".U1 > .pin9"
     },
     {
       "from": ".U_AUX9 > .pin2",
@@ -2758,12 +2762,12 @@
       "to": ".U1 > .pin11"
     },
     {
-      "from": ".Q11 > .pin2",
-      "to": ".U1 > .pin5"
+      "from": ".Q11 > .pin1",
+      "to": ".U1 > .pin4"
     },
     {
-      "from": ".Q12 > .pin2",
-      "to": ".U1 > .pin6"
+      "from": ".Q12 > .pin1",
+      "to": ".U1 > .pin5"
     },
     {
       "from": ".U_AUX13 > .pin2",
@@ -2910,12 +2914,8 @@
       "to": ".U1 > .pin1"
     },
     {
-      "from": ".Q15 > .pin2",
-      "to": ".U1 > .pin41"
-    },
-    {
-      "from": ".Q15 > .pin3",
-      "to": ".U1 > .pin42"
+      "from": ".Q15 > .pin1",
+      "to": ".U1 > .pin40"
     },
     {
       "from": ".U_AUX16 > .pin2",
@@ -2994,8 +2994,8 @@
       "to": ".U1 > .pin21"
     },
     {
-      "from": ".Q17 > .pin2",
-      "to": ".U1 > .pin43"
+      "from": ".Q17 > .pin1",
+      "to": ".U1 > .pin42"
     },
     {
       "from": ".U_AUX18 > .pin2",
@@ -3446,20 +3446,12 @@
       "to": ".U1 > .pin30"
     },
     {
-      "from": ".Q25 > .pin2",
-      "to": ".U1 > .pin24"
-    },
-    {
-      "from": ".Q2 > .pin4",
-      "to": "net.GND"
-    },
-    {
-      "from": ".Q4 > .pin4",
-      "to": "net.GND"
+      "from": ".Q25 > .pin1",
+      "to": ".U1 > .pin23"
     },
     {
       "from": ".C_BULK5 > .pin1",
-      "to": "net.C_BULK5_PASSIVE"
+      "to": "net.V5"
     },
     {
       "from": ".C_BULK5 > .pin2",
@@ -3467,14 +3459,10 @@
     },
     {
       "from": ".C_BULK8 > .pin1",
-      "to": "net.C_BULK8_PASSIVE"
+      "to": "net.V5"
     },
     {
       "from": ".C_BULK8 > .pin2",
-      "to": "net.GND"
-    },
-    {
-      "from": ".Q15 > .pin4",
       "to": "net.GND"
     }
   ]

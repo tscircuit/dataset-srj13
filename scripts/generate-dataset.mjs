@@ -1164,10 +1164,22 @@ const addNonPassivePowerConnectivity = (components, state) => {
     if (component.componentType === "resistor" || component.componentType === "capacitor") continue
     const pins = componentPins(component)
     if (pins.length === 0) continue
-    const v5Pin = component.componentType === "mosfet" && pins.includes(2) ? 2 : pins[0]
-    const gndPin = component.componentType === "mosfet" && pins.includes(3) ? 3 : pins[pins.length - 1]
-    state.addTrace(pinEndpoint(component.ref, v5Pin), "net.V5")
-    if (gndPin !== v5Pin) state.addTrace(pinEndpoint(component.ref, gndPin), "net.GND")
+    const powerPins = powerPinsForComponent(component, pins)
+    for (const pin of powerPins.v5) state.addTrace(pinEndpoint(component.ref, pin), "net.V5")
+    for (const pin of powerPins.gnd) state.addTrace(pinEndpoint(component.ref, pin), "net.GND")
+  }
+}
+
+const powerPinsForComponent = (component, pins) => {
+  if (component.componentType === "mosfet") {
+    return {
+      v5: pins.filter((pin) => pin === 2 || pin === 4),
+      gnd: pins.filter((pin) => pin === 3),
+    }
+  }
+  return {
+    v5: pins.length > 0 ? [pins[0]] : [],
+    gnd: pins.length > 1 ? [pins[pins.length - 1]] : [],
   }
 }
 
@@ -1184,9 +1196,10 @@ const addSubcircuitMcuConnectivity = (components, state) => {
   for (const subcircuit of subcircuits) {
     const preferredMcu = nearestMcu(subcircuit, mcus)
     const pins = componentPins(subcircuit)
+    const powerPins = powerPinsForComponent(subcircuit, pins)
+    const powerPinSet = new Set([...powerPins.v5, ...powerPins.gnd])
     for (const pin of pins) {
-      const isPowerPin = pins.length > 1 && (pin === pins[0] || pin === pins[pins.length - 1])
-      if (isPowerPin) continue
+      if (powerPinSet.has(pin)) continue
       if (state.pinHasConnectionToAny(subcircuit, pin, mcus)) continue
       const target = nextMcuPin(state, mcus, preferredMcu, `${subcircuit.ref}:${pin}`)
       if (!target) return
@@ -1197,14 +1210,17 @@ const addSubcircuitMcuConnectivity = (components, state) => {
 
 const defaultPinNet = (component, pin, pins) => {
   if (component.componentType === "resistor" || component.componentType === "capacitor") {
+    if (component.kind === "large_capacitor_subcircuit") {
+      return pin === pins[pins.length - 1] ? "net.GND" : "net.V5"
+    }
     return pin === pins[pins.length - 1] ? "net.GND" : `net.${component.ref}_PASSIVE`
   }
   if (pin === pins[0]) return "net.V5"
-  if (pin === pins[pins.length - 1]) return "net.GND"
   if (component.componentType === "mosfet") {
-    if (pin === pins[1]) return "net.V5"
-    if (pin === pins[2]) return "net.GND"
+    if (pin === 2 || pin === 4) return "net.V5"
+    if (pin === 3) return "net.GND"
   }
+  if (pin === pins[pins.length - 1]) return "net.GND"
   return `net.${component.ref}_SIG${pin}`
 }
 
