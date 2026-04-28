@@ -66,6 +66,7 @@ const mcuCatalog = [
   { family: "bga", footprint: "bga64_p0.8mm", pins: 64, bounds: [7.1, 7.1] },
   { family: "qfn", footprint: "qfn48_w7_h7_p0.5mm", pins: 48, bounds: [7.5, 7.5] },
   { family: "qfp", footprint: "qfp48_w7_h7_p0.5mm", pins: 48, bounds: [9.3, 9.3] },
+  { family: "qfp", footprint: "qfp128_w14_h14_p0.4mm", pins: 128, bounds: [16.1, 16.1] },
   { family: "lqfp", footprint: "lqfp64_w10_h10_p0.5mm", pins: 64, bounds: [12.8, 12.8] },
   { family: "tssop", footprint: "tssop38_w4_p0.5mm", pins: 38, bounds: [6.8, 10.5] },
 ]
@@ -77,7 +78,7 @@ const subcircuitCatalog = [
   { kind: "tssop_subcircuit", componentType: "chip", footprint: "tssop16_w4_p0.65mm", pins: 16, bounds: [6.95, 6.05] },
   { kind: "tssop20_subcircuit", componentType: "chip", footprint: "tssop20_w4_p0.65mm", pins: 20, bounds: [6.95, 7.35] },
   { kind: "qfn_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm", pins: 20, bounds: [4.42, 4.42] },
-  { kind: "qfn_thermalpad_subcircuit", componentType: "chip", footprint: "qfn20_w4_h4_p0.5mm_thermalpad", pins: 20, bounds: [4.42, 4.42] },
+  { kind: "qfn_thermalpad_subcircuit", componentType: "chip", footprint: "qfn20_w5_h5_p0.65mm_thermalpad2x2", pins: 20, bounds: [5.43, 5.43] },
   { kind: "button_4pin_subcircuit", componentType: "chip", footprint: "pushbutton_4pin", pins: 4, bounds: [8.5, 10.5] },
   { kind: "button_6x6_subcircuit", componentType: "chip", footprint: "pushbutton_6x6", pins: 4, bounds: [8.5, 10.5] },
   { kind: "large_capacitor_subcircuit", componentType: "capacitor", footprint: "radial_capacitor", pins: 2, bounds: [12, 12], passiveValue: "47uF", standalone: true },
@@ -235,6 +236,30 @@ const addComponent = (components, component, clearance = 1) => {
     throw new Error(`Generated overlapping component ${component.ref}`)
   }
   components.push(component)
+}
+
+const nearestLegalComponent = (component, components, board, clearance = 1) => {
+  const candidates = [{ x: component.x, y: component.y, score: 0 }]
+  for (let radius = 4; radius <= 28; radius += 4) {
+    for (const dx of [-radius, 0, radius]) {
+      for (const dy of [-radius, 0, radius]) {
+        if (dx === 0 && dy === 0) continue
+        candidates.push({
+          x: round(component.x + dx),
+          y: round(component.y + dy),
+          score: Math.hypot(dx, dy),
+        })
+      }
+    }
+  }
+  candidates.sort((a, b) => a.score - b.score)
+  for (const candidate of candidates) {
+    const placed = { ...component, x: candidate.x, y: candidate.y }
+    if (!isInsideBoard(placed, board, 1)) continue
+    if (overlapsAny(placed, components, clearance)) continue
+    return placed
+  }
+  return null
 }
 
 const getUtilization = (components, board) => {
@@ -521,7 +546,7 @@ const placeMcus = (components, traces, definition, rng) => {
     const ref = `U${index + 1}`
     const passiveCount = 8 + Math.floor(rng() * 13)
     const mcuRotation = index % 2 === 0 ? 0 : 90
-    addComponent(components, {
+    const mcuComponent = nearestLegalComponent({
       ref,
       kind: "mcu",
       componentType: "chip",
@@ -533,7 +558,13 @@ const placeMcus = (components, traces, definition, rng) => {
       pinCount: mcu.pins,
       designatedPassiveCount: passiveCount,
       supplierPartNumbers: { jlcpcb: ["C2040", "C15081"] },
-    })
+    }, components, definition.board, 1)
+    if (!mcuComponent) {
+      throw new Error(`Could not place MCU ${ref} without collision`)
+    }
+    components.push(mcuComponent)
+    x = mcuComponent.x
+    y = mcuComponent.y
 
     const sideOrder = ["left", "top", "right", "bottom"]
     const slotOffsets = [-2, -1, 0, 1, 2]
@@ -557,7 +588,7 @@ const placeMcus = (components, traces, definition, rng) => {
                   sideOrder[(index + passiveIndex) % sideOrder.length],
                   mcu.bounds,
                   slotOffsets[Math.floor(passiveIndex / sideOrder.length) % slotOffsets.length],
-                  0.75,
+                  1.35,
                 ),
               )
             ),
@@ -639,9 +670,73 @@ const placeMcus = (components, traces, definition, rng) => {
 
     components.push(...passiveComponents)
     traces.push(...passiveTraces)
-    const mcuComponent = components.find((component) => component.ref === ref)
-    mcuComponent.passiveCount = passiveComponents.length
+    const placedMcu = components.find((component) => component.ref === ref)
+    placedMcu.passiveCount = passiveComponents.length
   })
+}
+
+const correctionCandidateOffsets = (mcu, passiveBounds, passiveIndex) => {
+  const sides = ["left", "right", "top", "bottom"]
+  const offsets = [-3, -2, -1, 0, 1, 2, 3]
+  const candidates = []
+  for (let ring = 0; ring < 5; ring++) {
+    const sideInset = 1.35 + ring * 0.55
+    for (const side of sides) {
+      for (const offset of offsets) {
+        const spread = offset * 1.15
+        if (side === "left") candidates.push({ x: mcu.x - mcu.bounds.width / 2 - passiveBounds.width / 2 - sideInset, y: mcu.y + spread })
+        if (side === "right") candidates.push({ x: mcu.x + mcu.bounds.width / 2 + passiveBounds.width / 2 + sideInset, y: mcu.y + spread })
+        if (side === "top") candidates.push({ x: mcu.x + spread, y: mcu.y + mcu.bounds.height / 2 + passiveBounds.height / 2 + sideInset })
+        if (side === "bottom") candidates.push({ x: mcu.x + spread, y: mcu.y - mcu.bounds.height / 2 - passiveBounds.height / 2 - sideInset })
+      }
+    }
+  }
+  return candidates.sort((a, b) => {
+    const da = Math.hypot(a.x - mcu.x, a.y - mcu.y)
+    const db = Math.hypot(b.x - mcu.x, b.y - mcu.y)
+    return da - db || ((passiveIndex + Math.round(a.x * 10) + Math.round(a.y * 10)) % 7) - ((passiveIndex + Math.round(b.x * 10) + Math.round(b.y * 10)) % 7)
+  })
+}
+
+const correctMcuPassivePlacement = (components, traces, definition) => {
+  for (const mcu of components.filter((component) => component.kind === "mcu")) {
+    const mcuIndex = Number(mcu.ref.replace(/^U/, ""))
+    const existing = () => components.filter((component) =>
+      component.kind === "mcu_passive" && new RegExp(`^[CR]${mcuIndex}\\d+$`).test(component.ref)
+    )
+    const targetCount = Math.min(mcu.designatedPassiveCount, 8)
+    for (let passiveIndex = 0; existing().length < targetCount && passiveIndex < mcu.designatedPassiveCount; passiveIndex++) {
+      const isCapacitor = passiveIndex % 2 === 0
+      const passiveRef = `${isCapacitor ? "C" : "R"}${mcuIndex}${passiveIndex + 1}`
+      if (components.some((component) => component.ref === passiveRef)) continue
+      const passive = passiveFootprints[(passiveIndex + mcuIndex) % passiveFootprints.length]
+      for (const rotation of [0, 90, 180, 270]) {
+        const bounds = boundsForRotation(passive.bounds, rotation)
+        for (const candidate of correctionCandidateOffsets(mcu, bounds, passiveIndex)) {
+          const passiveComponent = {
+            ref: passiveRef,
+            kind: "mcu_passive",
+            componentType: isCapacitor ? "capacitor" : "resistor",
+            footprint: passive.footprint,
+            x: round(candidate.x),
+            y: round(candidate.y),
+            rotation,
+            bounds,
+            passiveKind: isCapacitor ? "capacitor" : "resistor",
+            passiveValue: isCapacitor ? "100nF" : "10k",
+          }
+          if (!isInsideBoard(passiveComponent, definition.board, 0.55)) continue
+          if (overlapsAnyForFillCluster(passiveComponent, components, 0.15)) continue
+          components.push(passiveComponent)
+          traces.push({ from: `.${mcu.ref} > .pin${passiveIndex + 1}`, to: `.${passiveRef} > .pin1` })
+          traces.push({ from: `.${passiveRef} > .pin2`, to: isCapacitor ? "net.GND" : "net.VCC" })
+          break
+        }
+        if (components.some((component) => component.ref === passiveRef)) break
+      }
+    }
+    mcu.passiveCount = existing().length
+  }
 }
 
 const makePackingPad = (id, bounds, networkId = "cluster", offset = { x: 0, y: 0 }) => ({
@@ -929,6 +1024,7 @@ const generatePlacement = (definition) => {
 
   placeEdge(components, traces, definition, rng)
   placeMcus(components, traces, definition, rng)
+  correctMcuPassivePlacement(components, traces, definition)
   placeSubcircuits(components, traces, definition, rng)
 
   return {
