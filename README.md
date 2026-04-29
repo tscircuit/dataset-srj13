@@ -2,7 +2,7 @@
 
 Synthetic tscircuit dataset for connector-heavy MCU boards.
 
-The dataset is split into three phases:
+The source dataset is split into three phases:
 
 1. `dataset/definitions/*.json` describes board size, edge connector kinds, MCU count, and seed.
 2. `dataset/placements/*.placement.json` is generated from definitions and contains concrete component footprints, positions, bounding boxes, and trace intents.
@@ -14,6 +14,39 @@ Run the pipeline:
 bun run generate:dataset
 bun run validate:placements
 bun run check:examples
+```
+
+Build the distributable SRJ dataset:
+
+```bash
+bun run build:dataset-dist
+```
+
+This runs `tsci build`, converts `dist/circuits/*/circuit.json` into `dataset-dist/*.json`, and writes `dataset-dist/index.js` plus `dataset-dist/index.d.ts`. The package `main` field points at `dataset-dist/index.js`, so consumers import the generated SRJ files through the package entry point.
+
+Install from GitHub:
+
+```bash
+bun add @tsci/seveibar.dataset-srj13@github:tscircuit/dataset-srj13
+```
+
+Use it from JavaScript or TypeScript:
+
+```ts
+import { dataset, example_01 } from "@tsci/seveibar.dataset-srj13"
+
+console.log(dataset["example-01"])
+console.log(example_01)
+```
+
+You can pin a specific commit or branch with the GitHub dependency syntax:
+
+```json
+{
+  "dependencies": {
+    "@tsci/seveibar.dataset-srj13": "github:tscircuit/dataset-srj13#main"
+  }
+}
 ```
 
 Connector footprint mappings live in `scripts/generate-dataset.mjs`. HDMI, USB-C, and RS232 edge connectors are backed by `tsci import`-generated JLCPCB components in `imports/`; the other connector families use footprinter-compatible footprints plus supplier metadata.

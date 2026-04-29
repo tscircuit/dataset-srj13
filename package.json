@@ -2,7 +2,11 @@
   "name": "@tsci/seveibar.dataset-srj13",
   "version": "1.0.0",
   "description": "A tscircuit component package",
-  "main": "index.tsx",
+  "main": "dataset-dist/index.js",
+  "types": "dataset-dist/index.d.ts",
+  "files": [
+    "dataset-dist"
+  ],
   "keywords": [
     "tscircuit",
     "circuit",
@@ -12,6 +16,7 @@
   "scripts": {
     "dev": "tsci dev",
     "build": "tsci build",
+    "build:dataset-dist": "bash scripts/build-dataset-dist.sh",
     "generate:dataset": "bun scripts/generate-dataset.mjs",
     "validate:placements": "bun scripts/validate-placements.mjs",
     "check:examples": "bun scripts/check-examples.mjs",
