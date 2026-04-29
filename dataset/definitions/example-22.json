@@ -1,0 +1,10 @@
+{
+  "id": "example-22",
+  "seed": 1331,
+  "board": { "width": 104, "height": 84 },
+  "leftEdge": ["usbc", "pinheader8_rows2", "rj45"],
+  "rightEdge": ["hdmi", "pinheader10", "barrel_jack"],
+  "topEdge": ["microusb", "rs232", "pinheader12"],
+  "bottomEdge": ["usbb", "hdmi", "potentiometer_rk09", "pinheader8_rows2"],
+  "mcuCount": 3
+}

@@ -6,6 +6,9 @@ import { A_920_E52A2021S10100 as MicroUsbConnector } from "../imports/A_920_E52A
 import { RK09K1110077 as PotentiometerConnector } from "../imports/RK09K1110077"
 import { SP3232EEN_L_TR as Rs232Connector } from "../imports/SP3232EEN_L_TR"
 import { TYPE_C_16PIN_2MD_073_ as UsbCConnector } from "../imports/TYPE_C_16PIN_2MD_073_"
+import { ESP32_C3_MINI_1_H4 } from "../imports/ESP32_C3_MINI_1_H4"
+import { ESP32_S3_WROOM_1U_N16R2 } from "../imports/ESP32_S3_WROOM_1U_N16R2"
+import { ESP32_WROOM_32E_N8 } from "../imports/ESP32_WROOM_32E_N8"
 import type {
   DatasetPlacement,
   PlacementComponent,
@@ -96,6 +99,18 @@ const renderComponent = (component: PlacementComponent) => {
 
   if (component.kind === "flat_power_mosfet_subcircuit") {
     return <IRF640NSTRLPBF key={component.ref} {...importedCommon} />
+  }
+
+  if (component.footprint === "imported:ESP32_WROOM_32E_N8") {
+    return <ESP32_WROOM_32E_N8 key={component.ref} {...importedCommon} />
+  }
+
+  if (component.footprint === "imported:ESP32_C3_MINI_1_H4") {
+    return <ESP32_C3_MINI_1_H4 key={component.ref} {...importedCommon} />
+  }
+
+  if (component.footprint === "imported:ESP32_S3_WROOM_1U_N16R2") {
+    return <ESP32_S3_WROOM_1U_N16R2 key={component.ref} {...importedCommon} />
   }
 
   if (component.componentType === "resistor") {

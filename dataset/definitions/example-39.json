@@ -1,0 +1,11 @@
+{
+  "id": "example-39",
+  "seed": 1350,
+  "board": { "width": 128, "height": 96 },
+  "leftEdge": ["hdmi", "pinheader12", "barrel_jack"],
+  "rightEdge": ["usbc", "hdmi", "pinheader8_rows2"],
+  "topEdge": ["rs232", "rj45", "pinheader10"],
+  "bottomEdge": ["microusb", "usbb", "potentiometer_rk09", "pinheader8_rows2"],
+  "mcuCount": 2,
+  "mcuSource": "wifi_modules"
+}

@@ -64,12 +64,22 @@ const connectorCatalog = {
 }
 
 const mcuCatalog = [
-  { family: "bga", footprint: "bga64_p0.8mm", pins: 64, bounds: [7.1, 7.1] },
-  { family: "qfn", footprint: "qfn48_w8_h8_p0.5mm", pins: 48, bounds: [8.43, 8.43] },
-  { family: "qfp", footprint: "qfp48_w7_h7_p0.5mm", pins: 48, bounds: [9.3, 9.3] },
-  { family: "qfp", footprint: "qfp128_w14_h14_p0.4mm", pins: 128, bounds: [16.1, 16.1] },
-  { family: "lqfp", footprint: "lqfp64_w10_h10_p0.5mm", pins: 64, bounds: [12.8, 12.8] },
-  { family: "tssop", footprint: "tssop38_w4_p0.5mm", pins: 38, bounds: [6.8, 10.5] },
+  { family: "bga", footprint: "bga64_p0.8mm", pins: 64, bounds: [8.8, 8.8] },
+  { family: "qfn", footprint: "qfn48_w8_h8_p0.5mm", pins: 48, bounds: [12.6, 12.6] },
+  { family: "qfp", footprint: "qfp48_w7_h7_p0.5mm", pins: 48, bounds: [10.4, 10.4] },
+  { family: "qfp", footprint: "qfp128_w14_h14_p0.4mm", pins: 128, bounds: [18.2, 18.2] },
+  { family: "lqfp", footprint: "lqfp64_w10_h10_p0.5mm", pins: 64, bounds: [14.5, 14.5] },
+  { family: "tssop", footprint: "tssop38_w4_p0.5mm", pins: 38, bounds: [12.6, 10.6] },
+]
+
+const compactMcuCatalog = [
+  { family: "bga", footprint: "bga64_p0.8mm", pins: 64, bounds: [8.8, 8.8] },
+]
+
+const wifiModuleMcuCatalog = [
+  { family: "wifi_module", footprint: "imported:ESP32_WROOM_32E_N8", pins: 47, bounds: [27.2, 20.8], jlcpcb: ["C701342"] },
+  { family: "wifi_module", footprint: "imported:ESP32_C3_MINI_1_H4", pins: 61, bounds: [14.7, 17.4], jlcpcb: ["C2934569"] },
+  { family: "wifi_module", footprint: "imported:ESP32_S3_WROOM_1U_N16R2", pins: 49, bounds: [19.6, 19.6], jlcpcb: ["C3013945"] },
 ]
 
 const subcircuitCatalog = [
@@ -103,6 +113,14 @@ const standardSubcircuitCatalog = subcircuitCatalog.filter((component) =>
   component.kind !== "irf540_mosfet_subcircuit" &&
   component.kind !== "flat_power_mosfet_subcircuit"
 )
+const compactSubcircuitCatalog = [
+  largeCapacitorSubcircuit,
+  ...buttonSubcircuitCatalog,
+  subcircuitCatalog.find((component) => component.kind === "qfn_subcircuit"),
+  subcircuitCatalog.find((component) => component.kind === "mosfet_subcircuit"),
+  subcircuitCatalog.find((component) => component.kind === "soic_subcircuit"),
+  subcircuitCatalog.find((component) => component.kind === "tssop_subcircuit"),
+].filter(Boolean)
 
 const passiveFootprints = [
   { footprint: "0201", bounds: [1.12, 0.4] },
@@ -218,7 +236,7 @@ const edgeKeepoutFor = (component) =>
   component.componentType === "connector" || component.componentType === "pinheader"
     ? 2.2
     : component.kind === "mcu"
-      ? 1.35
+      ? 3
     : 0
 
 const overlapsAnyForFillCluster = (candidate, components, clearance = 0) =>
@@ -283,8 +301,20 @@ const boundsForRotation = (bounds, rotation) => {
     : { width: bounds[0], height: bounds[1] }
 }
 
-const getDensityProfile = (definition) =>
-  densityProfiles[Math.abs(definition.seed) % densityProfiles.length]
+const getDensityProfile = (definition) => {
+  const base = densityProfiles[Math.abs(definition.seed) % densityProfiles.length]
+  if (!definition.densityTarget && !definition.compact) return base
+  return {
+    ...base,
+    targetUtilization: definition.densityTarget ?? base.targetUtilization,
+    earlyClearance: definition.compact ? 0.65 : base.earlyClearance,
+    lateClearance: definition.compact ? minimumPackingMargin : base.lateClearance,
+    selfClearance: definition.compact ? minimumPackingMargin : base.selfClearance,
+    earlyStep: definition.compact ? 4.5 : 8,
+    lateStep: definition.compact ? 2.75 : base.lateStep,
+    maxPasses: definition.compact ? 8 : 16,
+  }
+}
 
 const portEdgeRotations = {
   left: 270,
@@ -526,8 +556,10 @@ const withBoardSizedForConnectors = (definition) => {
 
   for (const [edgeKey, horizontal] of edgeGroups) {
     const catalogs = nextDefinition[edgeKey].map(connectorFor)
-    const rotation = horizontal ? 0 : 90
-    const majorSizes = catalogs.map((catalog) => {
+    const edgeName = edgeKey.replace("Edge", "")
+    const majorSizes = catalogs.map((catalog, index) => {
+      const kind = nextDefinition[edgeKey][index] ?? catalog.kind
+      const rotation = getEdgeRotation(edgeName, kind, nextDefinition.id)
       const bounds = boundsForRotation(catalog.bounds, rotation)
       return horizontal ? bounds.width : bounds.height
     })
@@ -545,15 +577,28 @@ const withBoardSizedForConnectors = (definition) => {
 const placeMcus = (components, traces, definition, rng) => {
   const centersByCount = {
     1: [[0, 0]],
-    2: [[-12, 0], [12, 0]],
+    2: definition.mcuSource === "wifi_modules" ? [[-17, 0], [17, 0]] : [[-12, 0], [12, 0]],
     3: [[-16, 6], [16, 6], [0, -12]],
   }
+  const wifiModuleSlot =
+    definition.mcuSource === "wifi_modules"
+      ? definition.seed % definition.mcuCount
+      : -1
 
   centersByCount[definition.mcuCount].forEach(([x, y], index) => {
-    const mcu = mcuCatalog[(definition.seed + index) % mcuCatalog.length]
+    const isWifiModuleMcu = index === wifiModuleSlot
+    const selectedMcuCatalog = isWifiModuleMcu
+      ? wifiModuleMcuCatalog
+      : definition.compact
+        ? compactMcuCatalog
+        : mcuCatalog
+    const mcu = selectedMcuCatalog[(definition.seed + index) % selectedMcuCatalog.length]
     const ref = `U${index + 1}`
     const passiveCount = 8 + Math.floor(rng() * 13)
     const mcuRotation = index % 2 === 0 ? 0 : 90
+    const renderedMcuBounds = boundsForRotation(mcu.bounds, mcuRotation)
+    const packingMcuBounds = [renderedMcuBounds.width, renderedMcuBounds.height]
+    const mcuPassiveTargetInset = definition.compact ? 2.5 : isWifiModuleMcu ? 9 : 5.25
     const mcuComponent = nearestLegalComponent({
       ref,
       kind: "mcu",
@@ -562,10 +607,10 @@ const placeMcus = (components, traces, definition, rng) => {
       x,
       y,
       rotation: mcuRotation,
-      bounds: { width: mcu.bounds[0], height: mcu.bounds[1] },
+      bounds: renderedMcuBounds,
       pinCount: mcu.pins,
       designatedPassiveCount: passiveCount,
-      supplierPartNumbers: { jlcpcb: ["C2040", "C15081"] },
+      supplierPartNumbers: { jlcpcb: mcu.jlcpcb ?? ["C2040", "C15081"] },
     }, components, definition.board, 1)
     if (!mcuComponent) {
       throw new Error(`Could not place MCU ${ref} without collision`)
@@ -583,10 +628,10 @@ const placeMcus = (components, traces, definition, rng) => {
           componentId: ref,
           isStatic: true,
           center: { x: 0, y: 0 },
-          ccwRotationOffset: mcuRotation,
-          availableRotationDegrees: [mcuRotation],
+          ccwRotationOffset: 0,
+          availableRotationDegrees: [0],
           pads: [
-            makePackingPad(`${ref}_body`, mcu.bounds, `${ref}_body`),
+            makePackingPad(`${ref}_body`, packingMcuBounds, `${ref}_body`),
             ...Array.from({ length: passiveCount }, (_, passiveIndex) =>
               makePackingPad(
                 `${ref}_target_${passiveIndex + 1}`,
@@ -594,9 +639,9 @@ const placeMcus = (components, traces, definition, rng) => {
                 `${ref}_p${passiveIndex + 1}`,
                 pinTargetForSide(
                   sideOrder[(index + passiveIndex) % sideOrder.length],
-                  mcu.bounds,
+                  packingMcuBounds,
                   slotOffsets[Math.floor(passiveIndex / sideOrder.length) % slotOffsets.length],
-                  2.15,
+                  mcuPassiveTargetInset,
                 ),
               )
             ),
@@ -604,10 +649,10 @@ const placeMcus = (components, traces, definition, rng) => {
         },
       ],
       bounds: {
-        minX: -Math.max(18, mcu.bounds[0] / 2 + 12),
-        minY: -Math.max(18, mcu.bounds[1] / 2 + 12),
-        maxX: Math.max(18, mcu.bounds[0] / 2 + 12),
-        maxY: Math.max(18, mcu.bounds[1] / 2 + 12),
+        minX: -Math.max(18, packingMcuBounds[0] / 2 + 12),
+        minY: -Math.max(18, packingMcuBounds[1] / 2 + 12),
+        maxX: Math.max(18, packingMcuBounds[0] / 2 + 12),
+        maxY: Math.max(18, packingMcuBounds[1] / 2 + 12),
       },
       minGap: Math.max(0.55, minimumPackingMargin),
       packOrderStrategy: "largest_to_smallest",
@@ -669,7 +714,7 @@ const placeMcus = (components, traces, definition, rng) => {
         passiveValue: spec.isCapacitor ? "100nF" : "10k",
       }
       if (!isInsideBoard(passiveComponent, definition.board, 0.55)) continue
-      if (overlapsAnyForFillCluster(passiveComponent, components, mcuPassiveCourtyardClearance)) continue
+      if (overlapsAny(passiveComponent, components, mcuPassiveCourtyardClearance)) continue
       if (passiveComponents.some((other) => intersects(rectFor(passiveComponent, mcuPassiveSelfClearance), rectFor(other, mcuPassiveSelfClearance)))) continue
       passiveComponents.push(passiveComponent)
       passiveTraces.push({ from: `.${ref} > .pin${spec.passiveIndex + 1}`, to: `.${spec.passiveRef} > .pin1` })
@@ -734,7 +779,7 @@ const correctMcuPassivePlacement = (components, traces, definition) => {
             passiveValue: isCapacitor ? "100nF" : "10k",
           }
           if (!isInsideBoard(passiveComponent, definition.board, 0.55)) continue
-          if (overlapsAnyForFillCluster(passiveComponent, components, mcuPassiveCourtyardClearance)) continue
+          if (overlapsAny(passiveComponent, components, mcuPassiveCourtyardClearance)) continue
           components.push(passiveComponent)
           traces.push({ from: `.${mcu.ref} > .pin${passiveIndex + 1}`, to: `.${passiveRef} > .pin1` })
           traces.push({ from: `.${passiveRef} > .pin2`, to: "net.GND" })
@@ -841,6 +886,8 @@ const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
   )
   const subRotationSeed = [0, 90, 180, 270][subIndex % 4]
   const subPadSize = 0.28
+  const localPackHalfWidth = Math.max(8, catalog.bounds[0] / 2 + 6)
+  const localPackHalfHeight = Math.max(8, catalog.bounds[1] / 2 + 6)
   const packedInput = {
     components: [
       {
@@ -863,10 +910,10 @@ const buildSubcircuitCluster = ({ x, y, catalog, subIndex, rng }) => {
       },
     ],
     bounds: {
-      minX: -8,
-      minY: -8,
-      maxX: 8,
-      maxY: 8,
+      minX: -localPackHalfWidth,
+      minY: -localPackHalfHeight,
+      maxX: localPackHalfWidth,
+      maxY: localPackHalfHeight,
     },
     minGap: Math.max(0.55, minimumPackingMargin),
     packOrderStrategy: "largest_to_smallest",
@@ -1246,7 +1293,7 @@ const addConnectivityTraces = (components, traces) => {
 }
 
 const makeFillCandidates = (definition, rng, passIndex, densityProfile) => {
-  const step = passIndex < 2 ? 8 : densityProfile.lateStep
+  const step = passIndex < 2 ? (densityProfile.earlyStep ?? 8) : densityProfile.lateStep
   const candidates = []
   for (let y = -definition.board.height / 2 + step / 2; y <= definition.board.height / 2 - step / 2; y += step) {
     for (let x = -definition.board.width / 2 + step / 2; x <= definition.board.width / 2 - step / 2; x += step) {
@@ -1263,7 +1310,12 @@ const makeFillCandidates = (definition, rng, passIndex, densityProfile) => {
 const placeSubcircuits = (components, traces, definition, rng) => {
   const densityProfile = getDensityProfile(definition)
   let subIndex = 1
-  for (let passIndex = 0; passIndex < 16 && getUtilization(components, definition.board) < densityProfile.targetUtilization; passIndex++) {
+  for (
+    let passIndex = 0;
+    passIndex < (densityProfile.maxPasses ?? 16) &&
+      getUtilization(components, definition.board) < densityProfile.targetUtilization;
+    passIndex++
+  ) {
     let placedThisPass = 0
     for (const { x, y } of makeFillCandidates(definition, rng, passIndex, densityProfile)) {
       if (getUtilization(components, definition.board) >= densityProfile.targetUtilization) break
@@ -1273,41 +1325,54 @@ const placeSubcircuits = (components, traces, definition, rng) => {
       const needsFlatPowerMosfet = !components.some((component) => component.kind === "flat_power_mosfet_subcircuit")
       const needsLargeCapacitor = !components.some((component) => component.kind === "large_capacitor_subcircuit")
       const needsButton = !components.some((component) => component.kind.startsWith("button_"))
-      const catalog = needsLargePowerMosfet
-        ? largePowerMosfetSubcircuit
-        : needsPowerMosfet
-        ? powerMosfetSubcircuit
-        : needsIrf540Mosfet
-        ? irf540MosfetSubcircuit
-        : needsFlatPowerMosfet
-        ? flatPowerMosfetSubcircuit
-        : needsLargeCapacitor
-        ? largeCapacitorSubcircuit
-        : needsButton
-        ? pick(rng, buttonSubcircuitCatalog)
-        : rng() < 0.06
-          ? largePowerMosfetSubcircuit
-          : rng() < 0.1
-          ? largeCapacitorSubcircuit
-          : rng() < 0.1
-          ? flatPowerMosfetSubcircuit
-          : rng() < 0.12
-          ? irf540MosfetSubcircuit
-          : rng() < 0.2
-          ? powerMosfetSubcircuit
-          : pick(rng, standardSubcircuitCatalog)
-      const cluster = buildSubcircuitCluster({ x, y, catalog, subIndex, rng })
-      if (!cluster) continue
-      if (!canPlaceCluster(
-        cluster,
-        components,
-        definition.board,
-        passIndex < 2 ? densityProfile.earlyClearance : densityProfile.lateClearance,
-        densityProfile.selfClearance,
-      )) continue
-      addCluster(components, traces, cluster)
-      placedThisPass++
-      subIndex++
+      const catalogOptions = definition.compact
+        ? [
+            ...(needsLargeCapacitor ? [largeCapacitorSubcircuit] : []),
+            ...(needsButton ? [pick(rng, buttonSubcircuitCatalog)] : []),
+            pick(rng, compactSubcircuitCatalog),
+            pick(rng, compactSubcircuitCatalog),
+            pick(rng, compactSubcircuitCatalog),
+          ]
+        : [
+            needsLargePowerMosfet
+              ? largePowerMosfetSubcircuit
+              : needsPowerMosfet
+              ? powerMosfetSubcircuit
+              : needsIrf540Mosfet
+              ? irf540MosfetSubcircuit
+              : needsFlatPowerMosfet
+              ? flatPowerMosfetSubcircuit
+              : needsLargeCapacitor
+              ? largeCapacitorSubcircuit
+              : needsButton
+              ? pick(rng, buttonSubcircuitCatalog)
+              : rng() < 0.06
+                ? largePowerMosfetSubcircuit
+                : rng() < 0.1
+                ? largeCapacitorSubcircuit
+                : rng() < 0.1
+                ? flatPowerMosfetSubcircuit
+                : rng() < 0.12
+                ? irf540MosfetSubcircuit
+                : rng() < 0.2
+                ? powerMosfetSubcircuit
+                : pick(rng, standardSubcircuitCatalog),
+          ]
+      for (const catalog of catalogOptions) {
+        const cluster = buildSubcircuitCluster({ x, y, catalog, subIndex, rng })
+        if (!cluster) continue
+        if (!canPlaceCluster(
+          cluster,
+          components,
+          definition.board,
+          passIndex < 2 ? densityProfile.earlyClearance : densityProfile.lateClearance,
+          densityProfile.selfClearance,
+        )) continue
+        addCluster(components, traces, cluster)
+        placedThisPass++
+        subIndex++
+        break
+      }
     }
   }
 }
@@ -1329,6 +1394,7 @@ const generatePlacement = (definition) => {
     id: definition.id,
     sourceDefinition: `dataset/definitions/${definition.id}.json`,
     densityProfile: getDensityProfile(definition),
+    densityCoverageMargin: definition.compact ? 1.2 : 0,
     board: definition.board,
     components,
     traces,

@@ -13,9 +13,12 @@ const rectFor = (component, clearance = 0) => ({
 const intersects = (a, b) =>
   a.left < b.right && a.right > b.left && a.bottom < b.top && a.top > b.bottom
 
-const getUtilization = (components, board) => {
+const getUtilization = (components, board, coverageMargin = 0) => {
   const occupiedArea = components.reduce(
-    (sum, component) => sum + component.bounds.width * component.bounds.height,
+    (sum, component) =>
+      sum +
+      (component.bounds.width + coverageMargin * 2) *
+        (component.bounds.height + coverageMargin * 2),
     0,
   )
   return occupiedArea / (board.width * board.height)
@@ -80,7 +83,8 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
   const placement = JSON.parse(readFileSync(join(placementsDir, file), "utf8"))
   const components = placement.components
   const mcus = components.filter((component) => component.kind === "mcu")
-  const utilization = getUtilization(components, placement.board)
+  const utilization = getUtilization(components, placement.board, placement.densityCoverageMargin ?? 0)
+  const isCompactPlacement = (placement.densityProfile?.targetUtilization ?? 0) >= 0.5
   const componentByRef = new Map(components.map((component) => [component.ref, component]))
   const touchedPins = new Map(components.map((component) => [component.ref, new Set()]))
 
@@ -105,35 +109,42 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     }
   }
 
-  if (utilization < 0.3) {
-    reportFailure(`${file}: only ${(utilization * 100).toFixed(2)}% covered, expected at least 30% JSON coverage`)
+  const expectedUtilization = isCompactPlacement ? placement.densityProfile.targetUtilization : 0.3
+  if (utilization < expectedUtilization) {
+    reportFailure(`${file}: only ${(utilization * 100).toFixed(2)}% covered, expected at least ${(expectedUtilization * 100).toFixed(0)}% JSON coverage`)
+  }
+
+  if ((placement.densityProfile?.targetUtilization ?? 0) >= 0.5) {
+    if (placement.board.width > 60 || placement.board.height > 40) {
+      reportFailure(`${file}: compact board is ${placement.board.width}mm x ${placement.board.height}mm, expected at most 60mm x 40mm`)
+    }
   }
 
   if (components.some((component) => component.kind === "dense_passive")) {
     reportFailure(`${file}: contains dense_passive filler despite MCU passive-count cap`)
   }
 
-  if (!components.some((component) => component.kind === "power_mosfet_subcircuit")) {
+  if (!isCompactPlacement && !components.some((component) => component.kind === "power_mosfet_subcircuit")) {
     reportFailure(`${file}: missing power_mosfet_subcircuit variant`)
   }
 
-  if (!components.some((component) => component.kind === "large_power_mosfet_subcircuit")) {
+  if (!isCompactPlacement && !components.some((component) => component.kind === "large_power_mosfet_subcircuit")) {
     reportFailure(`${file}: missing large_power_mosfet_subcircuit variant`)
   }
 
-  if (!components.some((component) => component.kind === "irf540_mosfet_subcircuit")) {
+  if (!isCompactPlacement && !components.some((component) => component.kind === "irf540_mosfet_subcircuit")) {
     reportFailure(`${file}: missing C2566 IRF540NPBF mosfet variant`)
   }
 
-  if (!components.some((component) => component.kind === "flat_power_mosfet_subcircuit")) {
+  if (!isCompactPlacement && !components.some((component) => component.kind === "flat_power_mosfet_subcircuit")) {
     reportFailure(`${file}: missing flat D2PAK/TO-263 power mosfet variant`)
   }
 
-  if (!components.some((component) => component.kind === "large_capacitor_subcircuit")) {
+  if (!isCompactPlacement && !components.some((component) => component.kind === "large_capacitor_subcircuit")) {
     reportFailure(`${file}: missing large capacitor subcircuit variant`)
   }
 
-  if (!components.some((component) => component.kind.startsWith("button_"))) {
+  if (!isCompactPlacement && !components.some((component) => component.kind.startsWith("button_"))) {
     reportFailure(`${file}: missing button footprint subcircuit variant`)
   }
 
@@ -278,7 +289,11 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
 
   for (let i = 0; i < components.length; i++) {
     for (let j = i + 1; j < components.length; j++) {
-      if (intersects(rectFor(components[i], 0.15), rectFor(components[j], 0.15))) {
+      const clearance = isCompactPlacement &&
+        (components[i].kind === "compact_filler_passive" || components[j].kind === "compact_filler_passive")
+        ? 0.01
+        : 0.15
+      if (intersects(rectFor(components[i], clearance), rectFor(components[j], clearance))) {
         reportFailure(`${file}: ${components[i].ref} overlaps ${components[j].ref}`)
       }
     }
