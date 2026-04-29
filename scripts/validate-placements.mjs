@@ -148,19 +148,35 @@ for (const file of readdirSync(placementsDir).filter((name) => name.endsWith(".j
     reportFailure(`${file}: missing button footprint subcircuit variant`)
   }
 
-  if (components.filter((component) => component.kind === "hdmi").length < 1) {
+  const hdmiCount = components.filter((component) => component.kind === "hdmi").length
+  const usbCount = components.filter((component) => component.kind === "usbc" || component.kind === "microusb" || component.kind === "usbb").length
+  const pinheaderCount = components.filter((component) => component.componentType === "pinheader").length
+
+  if (!isCompactPlacement && hdmiCount < 1) {
     reportFailure(`${file}: expected at least one HDMI edge connector`)
   }
 
-  if (components.filter((component) => component.kind === "usbc" || component.kind === "microusb" || component.kind === "usbb").length < 1) {
+  if (isCompactPlacement && hdmiCount > 1) {
+    reportFailure(`${file}: compact board has ${hdmiCount} HDMI connectors, expected 0-1`)
+  }
+
+  if (!isCompactPlacement && usbCount < 1) {
     reportFailure(`${file}: expected at least one USB edge connector`)
   }
 
-  if (components.filter((component) => component.componentType === "pinheader").length < 2) {
+  if (isCompactPlacement && usbCount > 1) {
+    reportFailure(`${file}: compact board has ${usbCount} USB connectors, expected 0-1`)
+  }
+
+  if (!isCompactPlacement && pinheaderCount < 2) {
     reportFailure(`${file}: expected at least two pin headers`)
   }
 
-  if (!components.some((component) => component.kind === "potentiometer_rk09")) {
+  if (isCompactPlacement && pinheaderCount < 1) {
+    reportFailure(`${file}: compact board expected at least one pin header`)
+  }
+
+  if (!isCompactPlacement && !components.some((component) => component.kind === "potentiometer_rk09")) {
     reportFailure(`${file}: missing outward-facing RK09 potentiometer edge connector`)
   }
 

@@ -3,9 +3,9 @@
   "seed": 1468,
   "board": { "width": 60, "height": 40 },
   "leftEdge": [],
-  "rightEdge": ["hdmi"],
-  "topEdge": ["hdmi", "pinheader4"],
-  "bottomEdge": ["usbc", "potentiometer_rk09", "pinheader4_rows2"],
+  "rightEdge": ["pinheader4"],
+  "topEdge": ["barrel_jack"],
+  "bottomEdge": ["usbc", "pinheader4_rows2"],
   "mcuCount": 1,
   "densityTarget": 0.5,
   "compact": true

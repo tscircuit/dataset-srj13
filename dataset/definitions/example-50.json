@@ -2,10 +2,10 @@
   "id": "example-50",
   "seed": 1470,
   "board": { "width": 60, "height": 40 },
-  "leftEdge": ["rs232"],
+  "leftEdge": ["hdmi"],
   "rightEdge": [],
-  "topEdge": ["hdmi", "pinheader4"],
-  "bottomEdge": ["usbc", "potentiometer_rk09", "pinheader4_rows2"],
+  "topEdge": ["pinheader4"],
+  "bottomEdge": ["barrel_jack", "pinheader4_rows2"],
   "mcuCount": 1,
   "densityTarget": 0.5,
   "compact": true

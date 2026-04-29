@@ -307,9 +307,7 @@ const boundsForRotation = (bounds, rotation) => {
 const getDensityProfile = (definition) => {
   const base = densityProfiles[Math.abs(definition.seed) % densityProfiles.length]
   if (!definition.densityTarget && !definition.compact) return base
-  const targetUtilization = definition.compact
-    ? Math.max(definition.densityTarget ?? base.targetUtilization, 0.6)
-    : definition.densityTarget ?? base.targetUtilization
+  const targetUtilization = definition.densityTarget ?? base.targetUtilization
   return {
     ...base,
     targetUtilization,
