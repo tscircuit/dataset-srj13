@@ -2,7 +2,7 @@
   "id": "example-45",
   "sourceDefinition": "dataset/definitions/example-45.json",
   "densityProfile": {
-    "targetUtilization": 0.5,
+    "targetUtilization": 0.6,
     "earlyClearance": 0.65,
     "lateClearance": 0.3,
     "selfClearance": 0.3,
@@ -10,7 +10,7 @@
     "earlyStep": 4.5,
     "maxPasses": 8
   },
-  "densityCoverageMargin": 1.2,
+  "densityCoverageMargin": 0.3,
   "board": {
     "width": 60,
     "height": 40
@@ -521,6 +521,2121 @@
       },
       "passiveKind": "capacitor",
       "passiveValue": "1uF"
+    },
+    {
+      "ref": "R_RAND1",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 0.6,
+      "y": -5.049,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND2",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": -15.763,
+      "y": 12.208,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND3",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 23.276,
+      "y": -13.393,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND4",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -27.069,
+      "y": 12.458,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND5",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -17.201,
+      "y": 1.207,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND6",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -28.742,
+      "y": 15.995,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND7",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": 18.024,
+      "y": 8.089,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND8",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 25.488,
+      "y": 9.9,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND9",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 2.129,
+      "y": -2.926,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND10",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 16.151,
+      "y": -8.949,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND11",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -8.579,
+      "y": -10.248,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND12",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -8.001,
+      "y": -16.062,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND13",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 11.452,
+      "y": -12.218,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND14",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 26.21,
+      "y": -19.095,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND15",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": 6.371,
+      "y": -12.458,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND16",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 22.554,
+      "y": -6.829,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND17",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -26.674,
+      "y": -12.033,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND18",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": -26.072,
+      "y": -15.992,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND19",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": 1.811,
+      "y": 4.104,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND20",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 14.487,
+      "y": 5.546,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND21",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -19.346,
+      "y": 17.234,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND22",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 14.262,
+      "y": -6.186,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND23",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 18.963,
+      "y": -9.718,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND24",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": -9.486,
+      "y": 1.599,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND25",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -19.137,
+      "y": 8.826,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND26",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 14.456,
+      "y": -11.643,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND27",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -14.391,
+      "y": 2.874,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND28",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": -25.49,
+      "y": -3.766,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND29",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 17.639,
+      "y": 2.805,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND30",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -8.002,
+      "y": -1.676,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND31",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -22.673,
+      "y": -17.024,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND32",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 27.499,
+      "y": 6.526,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND33",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 18.053,
+      "y": -12.405,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND34",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 4.374,
+      "y": 15.338,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND35",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -28.119,
+      "y": 14.53,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND36",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -1.931,
+      "y": 1.21,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND37",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 24.363,
+      "y": -11.375,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND38",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 1.944,
+      "y": -0.703,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND39",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": 23.158,
+      "y": -19.116,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND40",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 9.699,
+      "y": -12.856,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND41",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -24.712,
+      "y": -10.53,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND42",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -26.992,
+      "y": 18.021,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND43",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": 21.245,
+      "y": 6.515,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND44",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 18.546,
+      "y": 14.025,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND45",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 27.908,
+      "y": -16.263,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND46",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -16.625,
+      "y": 7.769,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND47",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -0.018,
+      "y": -2.647,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND48",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 20.375,
+      "y": 14.875,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND49",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -27.879,
+      "y": -8.565,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND50",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -16.207,
+      "y": 6.493,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND51",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -4.355,
+      "y": 1.366,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND52",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 4.09,
+      "y": 11.512,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND53",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -19.219,
+      "y": -5.045,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND54",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -10.55,
+      "y": -8.7,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND55",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 27.787,
+      "y": -13.55,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND56",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 27.259,
+      "y": -5.85,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND57",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -6.956,
+      "y": 3.148,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND58",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 4.293,
+      "y": 9.614,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND59",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -14.752,
+      "y": -6.174,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND60",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -5.487,
+      "y": -4.718,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND61",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 17.237,
+      "y": -5.54,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND62",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 10.377,
+      "y": -9.707,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND63",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 16.205,
+      "y": 11.111,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND64",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": -13.178,
+      "y": -1.479,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND65",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -21.452,
+      "y": -4.727,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND66",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 7.121,
+      "y": -5.993,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND67",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -16.113,
+      "y": 17.723,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND68",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 6.831,
+      "y": -8.46,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND69",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -21.072,
+      "y": -7.466,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND70",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -28.29,
+      "y": 4.324,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND71",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": 3.816,
+      "y": 1.547,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND72",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 25.599,
+      "y": 12.424,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND73",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 4.039,
+      "y": -5.503,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND74",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -17.473,
+      "y": 11.289,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND75",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 22.941,
+      "y": -15.282,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND76",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 18.512,
+      "y": -7.362,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND77",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -28.405,
+      "y": 9.168,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND78",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -25.575,
+      "y": 12.471,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND79",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -26.134,
+      "y": -18.935,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND80",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -25.403,
+      "y": -9.108,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND81",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 16.758,
+      "y": 14.79,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND82",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 6.966,
+      "y": -18.331,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND83",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -28.672,
+      "y": -1.647,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND84",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -8.333,
+      "y": -11.613,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND85",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -23.702,
+      "y": -6.994,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND86",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 20.419,
+      "y": -6.937,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND87",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -16.394,
+      "y": 3.644,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND88",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -9.529,
+      "y": -5.155,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND89",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -25.714,
+      "y": -6.192,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND90",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -28.161,
+      "y": -12.697,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND91",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 29.071,
+      "y": 8.502,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND92",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -12.259,
+      "y": 5.182,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND93",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -12.701,
+      "y": -7.031,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND94",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 25.338,
+      "y": -9.48,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND95",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 27.199,
+      "y": -11.218,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND96",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 15.778,
+      "y": 8.66,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND97",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 10.022,
+      "y": -8.09,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND98",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 19.148,
+      "y": 10.752,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND99",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 22.32,
+      "y": 16.488,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND100",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": -24.115,
+      "y": -13.001,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND101",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 21.906,
+      "y": -10.064,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND102",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 25.718,
+      "y": -14.519,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND103",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -29.365,
+      "y": -9.415,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND104",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 25.427,
+      "y": -7.418,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND105",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 20.916,
+      "y": 4.324,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND106",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -17.569,
+      "y": 13.418,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND107",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -22.287,
+      "y": 12.124,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND108",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 22.935,
+      "y": 13.271,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND109",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": -6.99,
+      "y": -3.139,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND110",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 17.554,
+      "y": -1.353,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND111",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 9.318,
+      "y": 10.241,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND112",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 28.236,
+      "y": 13.676,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND113",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": 19.09,
+      "y": 3.807,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND114",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -27.872,
+      "y": -18.633,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND115",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 19.803,
+      "y": -5.556,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND116",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 21.018,
+      "y": 10.83,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND117",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -17.375,
+      "y": -3.037,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND118",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": -12.018,
+      "y": -4.458,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND119",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 15.863,
+      "y": 13.049,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND120",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 23.35,
+      "y": -9.253,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND121",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -0.708,
+      "y": 4.135,
+      "rotation": 0,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND122",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 20.993,
+      "y": -8.794,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND123",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -8.352,
+      "y": -0.259,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND124",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": -4.428,
+      "y": -1.254,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND125",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 5.123,
+      "y": 8.031,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND126",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 3.845,
+      "y": -4.143,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND127",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 24.775,
+      "y": -4.916,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND128",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0603",
+      "x": 17.346,
+      "y": 19.082,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND129",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 22.177,
+      "y": -11.603,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND130",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 20.45,
+      "y": 19.086,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND131",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 24.68,
+      "y": 4.844,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND132",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -28.949,
+      "y": 12.259,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND133",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": 6.817,
+      "y": 10.161,
+      "rotation": 180,
+      "bounds": {
+        "width": 2.45,
+        "height": 0.95
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND134",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -27.623,
+      "y": -5.243,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND135",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0201",
+      "x": 13.912,
+      "y": 8.599,
+      "rotation": 270,
+      "bounds": {
+        "width": 0.4,
+        "height": 1.12
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND136",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": 3.835,
+      "y": 5.592,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.64,
+        "height": 1.56
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND137",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": -8.81,
+      "y": -14.517,
+      "rotation": 180,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND138",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0402",
+      "x": -10.237,
+      "y": -2.153,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND139",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0603",
+      "x": -2.636,
+      "y": -1.35,
+      "rotation": 90,
+      "bounds": {
+        "width": 0.95,
+        "height": 2.45
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
+    },
+    {
+      "ref": "C_RAND140",
+      "kind": "compact_random_passive",
+      "componentType": "capacitor",
+      "footprint": "0201",
+      "x": 5.917,
+      "y": 6.006,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.12,
+        "height": 0.4
+      },
+      "passiveKind": "capacitor",
+      "passiveValue": "100nF"
+    },
+    {
+      "ref": "R_RAND141",
+      "kind": "compact_random_passive",
+      "componentType": "resistor",
+      "footprint": "0402",
+      "x": 11.595,
+      "y": -5.426,
+      "rotation": 0,
+      "bounds": {
+        "width": 1.56,
+        "height": 0.64
+      },
+      "passiveKind": "resistor",
+      "passiveValue": "10k"
     }
   ],
   "traces": [
@@ -666,6 +2781,1134 @@
     },
     {
       "from": ".CA4_1 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND1 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND1 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND2 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND2 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND3 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND3 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND4 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND4 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND5 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND5 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND6 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND6 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND7 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND7 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND8 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND8 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND9 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND9 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND10 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND10 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND11 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND11 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND12 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND12 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND13 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND13 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND14 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND14 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND15 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND15 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND16 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND16 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND17 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND17 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND18 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND18 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND19 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND19 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND20 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND20 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND21 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND21 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND22 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND22 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND23 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND23 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND24 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND24 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND25 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND25 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND26 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND26 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND27 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND27 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND28 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND28 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND29 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND29 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND30 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND30 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND31 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND31 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND32 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND32 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND33 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND33 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND34 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND34 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND35 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND35 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND36 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND36 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND37 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND37 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND38 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND38 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND39 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND39 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND40 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND40 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND41 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND41 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND42 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND42 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND43 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND43 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND44 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND44 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND45 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND45 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND46 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND46 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND47 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND47 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND48 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND48 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND49 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND49 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND50 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND50 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND51 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND51 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND52 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND52 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND53 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND53 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND54 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND54 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND55 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND55 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND56 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND56 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND57 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND57 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND58 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND58 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND59 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND59 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND60 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND60 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND61 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND61 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND62 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND62 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND63 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND63 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND64 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND64 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND65 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND65 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND66 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND66 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND67 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND67 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND68 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND68 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND69 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND69 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND70 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND70 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND71 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND71 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND72 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND72 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND73 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND73 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND74 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND74 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND75 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND75 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND76 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND76 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND77 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND77 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND78 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND78 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND79 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND79 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND80 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND80 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND81 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND81 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND82 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND82 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND83 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND83 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND84 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND84 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND85 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND85 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND86 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND86 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND87 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND87 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND88 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND88 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND89 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND89 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND90 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND90 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND91 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND91 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND92 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND92 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND93 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND93 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND94 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND94 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND95 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND95 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND96 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND96 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND97 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND97 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND98 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND98 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND99 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND99 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND100 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND100 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND101 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND101 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND102 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND102 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND103 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND103 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND104 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND104 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND105 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND105 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND106 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND106 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND107 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND107 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND108 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND108 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND109 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND109 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND110 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND110 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND111 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND111 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND112 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND112 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND113 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND113 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND114 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND114 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND115 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND115 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND116 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND116 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND117 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND117 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND118 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND118 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND119 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND119 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND120 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND120 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND121 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND121 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND122 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND122 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND123 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND123 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND124 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND124 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND125 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND125 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND126 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND126 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND127 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND127 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND128 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND128 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND129 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND129 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND130 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND130 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND131 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND131 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND132 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND132 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND133 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND133 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND134 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND134 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND135 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND135 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND136 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND136 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND137 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND137 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND138 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND138 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND139 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND139 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".C_RAND140 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".C_RAND140 > .pin2",
+      "to": "net.GND"
+    },
+    {
+      "from": ".R_RAND141 > .pin1",
+      "to": "net.V5"
+    },
+    {
+      "from": ".R_RAND141 > .pin2",
       "to": "net.GND"
     },
     {

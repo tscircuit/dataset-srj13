@@ -286,9 +286,12 @@ const nearestLegalComponent = (component, components, board, clearance = 1) => {
   return null
 }
 
-const getUtilization = (components, board) => {
+const getUtilization = (components, board, coverageMargin = 0) => {
   const occupiedArea = components.reduce(
-    (sum, component) => sum + component.bounds.width * component.bounds.height,
+    (sum, component) =>
+      sum +
+      (component.bounds.width + coverageMargin * 2) *
+        (component.bounds.height + coverageMargin * 2),
     0,
   )
   return occupiedArea / (board.width * board.height)
@@ -304,9 +307,12 @@ const boundsForRotation = (bounds, rotation) => {
 const getDensityProfile = (definition) => {
   const base = densityProfiles[Math.abs(definition.seed) % densityProfiles.length]
   if (!definition.densityTarget && !definition.compact) return base
+  const targetUtilization = definition.compact
+    ? Math.max(definition.densityTarget ?? base.targetUtilization, 0.6)
+    : definition.densityTarget ?? base.targetUtilization
   return {
     ...base,
-    targetUtilization: definition.densityTarget ?? base.targetUtilization,
+    targetUtilization,
     earlyClearance: definition.compact ? 0.65 : base.earlyClearance,
     lateClearance: definition.compact ? minimumPackingMargin : base.lateClearance,
     selfClearance: definition.compact ? minimumPackingMargin : base.selfClearance,
@@ -1377,6 +1383,50 @@ const placeSubcircuits = (components, traces, definition, rng) => {
   }
 }
 
+const placeCompactRandomPassives = (components, traces, definition, rng) => {
+  if (!definition.compact) return
+  const densityProfile = getDensityProfile(definition)
+  const coverageMargin = minimumPackingMargin
+  let fillerIndex = 1
+  let attempts = 0
+  const maxAttempts = 180000
+
+  while (
+    getUtilization(components, definition.board, coverageMargin) < densityProfile.targetUtilization &&
+    attempts < maxAttempts
+  ) {
+    attempts++
+    const passive = pick(rng, passiveFootprints)
+    const rotation = [0, 90, 180, 270][Math.floor(rng() * 4)]
+    const bounds = boundsForRotation(passive.bounds, rotation)
+    const isCapacitor = fillerIndex % 2 === 0
+    const ref = `${isCapacitor ? "C" : "R"}_RAND${fillerIndex}`
+    const xLimit = definition.board.width / 2 - bounds.width / 2 - coverageMargin
+    const yLimit = definition.board.height / 2 - bounds.height / 2 - coverageMargin
+    if (xLimit <= 0 || yLimit <= 0) break
+    const component = {
+      ref,
+      kind: "compact_random_passive",
+      componentType: isCapacitor ? "capacitor" : "resistor",
+      footprint: passive.footprint,
+      x: round((rng() * 2 - 1) * xLimit),
+      y: round((rng() * 2 - 1) * yLimit),
+      rotation,
+      bounds,
+      passiveKind: isCapacitor ? "capacitor" : "resistor",
+      passiveValue: isCapacitor ? "100nF" : "10k",
+    }
+    if (!isInsideBoard(component, definition.board, coverageMargin)) continue
+    if (components.some((other) =>
+      intersects(rectFor(component, coverageMargin), rectFor(other, coverageMargin))
+    )) continue
+    components.push(component)
+    traces.push({ from: `.${ref} > .pin1`, to: "net.V5" })
+    traces.push({ from: `.${ref} > .pin2`, to: "net.GND" })
+    fillerIndex++
+  }
+}
+
 const generatePlacement = (definition) => {
   definition = withBoardSizedForConnectors(definition)
   const rng = makeRng(definition.seed)
@@ -1388,13 +1438,14 @@ const generatePlacement = (definition) => {
   correctMcuPassivePlacement(components, traces, definition)
   correctMcuPassiveRotations(components, definition)
   placeSubcircuits(components, traces, definition, rng)
+  placeCompactRandomPassives(components, traces, definition, rng)
   addConnectivityTraces(components, traces)
 
   return {
     id: definition.id,
     sourceDefinition: `dataset/definitions/${definition.id}.json`,
     densityProfile: getDensityProfile(definition),
-    densityCoverageMargin: definition.compact ? 1.2 : 0,
+    densityCoverageMargin: definition.compact ? minimumPackingMargin : 0,
     board: definition.board,
     components,
     traces,
