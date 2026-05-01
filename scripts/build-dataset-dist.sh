@@ -18,6 +18,7 @@ import {
   writeFileSync,
 } from "node:fs"
 import { join } from "node:path"
+import { getSimpleRouteJsonFromCircuitJson } from "@tscircuit/core"
 
 const circuitJsonDir = "dist/circuits"
 const datasetDistDir = "dataset-dist"
@@ -25,7 +26,6 @@ const datasetDistDir = "dataset-dist"
 const round = (value) => Math.round(value * 1_000_000) / 1_000_000
 const isFiniteNumber = (value) => typeof value === "number" && Number.isFinite(value)
 const safeIdentifier = (name) => name.replace(/[^A-Za-z0-9_$]/g, "_").replace(/^[^A-Za-z_$]/, "_$&")
-const layerToZ = (layer) => (layer === "bottom" ? 1 : 0)
 
 const getCircuitJsonFiles = () => {
   if (!existsSync(circuitJsonDir)) {
@@ -89,128 +89,193 @@ const getOutline = (bounds) => [
   { x: bounds.minX, y: bounds.maxY },
 ]
 
-const getPointForPort = (port) => {
-  const layers = Array.isArray(port.layers) && port.layers.length > 0
-    ? [...new Set(port.layers)].sort()
-    : ["top"]
+const EVERY_LAYER = ["top", "inner1", "inner2", "bottom"]
 
-  const basePoint = {
-    x: round(port.x),
-    y: round(port.y),
-    pointId: port.pcb_port_id,
-    pcb_port_id: port.pcb_port_id,
+const getObstacleLayers = (element) => {
+  if (Array.isArray(element.layers) && element.layers.length > 0) {
+    return [...new Set(element.layers)]
   }
-
-  if (layers.length === 1) {
-    return { ...basePoint, layer: layers[0] }
-  }
-
-  return { ...basePoint, layers }
+  if (typeof element.layer === "string") return [element.layer]
+  return EVERY_LAYER
 }
 
-const getObstacleLayers = (component) => {
-  if (Array.isArray(component.layers) && component.layers.length > 0) return component.layers
-  if (typeof component.layer === "string") return [component.layer]
-  return ["top"]
+const getConnectedToWithNet = (connMap, ids) => [
+  ...ids,
+  ...ids.map((id) => connMap?.getNetConnectedToId(id)).filter(Boolean),
+]
+
+const getPolygonBounds = (points) => {
+  if (!Array.isArray(points) || points.length === 0) return null
+  const xs = points.map((point) => point.x).filter(isFiniteNumber)
+  const ys = points.map((point) => point.y).filter(isFiniteNumber)
+  if (xs.length === 0 || ys.length === 0) return null
+  return {
+    minX: Math.min(...xs),
+    maxX: Math.max(...xs),
+    minY: Math.min(...ys),
+    maxY: Math.max(...ys),
+  }
 }
 
-const getSourcePortConnectionNames = (elements) => {
-  const sourcePortConnectionNames = new Map()
-  const physicalSourcePortIds = new Set(
-    elements
-      .filter((element) => element.type === "pcb_port" && element.source_port_id)
-      .map((port) => port.source_port_id),
-  )
+const roundObstacleGeometry = (obstacle) => ({
+  ...obstacle,
+  center: {
+    x: round(obstacle.center.x),
+    y: round(obstacle.center.y),
+  },
+  width: round(obstacle.width),
+  height: round(obstacle.height),
+  ...(isFiniteNumber(obstacle.ccwRotationDegrees)
+    ? { ccwRotationDegrees: round(obstacle.ccwRotationDegrees) }
+    : {}),
+})
 
-  const tracesByConnectivityKey = new Map()
-  for (const trace of elements.filter((element) => element.type === "source_trace")) {
-    const sourcePortIds = (trace.connected_source_port_ids ?? []).filter((sourcePortId) =>
-      physicalSourcePortIds.has(sourcePortId)
-    )
-    if (sourcePortIds.length === 0) continue
-    const key = trace.subcircuit_connectivity_map_key ?? trace.source_trace_id
-    const group = tracesByConnectivityKey.get(key) ?? new Set()
-    for (const sourcePortId of sourcePortIds) group.add(sourcePortId)
-    tracesByConnectivityKey.set(key, group)
+const createPrimitiveObstacles = (elements, connMap) => {
+  const obstacles = []
+  const pushObstacle = (obstacle) => {
+    obstacles.push(roundObstacleGeometry(obstacle))
   }
 
-  let connectionIndex = 0
-  const connections = []
-  for (const [key, sourcePortIds] of [...tracesByConnectivityKey.entries()].sort(([a], [b]) => a.localeCompare(b))) {
-    if (sourcePortIds.size < 2) continue
-    const name = `connection_${String(connectionIndex + 1).padStart(4, "0")}`
-    connectionIndex++
-    connections.push({ name, key, sourcePortIds })
-    for (const sourcePortId of sourcePortIds) {
-      const names = sourcePortConnectionNames.get(sourcePortId) ?? []
-      names.push(name)
-      sourcePortConnectionNames.set(sourcePortId, names)
+  for (const element of elements) {
+    if (element.type === "pcb_smtpad") {
+      const connectedTo = getConnectedToWithNet(connMap, [element.pcb_smtpad_id])
+      if (element.shape === "rect") {
+        pushObstacle({
+          type: "rect",
+          layers: getObstacleLayers(element),
+          center: { x: element.x, y: element.y },
+          width: element.width,
+          height: element.height,
+          connectedTo,
+        })
+      } else if (element.shape === "polygon") {
+        const bounds = getPolygonBounds(element.points)
+        if (!bounds) continue
+        pushObstacle({
+          type: "rect",
+          layers: getObstacleLayers(element),
+          center: {
+            x: (bounds.minX + bounds.maxX) / 2,
+            y: (bounds.minY + bounds.maxY) / 2,
+          },
+          width: bounds.maxX - bounds.minX,
+          height: bounds.maxY - bounds.minY,
+          connectedTo,
+        })
+      }
+      continue
+    }
+
+    if (element.type === "pcb_plated_hole") {
+      const connectedTo = getConnectedToWithNet(connMap, [element.pcb_plated_hole_id])
+      if (element.shape === "circle") {
+        pushObstacle({
+          type: "rect",
+          layers: getObstacleLayers(element),
+          center: { x: element.x, y: element.y },
+          width: element.outer_diameter,
+          height: element.outer_diameter,
+          connectedTo,
+        })
+      } else if (element.shape === "pill") {
+        pushObstacle({
+          type: "rect",
+          layers: getObstacleLayers(element),
+          center: { x: element.x, y: element.y },
+          width: element.outer_width,
+          height: element.outer_height,
+          ccwRotationDegrees: element.ccw_rotation,
+          connectedTo,
+        })
+      } else if (element.shape === "circular_hole_with_rect_pad") {
+        pushObstacle({
+          type: "rect",
+          layers: getObstacleLayers(element),
+          center: { x: element.x, y: element.y },
+          width: element.rect_pad_width,
+          height: element.rect_pad_height,
+          ccwRotationDegrees: element.rect_ccw_rotation,
+          connectedTo,
+        })
+      }
+      continue
+    }
+
+    if (element.type === "pcb_hole" && element.hole_shape === "circle") {
+      pushObstacle({
+        type: "rect",
+        layers: getObstacleLayers(element),
+        center: { x: element.x, y: element.y },
+        width: element.hole_diameter,
+        height: element.hole_diameter,
+        connectedTo: [],
+      })
     }
   }
 
-  return { sourcePortConnectionNames, connections }
+  for (const obstacle of obstacles) {
+    const additionalIds = obstacle.connectedTo.flatMap((id) => connMap?.getIdsConnectedToNet(id) ?? [])
+    obstacle.connectedTo.push(...additionalIds)
+  }
+
+  const sourcePortIdToInternalConnectionId = new Map()
+  for (const internalConnection of elements.filter(
+    (element) => element.type === "source_component_internal_connection",
+  )) {
+    for (const sourcePortId of internalConnection.source_port_ids ?? []) {
+      sourcePortIdToInternalConnectionId.set(
+        sourcePortId,
+        internalConnection.source_component_internal_connection_id,
+      )
+    }
+  }
+
+  const portsById = new Map(
+    elements
+      .filter((element) => element.type === "pcb_port")
+      .map((port) => [port.pcb_port_id, port]),
+  )
+
+  const primitiveIdToSourcePortId = new Map()
+  for (const element of elements) {
+    const primitiveId = element.pcb_smtpad_id ?? element.pcb_plated_hole_id
+    if (!primitiveId || !element.pcb_port_id) continue
+    const port = portsById.get(element.pcb_port_id)
+    if (port?.source_port_id) {
+      primitiveIdToSourcePortId.set(primitiveId, port.source_port_id)
+    }
+  }
+
+  for (const obstacle of obstacles) {
+    for (const connectedId of obstacle.connectedTo) {
+      const sourcePortId = primitiveIdToSourcePortId.get(connectedId)
+      if (!sourcePortId) continue
+      const internalConnectionId = sourcePortIdToInternalConnectionId.get(sourcePortId)
+      if (!internalConnectionId) continue
+      obstacle.offBoardConnectsTo = [internalConnectionId]
+      obstacle.netIsAssignable = true
+      break
+    }
+  }
+
+  return obstacles
 }
 
 const convertCircuitJsonToSrj = (id, elements) => {
   const board = findBoard(elements)
   const components = elements.filter((element) => element.type === "pcb_component")
   const ports = elements.filter((element) => element.type === "pcb_port")
-  const portsBySourcePortId = new Map(
-    ports
-      .filter((port) => port.source_port_id)
-      .map((port) => [port.source_port_id, port]),
-  )
-  const { sourcePortConnectionNames, connections: connectionGroups } = getSourcePortConnectionNames(elements)
-
-  const connections = connectionGroups
-    .map(({ name, key, sourcePortIds }) => ({
-      name,
-      netConnectionName: key,
-      pointsToConnect: [...sourcePortIds]
-        .map((sourcePortId) => portsBySourcePortId.get(sourcePortId))
-        .filter(Boolean)
-        .map(getPointForPort),
-    }))
-    .filter((connection) => connection.pointsToConnect.length >= 2)
-
-  const componentPorts = new Map()
-  for (const port of ports) {
-    if (!port.pcb_component_id) continue
-    const list = componentPorts.get(port.pcb_component_id) ?? []
-    list.push(port)
-    componentPorts.set(port.pcb_component_id, list)
-  }
-
-  const obstacles = components
-    .filter((component) => component.center && isFiniteNumber(component.width) && isFiniteNumber(component.height))
-    .map((component) => {
-      const connectedTo = new Set()
-      for (const port of componentPorts.get(component.pcb_component_id) ?? []) {
-        for (const name of sourcePortConnectionNames.get(port.source_port_id) ?? []) {
-          connectedTo.add(name)
-        }
-      }
-
-      const layers = getObstacleLayers(component)
-      return {
-        obstacleId: component.pcb_component_id,
-        type: "rect",
-        layers,
-        zLayers: [...new Set(layers.map(layerToZ))].sort((a, b) => a - b),
-        center: {
-          x: round(component.center.x),
-          y: round(component.center.y),
-        },
-        width: round(component.width),
-        height: round(component.height),
-        ccwRotationDegrees: round(component.rotation ?? component.ccw_rotation ?? 0),
-        connectedTo: [...connectedTo].sort(),
-      }
-    })
+  // Use the core SRJ conversion for connections and metadata.
+  const { simpleRouteJson, connMap } = getSimpleRouteJsonFromCircuitJson({
+    circuitJson: elements,
+    minTraceWidth: board?.min_trace_width ?? 0.1,
+  })
+  const obstacles = createPrimitiveObstacles(elements, connMap)
 
   const bounds = getBounds(board, components, ports)
 
   return {
+    ...simpleRouteJson,
     id,
     sourceCircuitJson: `dist/circuits/${id}/circuit.json`,
     layerCount: board?.num_layers ?? 2,
@@ -223,7 +288,6 @@ const convertCircuitJsonToSrj = (id, elements) => {
     bounds,
     outline: getOutline(bounds),
     obstacles,
-    connections,
   }
 }
 
@@ -250,11 +314,13 @@ const declarationLines = [
   "",
   "export interface SimpleRouteConnection {",
   "  name: string",
+  "  source_trace_id?: string",
   "  rootConnectionName?: string",
   "  mergedConnectionNames?: string[]",
   "  isOffBoard?: boolean",
   "  netConnectionName?: string",
   "  nominalTraceWidth?: number",
+  "  width?: number",
   "  pointsToConnect: SimpleRouteConnectionPoint[]",
   "  externallyConnectedPointIds?: string[][]",
   "}",

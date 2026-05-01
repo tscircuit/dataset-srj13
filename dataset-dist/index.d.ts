@@ -11,11 +11,13 @@ export type SimpleRouteConnectionPoint =
 
 export interface SimpleRouteConnection {
   name: string
+  source_trace_id?: string
   rootConnectionName?: string
   mergedConnectionNames?: string[]
   isOffBoard?: boolean
   netConnectionName?: string
   nominalTraceWidth?: number
+  width?: number
   pointsToConnect: SimpleRouteConnectionPoint[]
   externallyConnectedPointIds?: string[][]
 }
