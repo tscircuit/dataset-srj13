@@ -27,7 +27,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "@tscircuit/capacity-autorouter": "https://npm-releases.tscircuit.com/npm-tarballs/25261817992-1/tscircuit-capacity-autorouter-0.0.489.tgz",
+    "@tscircuit/capacity-autorouter": "https://npm-releases.tscircuit.com/npm-tarballs/25263304462-1/tscircuit-capacity-autorouter-0.0.489.tgz",
     "@types/react": "^19.2.14",
     "tscircuit": "^0.0.1686",
     "typescript": "^5.0.0"

@@ -24,43 +24,206 @@ const jsonClone = (value) => JSON.parse(JSON.stringify(value))
 const safeIdentifier = (name) =>
   name.replace(/[^A-Za-z0-9_$]/g, "_").replace(/^[^A-Za-z_$]/, "_$&")
 
-function normalizeSolverInput(params) {
+const tinyTerminalRegionSize = 1e-6
+
+function mapLayerNameToZ(layerName, layerCount) {
+  if (layerName === "top") return 0
+  if (layerName === "bottom") return Math.max(layerCount - 1, 0)
+  const innerMatch = /^inner(\d+)$/.exec(layerName ?? "")
+  if (innerMatch) return Number(innerMatch[1])
+  return 0
+}
+
+function getConnectionPointLayers(point) {
+  if (!point) return []
+  if (Array.isArray(point.layers)) return point.layers
+  if (typeof point.layer === "string") return [point.layer]
+  return []
+}
+
+function getRoutePoint(connection, endpointIndex) {
+  return connection.simpleRouteConnection?.pointsToConnect?.[endpointIndex]
+}
+
+function getConnectionNetId(connection) {
+  return connection.mutuallyConnectedNetworkId ?? connection.connectionId
+}
+
+function getConnectionNetIndexMap(connections) {
+  const netIndexById = new Map()
+
+  for (const connection of connections) {
+    const netId = getConnectionNetId(connection)
+    if (!netIndexById.has(netId)) {
+      netIndexById.set(netId, netIndexById.size)
+    }
+  }
+
+  return netIndexById
+}
+
+function getSharedConnectionZ({
+  connection,
+  endpointIndex,
+  fallbackZ,
+  regionAvailableZ,
+  layerCount,
+}) {
+  const point = getRoutePoint(connection, endpointIndex)
+  const pointZLayers = getConnectionPointLayers(point).map((layerName) =>
+    mapLayerNameToZ(layerName, layerCount),
+  )
+
+  return regionAvailableZ.find((z) => pointZLayers.includes(z)) ?? fallbackZ
+}
+
+function buildSerializedTinyGraph(params) {
+  const netIndexById = getConnectionNetIndexMap(params.connections)
   const regions = params.graph.regions.map((region) => ({
     regionId: region.regionId,
+    pointIds: region.ports.map((port) => port.d.portId),
     d: jsonClone(region.d),
-    portIds: region.ports.map((port) => port.portId),
   }))
-
   const ports = params.graph.ports.map((port) => {
     const { regions: _regions, ...portData } = port.d
-    const portRegions = port.d.regions ?? [port.region1, port.region2]
 
     return {
-      portId: port.portId,
-      d: jsonClone(portData),
+      portId: port.d.portId,
       region1Id: port.region1.regionId,
       region2Id: port.region2.regionId,
-      regionIds: portRegions.map((region) => region.regionId),
+      d: jsonClone(portData),
     }
   })
-
   const connections = params.connections.map((connection) => ({
     connectionId: connection.connectionId,
-    mutuallyConnectedNetworkId: connection.mutuallyConnectedNetworkId,
+    mutuallyConnectedNetworkId:
+      connection.mutuallyConnectedNetworkId ?? connection.connectionId,
     startRegionId: connection.startRegion.regionId,
     endRegionId: connection.endRegion.regionId,
     simpleRouteConnection: jsonClone(connection.simpleRouteConnection),
   }))
+  const solvedRoutes = []
 
-  const { graph: _graph, connections: _connections, ...rest } = params
+  for (const connection of params.connections) {
+    const startPoint = getRoutePoint(connection, 0)
+    const endPoint = getRoutePoint(connection, 1)
+    const fallbackStartZ = connection.startRegion.d.availableZ[0] ?? 0
+    const fallbackEndZ = connection.endRegion.d.availableZ[0] ?? 0
+    const startZ = getSharedConnectionZ({
+      connection,
+      endpointIndex: 0,
+      fallbackZ: fallbackStartZ,
+      regionAvailableZ: connection.startRegion.d.availableZ,
+      layerCount: params.layerCount,
+    })
+    const endZ = getSharedConnectionZ({
+      connection,
+      endpointIndex: 1,
+      fallbackZ: fallbackEndZ,
+      regionAvailableZ: connection.endRegion.d.availableZ,
+      layerCount: params.layerCount,
+    })
+    const startTerminalRegionId = `tiny-terminal:start-region:${connection.connectionId}`
+    const endTerminalRegionId = `tiny-terminal:end-region:${connection.connectionId}`
+    const startTerminalPortId = `tiny-terminal:start-port:${connection.connectionId}`
+    const endTerminalPortId = `tiny-terminal:end-port:${connection.connectionId}`
+    const terminalNetId = netIndexById.get(getConnectionNetId(connection)) ?? -1
+
+    regions.push({
+      regionId: startTerminalRegionId,
+      pointIds: [startTerminalPortId],
+      d: {
+        capacityMeshNodeId: startTerminalRegionId,
+        center: {
+          x: startPoint?.x ?? connection.startRegion.d.center.x,
+          y: startPoint?.y ?? connection.startRegion.d.center.y,
+        },
+        width: tinyTerminalRegionSize,
+        height: tinyTerminalRegionSize,
+        availableZ: [startZ],
+        netId: terminalNetId,
+        _containsTarget: true,
+        _tinyTerminal: true,
+        _tinyTerminalNetId:
+          connection.mutuallyConnectedNetworkId ?? connection.connectionId,
+      },
+    })
+    regions.push({
+      regionId: endTerminalRegionId,
+      pointIds: [endTerminalPortId],
+      d: {
+        capacityMeshNodeId: endTerminalRegionId,
+        center: {
+          x: endPoint?.x ?? connection.endRegion.d.center.x,
+          y: endPoint?.y ?? connection.endRegion.d.center.y,
+        },
+        width: tinyTerminalRegionSize,
+        height: tinyTerminalRegionSize,
+        availableZ: [endZ],
+        netId: terminalNetId,
+        _containsTarget: true,
+        _tinyTerminal: true,
+        _tinyTerminalNetId:
+          connection.mutuallyConnectedNetworkId ?? connection.connectionId,
+      },
+    })
+    ports.push({
+      portId: startTerminalPortId,
+      region1Id: connection.startRegion.regionId,
+      region2Id: startTerminalRegionId,
+      d: {
+        portId: startTerminalPortId,
+        x: startPoint?.x ?? connection.startRegion.d.center.x,
+        y: startPoint?.y ?? connection.startRegion.d.center.y,
+        z: startZ,
+        distToCentermostPortOnZ: 0,
+        _tinyTerminal: true,
+      },
+    })
+    ports.push({
+      portId: endTerminalPortId,
+      region1Id: connection.endRegion.regionId,
+      region2Id: endTerminalRegionId,
+      d: {
+        portId: endTerminalPortId,
+        x: endPoint?.x ?? connection.endRegion.d.center.x,
+        y: endPoint?.y ?? connection.endRegion.d.center.y,
+        z: endZ,
+        distToCentermostPortOnZ: 0,
+        _tinyTerminal: true,
+      },
+    })
+
+    const startRegion = regions.find(
+      (region) => region.regionId === connection.startRegion.regionId,
+    )
+    const endRegion = regions.find(
+      (region) => region.regionId === connection.endRegion.regionId,
+    )
+    startRegion?.pointIds.push(startTerminalPortId)
+    endRegion?.pointIds.push(endTerminalPortId)
+
+    solvedRoutes.push({
+      connection: {
+        connectionId: connection.connectionId,
+      },
+      path: [{ portId: startTerminalPortId }, { portId: endTerminalPortId }],
+    })
+  }
 
   return {
+    format: "serialized-hg-port-point-pathing-solver-params",
     graph: {
       regions,
       ports,
     },
     connections,
-    ...jsonClone(rest),
+    solvedRoutes,
+    effort: jsonClone(params.effort),
+    flags: jsonClone(params.flags),
+    layerCount: jsonClone(params.layerCount),
+    weights: jsonClone(params.weights),
+    minViaPadDiameter: jsonClone(params.minViaPadDiameter),
   }
 }
 
@@ -150,6 +313,7 @@ async function buildCase({ sampleName, srjPath, sourceFile, outputFile }) {
   }
 
   const portPointPathingSolver = solver.portPointPathingSolver
+  const constructorParams = portPointPathingSolver.getConstructorParams()[0]
 
   if (solveBeforeWriting) {
     while (!(portPointPathingSolver.solved || portPointPathingSolver.failed)) {
@@ -181,9 +345,7 @@ async function buildCase({ sampleName, srjPath, sourceFile, outputFile }) {
       autorouterPackage: "@tscircuit/capacity-autorouter",
       autorouterVersion: autorouterPkg.version,
     },
-    solverInput: normalizeSolverInput(
-      portPointPathingSolver.getConstructorParams()[0],
-    ),
+    solverInput: buildSerializedTinyGraph(constructorParams),
     stats: jsonClone(portPointPathingSolver.stats ?? {}),
     resultSummary: getResultSummary(solver, portPointPathingSolver),
   }
@@ -247,6 +409,7 @@ function hydrateTinyHypergraphSolverInput(solverInput) {
   const ports = solverInput.graph.ports.map((port) => {
     const region1 = regionsById.get(port.region1Id)
     const region2 = regionsById.get(port.region2Id)
+    const regionIds = port.regionIds ?? [port.region1Id, port.region2Id]
 
     if (!region1 || !region2) {
       throw new Error(\`Could not hydrate port \${port.portId}\`)
@@ -256,7 +419,7 @@ function hydrateTinyHypergraphSolverInput(solverInput) {
       portId: port.portId,
       d: {
         ...port.d,
-        regions: port.regionIds.map((regionId) => regionsById.get(regionId)),
+        regions: regionIds.map((regionId) => regionsById.get(regionId)),
       },
       region1,
       region2,

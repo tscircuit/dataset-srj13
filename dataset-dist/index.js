@@ -278,6 +278,7 @@ function hydrateTinyHypergraphSolverInput(solverInput) {
   const ports = solverInput.graph.ports.map((port) => {
     const region1 = regionsById.get(port.region1Id)
     const region2 = regionsById.get(port.region2Id)
+    const regionIds = port.regionIds ?? [port.region1Id, port.region2Id]
 
     if (!region1 || !region2) {
       throw new Error(`Could not hydrate port ${port.portId}`)
@@ -287,7 +288,7 @@ function hydrateTinyHypergraphSolverInput(solverInput) {
       portId: port.portId,
       d: {
         ...port.d,
-        regions: port.regionIds.map((regionId) => regionsById.get(regionId)),
+        regions: regionIds.map((regionId) => regionsById.get(regionId)),
       },
       region1,
       region2,
