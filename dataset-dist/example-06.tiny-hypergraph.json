@@ -6,7 +6,7 @@
     "pipeline": "AutoroutingPipelineSolver4_TinyHypergraph",
     "phase": "portPointPathingSolver",
     "autorouterPackage": "@tscircuit/capacity-autorouter",
-    "autorouterVersion": "0.0.484"
+    "autorouterVersion": "0.0.489"
   },
   "solverInput": {
     "graph": {
