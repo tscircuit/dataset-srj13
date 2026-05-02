@@ -111,3 +111,90 @@ export const example_50: SimpleRouteJson
 export const dataset: Record<string, SimpleRouteJson>
 declare const defaultDataset: Record<string, SimpleRouteJson>
 export default defaultDataset
+
+type JsonValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JsonValue[]
+  | { [key: string]: JsonValue }
+
+export interface TinyHypergraphBenchmarkCase {
+  sampleName: string
+  sourceFile: string
+  outputFile: string
+  generatedBy: {
+    pipeline: "AutoroutingPipelineSolver4_TinyHypergraph"
+    phase: "portPointPathingSolver"
+    autorouterPackage: "@tscircuit/capacity-autorouter"
+    autorouterVersion: string
+  }
+  solverInput: JsonValue
+  stats: Record<string, JsonValue>
+  resultSummary: Record<string, JsonValue>
+}
+
+export const example_01TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_02TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_03TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_04TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_05TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_06TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_07TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_08TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_09TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_10TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_11TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_12TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_13TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_14TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_15TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_16TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_17TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_18TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_19TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_20TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_21TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_22TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_23TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_24TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_25TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_26TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_27TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_28TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_29TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_30TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_31TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_32TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_33TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_34TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_35TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_36TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_37TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_38TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_39TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_40TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_41TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_42TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_43TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_44TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_45TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_46TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_47TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_48TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_49TinyHypergraph: TinyHypergraphBenchmarkCase
+export const example_50TinyHypergraph: TinyHypergraphBenchmarkCase
+
+export const datasetDistManifest: JsonValue
+export const tinyHypergraphBenchmarkByName: Record<
+  string,
+  TinyHypergraphBenchmarkCase
+>
+export const samples: Array<{
+  sampleName: string
+  srj: SimpleRouteJson
+  tinyHypergraphBenchmark: TinyHypergraphBenchmarkCase
+}>
+
+export function hydrateTinyHypergraphSolverInput(solverInput: JsonValue): any

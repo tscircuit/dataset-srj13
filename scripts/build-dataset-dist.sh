@@ -403,3 +403,5 @@ writeFileSync(
 
 console.log(`Wrote ${files.length} SRJ files to ${datasetDistDir}`)
 '
+
+bun scripts/build-tiny-hypergraph-dist.mjs

@@ -22,7 +22,7 @@ Build the distributable SRJ dataset:
 bun run build:dataset-dist
 ```
 
-This runs `tsci build`, converts `dist/circuits/*/circuit.json` into `dataset-dist/*.json`, and writes `dataset-dist/index.js` plus `dataset-dist/index.d.ts`. The package `main` field points at `dataset-dist/index.js`, so consumers import the generated SRJ files through the package entry point.
+This runs `tsci build`, converts `dist/circuits/*/circuit.json` into `dataset-dist/*.json`, generates srj12-style `dataset-dist/*.tiny-hypergraph.json` benchmark cases plus `dataset-dist/manifest.json`, and writes `dataset-dist/index.js` plus `dataset-dist/index.d.ts`. The tiny-hypergraph generator captures the `portPointPathingSolver` constructor input by default; set `TINY_HYPERGRAPH_SOLVE=1` to require each case to solve before writing. The package `main` field points at `dataset-dist/index.js`, so consumers import the generated SRJ files and tiny-hypergraph benchmark files through the package entry point.
 
 Use it from JavaScript or TypeScript:
 
@@ -31,6 +31,22 @@ import { dataset, example_01 } from "@tsci/seveibar.dataset-srj13"
 
 console.log(dataset["example-01"])
 console.log(example_01)
+```
+
+Use the tiny-hypergraph benchmark cases:
+
+```ts
+import {
+  example_01TinyHypergraph,
+  hydrateTinyHypergraphSolverInput,
+  tinyHypergraphBenchmarkByName,
+} from "@tsci/seveibar.dataset-srj13"
+
+const benchmark = tinyHypergraphBenchmarkByName["example-01"]
+const solverInput = hydrateTinyHypergraphSolverInput(benchmark.solverInput)
+
+console.log(example_01TinyHypergraph.resultSummary)
+console.log(solverInput.connections.length)
 ```
 
 You can pin a specific commit or branch with the GitHub dependency syntax:
