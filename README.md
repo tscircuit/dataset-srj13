@@ -24,12 +24,6 @@ bun run build:dataset-dist
 
 This runs `tsci build`, converts `dist/circuits/*/circuit.json` into `dataset-dist/*.json`, and writes `dataset-dist/index.js` plus `dataset-dist/index.d.ts`. The package `main` field points at `dataset-dist/index.js`, so consumers import the generated SRJ files through the package entry point.
 
-Install from GitHub:
-
-```bash
-bun add @tsci/seveibar.dataset-srj13@github:tscircuit/dataset-srj13
-```
-
 Use it from JavaScript or TypeScript:
 
 ```ts
