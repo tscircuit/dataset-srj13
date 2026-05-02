@@ -17,6 +17,7 @@
     "dev": "tsci dev",
     "build": "tsci build",
     "build:dataset-dist": "bash scripts/build-dataset-dist.sh",
+    "build:tiny-hypergraph": "bun scripts/build-tiny-hypergraph-dist.mjs",
     "generate:dataset": "bun scripts/generate-dataset.mjs",
     "validate:placements": "bun scripts/validate-placements.mjs",
     "check:examples": "bun scripts/check-examples.mjs",
@@ -26,6 +27,7 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@tscircuit/capacity-autorouter": "0.0.484",
     "@types/react": "^19.2.14",
     "tscircuit": "^0.0.1686",
     "typescript": "^5.0.0"
