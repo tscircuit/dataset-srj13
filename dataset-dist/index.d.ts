@@ -24,7 +24,8 @@ export interface SimpleRouteConnection {
 
 export interface SimpleRouteObstacle {
   obstacleId?: string
-  type: "rect"
+  componentId?: string
+  type: "rect" | "oval"
   layers: string[]
   zLayers?: number[]
   center: { x: number; y: number }
