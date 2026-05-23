@@ -26,8 +26,10 @@
     "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
+    "@tscircuit/core": "^0.0.1267",
+    "@tscircuit/footprinter": "^0.0.357",
     "@types/react": "^19.2.14",
-    "tscircuit": "^0.0.1686",
+    "tscircuit": "^0.0.1778",
     "typescript": "^5.0.0"
   },
   "author": "seveibar"
