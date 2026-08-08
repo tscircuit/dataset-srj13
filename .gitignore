@@ -28,3 +28,5 @@ yarn-error.log*
 
 # tscircuit cache
 .tscircuit/
+.vercel
+.env*
