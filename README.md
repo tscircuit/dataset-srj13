@@ -2,6 +2,22 @@
 
 Synthetic tscircuit dataset for connector-heavy MCU boards.
 
+It contains 50 generated routing problems spanning HDMI, USB-C, RS232, audio,
+barrel-jack, and pin-header edge connectors paired with BGA, QFN, QFP, LQFP,
+and TSSOP microcontrollers plus deterministic passive placement.
+
+## Example
+
+The image below shows `example-24`. It is generated from the checked-in SRJ by
+constructing an `AutoroutingPipelineSolver`, calling `.visualize()`, and
+converting the resulting graphics object to SVG with `graphics-debug`.
+
+![SRJ13 connector-heavy MCU routing example](docs/sample.svg)
+
+Run `bun run generate:readme-image` to regenerate it. Run `bun run cosmos` to
+browse the example in React Cosmos; `bun run build:site` exports the Vercel
+site to `cosmos-export/`.
+
 The source dataset is split into three phases:
 
 1. `dataset/definitions/*.json` describes board size, edge connector kinds, MCU count, and seed.
