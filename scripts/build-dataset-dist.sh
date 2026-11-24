@@ -139,13 +139,14 @@ const createPrimitiveObstacles = (elements, connMap) => {
   for (const element of elements) {
     if (element.type === "pcb_smtpad") {
       const connectedTo = getConnectedToWithNet(connMap, [element.pcb_smtpad_id])
-      if (element.shape === "rect") {
+      if (element.shape === "rect" || element.shape === "rotated_rect") {
         pushObstacle({
           type: "rect",
           layers: getObstacleLayers(element),
           center: { x: element.x, y: element.y },
           width: element.width,
           height: element.height,
+          ccwRotationDegrees: element.ccw_rotation,
           connectedTo,
         })
       } else if (element.shape === "polygon") {

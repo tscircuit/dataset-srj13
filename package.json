@@ -23,7 +23,8 @@
     "snapshot": "tsci snapshot",
     "snapshot:update": "tsci snapshot --update",
     "start": "tsci dev",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",
